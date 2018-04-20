@@ -1,0 +1,11 @@
+.componentCard {
+    max-width: 30rem;
+}
+
+.graphCard {
+    max-width: 40rem;
+}
+
+.graphRow {
+    margin-top: 2.5%;
+}

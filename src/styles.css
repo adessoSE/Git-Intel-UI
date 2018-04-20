@@ -1,3 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "https://bootswatch.com/4/cerulean/bootstrap.min.css";
+
+/* Simple links everywhere */
+a, a:visited, a:hover, a:active {
+    color: inherit;
+    text-decoration:none;
+}

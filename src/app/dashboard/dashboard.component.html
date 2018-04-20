@@ -1,50 +1,144 @@
-<div class="row">
+<div class="row align-items-center justify-content-center ">
 
   <!-- Members -->
   <div class="col-md-2">
-    <div class="card border-primary mb-3" style="max-width: 20rem;">
-      <div class="card-header">Members</div>
-      <div class="card-body">
-        <h4 class="card-title">63</h4>
+    <a routerLink="/members/">
+      <div class="card border-primary mb-3 componentCard">
+        <div class="card-body">
+          <h4 class="card-title">Members</h4>
+          <h3 class="card-title" style="text-align: center">
+            <i class="fa fa-user"></i> 63</h3>
+        </div>
       </div>
-    </div>
+    </a>
   </div>
 
   <!-- Teams -->
   <div class="col-md-2">
-    <div class="card border-primary mb-3" style="max-width: 20rem;">
-      <div class="card-header">Members</div>
-      <div class="card-body">
-        <h4 class="card-title">Primary card title</h4>
-        <i class="fas fa-user"></i>
+    <a routerLink="/teams/">
+      <div class="card border-primary mb-3 componentCard">
+        <div class="card-body">
+          <h4 class="card-title">Teams</h4>
+          <h3 class="card-title" style="text-align: center">
+            <i class="fa fa-users"></i> 6</h3>
+        </div>
       </div>
-    </div>
+    </a>
   </div>
 
   <!-- Repositories -->
   <div class="col-md-2">
-      <div class="card border-primary mb-3" style="max-width: 20rem;">
-        <div class="card-header">Members</div>
+    <a routerLink="/repositories/">
+      <div class="card border-primary mb-3 componentCard">
         <div class="card-body">
-          <h4 class="card-title">Primary card title</h4>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <h4 class="card-title">Repositories</h4>
+          <h3 class="card-title" style="text-align: center">
+            <i class="fa fa-bitbucket"></i> 14</h3>
         </div>
       </div>
-    </div>
+    </a>
+  </div>
 
   <!-- External Repos -->
   <div class="col-md-2">
-      <div class="card border-primary mb-3" style="max-width: 20rem;">
-        <div class="card-header">Members</div>
+    <a routerLink="/external-repositories/">
+      <div class="card border-primary mb-3 componentCard">
         <div class="card-body">
-          <h4 class="card-title">Primary card title</h4>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <h4 class="card-title">Contribution in external repos</h4>
+          <h3 class="card-title" style="text-align: center">
+            <i class="fa fa-location-arrow"></i> 8</h3>
+        </div>
+      </div>
+    </a>
+  </div>
+
+</div>
+
+
+<!-- Graphs -->
+<div class="row justify-content-center graphRow">
+
+  <!-- Member Growth -->
+  <div class="col-md-3">
+    <div class="card border-primary mb-3 graphCard">
+      <div class="card-body">
+        <!-- Custom card header -->
+        <div class="row">
+          <div class="col-md-5">
+            <h4>Member Growth</h4>
+          </div>
+          <div class="col-md-4 offset-md-3">
+            <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#memberModal">
+              <i class="fa fa-arrows-alt"></i>
+            </button>
+          </div>
+        </div>
+        <!-- Actual Graph body -->
+        <img style="height: 200px; width: 100%; display: block;" src="../../assets/graph.png" alt="Card image">
+      </div>
+    </div>
+  </div>
+
+  <!-- Activity inside owned Repos (Commits/Week) -->
+  <div class="col-md-3">
+    <div class="card border-primary mb-3 graphCard">
+      <div class="card-body">
+        <!-- Custom card header -->
+        <div class="row">
+          <div class="col-md-5">
+            <h4>Member Growth</h4>
+          </div>
+          <div class="col-md-4 offset-md-3">
+            <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#memberModal">
+              <i class="fa fa-arrows-alt"></i>
+            </button>
+          </div>
+        </div>
+        <!-- Actual Graph body -->
+        <img style="height: 200px; width: 100%; display: block;" src="../../assets/graph.png" alt="Card image">
+      </div>
+    </div>
+  </div>
+
+  <!-- Contribution to external Repos (PRs/Week) -->
+  <div class="col-md-3">
+    <div class="card border-primary mb-3 graphCard">
+      <div class="card-body">
+        <!-- Custom card header -->
+        <div class="row">
+          <div class="col-md-5">
+            <h4>Member Growth</h4>
+          </div>
+          <div class="col-md-4 offset-md-3">
+            <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#memberModal">
+              <i class="fa fa-arrows-alt"></i>
+            </button>
+          </div>
+        </div>
+        <!-- Actual Graph body -->
+        <img style="height: 200px; width: 100%; display: block;" src="../../assets/graph.png" alt="Card image">
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Graph Modal -->
+  <div class="modal fade" id="memberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Title data</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <img style="height: 600px; width: 100%; display: block;" src="../../assets/graph.png" alt="Card image">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Download</button>
         </div>
       </div>
     </div>
-</div>
-
-<i class="fas fa-user"></i>
-<i class="far fa-user"></i>
-<!--brand icon-->
-<i class="fab fa-github-square"></i>
+  </div>
