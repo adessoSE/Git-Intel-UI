@@ -9,6 +9,7 @@ import { MembersComponent } from './members/members.component';
 import { TeamsComponent } from './teams/teams.component';
 import { RepositoriesComponent } from './repositories/repositories.component';
 import { ExternalRepositoriesComponent } from './external-repositories/external-repositories.component';
+import { MemberComponent } from './member/member.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ExternalRepositoriesComponent } from './external-repositories/external-
     MembersComponent,
     TeamsComponent,
     RepositoriesComponent,
-    ExternalRepositoriesComponent
+    ExternalRepositoriesComponent,
+    MemberComponent
   ],
   imports: [
     BrowserModule,
