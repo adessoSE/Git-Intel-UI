@@ -10,6 +10,7 @@ export class DashboardComponent implements OnInit {
   data: any;
 
   constructor() {
+    // ==========TEST DATA=========
     this.data = {
       name: 'Business Company Ltd.',
       id: 'MDEyOk9yZ2FuaXphdGlvbjE3MTA0MjI=',
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit {
           externalRepoActivityAmount: [2, 2, 1, 2]
         }
     };
+    // ============================
   }
 
   ngOnInit() {

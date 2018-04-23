@@ -9,7 +9,7 @@ export class MembersComponent implements OnInit {
 
   data: any;
 
-  sortByToggle: string;
+  sortByToggle: string = 'commits';
 
   constructor() {
     // ==========TEST DATA=========
