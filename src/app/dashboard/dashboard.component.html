@@ -1,144 +1,164 @@
-<div class="row align-items-center justify-content-center ">
+<div class="container-fluid">
 
-  <!-- Members -->
-  <div class="col-md-2">
-    <a routerLink="/members/">
-      <div class="card border-primary mb-3 componentCard">
-        <div class="card-body">
-          <h4 class="card-title">Members</h4>
-          <h3 class="card-title" style="text-align: center">
-            <i class="fa fa-user"></i> 63</h3>
-        </div>
-      </div>
-    </a>
+  <!--Company meta data-->
+  <div class="row">
+    <div class="col-md-4">
+      <h1>{{data.name}}</h1>
+      <span class="orga-location">{{data.location}}</span>
+      <p class="orga-description">{{data.description}}.</p>
+    </div>
+    <span class="col-md-4 orga-link">
+      <a href="{{data.websiteURL}}"><i class="fa fa-globe fa-3x"></i>Link To Website</a>
+    </span>
+    <span class="col-md-4 orga-link">
+      <a href="{{data.githubURL}}">
+        <i class="fa fa-github fa-3x"></i>Link To GitHub</a>
+    </span>
   </div>
 
-  <!-- Teams -->
-  <div class="col-md-2">
-    <a routerLink="/teams/">
-      <div class="card border-primary mb-3 componentCard">
-        <div class="card-body">
-          <h4 class="card-title">Teams</h4>
-          <h3 class="card-title" style="text-align: center">
-            <i class="fa fa-users"></i> 6</h3>
-        </div>
-      </div>
-    </a>
-  </div>
+  <div class="row justify-content-center graph-row">
 
-  <!-- Repositories -->
-  <div class="col-md-2">
-    <a routerLink="/repositories/">
-      <div class="card border-primary mb-3 componentCard">
-        <div class="card-body">
-          <h4 class="card-title">Repositories</h4>
-          <h3 class="card-title" style="text-align: center">
-            <i class="fa fa-bitbucket"></i> 14</h3>
-        </div>
-      </div>
-    </a>
-  </div>
-
-  <!-- External Repos -->
-  <div class="col-md-2">
-    <a routerLink="/external-repositories/">
-      <div class="card border-primary mb-3 componentCard">
-        <div class="card-body">
-          <h4 class="card-title">Contribution in external repos</h4>
-          <h3 class="card-title" style="text-align: center">
-            <i class="fa fa-location-arrow"></i> 8</h3>
-        </div>
-      </div>
-    </a>
-  </div>
-
-</div>
-
-
-<!-- Graphs -->
-<div class="row justify-content-center graphRow">
-
-  <!-- Member Growth -->
-  <div class="col-md-3">
-    <div class="card border-primary mb-3 graphCard">
-      <div class="card-body">
-        <!-- Custom card header -->
-        <div class="row">
-          <div class="col-md-5">
-            <h4>Member Growth</h4>
-          </div>
-          <div class="col-md-4 offset-md-3">
-            <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#memberModal">
-              <i class="fa fa-arrows-alt"></i>
-            </button>
+    <!-- Members -->
+    <div class="col-md-2">
+      <a routerLink="/members/">
+        <div class="card border-primary mb-3 component-card">
+          <div class="card-body">
+            <h4 class="card-title">Members</h4>
+            <h3 class="card-title" style="text-align: center">
+              <i class="fa fa-user"></i> {{data.membersAmount}}</h3>
           </div>
         </div>
-        <!-- Actual Graph body -->
-        <img style="height: 200px; width: 100%; display: block;" src="../../assets/graph.png" alt="Card image">
+      </a>
+    </div>
+
+    <!-- Teams -->
+    <div class="col-md-2">
+      <a routerLink="/teams/">
+        <div class="card border-primary mb-3 component-card">
+          <div class="card-body">
+            <h4 class="card-title">Teams</h4>
+            <h3 class="card-title" style="text-align: center">
+              <i class="fa fa-users"></i> {{data.teamsAmount}}</h3>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Repositories -->
+    <div class="col-md-2">
+      <a routerLink="/repositories/">
+        <div class="card border-primary mb-3 component-card">
+          <div class="card-body">
+            <h4 class="card-title">Repositories</h4>
+            <h3 class="card-title" style="text-align: center">
+              <i class="fa fa-book mr-3"></i> {{data.repositoriesAmount}}</h3>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- External Repos -->
+    <div class="col-md-2">
+      <a routerLink="/external-repositories/">
+        <div class="card border-primary mb-3 component-card">
+          <div class="card-body">
+            <h4 class="card-title">Contribution in external repos</h4>
+            <h3 class="card-title" style="text-align: center">
+              <i class="fa fa-location-arrow"></i> {{data.externalRepositoriesAmount}}</h3>
+          </div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+
+
+  <!-- Graphs -->
+  <div class="row justify-content-center graph-row">
+
+    <!-- Member Growth -->
+    <div class="col-md-3">
+      <div class="card border-primary mb-3 graph-card">
+        <div class="card-body">
+          <!-- Custom card header -->
+          <div class="row">
+            <div class="col-md-5">
+              <h4>Member Growth</h4>
+            </div>
+            <div class="col-md-4 offset-md-3">
+              <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#memberModal">
+                <i class="fa fa-arrows-alt"></i>
+              </button>
+            </div>
+          </div>
+          <!-- Actual Graph body -->
+          <img style="height: 200px; width: 100%; display: block;" src="../../assets/graph.png" alt="Card image">
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Activity inside owned Repos (Commits/Week) -->
-  <div class="col-md-3">
-    <div class="card border-primary mb-3 graphCard">
-      <div class="card-body">
-        <!-- Custom card header -->
-        <div class="row">
-          <div class="col-md-5">
-            <h4>Member Growth</h4>
+    <!-- Activity inside owned Repos (Commits/Week) -->
+    <div class="col-md-3">
+      <div class="card border-primary mb-3 graph-card">
+        <div class="card-body">
+          <!-- Custom card header -->
+          <div class="row">
+            <div class="col-md-5">
+              <h4>Member Growth</h4>
+            </div>
+            <div class="col-md-4 offset-md-3">
+              <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#memberModal">
+                <i class="fa fa-arrows-alt"></i>
+              </button>
+            </div>
           </div>
-          <div class="col-md-4 offset-md-3">
-            <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#memberModal">
-              <i class="fa fa-arrows-alt"></i>
-            </button>
-          </div>
+          <!-- Actual Graph body -->
+          <img style="height: 200px; width: 100%; display: block;" src="../../assets/graph.png" alt="Card image">
         </div>
-        <!-- Actual Graph body -->
-        <img style="height: 200px; width: 100%; display: block;" src="../../assets/graph.png" alt="Card image">
       </div>
     </div>
-  </div>
 
-  <!-- Contribution to external Repos (PRs/Week) -->
-  <div class="col-md-3">
-    <div class="card border-primary mb-3 graphCard">
-      <div class="card-body">
-        <!-- Custom card header -->
-        <div class="row">
-          <div class="col-md-5">
-            <h4>Member Growth</h4>
+    <!-- Contribution to external Repos (PRs/Week) -->
+    <div class="col-md-3">
+      <div class="card border-primary mb-3 graph-card">
+        <div class="card-body">
+          <!-- Custom card header -->
+          <div class="row">
+            <div class="col-md-5">
+              <h4>Member Growth</h4>
+            </div>
+            <div class="col-md-4 offset-md-3">
+              <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#memberModal">
+                <i class="fa fa-arrows-alt"></i>
+              </button>
+            </div>
           </div>
-          <div class="col-md-4 offset-md-3">
-            <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#memberModal">
-              <i class="fa fa-arrows-alt"></i>
-            </button>
-          </div>
+          <!-- Actual Graph body -->
+          <img style="height: 200px; width: 100%; display: block;" src="../../assets/graph.png" alt="Card image">
         </div>
-        <!-- Actual Graph body -->
-        <img style="height: 200px; width: 100%; display: block;" src="../../assets/graph.png" alt="Card image">
       </div>
     </div>
-  </div>
 
 
-  <!-- Graph Modal -->
-  <div class="modal fade" id="memberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Title data</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
+    <!-- Graph Modal -->
+    <div class="modal fade" id="memberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Title data</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
             <img style="height: 600px; width: 100%; display: block;" src="../../assets/graph.png" alt="Card image">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Download</button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Download</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
+</div>

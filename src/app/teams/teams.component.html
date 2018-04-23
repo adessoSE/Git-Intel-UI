@@ -1,3 +1,65 @@
-<p>
-  teams works!
-</p>
+<div class="container-fluid">
+
+  <!--Breadcrumbs for user orientation-->
+  <div class="breadcrumbs">
+    <h1>
+      <a href="">
+        <i class="fa fa-arrow-left"></i>
+      </a>
+      <span> Organization / </span>
+      <span class="text-primary">Teams ({{data.teams.length}})</span>
+    </h1>
+  </div>
+
+  <!--Search and sort functionality-->
+  <div class="search-container">
+    <form class="form-inline float-right">
+      <input type="text" class="form-control " placeholder="Search Member">
+      <button type="submit" class="btn btn-primary">
+        <i class="fa fa-search"></i>
+      </button>
+    </form>
+    <div class="dropdown float-right mr-3">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+        Sort by
+      </button>
+      <div class="dropdown-menu">
+        <button class="dropdown-item" (click)="sortByToggle = 'members'">Members</button>
+        <button class="dropdown-item" (click)="sortByToggle = 'repositories'">Repositories</button>
+        <button class="dropdown-item" (click)="sortByToggle = 'commits'">Commits</button>
+      </div>
+    </div>
+  </div>
+
+  <!--Cards displaying teams and team info-->
+  <div class="row justify-content-center graph-row">
+    <!-- Teams -->
+    <div class="col-md-12 member-card" *ngFor="let team of data.teams">
+      <div class="card border-primary component-card">
+        <div class="card-body">
+          <div class="card-title">
+            <h4>{{team.name}}
+              <picture style="float: right;">
+                <i class="fa fa-user fa-3x"></i>
+              </picture>
+            </h4>
+            <p>{{team.description}}</p>
+          </div>
+          <div class="card-text pb-3">
+            <div class="team-info-container">
+              <span>
+                <i class="fa fa-users mr-3 fa-3x"></i>
+                <span class="text-primary">{{team.members}}</span> Members</span>
+              <span>
+                <i class="fa fa-book mr-3 fa-3x"></i>
+                <span class="text-primary">{{team.repositories}}</span> Repositories</span>
+              <span>
+                <i class="fa fa-stop-circle mr-3 fa-3x"></i>
+                <span class="text-primary">{{team.commits}}</span> Commits</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
