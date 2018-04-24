@@ -1,9 +1,14 @@
+import { Organization } from "./organization";
+
 export class Member {
+    private username: string;
     private name: string;
-    private userName: string;
-    private organization: string;
+    private organization: Organization;
     private commits: number;
     private pullRequests: number;
     private issues: number;
-    // avatar ?
+    // Avatar 
+
+    // Optional weitere Details:
+    // private bio: string;
 }
