@@ -1,31 +1,69 @@
-<div class="container-fluid" style="padding-left: 2%; padding-top: 2%; padding-right: 2%">
-  <div class="row">
-    <!-- Navigation -->
-    <div class="col-sm-8">
-      <h2>
-        <i class="fa fa-arrow-left"></i> Organization XY / Members (63)
-      </h2>
-    </div>
-    <!-- Orga website -->
-    <div class="col-sm-2">
-      <wbr>
-        <input class="form-control mr-sm-2" placeholder="Search user" type="text">
-    </div>
+<div class="container-fluid">
 
-    <div class="col-sm-2">
-      <wbr>
-      <div class="form-group">
-        <select class="custom-select">
-          <option selected="">Sort by</option>
-          <option value="1">Alphabetical</option>
-          <option value="2">Most commits</option>
-          <option value="3">Most PRs</option>
-          <option value="4">Most Issues</option>
-        </select>
+  <!--Breadcrumbs for user orientation-->
+  <div class="breadcrumbs">
+    <h1>
+      <a href="">
+        <i class="fa fa-arrow-left"></i>
+      </a>
+      <span> Organization / </span>
+      <span class="text-primary">Members ({{data.members.length}})</span>
+    </h1>
+  </div>
+
+  <!--Search and sort functionality-->
+  <div class="search-container">
+    <form class="form-inline float-right">
+      <input type="text" class="form-control " placeholder="Search Member">
+      <button type="submit" class="btn btn-primary">
+        <i class="fa fa-search"></i>
+      </button>
+    </form>
+    <div class="dropdown float-right mr-3">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+        Sort by
+      </button>
+      <div class="dropdown-menu">
+        <button class="dropdown-item" (click)="sortByToggle = 'commits'">Commits</button>
+        <button class="dropdown-item" (click)="sortByToggle = 'pull requests'">Pull Requests</button>
+        <button class="dropdown-item" (click)="sortByToggle = 'issues'">Issues</button>
       </div>
     </div>
-
   </div>
-  <!-- Organization description -->
 
+  <!--Cards displaying users and user info-->
+  <div class="row justify-content-center graph-row">
+    <!-- Members -->
+    <div class="col-md-4 member-card" *ngFor="let member of data.members">
+      <div class="card border-primary component-card">
+        <div class="card-body">
+          <h4 class="card-title">{{member.name}}
+            <picture style="float: right;">
+              <i class="fa fa-user fa-3x"></i>
+            </picture>
+          </h4>
+          <div class="card-text">
+            <p>Activity Last 7 Days:</p>
+            <ul>
+              <li>
+                <div class="member-icon">
+                  <i class="fa fa-stop-circle"></i>
+                </div>
+                <span class="text-primary"> {{member.commits}}</span> Commits</li>
+              <li>
+                <div class="member-icon">
+                  <i class="fa fa-code-fork"></i>
+                </div>
+                <span class="text-primary"> {{member.pullRequests}}</span> Pull Requests</li>
+              <li>
+                <div class="member-icon">
+                  <i class="fa fa-exclamation-circle"></i>
+                </div>
+                <span class="text-primary"> {{member.issues}}</span> Issues (Closed/Opened)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

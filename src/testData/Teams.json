@@ -1,0 +1,11 @@
+{
+    "teams": [
+        {
+            "name": "BrainySnake",
+            "description": "Program your Snake ai and try to beat the other coders",
+            "members": 36,
+            "repositories": 3,
+            "commits": 156
+        }
+    ]
+}
