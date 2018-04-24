@@ -1,12 +1,12 @@
 import { Organization } from "./organization";
 
 export class Member {
-    private username: string;
-    private name: string;
-    private organization: Organization;
-    private commits: number;
-    private pullRequests: number;
-    private issues: number;
+    public username: string;
+    public name: string;
+    public organization: Organization;
+    public commits: number;
+    public pullRequests: number;
+    public issues: number;
     // Avatar 
 
     // Optional weitere Details:

@@ -3,16 +3,16 @@
   <!--Company meta data-->
   <div class="row">
     <div class="col-md-4">
-      <h1>{{data.name}}</h1>
-      <span class="orga-location">{{data.location}}</span>
-      <p class="orga-description">{{data.description}}.</p>
+      <h1>{{orga.name}}</h1>
+      <span class="orga-location">{{orga.location}}</span>
+      <p class="orga-description">{{orga.description}}.</p>
     </div>
     <span class="col-md-4 orga-link">
-      <a href="{{data.websiteURL}}"><i class="fa fa-globe fa-3x"></i>Link To Website</a>
+      <a href="https://www.{{orga.website}}"><i class="fa fa-globe fa-3x"></i>{{orga.website}}</a>
     </span>
     <span class="col-md-4 orga-link">
-      <a href="{{data.githubURL}}">
-        <i class="fa fa-github fa-3x"></i>Link To GitHub</a>
+      <a href="https://www.github.com/{{orga.name}}">
+        <i class="fa fa-github fa-3x"></i>github.com/{{orga.name}}</a>
     </span>
   </div>
 
@@ -25,7 +25,7 @@
           <div class="card-body">
             <h4 class="card-title">Members</h4>
             <h3 class="card-title" style="text-align: center">
-              <i class="fa fa-user"></i> {{data.membersAmount}}</h3>
+              <i class="fa fa-user"></i> {{orga.numOfMembers}}</h3>
           </div>
         </div>
       </a>
@@ -38,7 +38,7 @@
           <div class="card-body">
             <h4 class="card-title">Teams</h4>
             <h3 class="card-title" style="text-align: center">
-              <i class="fa fa-users"></i> {{data.teamsAmount}}</h3>
+              <i class="fa fa-users"></i> {{orga.numOfTeams}}</h3>
           </div>
         </div>
       </a>
@@ -51,7 +51,7 @@
           <div class="card-body">
             <h4 class="card-title">Repositories</h4>
             <h3 class="card-title" style="text-align: center">
-              <i class="fa fa-book mr-3"></i> {{data.repositoriesAmount}}</h3>
+              <i class="fa fa-book mr-3"></i> {{orga.numOfRepos}}</h3>
           </div>
         </div>
       </a>
@@ -64,7 +64,7 @@
           <div class="card-body">
             <h4 class="card-title">Contribution in external repos</h4>
             <h3 class="card-title" style="text-align: center">
-              <i class="fa fa-location-arrow"></i> {{data.externalRepositoriesAmount}}</h3>
+              <i class="fa fa-location-arrow"></i> {{orga.numOfExternalRepos}}</h3>
           </div>
         </div>
       </a>

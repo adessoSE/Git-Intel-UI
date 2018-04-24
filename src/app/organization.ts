@@ -1,12 +1,12 @@
 
 export class Organization {
-    private name: string;
-    private description: string;
-    private location: string;
-    private website: string;
-    private numOfMembers: number;
-    private numOfTeams: number;
-    private numOfRepos: number;
-    private numOfExternalRepos: number;
+    public name: string;
+    public description: string;
+    public location: string;
+    public website: string;
+    public numOfMembers: number;
+    public numOfTeams: number;
+    public numOfRepos: number;
+    public numOfExternalRepos: number;
     // Avatar 
 }

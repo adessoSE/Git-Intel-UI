@@ -1,13 +1,14 @@
 
 export class Repository {
-    private name: string;
-    private description: string;
-    private programmingLanguage: string;
-    private license: string;
-    private numOfContributors: number;
-    private stars: number;
-    private commits: number;
-    private pullRequests: number;
-    private issues: number;
+    public name: string;
+    public description: string;
+    public programmingLanguage: string;
+    public license: string;
+    public numOfContributors: number;
+    public stars: number;
+    public commits: number;
+    public pullRequests: number;
+    public forks: number;
+    public issues: number;
     // Avatar
 }
