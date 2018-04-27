@@ -7,13 +7,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
+	// alias the searchTerm 
 	organization: string = "";
 
+	// dynamic tabs
 	tabs = [
 		{ link: "home", label: "Home" }
 	];
 
-
+	// Issue: Empty queries 
 	openNewTab() {
 		this.tabs.push({ link: this.organization + "/dashboard", label: this.organization });
 	}

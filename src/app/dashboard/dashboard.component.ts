@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ORGANIZATIONS } from '../mock-data';
+
 import { Organization } from '../organization';
+import { DashboardService } from '../services/dashboard.service';
+
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,10 +12,12 @@ import { Organization } from '../organization';
 })
 export class DashboardComponent implements OnInit {
 
-  orga: Organization = ORGANIZATIONS[0];
+  orga: Organization;
 
-  constructor() {
-   
+  constructor(service: DashboardService, private route: ActivatedRoute) {
+    let org = route.snapshot.paramMap.get('organization');
+    console.log(org);
+    this.orga = service.getOrganization(org);
   }
 
   ngOnInit() {
