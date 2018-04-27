@@ -13,7 +13,7 @@ export class DashboardService {
   }
 
   getOrganization(name: string) {
-    var org = this.orgas.find(function (org) { return org.name === name });
+    var org = this.orgas.find(function (org) { return org.name.toLocaleLowerCase === name.toLocaleLowerCase});
 
     var index = this.orgas.indexOf(org, 0);
 

@@ -17,7 +17,7 @@ export class AppComponent {
 
 	// Issue: Empty queries 
 	openNewTab() {
-		this.tabs.push({ link: this.organization + "/dashboard", label: this.organization });
+		this.tabs.push({ link: this.organization, label: this.organization });
 	}
 
 	/* Known issue: 

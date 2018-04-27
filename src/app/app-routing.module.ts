@@ -12,7 +12,7 @@ import { HomeComponent } from './home/home.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: ':organization/dashboard', component: DashboardComponent },
+  { path: ':organization', component: DashboardComponent },
   { path: ':organization/members', component: MembersComponent },
   { path: ':organization/member/:username', component: MemberComponent },
   { path: ':organization/teams', component: TeamsComponent },

@@ -1,16 +1,16 @@
 <div class="container-fluid">
 
+
   <!--Breadcrumbs for user orientation-->
   <div class="breadcrumbs">
     <h1>
-      <a href="">
+      <button type="button" class="btn btn-link" (click)="goBack()">
         <i class="fa fa-arrow-left"></i>
-      </a>
+      </button>
       <span> Organization / </span>
       <span class="text-primary">Members ({{data.members.length}})</span>
     </h1>
   </div>
-
   <!--Search and sort functionality-->
   <div class="search-container">
     <form class="form-inline float-right">
