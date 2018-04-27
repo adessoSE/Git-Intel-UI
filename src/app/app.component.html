@@ -7,7 +7,7 @@
       <!-- Title -->
       <div class="col-sm-4">
         <h1 class="display-3">
-          <a href="/dashboard">GitStalker</a>
+          <a href="/home">GitStalker</a>
         </h1>
         <p class="lead">Stalking made easy!</p>
       </div>
@@ -15,7 +15,8 @@
       <!-- Search field -->
       <div class="col-sm-8">
         <form class="form-inline my-2 my-lg-0" style="padding-top: 5%;">
-          <input class="form-control mr-sm-2 searchForm" [(ngModel)]="searchPhrase" name="search" placeholder="Organizations name" type="text" style="width: 35%;">
+          <input class="form-control mr-sm-2 searchForm" [(ngModel)]="searchPhrase" name="search" placeholder="Organizations name"
+            type="text" style="width: 35%;">
           <button class="btn btn-primary my-2 my-sm-0" (click)="openNewTab()">Stalk!</button>
         </form>
       </div>
@@ -31,6 +32,7 @@
     <a class="nav-link" data-toggle="tab" [routerLink]="tab.link">
       {{ tab.label }}
     </a>
+    <button (click)="closeTab(tab.label)" type="button" class="close" data-dismiss="alert">&times;</button>
   </li>
 </ul>
 

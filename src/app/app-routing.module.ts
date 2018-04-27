@@ -7,9 +7,11 @@ import { TeamsComponent } from './teams/teams.component';
 import { RepositoriesComponent } from './repositories/repositories.component';
 import { ExternalRepositoriesComponent } from './external-repositories/external-repositories.component';
 import { MemberComponent } from './member/member.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'members', component: MembersComponent },
   { path: 'member/:username', component: MemberComponent },

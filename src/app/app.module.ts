@@ -11,6 +11,7 @@ import { RepositoriesComponent } from './repositories/repositories.component';
 import { ExternalRepositoriesComponent } from './external-repositories/external-repositories.component';
 import { MemberComponent } from './member/member.component';
 import { FormsModule } from '@angular/forms';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { FormsModule } from '@angular/forms';
     TeamsComponent,
     RepositoriesComponent,
     ExternalRepositoriesComponent,
-    MemberComponent
+    MemberComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
