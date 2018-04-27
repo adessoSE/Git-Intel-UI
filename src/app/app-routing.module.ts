@@ -12,12 +12,12 @@ import { HomeComponent } from './home/home.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'members', component: MembersComponent },
-  { path: 'member/:username', component: MemberComponent },
-  { path: 'teams', component: TeamsComponent },
-  { path: 'repositories', component: RepositoriesComponent },
-  { path: 'external-repositories', component: ExternalRepositoriesComponent }
+  { path: ':organization/dashboard', component: DashboardComponent },
+  { path: ':organization/members', component: MembersComponent },
+  { path: ':organization/member/:username', component: MemberComponent },
+  { path: ':organization/teams', component: TeamsComponent },
+  { path: ':organization/repositories', component: RepositoriesComponent },
+  { path: ':organization/external-repositories', component: ExternalRepositoriesComponent }
 ];
 
 @NgModule({

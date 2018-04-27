@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-	searchPhrase: string = "";
+	organization: string = "";
 
 	tabs = [
 		{ link: "home", label: "Home" }
@@ -15,17 +15,22 @@ export class AppComponent {
 
 
 	openNewTab() {
-		this.tabs.push({ link: "dashboard", label: this.searchPhrase });
+		this.tabs.push({ link: this.organization + "/dashboard", label: this.organization });
 	}
 
+	/* Known issue: 
+	 Trying to close a tab with multiple instances
+		of the same name only closes the first one,
+		because it's the first result of tabs.find
+	*/
 	closeTab(tabName: string) {
 		// Find object id to get index
 		var obj = this.tabs.find(function (obj) { return obj.label === tabName });
 
-		var index = this.tabs.indexOf( obj, 0);
-		
+		var index = this.tabs.indexOf(obj, 0);
+
 		this.tabs.splice(index, 1);
-		}
+	}
 
 
 }

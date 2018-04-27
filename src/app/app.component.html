@@ -15,7 +15,7 @@
       <!-- Search field -->
       <div class="col-sm-8">
         <form class="form-inline my-2 my-lg-0" style="padding-top: 5%;">
-          <input class="form-control mr-sm-2 searchForm" [(ngModel)]="searchPhrase" name="search" placeholder="Organizations name"
+          <input class="form-control mr-sm-2 searchForm" [(ngModel)]="organization" name="search" placeholder="Organizations name"
             type="text" style="width: 35%;">
           <button class="btn btn-primary my-2 my-sm-0" (click)="openNewTab()">Stalk!</button>
         </form>
@@ -27,12 +27,12 @@
 </div>
 
 
-<ul class="nav nav-tabs">
-  <li class="nav-item" *ngFor="let tab of tabs">
-    <a class="nav-link" data-toggle="tab" [routerLink]="tab.link">
+<ul class="nav nav-tabs tabBar">
+  <li class="nav-item" *ngFor="let tab of tabs" >
+    <a class="nav-link" data-toggle="tab" [routerLink]="tab.link" style="display: inline-block;">
       {{ tab.label }}
     </a>
-    <button (click)="closeTab(tab.label)" type="button" class="close" data-dismiss="alert">&times;</button>
+    <button (click)="closeTab(tab.label)" type="button" class="close" data-dismiss="alert" style="margin-top: 10%;">&times;</button>
   </li>
 </ul>
 
