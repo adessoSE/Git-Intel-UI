@@ -1,40 +1,39 @@
 <!-- Header -->
 <div class="jumbotron">
-  
-  <!-- Title 
-  <h1><a href="/dashboard">GitStalker</a></h1>
-  <p class="lead">Stalking made easy!</p>
-  <hr class="my-4">
--->
+
   <div class="container-fluid">
+
     <div class="row">
       <!-- Title -->
       <div class="col-sm-4">
-        <h1 class="display-3"><a href="/dashboard">GitStalker</a></h1>
+        <h1 class="display-3">
+          <a href="/dashboard">GitStalker</a>
+        </h1>
         <p class="lead">Stalking made easy!</p>
       </div>
 
       <!-- Search field -->
       <div class="col-sm-8">
         <form class="form-inline my-2 my-lg-0" style="padding-top: 5%;">
-          <input class="form-control mr-sm-2 searchForm" placeholder="Organizations name" type="text" style="width: 35%;">
-          <button class="btn btn-primary my-2 my-sm-0" type="submit">Stalk!</button>
+          <input class="form-control mr-sm-2 searchForm" [(ngModel)]="searchPhrase" name="search" placeholder="Organizations name" type="text" style="width: 35%;">
+          <button class="btn btn-primary my-2 my-sm-0" (click)="openNewTab()">Stalk!</button>
         </form>
-
       </div>
+
     </div>
   </div>
 
 </div>
 
+
 <ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link active show" data-toggle="tab" routerLink="/dashboard/">Home</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" routerLink="/external-repositories/">Dev: Member</a>
+  <li class="nav-item" *ngFor="let tab of tabs">
+    <a class="nav-link" data-toggle="tab" [routerLink]="tab.link">
+      {{ tab.label }}
+    </a>
   </li>
 </ul>
+
 
 <!-- Body -->
 <router-outlet></router-outlet>
