@@ -1,7 +1,7 @@
-import { Organization } from "./organization";
-import { Member } from "./member";
-import { Repository } from "./repository";
-import { Team } from "./team";
+import { Organization } from "./entities/organization";
+import { Member } from "./entities/member";
+import { Repository } from "./entities/repository";
+import { Team } from "./entities/team";
 
 
 export const ORGANIZATIONS: Organization[] = [

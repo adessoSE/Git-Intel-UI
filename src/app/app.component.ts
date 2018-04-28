@@ -1,19 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HomeComponent } from './home/home.component';
+
 
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+ 
+	/*  @organization - Is the user entered search term
+		@showNavigation - Display navigation bar everywhere except home
+		@tabs - Manages dynamic tabs
+	*/
+	organization: string = "";		
+	showNavigation: boolean = false;
+	tabs = [ { link: "home", label: "Home" } ];
 
-	// alias the searchTerm 
-	organization: string = "";
+	ngOnInit() { }
 
-	// dynamic tabs
-	tabs = [
-		{ link: "home", label: "Home" }
-	];
+	onComponentActivate(event) {
+		this.showNavigation = (event instanceof HomeComponent) ? false : true;
+	}
+
+	// Will be possibly removed
+	onComponentDeactivate(event) { }
 
 	// Issue: Empty queries 
 	openNewTab() {
@@ -21,7 +32,7 @@ export class AppComponent {
 	}
 
 	/* Known issue: 
-	 Trying to close a tab with multiple instances
+	 	Trying to close a tab with multiple instances
 		of the same name only closes the first one,
 		because it's the first result of tabs.find
 	*/

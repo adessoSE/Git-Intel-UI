@@ -28,7 +28,7 @@
 
 
 <ul class="nav nav-tabs tabBar">
-  <li class="nav-item" *ngFor="let tab of tabs" >
+  <li class="nav-item" *ngFor="let tab of tabs">
     <a class="nav-link" data-toggle="tab" [routerLink]="tab.link" style="display: inline-block;">
       {{ tab.label }}
     </a>
@@ -37,5 +37,20 @@
 </ul>
 
 
+<!--Breadcrumbs for user orientation-->
+<ng-container *ngIf="showNavigation">
+  <div class="breadcrumbs">
+    <h1>
+      <button type="button" class="btn btn-link" (click)="goBack()">
+        <i class="fa fa-arrow-left"></i>
+      </button>
+      <span> Organization / </span>
+      <span class="text-primary">Members ({{data.members.length}})</span>
+    </h1>
+  </div>
+</ng-container>
+
+
 <!-- Body -->
-<router-outlet></router-outlet>
+<router-outlet (activate)='onComponentActivate($event)' (deactivate)='onComponentDeactivate($event)'>
+</router-outlet>

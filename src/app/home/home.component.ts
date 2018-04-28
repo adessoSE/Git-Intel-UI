@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  @Output() notifyx: EventEmitter<boolean>;
+  constructor() {
+    this.notifyx = new EventEmitter<boolean>();
   }
+
+
+  ngOnInit() { //console.log("hey"); 
+    this.notifyx.emit(false);
+  }
+
+  ngOnDestroy() {
+    //console.log("rip");
+    //this.notifyx.emit(true);
+  }
+
 
 }
