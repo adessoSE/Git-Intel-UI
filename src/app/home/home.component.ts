@@ -1,4 +1,5 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
+import { GlobalNavigationService } from '../services/global-navigation.service';
 
 @Component({
   selector: 'app-home',
@@ -7,19 +8,14 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  @Output() notifyx: EventEmitter<boolean>;
-  constructor() {
-    this.notifyx = new EventEmitter<boolean>();
+  constructor(private globalNavService: GlobalNavigationService) { }
+
+  ngOnInit() { 
+    this.globalNavService.showNavBar(false);
   }
 
-
-  ngOnInit() { //console.log("hey"); 
-    this.notifyx.emit(false);
-  }
-
-  ngOnDestroy() {
-    //console.log("rip");
-    //this.notifyx.emit(true);
+  ngOnDestroy() {   
+    this.globalNavService.showNavBar(true);
   }
 
 

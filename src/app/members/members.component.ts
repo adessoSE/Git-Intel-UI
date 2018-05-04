@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MembersComponent implements OnInit {
 
-  data: any;
+  
 
   sortByToggle: string = 'commits';
 

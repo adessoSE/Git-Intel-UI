@@ -1,0 +1,14 @@
+<ng-container *ngIf="showNavigation">
+  <div class="breadcrumbs">
+    <h1>
+      <button type="button" class="btn btn-link" (click)="goBack()">
+        <i class="fa fa-arrow-left"></i>
+      </button>
+      <li class="nav-item" *ngFor="let route of routeHistory"  style="display: inline-block;">
+        <a class="nav-link" [routerLink]="route">
+         / {{route}} 
+        </a>
+      </li>
+    </h1>
+  </div>
+</ng-container>
