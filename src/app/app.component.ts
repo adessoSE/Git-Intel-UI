@@ -48,8 +48,6 @@ export class AppComponent implements OnInit {
 		this.tabs.splice(index, 1);
 	}
 
-	goBack() {
-		this.location.back();
-	  }
+	
 
 }
