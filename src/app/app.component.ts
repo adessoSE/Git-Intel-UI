@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeComponent } from './home/home.component';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -27,8 +28,8 @@ export class AppComponent implements OnInit {
 	onComponentDeactivate(event) { }
 
 	// Issue: Empty queries 
-	openNewTab() {
-		this.tabs.push({ link: this.organization, label: this.organization });
+	openNewTab(orga: string): void {
+		this.tabs.push({ link: orga, label: orga });
 	}
 
 	/* Known issue: 
@@ -45,5 +46,8 @@ export class AppComponent implements OnInit {
 		this.tabs.splice(index, 1);
 	}
 
+	goBack() {
+		this.location.back();
+	  }
 
 }

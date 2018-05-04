@@ -17,7 +17,7 @@
         <form class="form-inline my-2 my-lg-0" style="padding-top: 5%;">
           <input class="form-control mr-sm-2 searchForm" [(ngModel)]="organization" name="search" placeholder="Organizations name"
             type="text" style="width: 35%;">
-          <button class="btn btn-primary my-2 my-sm-0" (click)="openNewTab()">Stalk!</button>
+          <button class="btn btn-primary my-2 my-sm-0" (click)="openNewTab(organization)">Stalk!</button>
         </form>
       </div>
 
@@ -27,6 +27,7 @@
 </div>
 
 
+<!-- Tab Bar -->
 <ul class="nav nav-tabs tabBar">
   <li class="nav-item" *ngFor="let tab of tabs">
     <a class="nav-link" data-toggle="tab" [routerLink]="tab.link" style="display: inline-block;">
@@ -37,15 +38,15 @@
 </ul>
 
 
-<!--Breadcrumbs for user orientation-->
+<!-- Navigation Bar -->
 <ng-container *ngIf="showNavigation">
   <div class="breadcrumbs">
     <h1>
       <button type="button" class="btn btn-link" (click)="goBack()">
         <i class="fa fa-arrow-left"></i>
       </button>
-      <span> Organization / </span>
-      <span class="text-primary">Members ({{data.members.length}})</span>
+      <span> </span>
+      
     </h1>
   </div>
 </ng-container>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { ORGANIZATIONS } from '../mock-data';
-import { Organization } from '../organization';
+import { Organization } from '../entities/organization';
 
 @Injectable()
 export class DashboardService {
