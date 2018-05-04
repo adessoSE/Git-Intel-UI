@@ -18,5 +18,8 @@ export class HomeComponent implements OnInit {
     this.globalNavService.showNavBar(true);
   }
 
+  openNewTab(org: string) {
+    this.globalNavService.onOpenNewTab(org);
+  }
 
 }

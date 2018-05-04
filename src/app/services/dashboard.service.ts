@@ -11,7 +11,7 @@ export class DashboardService {
   constructor() { }
 
   getOrganization(name: string) {
-    var org = this.orgas.find(x => x.name == name);
+    var org = this.orgas.find(x => x.name.toLocaleLowerCase() === name.toLocaleLowerCase());
 
     return org;
   }

@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
 import { HomeComponent } from './home/home.component';
+
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+
+import { GlobalNavigationService } from './services/global-navigation.service';
 
 
 @Component({
@@ -19,7 +23,11 @@ export class AppComponent implements OnInit {
 	showNavigation: boolean = false;
 	tabs = [ { link: "home", label: "Home" } ];
 	
-	constructor(private location: Location) { }
+	constructor(private location: Location, private router: Router, private globalNavService: GlobalNavigationService) { 
+		this.globalNavService.onOpenNewTabEmitter.subscribe((tab) => {
+			if( tab !== "" ) this.openNewTab(tab);
+		});
+	}
 
 	ngOnInit() { }
 
@@ -33,6 +41,7 @@ export class AppComponent implements OnInit {
 	// Issue: Empty queries 
 	openNewTab(orga: string): void {
 		this.tabs.push({ link: orga, label: orga });
+		this.router.navigate(["/"+ orga]);
 	}
 
 	/* Known issue: 
