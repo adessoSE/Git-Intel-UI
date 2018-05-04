@@ -30,7 +30,7 @@
 <!-- Tab Bar -->
 <ul class="nav nav-tabs tabBar">
   <li class="nav-item" *ngFor="let tab of tabs">
-    <a class="nav-link" data-toggle="tab" [routerLink]="tab.link" style="display: inline-block;">
+    <a class="nav-link" data-toggle="tab" [routerLink]="tab.link" (click)="onClickTab()" style="display: inline-block;">
       {{ tab.label }}
     </a>
     <button (click)="closeTab(tab.label)" type="button" class="close" data-dismiss="alert" style="margin-top: 10%;">&times;</button>
@@ -43,5 +43,4 @@
 
 
 <!-- Body -->
-<router-outlet (activate)='onComponentActivate($event)' (deactivate)='onComponentDeactivate($event)'>
-</router-outlet>
+<router-outlet></router-outlet>

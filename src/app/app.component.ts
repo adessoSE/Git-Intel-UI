@@ -23,17 +23,16 @@ export class AppComponent implements OnInit {
 	showNavigation: boolean = false;
 	tabs = [ { link: "home", label: "Home" } ];
 	
-	constructor(private location: Location, private router: Router, private globalNavService: GlobalNavigationService) { 
+	constructor
+		(private location: Location, private router: Router, 
+		private globalNavService: GlobalNavigationService) 
+		{ 
 		this.globalNavService.onOpenNewTabEmitter.subscribe((tab) => {
 			if( tab !== "" ) this.openNewTab(tab);
 		});
 	}
 
 	ngOnInit() { }
-
-	onComponentActivate(event) {
-		this.showNavigation = (event instanceof HomeComponent) ? false : true;
-	}
 
 	// Will be possibly removed
 	onComponentDeactivate(event) { }
@@ -58,6 +57,9 @@ export class AppComponent implements OnInit {
 		this.tabs.splice(index, 1);
 	}
 
+	onClickTab() {
+		this.globalNavService.onClickTab(true);
+	}
 	
 
 }
