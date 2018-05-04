@@ -17,6 +17,8 @@ export class AppComponent implements OnInit {
 	organization: string = "";		
 	showNavigation: boolean = false;
 	tabs = [ { link: "home", label: "Home" } ];
+	
+	constructor(private location: Location) { }
 
 	ngOnInit() { }
 
