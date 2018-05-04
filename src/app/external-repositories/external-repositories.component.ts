@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Repository } from '../entities/repository';
+import { ExRepositoryService } from '../services/ex-repository.service';
 
 @Component({
   selector: 'app-external-repositories',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExternalRepositoriesComponent implements OnInit {
 
-  constructor() { }
+  extRepos: Repository [];
+
+  constructor(extRepoService: ExRepositoryService) { 
+    this.extRepos = extRepoService.getExRepositories();
+  }
 
   ngOnInit() {
   }

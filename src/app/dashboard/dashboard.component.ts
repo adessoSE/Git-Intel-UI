@@ -4,8 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Organization } from '../entities/organization';
 
 import { DashboardService } from '../services/dashboard.service';
-
-
+import { GlobalNavigationService } from '../services/global-navigation.service';
 
 
 @Component({
@@ -17,13 +16,17 @@ export class DashboardComponent implements OnInit {
 
   orga: Organization;
 
-  constructor(service: DashboardService, private route: ActivatedRoute) {
+  constructor(private service: DashboardService, private route: ActivatedRoute, private globalNavService: GlobalNavigationService) {
     let org = route.snapshot.paramMap.get('organization');
-    console.log(org);
     this.orga = service.getOrganization(org);
   }
 
-  ngOnInit() {
+  ngOnInit() { 
+    this.globalNavService.showNavBar(false);
+  }
+
+  ngOnDestroy() {   
+    this.globalNavService.showNavBar(true);
   }
 
 }

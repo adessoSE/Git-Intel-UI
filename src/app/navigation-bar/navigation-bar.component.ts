@@ -14,11 +14,12 @@ export class NavigationBarComponent implements OnInit {
   routeHistory: string[] = [];
 
   constructor(private globalNavService: GlobalNavigationService, private location: Location, private router: Router) {
-
+    // Subscription: Show navigation?
     this.globalNavService.showNavBarEmitter.subscribe((mode) => {
       this.showNavigation = mode;
     });
 
+    // Subscribe to routing changes
     router.events.subscribe((val) => {
       this.splitRouteString(location.path());
     });
@@ -32,7 +33,7 @@ export class NavigationBarComponent implements OnInit {
   }
 
   /*
-    Iterate over link, remove all "/" and seperate words
+    Iterate over link, remove every "/" and seperate words
   */
   splitRouteString(link: string) {
     let h: string[] = [];
@@ -45,7 +46,7 @@ export class NavigationBarComponent implements OnInit {
       }
     }
 
-    h.push(link.substring(link.lastIndexOf("/") + 1, link.length));
+    h.push( link.substring(link.lastIndexOf("/") + 1, link.length) );
     h.shift();
     this.routeHistory = h;
   }

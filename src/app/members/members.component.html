@@ -1,8 +1,6 @@
 <div class="container-fluid">
 
-
-
-  <!--Search and sort functionality-->
+  <!-- Search and sort functionality -->
   <div class="search-container">
     <form class="form-inline float-right">
       <input type="text" class="form-control " placeholder="Search Member">
@@ -22,10 +20,10 @@
     </div>
   </div>
 
-  <!--Cards displaying users and user info-->
+  <!-- Cards displaying users and user info -->
   <div class="row justify-content-center graph-row">
     <!-- Members -->
-    <div class="col-md-4 member-card" *ngFor="let member of data.members">
+    <div class="col-md-4 member-card" *ngFor="let member of members">
       <div class="card border-primary component-card">
         <div class="card-body">
           <h4 class="card-title">{{member.name}}

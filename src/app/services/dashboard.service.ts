@@ -8,17 +8,11 @@ export class DashboardService {
 
   orgas: Organization [] = ORGANIZATIONS;
 
-  constructor() {
-   
-  }
+  constructor() { }
 
   getOrganization(name: string) {
-    var org = this.orgas.find(function (org) { return org.name.toLocaleLowerCase === name.toLocaleLowerCase});
+    var org = this.orgas.find(x => x.name == name);
 
-    var index = this.orgas.indexOf(org, 0);
-
-    this.orgas.slice(index, 1);
-    
     return org;
   }
 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MemberService } from '../services/member.service';
+import { Member } from '../entities/member';
 
 @Component({
   selector: 'app-members',
@@ -7,11 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MembersComponent implements OnInit {
 
-  
-
+  members: Member [];
   sortByToggle: string = 'commits';
 
-  constructor() { }
+  constructor(memberService: MemberService) { 
+    this.members = memberService.getMembers();
+  }
 
   ngOnInit() {
   }

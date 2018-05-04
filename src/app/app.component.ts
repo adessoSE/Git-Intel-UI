@@ -10,9 +10,10 @@ import { Location } from '@angular/common';
 })
 export class AppComponent implements OnInit {
  
-	/*  @organization - Is the user entered search term
-		@showNavigation - Display navigation bar everywhere except home
-		@tabs - Manages dynamic tabs
+	/* 
+	@organization - Is the user entered search term
+	@showNavigation - Display navigation bar everywhere except home
+	@tabs - Manages dynamic tabs
 	*/
 	organization: string = "";		
 	showNavigation: boolean = false;
