@@ -2,11 +2,11 @@ import { Member } from "./member";
 import { Repository } from "./repository";
 
 export class Team {
-    private name: string;
-    private description: string;
-    private repositories: Repository[];
-    private members: Member[];
-    private commits: number;
+    public name: string;
+    public description: string;
+    public repositories: Repository[];
+    public members: Member[];
+    public commits: number;
     // Avatar 
 
     // Optional weitere Details:

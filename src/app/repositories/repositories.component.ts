@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Repository } from '../entities/repository';
+import { RepositoryService } from '../services/repository.service';
 
 @Component({
   selector: 'app-repositories',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RepositoriesComponent implements OnInit {
 
-  constructor() { }
+  repositories: Repository [];
+  sortByToggle: string = 'Members';
+
+  constructor(repoService: RepositoryService) {
+    this.repositories = repoService.getRepositories();
+  }
 
   ngOnInit() {
   }

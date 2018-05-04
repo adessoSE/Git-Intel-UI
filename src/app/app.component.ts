@@ -1,27 +1,65 @@
-import { Component } from '@angular/core';
+import { HomeComponent } from './home/home.component';
+
+import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+
+import { GlobalNavigationService } from './services/global-navigation.service';
+
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'app';
-
-  /*
-$('#btnAdd').click(function (e) {
-  	var nextTab = $('#tabs li').size()+1;
+export class AppComponent implements OnInit {
+ 
+	/* 
+	@organization - Is the user entered search term
+	@showNavigation - Display navigation bar everywhere except home
+	@tabs - Manages dynamic tabs
+	*/
+	organization: string = "";		
+	showNavigation: boolean = false;
+	tabs = [ { link: "home", label: "Home" } ];
 	
-  	// create the tab
-  	$('<li><a href="#tab'+nextTab+'" data-toggle="tab">Tab '+nextTab+'</a></li>').appendTo('#tabs');
-  	
-  	// create the tab content
-  	$('<div class="tab-pane" id="tab'+nextTab+'">tab' +nextTab+' content</div>').appendTo('.tab-content');
-  	
-  	// make the new tab active
-  	$('#tabs a:last').tab('show');
-});
+	constructor
+		(private location: Location, private router: Router, 
+		private globalNavService: GlobalNavigationService) 
+		{ 
+		this.globalNavService.onOpenNewTabEmitter.subscribe((tab) => {
+			if( tab !== "" ) this.openNewTab(tab);
+		});
+	}
 
-  */
+	ngOnInit() { }
+
+	// Will be possibly removed
+	onComponentDeactivate(event) { }
+
+	// Issue: Empty queries 
+	openNewTab(orga: string): void {
+		this.tabs.push({ link: orga, label: orga });
+		this.router.navigate(["/"+ orga]);
+	}
+
+	/* Known issue: 
+	 	Trying to close a tab with multiple instances
+		of the same name only closes the first one,
+		because it's the first result of tabs.find
+	*/
+	closeTab(tabName: string) {
+		// Find object id to get index
+		var obj = this.tabs.find(function (obj) { return obj.label === tabName });
+
+		var index = this.tabs.indexOf(obj, 0);
+
+		this.tabs.splice(index, 1);
+	}
+
+	onClickTab() {
+		this.globalNavService.onClickTab(true);
+	}
+	
 
 }
