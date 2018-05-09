@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {PopoverModule} from "ngx-popover";
+import { PopoverModule } from "ngx-popover";
 
 import { Organization } from '../entities/organization';
 
@@ -17,9 +17,12 @@ export class DashboardComponent implements OnInit {
 
   orga: Organization;
 
-  constructor(private service: DashboardService, private activeRoute: ActivatedRoute,
-    private router: Router, private globalNavService: GlobalNavigationService) {
-    // Reacts to routing changes and calls method to fetch organization
+  constructor(
+    private service: DashboardService, 
+    private activeRoute: ActivatedRoute,
+    private router: Router, 
+    private globalNavService: GlobalNavigationService) {
+
     router.events.subscribe((val) => { this.determineOrganization(); });
   }
 

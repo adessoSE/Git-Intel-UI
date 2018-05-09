@@ -1,42 +1,38 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PopoverModule } from "ngx-popover";
+
 import { HomeComponent } from './home/home.component';
 
-import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { Router } from '@angular/router';
-
 import { GlobalNavigationService } from './services/global-navigation.service';
-
 
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-	/* 
-	@organization - Is the user entered search term
-	@tabs - Manages dynamic tabs
-	*/
 	organization: string = "";
-	tabs = [{ link: "home", label: "Home" }];
+	tabs: string[] = ["home"];
+	isSearchInvalid: boolean = false;
 
-	constructor(private location: Location, private router: Router,
+	constructor(
+		private router: Router,
 		private globalNavService: GlobalNavigationService) {
-		this.globalNavService.onOpenNewTabEmitter.subscribe((tab) => {
-			if (tab !== "") this.openNewTab(tab);
-		});
+
+		this.globalNavService.onOpenNewTabEmitter.subscribe((tab) => { if (tab !== "") this.openNewTab(tab) });
 	}
 
-	ngOnInit() { }
-
-	// Will be possibly removed
-	onComponentDeactivate(event) { }
-
-	// Issue: Empty queries 
-	openNewTab(orga: string): void {
-		this.tabs.push({ link: orga, label: orga });
-		this.router.navigate(["/" + orga]);
+	openNewTab(orga: string) {
+		if (this.checkSearchTerm(orga)) {
+			this.isSearchInvalid = false;
+			this.tabs.push(orga);
+			this.router.navigate(["/" + orga]);
+		}
+		else {
+			this.isSearchInvalid = true;
+		}
 	}
 
 	/* Known issue: 
@@ -44,18 +40,22 @@ export class AppComponent implements OnInit {
 		of the same name only closes the first one,
 		because it's the first result of tabs.find
 	*/
-	closeTab(tabName: string) {
-		// Find object id to get index
-		var obj = this.tabs.find(function (obj) { return obj.label === tabName });
-
-		var index = this.tabs.indexOf(obj, 0);
-
-		this.tabs.splice(index, 1);
+	closeTab(tab: string) {
+		const index: number = this.tabs.indexOf(tab);
+		if (index > 0) {
+			this.tabs.splice(index, 1);
+			this.router.navigate(["/" + this.tabs[index - 1]]);
+		}
 	}
 
 	onClickTab() {
 		this.globalNavService.onClickTab(true);
 	}
 
+	checkSearchTerm(term: string) : boolean {
+		// TODO: Use Regular Epressions
+		// Rules according to https://gist.github.com/tonybruess/9405134
+		return term.length > 0 && term.length < 40 && term[0] !== "-";
+	}
 
 }
