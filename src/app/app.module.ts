@@ -21,6 +21,7 @@ import { GlobalNavigationService } from './services/global-navigation.service';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { PopoverModule } from 'ngx-popover';
+import { TeamComponent } from './team/team.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { PopoverModule } from 'ngx-popover';
     MemberComponent,
     HomeComponent,
     NavigationBarComponent,
-    CapitalizePipe
+    CapitalizePipe,
+    TeamComponent
   ],
   imports: [
     BrowserModule,

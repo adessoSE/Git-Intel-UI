@@ -4,16 +4,8 @@
 
 /* Simple links everywhere */
 a, a:visited, a:hover, a:active {
-    color: inherit;
-    text-decoration:none;
-}
-
-.orga-description {
-    padding-top: 10%
-}
-
-.breadcrumbs {
-    padding-bottom: 5%
+    color: inherit !important;
+    text-decoration:none !important;
 }
 
 ul {

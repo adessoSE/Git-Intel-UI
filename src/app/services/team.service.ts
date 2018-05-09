@@ -16,4 +16,12 @@ export class TeamService {
     return this.teams;
   }
 
+  getTeamDetails(name: string) : Team {
+    for (const team of this.teams) {
+      if (team.name.toLocaleLowerCase === name.toLocaleLowerCase) {
+        return team;
+      }
+    }
+  }
+
 }

@@ -1,0 +1,60 @@
+<div class="container-fluid">
+
+    <!-- Search and sort functionality -->
+    <div class="search-container">
+      <form class="form-inline float-right">
+        <input type="text" class="form-control " placeholder="Search Member">
+        <button type="submit" class="btn btn-primary">
+          <i class="fa fa-search"></i>
+        </button>
+      </form>
+      <div class="dropdown float-right mr-3">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+          Sort by
+        </button>
+        <div class="dropdown-menu">
+          <button class="dropdown-item" (click)="sortByToggle = 'commits'">Commits</button>
+          <button class="dropdown-item" (click)="sortByToggle = 'pull requests'">Pull Requests</button>
+          <button class="dropdown-item" (click)="sortByToggle = 'issues'">Issues</button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Cards displaying users and user info -->
+    <div class="row justify-content-center graph-row">
+      <!-- Members -->
+      <div class="col-md-4 member-card" *ngFor="let member of team.members">
+        <div class="card border-primary component-card">
+          <a routerLink={{member.username}}>
+            <div class="card-body">
+              <h4 class="card-title">{{member.name}}
+                <picture style="float: right;">
+                  <i class="fa fa-user fa-3x"></i>
+                </picture>
+              </h4>
+              <div class="card-text">
+                <p>Activity Last 7 Days:</p>
+                <ul>
+                  <li>
+                    <div class="member-icon">
+                      <i class="fa fa-stop-circle"></i>
+                    </div>
+                    <span class="text-primary"> {{member.commits}}</span> Commits</li>
+                  <li>
+                    <div class="member-icon">
+                      <i class="fa fa-code-fork"></i>
+                    </div>
+                    <span class="text-primary"> {{member.pullRequests}}</span> Pull Requests</li>
+                  <li>
+                    <div class="member-icon">
+                      <i class="fa fa-exclamation-circle"></i>
+                    </div>
+                    <span class="text-primary"> {{member.issues}}</span> Issues (Closed/Opened)</li>
+                </ul>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
