@@ -1,3 +1,26 @@
-<p>
-  member works!
-</p>
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-4">
+      <h1>{{member.name}}</h1>
+    </div>
+    <span class="col-md-4 orga-link">
+        <a href="https://www.github.com/{{member.username}}">
+          <i class="fa fa-github fa-4x"></i>github.com/{{member.username}}</a>
+    </span>
+    <span>
+      <img class="img-responsive img-circle float-right" width="50%" height="50%" src="{{member.avatarURL}}">
+    </span>
+  </div>
+
+  <ul>
+    <li>
+      <h1>Commits: {{member.commits}}</h1>
+    </li>
+    <li>
+      <h1>Pull Requests: {{member.pullRequests}}</h1>
+    </li>
+    <li>
+      <h1>Issues: {{member.issues}}</h1>
+    </li>
+  </ul>

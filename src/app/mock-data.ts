@@ -29,12 +29,12 @@ export const ORGANIZATIONS: Organization[] = [
 
 export const MEMBERS: Member[] = [
     {
-        username: "peter-mueller",
-        name: 'Peter Müller',
+        username: "gbz",
+        name: 'Sergej G',
         organization: ORGANIZATIONS[0],
-        commits: 20,
-        pullRequests: 3,
-        issues: 2,
+        commits: 20000,
+        pullRequests: 300,
+        issues: 20,
     },
     {
         username: "peter-mueller",

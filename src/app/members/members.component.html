@@ -25,33 +25,35 @@
     <!-- Members -->
     <div class="col-md-4 member-card" *ngFor="let member of members">
       <div class="card border-primary component-card">
-        <div class="card-body">
-          <h4 class="card-title">{{member.name}}
-            <picture style="float: right;">
-              <i class="fa fa-user fa-3x"></i>
-            </picture>
-          </h4>
-          <div class="card-text">
-            <p>Activity Last 7 Days:</p>
-            <ul>
-              <li>
-                <div class="member-icon">
-                  <i class="fa fa-stop-circle"></i>
-                </div>
-                <span class="text-primary"> {{member.commits}}</span> Commits</li>
-              <li>
-                <div class="member-icon">
-                  <i class="fa fa-code-fork"></i>
-                </div>
-                <span class="text-primary"> {{member.pullRequests}}</span> Pull Requests</li>
-              <li>
-                <div class="member-icon">
-                  <i class="fa fa-exclamation-circle"></i>
-                </div>
-                <span class="text-primary"> {{member.issues}}</span> Issues (Closed/Opened)</li>
-            </ul>
+        <a routerLink={{member.username}}>
+          <div class="card-body">
+            <h4 class="card-title">{{member.name}}
+              <picture style="float: right;">
+                <i class="fa fa-user fa-3x"></i>
+              </picture>
+            </h4>
+            <div class="card-text">
+              <p>Activity Last 7 Days:</p>
+              <ul>
+                <li>
+                  <div class="member-icon">
+                    <i class="fa fa-stop-circle"></i>
+                  </div>
+                  <span class="text-primary"> {{member.commits}}</span> Commits</li>
+                <li>
+                  <div class="member-icon">
+                    <i class="fa fa-code-fork"></i>
+                  </div>
+                  <span class="text-primary"> {{member.pullRequests}}</span> Pull Requests</li>
+                <li>
+                  <div class="member-icon">
+                    <i class="fa fa-exclamation-circle"></i>
+                  </div>
+                  <span class="text-primary"> {{member.issues}}</span> Issues (Closed/Opened)</li>
+              </ul>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </div>
