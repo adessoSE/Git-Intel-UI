@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
 
   orga: Organization;
 
-  constructor(private service: DashboardService, private route: ActivatedRoute,
+  constructor(private service: DashboardService, private activeRoute: ActivatedRoute,
     private router: Router, private globalNavService: GlobalNavigationService) {
     // Reacts to routing changes and calls method to fetch organization
     router.events.subscribe((val) => { this.determineOrganization(); });
@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
 
   // Fetches correct organization according to URL parameter 
   determineOrganization() {
-    let org = this.route.snapshot.paramMap.get('organization');
+    let org = this.activeRoute.snapshot.paramMap.get('organization');
     this.orga = this.service.getOrganization(org);
   }
 }

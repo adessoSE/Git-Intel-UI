@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { GlobalNavigationService } from '../services/global-navigation.service';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { visitAll } from '@angular/compiler';
 
 @Component({
   selector: 'navigation-bar',
@@ -14,46 +15,34 @@ export class NavigationBarComponent {
   routeHistory: string[] = [];
   numOfEntities: number = 0;
 
-  constructor(private globalNavService: GlobalNavigationService, private location: Location, private router: Router) {
-    // Display Navigation Bar if not viewing Home or Dashboard Component
-    this.globalNavService.showNavBarEmitter.subscribe((mode) => {
-      this.showNavigation = mode;
-    });
+  constructor(
+    private globalNavService: GlobalNavigationService, 
+    private location: Location, 
+    private router: Router,
+    private activeRoute: ActivatedRoute) {
 
-    this.globalNavService.numOfEntitiesEmitter.subscribe((n) => {
-      this.numOfEntities = n;
-    })
+    // Subscribe to navigation and routing services
+    globalNavService.showNavBarEmitter.subscribe((mode) => { this.showNavigation = mode });
+    globalNavService.numOfEntitiesEmitter.subscribe((n) => { this.numOfEntities = n });
+    router.events.subscribe((val) => { this.prepareRouteHistory(location.path()) });
+  }
 
-    // Subscribe to routing changes
-    router.events.subscribe((val) => {
-      this.splitRouteString(location.path());
-    });
+  prepareRouteHistory(url: string) {
+ 
+    let h: string [] = [];
     
+    h = url.split("/");
+    h.shift();
+
+    for(let i = 1; i < h.length; i++) {
+      h[i] = h[i-1] + "/" + h[i];
+    }
+    
+    this.routeHistory = h;
   }
 
   goBack() {
     this.location.back();
   }
 
-  // To improve:
-  // Iterate over link, remove every "/" and seperate words
-  splitRouteString(link: string) {
-    // Help array h
-    let h: string[] = [];
-    let start = 0;
-
-    for (let i = 0; i < link.length; i++) {
-      if (link[i] === "/") {
-        // Add entry before finding "/"
-        h.push(link.substring(start, i));
-        start = i + 1;
-      }
-    }
-
-    // Add last entry and shift array to remove the empty bit
-    h.push(link.substring(link.lastIndexOf("/") + 1, link.length));
-    h.shift();
-    
-    this.routeHistory = h;
-  }
 }

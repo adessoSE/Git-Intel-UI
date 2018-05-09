@@ -2,13 +2,12 @@
   <div class="breadcrumb">
     <h2>
       <button type="button" class="btn btn-link" (click)="goBack()">
-        <h2><i class="fa fa-arrow-left"></i></h2>
+        <i class="fa fa-3x fa-arrow-left"></i>
       </button>
 
-      <li class="nav-item" *ngFor="let route of routeHistory"  style="display: inline-block;">
-        <!-- Bug: Capitalizes organization name if navigating to components of organization  -->
-        <a class="nav-link" [routerLink]="route">/ {{route | capitalize}} </a>
-      </li>({{numOfEntities}}) 
+      <li class="nav-item" *ngFor="let route of routeHistory" style="display: inline-block;">
+        <a class="nav-link" [routerLink]="route">/ {{route | routeName | capitalize}} </a>
+      </li>({{numOfEntities}})
     </h2>
   </div>
 </ng-container>

@@ -22,6 +22,7 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { PopoverModule } from 'ngx-popover';
 import { TeamComponent } from './team/team.component';
+import { RouteNamePipe } from './pipes/route-name.pipe';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { TeamComponent } from './team/team.component';
     HomeComponent,
     NavigationBarComponent,
     CapitalizePipe,
+    RouteNamePipe,
     TeamComponent
   ],
   imports: [
