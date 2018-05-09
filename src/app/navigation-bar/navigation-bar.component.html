@@ -1,6 +1,5 @@
 <ng-container *ngIf="showNavigation">
-
-  <div class="breadcrumbs">
+  <div class="breadcrumb">
     <h2>
       <button type="button" class="btn btn-link" (click)="goBack()">
         <h2><i class="fa fa-arrow-left"></i></h2>
@@ -9,8 +8,7 @@
       <li class="nav-item" *ngFor="let route of routeHistory"  style="display: inline-block;">
         <!-- Bug: Capitalizes organization name if navigating to components of organization  -->
         <a class="nav-link" [routerLink]="route">/ {{route | capitalize}} </a>
-      </li>
+      </li>({{numOfEntities}}) 
     </h2>
   </div>
-  
 </ng-container>

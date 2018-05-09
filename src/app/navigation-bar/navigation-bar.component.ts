@@ -12,12 +12,17 @@ export class NavigationBarComponent {
 
   showNavigation: boolean = false;
   routeHistory: string[] = [];
+  numOfEntities: number = 0;
 
   constructor(private globalNavService: GlobalNavigationService, private location: Location, private router: Router) {
     // Display Navigation Bar if not viewing Home or Dashboard Component
     this.globalNavService.showNavBarEmitter.subscribe((mode) => {
       this.showNavigation = mode;
     });
+
+    this.globalNavService.numOfEntitiesEmitter.subscribe((n) => {
+      this.numOfEntities = n;
+    })
 
     // Subscribe to routing changes
     router.events.subscribe((val) => {

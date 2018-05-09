@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from "rxjs/Observable";
+import { NavigationObj } from '../entities/nav-obj';
 
 @Injectable()
 export class GlobalNavigationService {
-
-  // Create Subject and treat as Observable
+  
+  private _numOfEntities: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  public numOfEntitiesEmitter: Observable<number> = this._numOfEntities.asObservable();
 
   private _showNavBar: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public showNavBarEmitter: Observable<boolean> = this._showNavBar.asObservable();
@@ -17,6 +19,10 @@ export class GlobalNavigationService {
   public onClickTabEmitter: Observable<boolean> = this._tabClicked.asObservable();
 
   constructor() { }
+
+  tellNumOfEntities(n: number) {
+    this._numOfEntities.next(n);
+  }
 
   showNavBar(ifShow: boolean) {
     this._showNavBar.next(ifShow);
