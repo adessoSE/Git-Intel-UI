@@ -13,22 +13,18 @@ import { GlobalNavigationService } from './services/global-navigation.service';
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
- 
+
 	/* 
 	@organization - Is the user entered search term
-	@showNavigation - Display navigation bar everywhere except home
 	@tabs - Manages dynamic tabs
 	*/
-	organization: string = "";		
-	showNavigation: boolean = false;
-	tabs = [ { link: "home", label: "Home" } ];
-	
-	constructor
-		(private location: Location, private router: Router, 
-		private globalNavService: GlobalNavigationService) 
-		{ 
+	organization: string = "";
+	tabs = [{ link: "home", label: "Home" }];
+
+	constructor(private location: Location, private router: Router,
+		private globalNavService: GlobalNavigationService) {
 		this.globalNavService.onOpenNewTabEmitter.subscribe((tab) => {
-			if( tab !== "" ) this.openNewTab(tab);
+			if (tab !== "") this.openNewTab(tab);
 		});
 	}
 
@@ -40,7 +36,7 @@ export class AppComponent implements OnInit {
 	// Issue: Empty queries 
 	openNewTab(orga: string): void {
 		this.tabs.push({ link: orga, label: orga });
-		this.router.navigate(["/"+ orga]);
+		this.router.navigate(["/" + orga]);
 	}
 
 	/* Known issue: 
@@ -60,6 +56,6 @@ export class AppComponent implements OnInit {
 	onClickTab() {
 		this.globalNavService.onClickTab(true);
 	}
-	
+
 
 }

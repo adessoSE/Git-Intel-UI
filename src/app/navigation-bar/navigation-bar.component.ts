@@ -23,6 +23,7 @@ export class NavigationBarComponent {
     router.events.subscribe((val) => {
       this.splitRouteString(location.path());
     });
+    
   }
 
   goBack() {

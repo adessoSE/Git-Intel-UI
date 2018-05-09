@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: ':organization', component: DashboardComponent },
   { path: ':organization/members', component: MembersComponent },
-  { path: ':organization/member/:username', component: MemberComponent },
+  { path: ':organization/members/:username', component: MemberComponent },
   { path: ':organization/teams', component: TeamsComponent },
   { path: ':organization/repositories', component: RepositoriesComponent },
   { path: ':organization/external-repositories', component: ExternalRepositoriesComponent }

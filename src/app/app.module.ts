@@ -19,6 +19,7 @@ import { ExRepositoryService } from './services/ex-repository.service';
 import { DashboardService } from './services/dashboard.service';
 import { GlobalNavigationService } from './services/global-navigation.service';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import { CapitalizePipe } from './pipes/capitalize.pipe';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
     ExternalRepositoriesComponent,
     MemberComponent,
     HomeComponent,
-    NavigationBarComponent
+    NavigationBarComponent,
+    CapitalizePipe
   ],
   imports: [
     BrowserModule,

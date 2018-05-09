@@ -7,7 +7,8 @@
       </button>
 
       <li class="nav-item" *ngFor="let route of routeHistory"  style="display: inline-block;">
-        <a class="nav-link" [routerLink]="route">/ {{route}}</a>
+        <!-- Bug: Capitalizes organization name if navigating to components of organization  -->
+        <a class="nav-link" [routerLink]="route">/ {{route | capitalize}} </a>
       </li>
     </h2>
   </div>
