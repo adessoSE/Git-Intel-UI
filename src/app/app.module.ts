@@ -20,6 +20,7 @@ import { DashboardService } from './services/dashboard.service';
 import { GlobalNavigationService } from './services/global-navigation.service';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
+import { PopoverModule } from 'ngx-popover';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    PopoverModule
   ],
   providers: [
     MemberService,

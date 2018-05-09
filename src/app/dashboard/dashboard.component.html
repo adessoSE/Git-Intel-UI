@@ -21,54 +21,87 @@
 
     <!-- Members -->
     <div class="col-md-2">
-      <a routerLink="members/">
-        <div class="card border-primary mb-3 component-card">
-          <div class="card-body">
-            <h4 class="card-title">Members</h4>
+      <div class="card border-primary mb-3 component-card">
+        <div class="card-body">
+          <h4 class="card-title">Members
+            <button type="button" class="btn btn-link" [popover]="popoverMembers" [popoverOnHover]="false">
+              <i class="fa fa-info-circle"></i>
+            </button>
+          </h4>
+          <a routerLink="members/">
             <h3 class="card-title" style="text-align: center">
               <i class="fa fa-user"></i> {{orga.numOfMembers}}</h3>
-          </div>
+          </a>
         </div>
-      </a>
+      </div>
+
+      <popover-content #popoverMembers title="" placement="top" [closeOnClickOutside]="true">
+        See all members of the organization. Write more here..
+      </popover-content>
     </div>
 
     <!-- Teams -->
     <div class="col-md-2">
-      <a routerLink="teams/">
-        <div class="card border-primary mb-3 component-card">
-          <div class="card-body">
-            <h4 class="card-title">Teams</h4>
+      <div class="card border-primary mb-3 component-card">
+        <div class="card-body">
+          <h4 class="card-title">Teams
+            <button type="button" class="btn btn-link" [popover]="popoverTeams" [popoverOnHover]="false">
+              <i class="fa fa-info-circle"></i>
+            </button>
+          </h4>
+          <a routerLink="teams/">
             <h3 class="card-title" style="text-align: center">
               <i class="fa fa-users"></i> {{orga.numOfTeams}}</h3>
-          </div>
+          </a>
         </div>
-      </a>
+      </div>
+
+      <popover-content #popoverTeams title="" placement="top" [closeOnClickOutside]="true">
+        See all teams of the organization. Write more here..
+      </popover-content>
     </div>
 
     <!-- Repositories -->
     <div class="col-md-2">
-      <a routerLink="repositories/">
-        <div class="card border-primary mb-3 component-card">
-          <div class="card-body">
-            <h4 class="card-title">Repositories</h4>
+      <div class="card border-primary mb-3 component-card">
+        <div class="card-body">
+          <h4 class="card-title">Repositories
+            <button type="button" class="btn btn-link" [popover]="popoverRepos" [popoverOnHover]="false">
+              <i class="fa fa-info-circle"></i>
+            </button>
+          </h4>
+          <a routerLink="repositories/">
             <h3 class="card-title" style="text-align: center">
               <i class="fa fa-book mr-3"></i> {{orga.numOfRepos}}</h3>
-          </div>
+          </a>
         </div>
-      </a>
+      </div>
+
+      <popover-content #popoverRepos title="" placement="top" [closeOnClickOutside]="true">
+        See all repositories of the organization. Write more here..
+      </popover-content>
+
     </div>
 
     <!-- External Repos -->
     <div class="col-md-2">
-      <a routerLink="external-repositories/">
-        <div class="card border-primary mb-3 component-card">
-          <div class="card-body">
-            <h4 class="card-title">Contribution in external repos</h4>
+      <div class="card border-primary mb-3 component-card">
+        <div class="card-body">
+          <h4 class="card-title">External Repositories
+            <button type="button" class="btn btn-link" [popover]="popoverExtRepos" [popoverOnHover]="false">
+              <i class="fa fa-info-circle"></i>
+            </button>
+          </h4>
+          <a routerLink="external-repositories/">
             <h3 class="card-title" style="text-align: center">
               <i class="fa fa-location-arrow"></i> {{orga.numOfExternalRepos}}</h3>
-          </div>
+          </a>
         </div>
-      </a>
+      </div>
+
+      <popover-content #popoverExtRepos title="" placement="top" [closeOnClickOutside]="true">
+        See all the repositories members of the organization contributed to. Write more here..
+      </popover-content>
     </div>
 
   </div>
@@ -162,4 +195,5 @@
       </div>
     </div>
   </div>
+
 </div>

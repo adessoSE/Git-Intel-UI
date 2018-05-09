@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import {PopoverModule} from "ngx-popover";
 
 import { Organization } from '../entities/organization';
 
