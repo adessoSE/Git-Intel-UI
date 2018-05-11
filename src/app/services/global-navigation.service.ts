@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from "rxjs/Observable";
-import { NavigationObj } from '../entities/nav-obj';
 
 @Injectable()
 export class GlobalNavigationService {

@@ -17,13 +17,32 @@ export class DashboardComponent implements OnInit {
 
   orga: Organization;
 
+  chartOptions = {
+    responsive: true
+  };
+  chartData: Array<any>;
+  chartLabels: Array<any>;
+  chartColors: Array<any> = [
+    {
+      backgroundColor: 'rgba(132, 179, 221, 0.2)',
+      borderColor: '#428bca',
+      pointBackgroundColor: 'rgba(225,10,24,0.2)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(225,10,24,0.2)'
+    }
+  ];
+
   constructor(
-    private service: DashboardService, 
+    private service: DashboardService,
     private activeRoute: ActivatedRoute,
-    private router: Router, 
+    private router: Router,
     private globalNavService: GlobalNavigationService) {
 
     router.events.subscribe((val) => { this.determineOrganization(); });
+
+    this.chartData = [{ data: [2, 2, 1, 2], label: 'Pull Requests last 5 Days' }];
+    this.chartLabels = ['16/4/2018', '19/4/2018', '20/4/2018', '21/4/2018'];
   }
 
   // Display Navigation Bar if not viewing Home or Dashboard Component

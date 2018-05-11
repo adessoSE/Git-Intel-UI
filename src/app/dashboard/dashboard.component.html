@@ -24,7 +24,7 @@
       <div class="card border-primary mb-3 component-card">
         <div class="card-body">
           <h4 class="card-title">Members
-            <button type="button" class="btn btn-link" [popover]="popoverMembers" [popoverOnHover]="false">
+            <button type="button" class="btn btn-link" [popover]="popoverMembers" [popoverOnHover]="true">
               <i class="fa fa-info-circle"></i>
             </button>
           </h4>
@@ -45,7 +45,7 @@
       <div class="card border-primary mb-3 component-card">
         <div class="card-body">
           <h4 class="card-title">Teams
-            <button type="button" class="btn btn-link" [popover]="popoverTeams" [popoverOnHover]="false">
+            <button type="button" class="btn btn-link" [popover]="popoverTeams" [popoverOnHover]="true">
               <i class="fa fa-info-circle"></i>
             </button>
           </h4>
@@ -66,7 +66,7 @@
       <div class="card border-primary mb-3 component-card">
         <div class="card-body">
           <h4 class="card-title">Repositories
-            <button type="button" class="btn btn-link" [popover]="popoverRepos" [popoverOnHover]="false">
+            <button type="button" class="btn btn-link" [popover]="popoverRepos" [popoverOnHover]="true">
               <i class="fa fa-info-circle"></i>
             </button>
           </h4>
@@ -87,8 +87,8 @@
     <div class="col-md-2">
       <div class="card border-primary mb-3 component-card">
         <div class="card-body">
-          <h4 class="card-title">External Repositories
-            <button type="button" class="btn btn-link" [popover]="popoverExtRepos" [popoverOnHover]="false">
+          <h4 class="card-title">Ext. Repositories
+            <button type="button" class="btn btn-link" [popover]="popoverExtRepos" [popoverOnHover]="true">
               <i class="fa fa-info-circle"></i>
             </button>
           </h4>
@@ -117,7 +117,7 @@
           <!-- Custom card header -->
           <div class="row">
             <div class="col-md-5">
-              <h4>Member Growth</h4>
+              Member Growth
             </div>
             <div class="col-md-4 offset-md-3">
               <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#memberModal">
@@ -126,7 +126,9 @@
             </div>
           </div>
           <!-- Actual Graph body -->
-          <img style="height: 200px; width: 100%; display: block;" src="../../assets/graph.png" alt="Card image">
+          <canvas baseChart [chartType]="'line'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [legend]="true"
+            [colors]="chartColors">
+          </canvas>
         </div>
       </div>
     </div>
@@ -138,7 +140,7 @@
           <!-- Custom card header -->
           <div class="row">
             <div class="col-md-5">
-              <h4>Member Growth</h4>
+              Member Growth
             </div>
             <div class="col-md-4 offset-md-3">
               <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#memberModal">
@@ -147,7 +149,9 @@
             </div>
           </div>
           <!-- Actual Graph body -->
-          <img style="height: 200px; width: 100%; display: block;" src="../../assets/graph.png" alt="Card image">
+          <canvas baseChart [chartType]="'line'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [legend]="true"
+            [colors]="chartColors">
+          </canvas>
         </div>
       </div>
     </div>
@@ -159,7 +163,7 @@
           <!-- Custom card header -->
           <div class="row">
             <div class="col-md-5">
-              <h4>Member Growth</h4>
+              Member Growth
             </div>
             <div class="col-md-4 offset-md-3">
               <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#memberModal">
@@ -168,11 +172,12 @@
             </div>
           </div>
           <!-- Actual Graph body -->
-          <img style="height: 200px; width: 100%; display: block;" src="../../assets/graph.png" alt="Card image">
+          <canvas baseChart [chartType]="'line'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [legend]="true"
+            [colors]="chartColors">
+          </canvas>
         </div>
       </div>
     </div>
-
 
     <!-- Graph Modal -->
     <div class="modal fade" id="memberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -194,6 +199,5 @@
         </div>
       </div>
     </div>
-  </div>
 
-</div>
+  </div>
