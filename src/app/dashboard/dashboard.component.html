@@ -1,27 +1,29 @@
-<div class="container-fluid">
+<div class="container-fluid" style="width: 75%">
 
-  <!--Company meta data-->
-  <div class="row">
-    <div class="col-md-4">
-      <h1>{{orga.name}}</h1>
-      <span class="orga-location">{{orga.location}}</span>
-      <p class="orga-description">{{orga.description}}.</p>
+  <!-- Company meta data -->
+  <div class="card col-md-12 member-card" style="border: 0; padding-top: 2%; padding-bottom: 2%; margin-bottom: 2%">
+    <div class="row">
+      <div class="col-md-4">
+        <h1>{{orga.name}}</h1>
+        <span class="orga-location">{{orga.location}}</span>
+        <p class="orga-description">{{orga.description}}.</p>
+      </div>
+      <span class="col-md-4 orga-link">
+        <a href="https://www.{{orga.website}}" target="_blank">
+          <i class="fa fa-globe fa-4x"></i>{{orga.website}}</a>
+      </span>
+      <span class="col-md-4 orga-link">
+        <a href="https://www.github.com/{{orga.name}}" target="_blank">
+          <i class="fa fa-github fa-4x"></i>github.com/{{orga.name}}</a>
+      </span>
     </div>
-    <span class="col-md-4 orga-link">
-      <a href="https://www.{{orga.website}}" target="_blank">
-        <i class="fa fa-globe fa-3x"></i>{{orga.website}}</a>
-    </span>
-    <span class="col-md-4 orga-link">
-      <a href="https://www.github.com/{{orga.name}}" target="_blank">
-        <i class="fa fa-github fa-3x"></i>github.com/{{orga.name}}</a>
-    </span>
   </div>
 
-  <div class="row justify-content-center graph-row">
+  <div class="row col-mb-12 justify-content-center graph-row">
 
     <!-- Members -->
-    <div class="col-md-2">
-      <div class="card border-primary mb-3 component-card">
+    <div class="col-xs-3">
+      <div class="card border-secondary mb-3 component-card">
         <div class="card-body">
           <h4 class="card-title">Members
             <button type="button" class="btn btn-link" [popover]="popoverMembers" [popoverOnHover]="true">
@@ -41,8 +43,8 @@
     </div>
 
     <!-- Teams -->
-    <div class="col-md-2">
-      <div class="card border-primary mb-3 component-card">
+    <div class="col-xs-3">
+      <div class="card border-secondary mb-3 component-card">
         <div class="card-body">
           <h4 class="card-title">Teams
             <button type="button" class="btn btn-link" [popover]="popoverTeams" [popoverOnHover]="true">
@@ -62,8 +64,8 @@
     </div>
 
     <!-- Repositories -->
-    <div class="col-md-2">
-      <div class="card border-primary mb-3 component-card">
+    <div class="col-xs-3">
+      <div class="card border-secondary mb-3 component-card">
         <div class="card-body">
           <h4 class="card-title">Repositories
             <button type="button" class="btn btn-link" [popover]="popoverRepos" [popoverOnHover]="true">
@@ -84,8 +86,8 @@
     </div>
 
     <!-- External Repos -->
-    <div class="col-md-2">
-      <div class="card border-primary mb-3 component-card">
+    <div class="col-xs-3">
+      <div class="card border-secondary mb-3 component-card">
         <div class="card-body">
           <h4 class="card-title">Ext. Repositories
             <button type="button" class="btn btn-link" [popover]="popoverExtRepos" [popoverOnHover]="true">
@@ -103,13 +105,11 @@
         See all the repositories members of the organization contributed to. Write more here..
       </popover-content>
     </div>
-
   </div>
-
 
   <!-- Graphs -->
   <!-- TODO: Move to array and unify all attributes to single object -->
-  <div class="row justify-content-center graph-row">
+  <div class="row justify-content-center">
     <graph class="col-md-4" [title]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels" [chartOptions]="chartOptions"
       [chartLegend]="chartLegend" [chartColors]="chartColors"></graph>
     <graph class="col-md-4" [title]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels" [chartOptions]="chartOptions"
@@ -117,6 +117,5 @@
     <graph class="col-md-4" [title]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels" [chartOptions]="chartOptions"
       [chartLegend]="chartLegend" [chartColors]="chartColors"></graph>
   </div>
-
 
 </div>

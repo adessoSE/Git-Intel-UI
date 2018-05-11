@@ -8,7 +8,7 @@ export const ORGANIZATIONS: Organization[] = [
     {
         name: "adessoAG",
         description: "All hail adesso",
-        location: "dortmund",
+        location: "Dortmund",
         website: "adesso.de",
         numOfMembers: 63,
         numOfTeams: 8,
@@ -18,7 +18,7 @@ export const ORGANIZATIONS: Organization[] = [
     {
         name: "microsoft",
         description: "All hail Microsoft",
-        location: "la",
+        location: "LA",
         website: "microsoft.de",
         numOfMembers: 500,
         numOfTeams: 89,
