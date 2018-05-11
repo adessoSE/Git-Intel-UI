@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from "rxjs/Observable";
+import { Tab } from '../entities/tab';
 
 @Injectable()
 export class GlobalNavigationService {
@@ -11,8 +12,8 @@ export class GlobalNavigationService {
   private _showNavBar: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public showNavBarEmitter: Observable<boolean> = this._showNavBar.asObservable();
 
-  private _openNewTab: BehaviorSubject<string> = new BehaviorSubject<string>("");
-  public onOpenNewTabEmitter: Observable<string> = this._openNewTab.asObservable();
+  private _openNewTab: BehaviorSubject<Tab> = new BehaviorSubject<Tab>({ id: 0, org: "home" ,url: "home" });
+  public onOpenNewTabEmitter: Observable<Tab> = this._openNewTab.asObservable();
 
   private _tabClicked: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public onClickTabEmitter: Observable<boolean> = this._tabClicked.asObservable();
@@ -28,7 +29,11 @@ export class GlobalNavigationService {
   }
 
   onOpenNewTab(orga: string) {
-    this._openNewTab.next(orga);
+    let id = new Date().getMilliseconds();
+    let tab = {id : id, org: orga, url: "home"};
+    console.log(tab);
+    
+    this._openNewTab.next(tab);
   }
 
   onClickTab(clicked: boolean) {

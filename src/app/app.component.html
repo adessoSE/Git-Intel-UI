@@ -15,8 +15,8 @@
       <!-- Search field -->
       <div class="col-sm-8">
         <form class="form-inline my-2 my-lg-0" style="padding-top: 5%;">
-          <input id="name" class="form-control mr-sm-2 searchForm" [ngClass]="{'is-invalid': isSearchInvalid}" [(ngModel)]="organization" required minlength="4" name="search"
-            placeholder="Organizations name" type="text" style="width: 35%;" #name="ngModel" >
+          <input id="name" class="form-control mr-sm-2 searchForm" [ngClass]="{'is-invalid': isSearchInvalid}" [(ngModel)]="organization"
+            required minlength="4" name="search" placeholder="Organizations name" type="text" style="width: 35%;" #name="ngModel">
           <button class="btn btn-primary my-2 my-sm-0" (click)="openNewTab(organization)">Stalk!</button>
         </form>
       </div>
@@ -28,6 +28,7 @@
 
 
 <!-- Tab Bar -->
+<!--
 <ul class="nav nav-tabs tabBar">
   <li class="nav-item" *ngFor="let tab of tabs">
     <a class="nav-link" data-toggle="tab" [routerLink]="tab" (click)="onClickTab()" style="display: inline-block;">
@@ -36,7 +37,15 @@
     <button (click)="closeTab(tab)" type="button" class="close" data-dismiss="alert" style="margin-top: 10%;">&times;</button>
   </li>
 </ul>
-
+-->
+<ul class="nav nav-tabs tabBar">
+  <li class="nav-item" *ngFor="let tab of tabss">
+    <a class="nav-link" data-toggle="tab" [routerLink]="tab.url" (click)="onClickTab()" style="display: inline-block;">
+      {{tab.org | capitalize}}
+    </a>
+    <button (click)="closeTab(tab)" type="button" class="close" data-dismiss="alert" style="margin-top: 10%;">&times;</button>
+  </li>
+</ul>
 
 <!-- Navigation Bar -->
 <navigation-bar></navigation-bar>
