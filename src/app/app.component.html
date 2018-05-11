@@ -17,7 +17,7 @@
         <form class="form-inline my-2 my-lg-0" style="padding-top: 5%;">
           <input id="name" class="form-control mr-sm-2 searchForm" [ngClass]="{'is-invalid': isSearchInvalid}" [(ngModel)]="organization"
             required minlength="4" name="search" placeholder="Organizations name" type="text" style="width: 35%;" #name="ngModel">
-          <button class="btn btn-primary my-2 my-sm-0" (click)="openNewTab(organization)">Stalk!</button>
+          <button class="btn btn-primary my-2 my-sm-0" (click)="onClickStalk(organization)">Stalk!</button>
         </form>
       </div>
 
