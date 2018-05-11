@@ -7,7 +7,7 @@ import { Team } from "./entities/team";
 export const ORGANIZATIONS: Organization[] = [
     {
         name: "adessoAG",
-        description: "description..",
+        description: "All hail adesso",
         location: "dortmund",
         website: "adesso.de",
         numOfMembers: 63,
@@ -17,7 +17,7 @@ export const ORGANIZATIONS: Organization[] = [
     },
     {
         name: "microsoft",
-        description: "description..",
+        description: "All hail Microsoft",
         location: "la",
         website: "microsoft.de",
         numOfMembers: 500,

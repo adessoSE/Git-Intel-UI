@@ -1,26 +1,47 @@
 <div class="container-fluid">
 
-  <div class="row">
-    <div class="col-md-4">
-      <h1>{{member.name}}</h1>
-    </div>
-    <span class="col-md-4 orga-link">
-        <a href="https://www.github.com/{{member.username}}">
+  <div class="card border-primary col-md-12 member-card" style="padding: 3.5% 0 0 3.5%">
+    <div class="row">
+      <div class="col-md-4">
+        <h1>{{member.name}}</h1>
+      </div>
+      <span class="col-md-4 orga-link">
+        <a href="https://www.github.com/{{member.username}}" target="_blank">
           <i class="fa fa-github fa-4x"></i>github.com/{{member.username}}</a>
-    </span>
-    <span>
-      <img class="img-responsive img-circle float-right" width="50%" height="50%" src="{{member.avatarURL}}">
-    </span>
+      </span>
+      <span>
+        <img class="img-responsive img-circle float-right" width="50%" height="50%" src="https://www.gruenderstory.de/wp-content/uploads/2013/08/github-logo-300x300.png">
+      </span>
+    </div>
   </div>
 
-  <ul>
-    <li>
-      <h1>Commits: {{member.commits}}</h1>
-    </li>
-    <li>
-      <h1>Pull Requests: {{member.pullRequests}}</h1>
-    </li>
-    <li>
-      <h1>Issues: {{member.issues}}</h1>
-    </li>
-  </ul>
+  <div class="card border-secondary col-md-12 member-card" style="margin-top: 2%">
+    <div class="row">
+
+      <div class="col-md-4">
+        <div class="member-icon">
+          <i class="fa fa-stop-circle"></i>
+        </div>
+        <span class="">{{member.commits}} Commits</span>
+      </div>
+
+      <div class="col-md-4">
+        <div class="member-icon">
+          <i class="fa fa-code-fork"></i>
+        </div>
+        <span class="">{{member.pullRequests}} Pull Requests</span>
+      </div>
+
+      <div class="col-md-4">
+        <div class="member-icon">
+          <i class="fa fa-exclamation-circle"></i>
+        </div>
+        <span class=""> {{member.issues}}</span> Issues (Closed/Opened)
+      </div>
+
+    </div>
+  </div>
+
+  
+</div>
+

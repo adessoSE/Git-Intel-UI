@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Repository } from '../entities/repository';
 import { ExRepositoryService } from '../services/ex-repository.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-external-repositories',
@@ -9,13 +10,18 @@ import { ExRepositoryService } from '../services/ex-repository.service';
 })
 export class ExternalRepositoriesComponent implements OnInit {
 
-  extRepos: Repository [];
+  extRepos: Repository[];
+  orgName: string = "";
 
-  constructor(extRepoService: ExRepositoryService) { 
+  constructor(
+    private extRepoService: ExRepositoryService,
+    private activeRoute: ActivatedRoute,
+    private router: Router) {
+
     this.extRepos = extRepoService.getExRepositories();
+    router.events.subscribe((val) => { this.orgName = this.activeRoute.snapshot.paramMap.get('organization'); });
   }
 
   ngOnInit() {
   }
-
 }
