@@ -17,6 +17,9 @@ export class DashboardComponent implements OnInit {
 
   orga: Organization;
 
+  chartTitle: string = "Member Growth";
+  chartType: string = "line";
+  chartLegend: boolean = true;
   chartOptions = {
     responsive: true
   };

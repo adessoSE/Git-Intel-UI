@@ -25,6 +25,7 @@ import { GlobalNavigationService } from './services/global-navigation.service';
 
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { RouteNamePipe } from './pipes/route-name.pipe';
+import { GraphComponent } from './graph/graph.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { RouteNamePipe } from './pipes/route-name.pipe';
     NavigationBarComponent,
     CapitalizePipe,
     RouteNamePipe,
-    TeamComponent
+    TeamComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,

@@ -15,9 +15,9 @@
     </div>
   </div>
 
-  <div class="card border-secondary col-md-12 member-card" style="margin-top: 2%">
-    <div class="row">
+  <div class="card border-secondary col-md-12 member-card" style="margin-top: 2%; margin-bottom: 2%">
 
+    <div class="row">
       <div class="col-md-4">
         <div class="member-icon">
           <i class="fa fa-stop-circle"></i>
@@ -38,10 +38,18 @@
         </div>
         <span class=""> {{member.issues}}</span> Issues (Closed/Opened)
       </div>
-
     </div>
+
   </div>
 
-  
-</div>
+  <div>
+    <graph class="col-md-4" [title]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels" [chartOptions]="chartOptions"
+      [chartLegend]="chartLegend" [chartColors]="chartColors"></graph>
+    <graph class="col-md-4" [title]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels" [chartOptions]="chartOptions"
+      [chartLegend]="chartLegend" [chartColors]="chartColors"></graph>
+    <graph class="col-md-4" [title]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels" [chartOptions]="chartOptions"
+      [chartLegend]="chartLegend" [chartColors]="chartColors"></graph>
+  </div>
 
+
+</div>

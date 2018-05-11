@@ -8,4 +8,5 @@
 
 .graph-row {
     margin-top: 2.5%;
+    min-width: 40rem;
 }
