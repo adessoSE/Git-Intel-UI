@@ -20,9 +20,8 @@ import 'rxjs/add/operator/mergeMap';
 export class AppComponent implements OnInit {
 
 	organization: string = "";
-	tabs: string[] = ["home"];
 	//tabss: Tab[] = [{ id: 0, org: "home", url: "/home" }];
-	tabss = new Set([{ id: 0, org: "home", url: "/home" }]);
+	tabs = new Set([{ id: 0, org: "home", url: "/home" }]);
 	route: string = "";
 	isSearchInvalid: boolean = false;
 
@@ -35,6 +34,7 @@ export class AppComponent implements OnInit {
 	ngOnInit() {
 		this.globalNavService.onOpenNewTabEmitter.subscribe((tab) => { if (tab.org !== "home") this.openNewTab(tab) });
 
+		// TODO: Simplify
 		this.router.events
 			.filter((event) => event instanceof NavigationEnd)
 			.map(() => this.activatedRoute)
@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
 	openNewTab(tab: Tab) {
 		if (this.checkSearchTerm(tab.org)) {
 			this.isSearchInvalid = false;
-			this.tabss.add(tab);
+			this.tabs.add(tab);
 			this.router.navigate([tab.org]);
 		}
 		else {
@@ -72,7 +72,7 @@ export class AppComponent implements OnInit {
 			this.router.navigate(["/" + this.tabss[idx - 1].url]);
 		}
 		*/
-		this.tabss.delete(removeTab);
+		this.tabs.delete(removeTab);
 		this.router.navigate(["/home"]);
 	}
 
@@ -82,24 +82,19 @@ export class AppComponent implements OnInit {
 
 	}
 
-	checkIfTabExists(pathArray: UrlSegment[]) {
-		/*let path = this.location.path();
-
-		if (this.tabss.some(tab => tab.url !== path)) {
-			console.log(path + " needs to be inserted")
-			this.globalNavService.onOpenNewTab(path);
-		}
-		*/
+	checkIfTabExists(urlSegment: UrlSegment[]) {
+		/* FOR DEBUGGING: 
 		console.log("path array: " + pathArray.toString());
 		console.log("url set: ");
 		this.tabss.forEach(e => { console.log(e.url) })
 		console.log("*****")
+		*/
 
-		let uri = "";
-		pathArray.forEach(str => { uri += str.toString() + "/" });
-		uri = uri.substring(0, uri.lastIndexOf("/"))
+		let targetURL = "";
+		urlSegment.forEach(str => { targetURL += str.toString() + "/" });
+		targetURL = targetURL.substring(0, targetURL.lastIndexOf("/"))
 
-		/*
+		/*	IF USING ARRAY OVER SET
 		if (this.tabss.some(tab => tab.url !== uri)) {
 			console.log(uri + " needs to be inserted")
 			this.tabss.forEach(element => {
@@ -108,18 +103,18 @@ export class AppComponent implements OnInit {
 			this.globalNavService.onOpenNewTab(uri);
 		}
 		*/
-		let noMatch = true;
 
-		this.tabss.forEach(element => {
-			if (element.url === uri) {
-				console.log("Break. Match entry with url: " + uri);
+		let noMatch = true;
+		this.tabs.forEach(element => {
+			if (element.url === targetURL) {
+				// console.log("Matched URL in Set: " + uri);
 				noMatch = false;
 			}
 		})
 
 		if (noMatch) {
-			console.log("No match entry with url: " + uri);
-			this.globalNavService.onOpenNewTab(uri);
+			// console.log("Didn't match URL in Set: " + uri);
+			this.globalNavService.onOpenNewTab(targetURL);
 		}
 
 	}

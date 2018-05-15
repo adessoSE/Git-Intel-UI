@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GlobalNavigationService } from '../services/global-navigation.service';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
@@ -9,35 +9,43 @@ import { visitAll } from '@angular/compiler';
   templateUrl: './navigation-bar.component.html',
   styleUrls: ['./navigation-bar.component.css']
 })
-export class NavigationBarComponent {
+export class NavigationBarComponent implements OnInit {
 
-  showNavigation: boolean = false;
+  showNavigation: boolean = true;
   routeHistory: string[] = [];
   numOfEntities: number = 0;
 
   constructor(
-    private globalNavService: GlobalNavigationService, 
-    private location: Location, 
+    private globalNavService: GlobalNavigationService,
+    private location: Location,
     private router: Router,
-    private activeRoute: ActivatedRoute) {
+    private activeRoute: ActivatedRoute) { }
 
+  ngOnInit() {
     // Subscribe to navigation and routing services
-    globalNavService.showNavBarEmitter.subscribe((mode) => { this.showNavigation = mode });
-    globalNavService.numOfEntitiesEmitter.subscribe((n) => { this.numOfEntities = n });
-    router.events.subscribe((val) => { this.prepareRouteHistory(location.path()) });
+    this.globalNavService.showNavBarEmitter.subscribe((mode) => { this.showNavigation = mode });
+    this.globalNavService.numOfEntitiesEmitter.subscribe((n) => { this.numOfEntities = n });
+    this.router.events.subscribe((val) => { this.prepareRouteHistory(this.location.path()) });
+
+    /* 
+     * Necessary for enabling Navigation Bar 
+     * if directly navigating to a URL
+     */ 
+    this.globalNavService.showNavBar(true);
   }
 
+
   prepareRouteHistory(url: string) {
- 
-    let h: string [] = [];
-    
+
+    let h: string[] = [];
+
     h = url.split("/");
     h.shift();
 
-    for(let i = 1; i < h.length; i++) {
-      h[i] = h[i-1] + "/" + h[i];
+    for (let i = 1; i < h.length; i++) {
+      h[i] = h[i - 1] + "/" + h[i];
     }
-    
+
     this.routeHistory = h;
   }
 
