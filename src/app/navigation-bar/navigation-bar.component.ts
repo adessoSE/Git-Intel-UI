@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { GlobalNavigationService } from '../services/global-navigation.service';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { visitAll } from '@angular/compiler';
 
 @Component({
   selector: 'navigation-bar',

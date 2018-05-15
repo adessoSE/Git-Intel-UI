@@ -30,21 +30,7 @@ export class GlobalNavigationService {
 
   onOpenNewTab(url: string) {
     let org = url;
-    //org = org.replace("/", "/ ")
-    /*
-    if (url.startsWith("/")) {
-      org = url.slice(1);
-    }
-    */
-    /*
-    let idx = org.indexOf("/");
-
-    if (idx !== -1) {
-      org = url.substring(0, idx);
-      console.log(org)
-    }
-    */
-
+ 
     let id = new Date().getMilliseconds();
     let tab = { id: id, org: org, url: url };
 

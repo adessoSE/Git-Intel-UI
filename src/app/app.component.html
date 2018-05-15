@@ -30,8 +30,9 @@
 <!-- Tab Bar -->
 <ul class="nav nav-tabs tabBar">
   <li class="nav-item" *ngFor="let tab of tabs">
-    <a class="nav-link" data-toggle="tab" [routerLink]="tab.url" (click)="onClickTab(tab)" style="display: inline-block;">
-      {{tab.org | capitalize}}
+    <a class="nav-link" data-toggle="tab" [routerLink]="tab.url" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:
+      true}" (click)="onClickTab(tab)" style="display: inline-block;">
+      {{tab.url | prepTabName | capitalize}}
     </a>
     <button (click)="closeTab(tab)" type="button" class="close" data-dismiss="alert" style="margin-top: 10%;">&times;</button>
   </li>

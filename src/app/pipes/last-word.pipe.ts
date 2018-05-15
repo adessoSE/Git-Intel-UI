@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({name: 'routeName'})
-export class RouteNamePipe implements PipeTransform {
+@Pipe({ name: 'lastWord' })
+export class LastWordPipe implements PipeTransform {
 
-    transform(value:string) {
+    transform(value: string) {
         if (value) {
             return value.slice(value.lastIndexOf("/") + 1);
         }

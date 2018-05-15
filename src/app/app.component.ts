@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
 
 	organization: string = "";
 	//tabss: Tab[] = [{ id: 0, org: "home", url: "/home" }];
-	tabs = new Set([{ id: 0, org: "home", url: "/home" }]);
+	tabs = new Set([{ id: 0, org: "home", url: "home" }]);
 	route: string = "";
 	isSearchInvalid: boolean = false;
 
@@ -45,6 +45,7 @@ export class AppComponent implements OnInit {
 			.filter((route) => route.outlet === 'primary')
 			.mergeMap((route) => route.url)
 			.subscribe((event) => {
+				// console.log(event)
 				this.checkIfTabExists(event);
 			});
 	}

@@ -26,7 +26,8 @@ import { GlobalNavigationService } from './services/global-navigation.service';
 import { TabService } from './services/tab.service';
 
 import { CapitalizePipe } from './pipes/capitalize.pipe';
-import { RouteNamePipe } from './pipes/route-name.pipe';
+import { LastWordPipe } from './pipes/last-word.pipe';
+import { PrepTabNamePipe } from './pipes/prep-tab-name.pipe';
 
 
 @NgModule({
@@ -40,10 +41,11 @@ import { RouteNamePipe } from './pipes/route-name.pipe';
     MemberComponent,
     HomeComponent,
     NavigationBarComponent,
-    CapitalizePipe,
-    RouteNamePipe,
     TeamComponent,
-    GraphComponent
+    GraphComponent,
+    CapitalizePipe,
+    LastWordPipe,
+    PrepTabNamePipe
   ],
   imports: [
     BrowserModule,

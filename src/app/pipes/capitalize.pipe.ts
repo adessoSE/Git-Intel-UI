@@ -1,13 +1,23 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({name: 'capitalize'})
+@Pipe({ name: 'capitalize' })
 export class CapitalizePipe implements PipeTransform {
 
-    transform(value:any) {
+    transform(value: string) {
+        let word = value;
         if (value) {
-            return value.charAt(0).toUpperCase() + value.slice(1);
+            word = word.charAt(0).toUpperCase() + word.slice(1);
+
+            let startIdx = 0;
+            for (let i = 1; i < word.length; i++) {
+                if (word.charAt(i) === "/" || word.charAt(i) === "-" || word.charAt(i) === "_") {
+                    word = word.substr(startIdx, i + 1) + word.charAt(i + 1).toUpperCase() + word.substr(i + 2);
+                    // startIdx = i
+                }
+            }
+
         }
-        return value;
+        return word;
     }
 
 }
