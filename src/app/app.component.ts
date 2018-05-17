@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd, UrlSegment } from '@angular/router';
 import { Location } from '@angular/common';
 import { PopoverModule } from "ngx-popover";
@@ -29,7 +29,8 @@ export class AppComponent implements OnInit {
 		private globalNavService: GlobalNavigationService,
 		private location: Location,
 		private router: Router,
-		private activatedRoute: ActivatedRoute) { }
+		private activatedRoute: ActivatedRoute,
+		private elRef: ElementRef, private renderer: Renderer) { }
 
 	ngOnInit() {
 		this.globalNavService.onOpenNewTabEmitter.subscribe((tab) => { if (tab.org !== "home") this.openNewTab(tab) });
@@ -80,7 +81,16 @@ export class AppComponent implements OnInit {
 	// As of right now: useless 
 	// Track tab
 	onClickTab(focus: Tab) {
+		let active = this.elRef.nativeElement.ownerDocument.activeElement;
 
+		let parser = new DOMParser();
+		let parsedHtml = parser.parseFromString(active, 'text/html');
+
+		console.log(parsedHtml)
+
+
+
+		console.log();
 	}
 
 	checkIfTabExists(urlSegment: UrlSegment[]) {

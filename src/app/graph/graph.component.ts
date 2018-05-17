@@ -15,9 +15,18 @@ export class GraphComponent implements OnInit {
   @Input() chartLabels: Array<any>;
   @Input() chartColors: Array<any>
 
-  constructor() { }
+  downloadLink: string;
+  downloadName = "graph.png";
+
+
+  constructor() {
+   }
 
   ngOnInit() {
+ 
+    this.downloadLink = document.getElementsByTagName('canvas')[0].toDataURL();
+
   }
+
 
 }

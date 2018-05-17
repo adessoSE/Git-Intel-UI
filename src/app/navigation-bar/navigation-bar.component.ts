@@ -27,8 +27,7 @@ export class NavigationBarComponent implements OnInit {
     this.router.events.subscribe((val) => { this.prepareRouteHistory(this.location.path()) });
 
     /* 
-     * Necessary for enabling Navigation Bar 
-     * if directly navigating to a URL
+     * Necessary for enabling Navigation Bar if navigating via URL
      */ 
     this.globalNavService.showNavBar(true);
   }

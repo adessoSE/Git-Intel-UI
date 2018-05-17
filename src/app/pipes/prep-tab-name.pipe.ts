@@ -7,7 +7,6 @@ export class PrepTabNamePipe implements PipeTransform {
         let retVal = value;
 
         if (value) {
-            console.log("pipe: " + value)
             let idxFirst = value.indexOf("/");
             let idxLast = value.lastIndexOf("/");
 

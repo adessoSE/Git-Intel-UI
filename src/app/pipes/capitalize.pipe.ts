@@ -12,7 +12,6 @@ export class CapitalizePipe implements PipeTransform {
             for (let i = 1; i < word.length; i++) {
                 if (word.charAt(i) === "/" || word.charAt(i) === "-" || word.charAt(i) === "_") {
                     word = word.substr(startIdx, i + 1) + word.charAt(i + 1).toUpperCase() + word.substr(i + 2);
-                    // startIdx = i
                 }
             }
 

@@ -42,15 +42,15 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private globalNavService: GlobalNavigationService) {
 
+    // Must be handled before onInit, because organization will be undefined otherwise 
     router.events.subscribe((val) => { this.determineOrganization(); });
-
-    this.chartData = [{ data: [2, 2, 1, 2], label: 'Pull Requests last 5 Days' }];
-    this.chartLabels = ['16/4/2018', '19/4/2018', '20/4/2018', '21/4/2018'];
   }
 
   // Display Navigation Bar if not viewing Home or Dashboard Component
   ngOnInit() {
     this.globalNavService.showNavBar(false);
+    this.chartData = [{ data: [2, 2, 1, 2], label: 'Pull Requests last 5 Days' }];
+    this.chartLabels = ['16/4/2018', '19/4/2018', '20/4/2018', '21/4/2018'];
   }
 
   ngOnDestroy() {
