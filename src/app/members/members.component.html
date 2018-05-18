@@ -13,9 +13,10 @@
         Sort by
       </button>
       <div class="dropdown-menu">
-        <button class="dropdown-item" (click)="sortByToggle = 'commits'">Commits</button>
-        <button class="dropdown-item" (click)="sortByToggle = 'pull requests'">Pull Requests</button>
-        <button class="dropdown-item" (click)="sortByToggle = 'issues'">Issues</button>
+        <button class="dropdown-item" (click)="sortByAlphabet()">Alphabet</button>
+        <button class="dropdown-item" (click)="sortByCommits()">Commits</button>
+        <button class="dropdown-item" (click)="sortByPullRequests()">Pull Requests</button>
+        <button class="dropdown-item" (click)="sortByIssues()">Issues</button>
       </div>
     </div>
   </div>

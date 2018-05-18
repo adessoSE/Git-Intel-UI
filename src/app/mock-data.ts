@@ -32,49 +32,49 @@ export const MEMBERS: Member[] = [
         username: "gbz",
         name: 'Sergej G',
         organization: ORGANIZATIONS[0],
-        commits: 20000,
-        pullRequests: 300,
+        commits: 200,
+        pullRequests: 1,
+        issues: 7,
+    },
+    {
+        username: "peter-mueller",
+        name: 'Peter Müller',
+        organization: ORGANIZATIONS[0],
+        commits: 180,
+        pullRequests: 3,
+        issues: 11,
+    },
+    {
+        username: "alfreed-mueller",
+        name: 'Alfred Müller',
+        organization: ORGANIZATIONS[0],
+        commits: 50,
+        pullRequests: 3,
+        issues: 0,
+    },
+    {
+        username: "jochen-schweizer",
+        name: 'Jochen Schweizer',
+        organization: ORGANIZATIONS[0],
+        commits: 2,
+        pullRequests: 13,
+        issues: 2,
+    },
+    {
+        username: "peter-pan",
+        name: 'Peter Pan',
+        organization: ORGANIZATIONS[0],
+        commits: 0,
+        pullRequests: 7,
+        issues: 5,
+    },
+    {
+        username: "dennis-zauener",
+        name: 'Dennis Zäuner',
+        organization: ORGANIZATIONS[0],
+        commits: 20,
+        pullRequests: 0,
         issues: 20,
-    },
-    {
-        username: "peter-mueller",
-        name: 'Peter Müller',
-        organization: ORGANIZATIONS[0],
-        commits: 20,
-        pullRequests: 3,
-        issues: 2,
-    },
-    {
-        username: "peter-mueller",
-        name: 'Peter Müller',
-        organization: ORGANIZATIONS[0],
-        commits: 20,
-        pullRequests: 3,
-        issues: 2,
-    },
-    {
-        username: "peter-mueller",
-        name: 'Peter Müller',
-        organization: ORGANIZATIONS[0],
-        commits: 20,
-        pullRequests: 3,
-        issues: 2,
-    },
-    {
-        username: "peter-mueller",
-        name: 'Peter Müller',
-        organization: ORGANIZATIONS[0],
-        commits: 20,
-        pullRequests: 3,
-        issues: 2,
-    },
-    {
-        username: "peter-mueller",
-        name: 'Peter Müller',
-        organization: ORGANIZATIONS[0],
-        commits: 20,
-        pullRequests: 3,
-        issues: 2,
     }
 ];
 
@@ -83,25 +83,25 @@ export const REPOSITORIES: Repository[] = [
         name: 'BrainySnake',
         description: 'Program your ai and compete against others',
         programmingLanguage: 'Java',
-        license: 'MIT',
+        license: 'OpenLicense3',
         numOfContributors: 5,
-        stars: 7,
+        stars: 70,
         commits: 156,
-        pullRequests: 0,
-        forks: 3,
-        issues: 6
+        pullRequests: 1,
+        forks: 1,
+        issues: 2
     },
     {
-        name: 'BrainySnake2',
-        description: 'Program your ai and compete against others',
+        name: 'HelloWorld',
+        description: 'test',
         programmingLanguage: 'Java',
-        license: 'MIT',
+        license: 'Apache2',
         numOfContributors: 5,
-        stars: 7,
-        commits: 156,
-        pullRequests: 0,
+        stars: 5,
+        commits: 2,
+        pullRequests: 5,
         forks: 3,
-        issues: 6
+        issues: 4
     },
     {
         name: 'GitStalker',
@@ -112,7 +112,7 @@ export const REPOSITORIES: Repository[] = [
         stars: 2000,
         commits: 99,
         pullRequests: 0,
-        forks: 3,
+        forks: 43,
         issues: 6
     }
 ];
@@ -122,25 +122,25 @@ export const EX_REPOSITORIES: Repository[] = [
         name: 'BrainySnake',
         description: 'Program your ai and compete against others',
         programmingLanguage: 'Java',
-        license: 'MIT',
+        license: 'OpenLicense3',
         numOfContributors: 5,
-        stars: 7,
+        stars: 70,
         commits: 156,
-        pullRequests: 0,
-        forks: 3,
-        issues: 6
+        pullRequests: 1,
+        forks: 1,
+        issues: 2
     },
     {
-        name: 'BrainySnake2',
-        description: 'Program your ai and compete against others',
+        name: 'HelloWorld',
+        description: 'test',
         programmingLanguage: 'Java',
-        license: 'MIT',
+        license: 'Apache2',
         numOfContributors: 5,
-        stars: 7,
-        commits: 156,
-        pullRequests: 0,
+        stars: 5,
+        commits: 2,
+        pullRequests: 5,
         forks: 3,
-        issues: 6
+        issues: 4
     },
     {
         name: 'GitStalker',
@@ -151,7 +151,7 @@ export const EX_REPOSITORIES: Repository[] = [
         stars: 2000,
         commits: 99,
         pullRequests: 0,
-        forks: 3,
+        forks: 43,
         issues: 6
     }
 ];
@@ -160,22 +160,22 @@ export const TEAMS: Team[] = [
     {
         name: "GitStalker",
         description: "Developing the coolest programm",
-        repositories: REPOSITORIES.slice(2,2),
-        members: MEMBERS.slice(0, 2),
+        repositories: REPOSITORIES.slice(0, 2),
+        members: MEMBERS.slice(0, 3),
         commits: 200
     },
     {
         name: "BrainySnake",
         description: "Developing the coolest programm",
-        repositories: REPOSITORIES.slice(0,1),
-        members: MEMBERS.slice(0, 2),
-        commits: 200
+        repositories: REPOSITORIES.slice(1, 2),
+        members: MEMBERS.slice(2, 6),
+        commits: 150
     },
     {
-        name: "BrainySnake2",
-        description: "Developing the coolest programm",
-        repositories: REPOSITORIES.slice(1,1),
-        members: MEMBERS.slice(0, 2),
-        commits: 200
+        name: "HelloWorld",
+        description: "Developing helloworlds",
+        repositories: REPOSITORIES.slice(0, 1),
+        members: MEMBERS.slice(1, 2),
+        commits: 20
     }
 ];

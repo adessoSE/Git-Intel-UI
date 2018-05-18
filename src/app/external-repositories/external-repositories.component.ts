@@ -24,4 +24,42 @@ export class ExternalRepositoriesComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  sortByAlphabet() {
+    this.extRepos.sort((a: Repository, b: Repository) => a.name.localeCompare(b.name));
+  }
+
+  sortByCommits() {
+    this.extRepos.sort((a: Repository, b: Repository) => {
+      return +b.commits - +a.commits;
+    });
+  }
+
+  sortByIssues() {
+    this.extRepos.sort((a: Repository, b: Repository) => {
+      return +b.issues - +a.issues;
+    });
+  }
+
+  sortByForks() {
+    this.extRepos.sort((a: Repository, b: Repository) => {
+      return +b.forks - +a.forks;
+    });
+  }
+
+  sortByLicense() {
+    this.extRepos.sort((a: Repository, b: Repository) => a.license.localeCompare(b.license));
+  }
+
+  sortByPullRequests() {
+    this.extRepos.sort((a: Repository, b: Repository) => {
+      return +b.pullRequests - +a.pullRequests;
+    });
+  }
+
+  sortByStars() {
+    this.extRepos.sort((a: Repository, b: Repository) => {
+      return +b.stars - +a.stars;
+    });
+  }
 }

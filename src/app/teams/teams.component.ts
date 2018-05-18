@@ -16,6 +16,27 @@ export class TeamsComponent implements OnInit {
     this.teams = memberService.getTeams();
   }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  sortByAlphabet() {
+    this.teams.sort((a: Team, b: Team) => a.name.localeCompare(b.name));
+  }
+
+  sortByCommits() {
+    this.teams.sort((a: Team, b: Team) => {
+      return +b.commits - +a.commits;
+    });
+  }
+
+  sortByMembers() {
+    this.teams.sort((a: Team, b: Team) => {
+      return +b.members.length - +a.members.length;
+    });
+  }
+
+  sortByRepositories() {
+    this.teams.sort((a: Team, b: Team) => {
+      return +b.repositories.length - +a.repositories.length;
+    });
   }
 }
