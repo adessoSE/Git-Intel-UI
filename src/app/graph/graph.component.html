@@ -1,25 +1,4 @@
-<!-- Member Growth -->
-<div class="card border-secondary mb-3 graph-card">
-  <div class="card-body">
-    <!-- Custom card header -->
-    <div class="row">
-      <div class="col-md-5">
-        {{chartTitle}}
-      </div>
-      <div class="col-md-4 offset-md-3">
-        <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#memberModal">
-          <i class="fa fa-arrows-alt"></i>
-        </button>
-      </div>
-    </div>
-    <!-- Actual Graph body -->
-    <canvas id="chart" baseChart [chartType]="chartType" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [legend]="chartLegend"
-      [colors]="chartColors">
-    </canvas>
-  </div>
-</div>
-
-<!-- Graph Modal -->
+<!-- Graph Modal | Must remain first element, because it's canvas is used for downloading -->
 <div class="modal fade" id="memberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" style="margin-left: 20%" role="document">
     <div class="modal-content">
@@ -36,9 +15,29 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Download</button>
-        <a href="downloadLink" download="downloadName">Download</a>
+        <a href="#" (click)="downloadGraph($event)" class="btn btn-primary" style="color:white !important">Download</a>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Member Growth -->
+<div class="card border-secondary mb-3 graph-card">
+  <div class="card-body">
+    <!-- Custom card header -->
+    <div class="row">
+      <div class="col-md-5">
+        {{chartTitle}}
+      </div>
+      <div class="col-md-4 offset-md-3">
+        <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#memberModal">
+          <i class="fa fa-arrows-alt"></i>
+        </button>
+      </div>
+    </div>
+    <!-- Actual Graph body -->
+    <canvas id="chart" baseChart [chartType]="chartType" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions"
+      [legend]="chartLegend" [colors]="chartColors">
+    </canvas>
   </div>
 </div>

@@ -1,6 +1,6 @@
 <div class="container-fluid">
 
-  <div class="card border-primary col-md-12 member-card" style="padding: 3.5% 0 0 3.5%">
+  <div class="card border-primary col-md-12 member-card" style="padding-bottom: 1%; margin-bottom: 2%">
     <div class="row">
       <div class="col-md-4">
         <h1>{{member.name}}</h1>
@@ -13,42 +13,42 @@
         <img class="img-responsive img-circle float-right" width="50%" height="50%" src="https://www.gruenderstory.de/wp-content/uploads/2013/08/github-logo-300x300.png">
       </span>
     </div>
-  </div>
 
-  <div class="card border-secondary col-md-12 member-card" style="margin-top: 2%; margin-bottom: 2%">
 
-    <div class="row">
-      <div class="col-md-4">
-        <div class="member-icon">
-          <i class="fa fa-stop-circle"></i>
+    <div class="card border-secondary col-md-12 member-card" style="border : 0;">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="member-icon">
+            <i class="fa fa-stop-circle"></i>
+          </div>
+          <span class="">{{member.commits}} Commits</span>
         </div>
-        <span class="">{{member.commits}} Commits</span>
+
+        <div class="col-md-4">
+          <div class="member-icon">
+            <i class="fa fa-code-fork"></i>
+          </div>
+          <span class="">{{member.pullRequests}} Pull Requests</span>
+        </div>
+
+        <div class="col-md-4">
+          <div class="member-icon">
+            <i class="fa fa-exclamation-circle"></i>
+          </div>
+          <span class=""> {{member.issues}}</span> Issues (Closed/Opened)
+        </div>
       </div>
 
-      <div class="col-md-4">
-        <div class="member-icon">
-          <i class="fa fa-code-fork"></i>
-        </div>
-        <span class="">{{member.pullRequests}} Pull Requests</span>
-      </div>
-
-      <div class="col-md-4">
-        <div class="member-icon">
-          <i class="fa fa-exclamation-circle"></i>
-        </div>
-        <span class=""> {{member.issues}}</span> Issues (Closed/Opened)
-      </div>
     </div>
-
   </div>
 
   <div>
-    <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels" [chartOptions]="chartOptions"
-      [chartLegend]="chartLegend" [chartColors]="chartColors"></graph>
-    <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels" [chartOptions]="chartOptions"
-      [chartLegend]="chartLegend" [chartColors]="chartColors"></graph>
-    <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels" [chartOptions]="chartOptions"
-      [chartLegend]="chartLegend" [chartColors]="chartColors"></graph>
+    <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels"
+      [chartOptions]="chartOptions" [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="member.organization.name"></graph>
+    <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels"
+      [chartOptions]="chartOptions" [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="member.organization.name"></graph>
+    <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels"
+      [chartOptions]="chartOptions" [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="member.organization.name"></graph>
   </div>
 
 
