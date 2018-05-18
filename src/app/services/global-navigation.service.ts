@@ -12,7 +12,7 @@ export class GlobalNavigationService {
   private _showNavBar: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public showNavBarEmitter: Observable<boolean> = this._showNavBar.asObservable();
 
-  private _openNewTab: BehaviorSubject<Tab> = new BehaviorSubject<Tab>({ id: 0, org: "home", url: "home" });
+  private _openNewTab: BehaviorSubject<Tab> = new BehaviorSubject<Tab>(null);
   public onOpenNewTabEmitter: Observable<Tab> = this._openNewTab.asObservable();
 
   private _tabClicked: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);

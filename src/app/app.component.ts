@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
 
 	organization: string = "";
 	//tabss: Tab[] = [{ id: 0, org: "home", url: "/home" }];
-	tabs = new Set([{ id: 0, org: "home", url: "home" }]);
+	tabs = new Set<Tab>();
 	route: string = "";
 	isSearchInvalid: boolean = false;
 
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
 		private elRef: ElementRef, private renderer: Renderer) { }
 
 	ngOnInit() {
-		this.globalNavService.onOpenNewTabEmitter.subscribe((tab) => { if (tab.org !== "home") this.openNewTab(tab) });
+		this.globalNavService.onOpenNewTabEmitter.subscribe((tab) => { if (tab !== null && tab.org !== "home") this.openNewTab(tab) });
 
 		// TODO: Simplify
 		this.router.events
