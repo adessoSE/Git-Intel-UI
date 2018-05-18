@@ -8,14 +8,9 @@ a, a:visited, a:hover, a:active {
     text-decoration:none !important;
 }
 
+/* The following are used in almost every component */
 ul {
     list-style-type: none;
-}
-
-.member-icon {
-    display: inline-block;
-    width: 10%;
-    padding-right: 5%;
 }
 
 .member-card {
@@ -31,10 +26,6 @@ ul {
     width: 75%;
     display: flex;
     justify-content: space-between;
-}
-
-.orga-link {
-    margin-top: 20px;
 }
 
 .card-title {
