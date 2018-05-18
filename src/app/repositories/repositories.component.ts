@@ -11,6 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class RepositoriesComponent implements OnInit {
 
   repositories: Repository[];
+  repositoriesCopy: Repository[];
+
   orgName: string = "";
   sortByToggle: string = 'Members';
 
@@ -20,6 +22,9 @@ export class RepositoriesComponent implements OnInit {
     private router: Router) {
 
     this.repositories = repoService.getRepositories();
+    // Necessary copy for filter function    
+    this.repositoriesCopy = this.repositories;
+
     router.events.subscribe((val) => { this.orgName = this.activeRoute.snapshot.paramMap.get('organization'); });
   }
 
@@ -63,4 +68,9 @@ export class RepositoriesComponent implements OnInit {
     });
   }
 
+  search(term: string) {
+    this.repositories = this.repositoriesCopy.filter(e => {
+      return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
+    });
+  }
 }

@@ -3,7 +3,7 @@
   <!-- Search and sort functionality -->
   <div class="search-container">
     <form class="form-inline float-right">
-      <input type="text" class="form-control " placeholder="Search Member">
+      <input type="text" class="form-control" placeholder="Search Member" #searchBox (keyup)="search(searchBox.value)">
       <button type="submit" class="btn btn-primary">
         <i class="fa fa-search"></i>
       </button>
