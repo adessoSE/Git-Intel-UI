@@ -1,165 +1,120 @@
-<div class="container-fluid">
+<div class="container-fluid" style="width: 75%">
 
-  <!--Company meta data-->
-  <div class="row">
-    <div class="col-md-4">
-      <h1>{{orga.name}}</h1>
-      <span class="orga-location">{{orga.location}}</span>
-      <p class="orga-description">{{orga.description}}.</p>
+  <!-- Company meta data -->
+  <div class="card col-md-12 member-card" style="border: 0; padding-top: 2%; padding-bottom: 2%; margin-bottom: 2%">
+    <div class="row">
+      <div class="col-md-4">
+        <h1>{{orga.name}}</h1>
+        <span class="orga-location">{{orga.location}}</span>
+        <p class="orga-description">{{orga.description}}.</p>
+      </div>
+      <span class="col-md-4 orga-link">
+        <a href="https://www.{{orga.website}}" target="_blank">
+          <i class="fa fa-globe fa-4x"></i>&nbsp;{{orga.website}}</a>
+      </span>
+      <span class="col-md-4 orga-link">
+        <a href="https://www.github.com/{{orga.name}}" target="_blank">
+          <i class="fa fa-github fa-4x"></i>&nbsp;github.com/{{orga.name}}</a>
+      </span>
     </div>
-    <span class="col-md-4 orga-link">
-      <a href="https://www.{{orga.website}}">
-        <i class="fa fa-globe fa-3x"></i>{{orga.website}}</a>
-    </span>
-    <span class="col-md-4 orga-link">
-      <a href="https://www.github.com/{{orga.name}}">
-        <i class="fa fa-github fa-3x"></i>github.com/{{orga.name}}</a>
-    </span>
   </div>
 
-  <div class="row justify-content-center graph-row">
+  <div class="row col-mb-12 justify-content-center graph-row">
 
     <!-- Members -->
-    <div class="col-md-2">
-      <a routerLink="members/">
-        <div class="card border-primary mb-3 component-card">
-          <div class="card-body">
-            <h4 class="card-title">Members</h4>
+    <div class="col-xs-3">
+      <div class="card border-secondary mb-3 component-card">
+        <div class="card-body">
+          <h4 class="card-title">Members
+            <button type="button" class="btn btn-link" [popover]="popoverMembers" [popoverOnHover]="true">
+              <i class="fa fa-info-circle"></i>
+            </button>
+          </h4>
+          <a routerLink="members/">
             <h3 class="card-title" style="text-align: center">
               <i class="fa fa-user"></i> {{orga.numOfMembers}}</h3>
-          </div>
+          </a>
         </div>
-      </a>
+      </div>
+
+      <popover-content #popoverMembers title="" placement="top" [closeOnClickOutside]="true">
+        See all members of the organization. Write more here..
+      </popover-content>
     </div>
 
     <!-- Teams -->
-    <div class="col-md-2">
-      <a routerLink="teams/">
-        <div class="card border-primary mb-3 component-card">
-          <div class="card-body">
-            <h4 class="card-title">Teams</h4>
+    <div class="col-xs-3">
+      <div class="card border-secondary mb-3 component-card">
+        <div class="card-body">
+          <h4 class="card-title">Teams
+            <button type="button" class="btn btn-link" [popover]="popoverTeams" [popoverOnHover]="true">
+              <i class="fa fa-info-circle"></i>
+            </button>
+          </h4>
+          <a routerLink="teams/">
             <h3 class="card-title" style="text-align: center">
               <i class="fa fa-users"></i> {{orga.numOfTeams}}</h3>
-          </div>
+          </a>
         </div>
-      </a>
+      </div>
+
+      <popover-content #popoverTeams title="" placement="top" [closeOnClickOutside]="true">
+        See all teams of the organization. Write more here..
+      </popover-content>
     </div>
 
     <!-- Repositories -->
-    <div class="col-md-2">
-      <a routerLink="repositories/">
-        <div class="card border-primary mb-3 component-card">
-          <div class="card-body">
-            <h4 class="card-title">Repositories</h4>
+    <div class="col-xs-3">
+      <div class="card border-secondary mb-3 component-card">
+        <div class="card-body">
+          <h4 class="card-title">Repositories
+            <button type="button" class="btn btn-link" [popover]="popoverRepos" [popoverOnHover]="true">
+              <i class="fa fa-info-circle"></i>
+            </button>
+          </h4>
+          <a routerLink="repositories/">
             <h3 class="card-title" style="text-align: center">
               <i class="fa fa-book mr-3"></i> {{orga.numOfRepos}}</h3>
-          </div>
+          </a>
         </div>
-      </a>
+      </div>
+
+      <popover-content #popoverRepos title="" placement="top" [closeOnClickOutside]="true">
+        See all repositories of the organization. Write more here..
+      </popover-content>
+
     </div>
 
     <!-- External Repos -->
-    <div class="col-md-2">
-      <a routerLink="external-repositories/">
-        <div class="card border-primary mb-3 component-card">
-          <div class="card-body">
-            <h4 class="card-title">Contribution in external repos</h4>
+    <div class="col-xs-3">
+      <div class="card border-secondary mb-3 component-card">
+        <div class="card-body">
+          <h4 class="card-title">Ext. Repositories
+            <button type="button" class="btn btn-link" [popover]="popoverExtRepos" [popoverOnHover]="true">
+              <i class="fa fa-info-circle"></i>
+            </button>
+          </h4>
+          <a routerLink="external-repositories/">
             <h3 class="card-title" style="text-align: center">
               <i class="fa fa-location-arrow"></i> {{orga.numOfExternalRepos}}</h3>
-          </div>
+          </a>
         </div>
-      </a>
+      </div>
+
+      <popover-content #popoverExtRepos title="" placement="top" [closeOnClickOutside]="true">
+        See all the repositories members of the organization contributed to. Write more here..
+      </popover-content>
     </div>
-
   </div>
-
 
   <!-- Graphs -->
-  <div class="row justify-content-center graph-row">
-
-    <!-- Member Growth -->
-    <div class="col-md-3">
-      <div class="card border-primary mb-3 graph-card">
-        <div class="card-body">
-          <!-- Custom card header -->
-          <div class="row">
-            <div class="col-md-5">
-              <h4>Member Growth</h4>
-            </div>
-            <div class="col-md-4 offset-md-3">
-              <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#memberModal">
-                <i class="fa fa-arrows-alt"></i>
-              </button>
-            </div>
-          </div>
-          <!-- Actual Graph body -->
-          <img style="height: 200px; width: 100%; display: block;" src="../../assets/graph.png" alt="Card image">
-        </div>
-      </div>
-    </div>
-
-    <!-- Activity inside owned Repos (Commits/Week) -->
-    <div class="col-md-3">
-      <div class="card border-primary mb-3 graph-card">
-        <div class="card-body">
-          <!-- Custom card header -->
-          <div class="row">
-            <div class="col-md-5">
-              <h4>Member Growth</h4>
-            </div>
-            <div class="col-md-4 offset-md-3">
-              <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#memberModal">
-                <i class="fa fa-arrows-alt"></i>
-              </button>
-            </div>
-          </div>
-          <!-- Actual Graph body -->
-          <img style="height: 200px; width: 100%; display: block;" src="../../assets/graph.png" alt="Card image">
-        </div>
-      </div>
-    </div>
-
-    <!-- Contribution to external Repos (PRs/Week) -->
-    <div class="col-md-3">
-      <div class="card border-primary mb-3 graph-card">
-        <div class="card-body">
-          <!-- Custom card header -->
-          <div class="row">
-            <div class="col-md-5">
-              <h4>Member Growth</h4>
-            </div>
-            <div class="col-md-4 offset-md-3">
-              <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#memberModal">
-                <i class="fa fa-arrows-alt"></i>
-              </button>
-            </div>
-          </div>
-          <!-- Actual Graph body -->
-          <img style="height: 200px; width: 100%; display: block;" src="../../assets/graph.png" alt="Card image">
-        </div>
-      </div>
-    </div>
-
-
-    <!-- Graph Modal -->
-    <div class="modal fade" id="memberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Title data</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <img style="height: 600px; width: 100%; display: block;" src="../../assets/graph.png" alt="Card image">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Download</button>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="row justify-content-center">
+    <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels" [chartOptions]="chartOptions"
+      [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="orga.name"></graph>
+    <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels" [chartOptions]="chartOptions"
+      [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="orga.name"></graph>
+    <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels" [chartOptions]="chartOptions"
+      [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="orga.name"></graph>
   </div>
+
 </div>

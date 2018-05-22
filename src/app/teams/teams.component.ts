@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Team } from '../entities/team';
+import { TeamService } from '../services/team.service';
 
 @Component({
   selector: 'app-teams',
@@ -7,40 +9,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeamsComponent implements OnInit {
 
-  data: any;
+  teams: Team [];
+  teamsCopy: Team [];
 
-  sortByToggle: string = 'Members';
-
-  constructor() {
-    // ==========TEST DATA=========
-    this.data = {
-      teams: [
-        {
-          name: 'Frontend',
-          description: 'Frontend developers working on angular applications',
-          members: 18,
-          repositories: 4,
-          commits: 156
-        },
-        {
-          name: 'Backend',
-          description: 'Java developers for backend repos',
-          members: 36,
-          repositories: 6,
-          commits: 336
-        },
-        {
-          name: 'Open Source Projects',
-          description: 'People working on the company\'s open source projects',
-          members: 6,
-          repositories: 2,
-          commits: 80
-        }
-      ]
-    };
-    // ============================
+  constructor(memberService: TeamService) { 
+    this.teams = memberService.getTeams();
+    this.teamsCopy = this.teams;
   }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  sortByAlphabet() {
+    this.teams.sort((a: Team, b: Team) => a.name.localeCompare(b.name));
+  }
+
+  sortByCommits() {
+    this.teams.sort((a: Team, b: Team) => {
+      return +b.commits - +a.commits;
+    });
+  }
+
+  sortByMembers() {
+    this.teams.sort((a: Team, b: Team) => {
+      return +b.members.length - +a.members.length;
+    });
+  }
+
+  sortByRepositories() {
+    this.teams.sort((a: Team, b: Team) => {
+      return +b.repositories.length - +a.repositories.length;
+    });
+  }
+
+  search(term: string) {
+    this.teams = this.teamsCopy.filter(e => {
+      return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
+    });
   }
 }

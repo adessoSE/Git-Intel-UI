@@ -8,6 +8,7 @@ import { RepositoriesComponent } from './repositories/repositories.component';
 import { ExternalRepositoriesComponent } from './external-repositories/external-repositories.component';
 import { MemberComponent } from './member/member.component';
 import { HomeComponent } from './home/home.component';
+import { TeamComponent } from './team/team.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -16,6 +17,8 @@ const routes: Routes = [
   { path: ':organization/members', component: MembersComponent },
   { path: ':organization/members/:username', component: MemberComponent },
   { path: ':organization/teams', component: TeamsComponent },
+  { path: ':organization/teams/:name', component: TeamComponent },
+  { path: ':organization/teams/:name/:username', component: MemberComponent },
   { path: ':organization/repositories', component: RepositoriesComponent },
   { path: ':organization/external-repositories', component: ExternalRepositoriesComponent }
 ];

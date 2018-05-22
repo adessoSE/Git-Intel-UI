@@ -1,13 +1,16 @@
 <div class="container-fluid">
-
-  <!--Search and sort functionality-->
+  <!-- Search and sort functionality -->
   <div class="search-container">
+
+    <!-- Search -->
     <form class="form-inline float-right">
-      <input type="text" class="form-control " placeholder="Search Repository" #searchBox (keyup)="search(searchBox.value)">
+      <input type="text" class="form-control " placeholder="Search Member or Repo" #searchBox (keyup)="search(searchBox.value)">
       <button type="submit" class="btn btn-primary">
         <i class="fa fa-search"></i>
       </button>
     </form>
+
+    <!-- Sort -->
     <div class="dropdown float-right mr-3">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
         Sort by
@@ -15,19 +18,72 @@
       <div class="dropdown-menu">
         <button class="dropdown-item" (click)="sortByAlphabet()">Alphabet</button>
         <button class="dropdown-item" (click)="sortByCommits()">Commits</button>
-        <button class="dropdown-item" (click)="sortByIssues()">Issues</button>
-        <button class="dropdown-item" (click)="sortByForks()">Forks</button>
         <button class="dropdown-item" (click)="sortByPullRequests()">Pull Requests</button>
-        <button class="dropdown-item" (click)="sortByLicense()">License</button>
-        <button class="dropdown-item" (click)="sortByStars()">Stars</button>
+        <button class="dropdown-item" (click)="sortByIssues()">Issues</button>
+      </div>
+    </div>
+
+    <!-- Check Boxes -->
+    <form class="form-inline float-right mr-3">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input #cbRepos type="checkbox" name="size" (change)="0" checked="">&nbsp;Repositories
+        </label>
+      </div>
+    </form>
+
+    <form class="form-inline float-right mr-3">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input #cbMembers type="checkbox" name="size" (change)="0" checked="">&nbsp;Members
+        </label>
+      </div>
+    </form>
+  </div>
+
+  <!-- Cards displaying users and user info -->
+  <div class="row justify-content-center graph-row" *ngIf="cbMembers.checked">
+    <!-- Members -->
+    <div class="col-md-4 member-card" *ngFor="let member of members">
+      <div class="card border-primary component-card">
+        <a routerLink={{member.username}}>
+          <div class="card-body">
+            <h4 class="card-title">{{member.name}}
+              <picture style="float: right;">
+                <i class="fa fa-user fa-3x"></i>
+              </picture>
+            </h4>
+            <div class="card-text">
+              <p>Activity Last 7 Days:</p>
+              <ul>
+                <li>
+                  <div class="member-icon">
+                    <i class="fa fa-stop-circle"></i>
+                  </div>
+                  <span class="text-primary"> {{member.commits}}</span> Commits</li>
+                <li>
+                  <div class="member-icon">
+                    <i class="fa fa-code-fork"></i>
+                  </div>
+                  <span class="text-primary"> {{member.pullRequests}}</span> Pull Requests</li>
+                <li>
+                  <div class="member-icon">
+                    <i class="fa fa-exclamation-circle"></i>
+                  </div>
+                  <span class="text-primary"> {{member.issues}}</span> Issues (Closed/Opened)</li>
+              </ul>
+            </div>
+          </div>
+        </a>
       </div>
     </div>
   </div>
 
-  <!--Cards displaying teams and team info-->
-  <div class="row justify-content-center graph-row">
-    <!-- Teams -->
-    <div class="col-md-12 member-card" *ngFor="let repo of extRepos">
+  <!--Cards displaying Repositories and Repository info-->
+  <div class="row justify-content-center graph-row" *ngIf="cbRepos.checked">
+    <!-- Repositories -->
+    <div class="col-md-12 member-card" *ngFor="let repo of team.repositories">
+
       <div class="card border-primary component-card">
         <a href="https://www.github.com/{{orgName}}/{{repo.name}}" target="_blank">
           <div class="card-body">
@@ -57,7 +113,6 @@
               </h4>
               <p>{{repo.description}}</p>
             </div>
-
             <div class="card-text pb-3">
               <div class="team-info-container">
                 <span>
@@ -74,5 +129,7 @@
           </div>
         </a>
       </div>
+
     </div>
   </div>
+</div>

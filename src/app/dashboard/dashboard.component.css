@@ -7,12 +7,11 @@
 }
 
 .graph-row {
-    margin-top: 2.5%;
+    margin-top: 2%;
+    margin-bottom: 1.5%;
+    min-width: 100rem;
 }
 
-.tooltip .tooltiptext {
-    width: 120px;
-    bottom: 100%;
-    left: 50%;
-    margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+.orga-link {
+    margin-top: 20px;
 }
