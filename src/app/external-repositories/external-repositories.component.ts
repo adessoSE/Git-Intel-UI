@@ -11,6 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ExternalRepositoriesComponent implements OnInit {
 
   extRepos: Repository[];
+  extReposCopy: Repository[];  
   orgName: string = "";
 
   constructor(
@@ -19,9 +20,56 @@ export class ExternalRepositoriesComponent implements OnInit {
     private router: Router) {
 
     this.extRepos = extRepoService.getExRepositories();
+    // Necessary copy for filter function    
+    this.extReposCopy = this.extRepos;
+    
     router.events.subscribe((val) => { this.orgName = this.activeRoute.snapshot.paramMap.get('organization'); });
   }
 
   ngOnInit() {
+  }
+
+  sortByAlphabet() {
+    this.extRepos.sort((a: Repository, b: Repository) => a.name.localeCompare(b.name));
+  }
+
+  sortByCommits() {
+    this.extRepos.sort((a: Repository, b: Repository) => {
+      return +b.commits - +a.commits;
+    });
+  }
+
+  sortByIssues() {
+    this.extRepos.sort((a: Repository, b: Repository) => {
+      return +b.issues - +a.issues;
+    });
+  }
+
+  sortByForks() {
+    this.extRepos.sort((a: Repository, b: Repository) => {
+      return +b.forks - +a.forks;
+    });
+  }
+
+  sortByLicense() {
+    this.extRepos.sort((a: Repository, b: Repository) => a.license.localeCompare(b.license));
+  }
+
+  sortByPullRequests() {
+    this.extRepos.sort((a: Repository, b: Repository) => {
+      return +b.pullRequests - +a.pullRequests;
+    });
+  }
+
+  sortByStars() {
+    this.extRepos.sort((a: Repository, b: Repository) => {
+      return +b.stars - +a.stars;
+    });
+  }
+
+  search(term: string) {
+    this.extRepos = this.extReposCopy.filter(e => {
+      return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
+    });
   }
 }

@@ -15,9 +15,9 @@
       <!-- Search field -->
       <div class="col-sm-8">
         <form class="form-inline my-2 my-lg-0" style="padding-top: 5%;">
-          <input id="name" class="form-control mr-sm-2 searchForm" [ngClass]="{'is-invalid': isSearchInvalid}" [(ngModel)]="organization" required minlength="4" name="search"
-            placeholder="Organizations name" type="text" style="width: 35%;" #name="ngModel" >
-          <button class="btn btn-primary my-2 my-sm-0" (click)="openNewTab(organization)">Stalk!</button>
+          <input id="name" class="form-control mr-sm-2 searchForm" [ngClass]="{'is-invalid': isSearchInvalid}" [(ngModel)]="organization"
+            required minlength="4" name="search" placeholder="Organizations name" type="text" style="width: 35%;" #name="ngModel">
+          <button class="btn btn-primary my-2 my-sm-0" (click)="onClickStalk(organization)">Stalk!</button>
         </form>
       </div>
 
@@ -29,14 +29,14 @@
 
 <!-- Tab Bar -->
 <ul class="nav nav-tabs tabBar">
-  <li class="nav-item" *ngFor="let tab of tabs">
-    <a class="nav-link" data-toggle="tab" [routerLink]="tab" (click)="onClickTab()" style="display: inline-block;">
-      {{tab | capitalize}}
+  <li class="nav-item" *ngFor="let tab of tabs; let idx = index">
+    <a class="nav-link" data-toggle="tab" [routerLink]="tab.url" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:
+      true}" (click)="setActiveTab(idx)" style="display: inline-block;">
+      {{tab.url | prepTabName | capitalize}}
     </a>
-    <button (click)="closeTab(tab)" type="button" class="close" data-dismiss="alert" style="margin-top: 10%;">&times;</button>
+    <button (click)="closeTab(idx)" type="button" class="close" data-dismiss="alert" style="margin-top: 10%;">&times;</button>
   </li>
 </ul>
-
 
 <!-- Navigation Bar -->
 <navigation-bar></navigation-bar>

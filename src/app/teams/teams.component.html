@@ -3,7 +3,7 @@
   <!--Search and sort functionality-->
   <div class="search-container">
     <form class="form-inline float-right">
-      <input type="text" class="form-control " placeholder="Search Team">
+      <input type="text" class="form-control " placeholder="Search Team" #searchBox (keyup)="search(searchBox.value)">
       <button type="submit" class="btn btn-primary">
         <i class="fa fa-search"></i>
       </button>
@@ -13,9 +13,10 @@
         Sort by
       </button>
       <div class="dropdown-menu">
-        <button class="dropdown-item" (click)="sortByToggle = 'members'">Members</button>
-        <button class="dropdown-item" (click)="sortByToggle = 'repositories'">Repositories</button>
-        <button class="dropdown-item" (click)="sortByToggle = 'commits'">Commits</button>
+        <button class="dropdown-item" (click)="sortByAlphabet()">Alphabet</button>
+        <button class="dropdown-item" (click)="sortByCommits()">Commits</button>
+        <button class="dropdown-item" (click)="sortByMembers()">Members</button>
+        <button class="dropdown-item" (click)="sortByRepositories()">Repositories</button>
       </div>
     </div>
   </div>
@@ -53,4 +54,6 @@
       </div>
     </div>
   </div>
+
+
 </div>

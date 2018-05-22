@@ -14,10 +14,19 @@ export class GraphComponent implements OnInit {
   @Input() chartData: Array<any>;
   @Input() chartLabels: Array<any>;
   @Input() chartColors: Array<any>
+  @Input() organization: string;
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  downloadGraph(event) {
+    var anchor = event.target;
+
+    anchor.href = document.getElementsByTagName('canvas')[0].toDataURL();
+
+    anchor.download = this.organization + " " + this.chartTitle + " - " + new Date().toLocaleDateString() + ".png";
   }
+
 
 }

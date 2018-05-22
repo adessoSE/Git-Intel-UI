@@ -3,27 +3,33 @@
   <!--Search and sort functionality-->
   <div class="search-container">
     <form class="form-inline float-right">
-      <input type="text" class="form-control " placeholder="Search Repository">
+      <input type="text" class="form-control " placeholder="Search Repository" #searchBox (keyup)="search(searchBox.value)">
       <button type="submit" class="btn btn-primary">
         <i class="fa fa-search"></i>
       </button>
     </form>
+    <div class="float-left mr-3">
+        <h4>Activities: Last 7 days.</h4>
+    </div>
     <div class="dropdown float-right mr-3">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
         Sort by
       </button>
       <div class="dropdown-menu">
-        <button class="dropdown-item" (click)="sortByToggle = 'commits'">Commits</button>
-        <button class="dropdown-item" (click)="sortByToggle = 'pull requests'">Pull Requests</button>
-        <button class="dropdown-item" (click)="sortByToggle = 'issues'">Issues</button>
-        <button class="dropdown-item" (click)="sortByToggle = 'stars'">Stars</button>
+        <button class="dropdown-item" (click)="sortByAlphabet()">Alphabet</button>
+        <button class="dropdown-item" (click)="sortByCommits()">Commits</button>
+        <button class="dropdown-item" (click)="sortByIssues()">Issues</button>
+        <button class="dropdown-item" (click)="sortByForks()">Forks</button>
+        <button class="dropdown-item" (click)="sortByPullRequests()">Pull Requests</button>
+        <button class="dropdown-item" (click)="sortByLicense()">License</button>
+        <button class="dropdown-item" (click)="sortByStars()">Stars</button>
       </div>
     </div>
   </div>
 
-  <!--Cards displaying teams and team info-->
+  <!--Cards displaying Repositories and Repository info-->
   <div class="row justify-content-center graph-row">
-    <!-- Teams -->
+    <!-- Repositories -->
     <div class="col-md-12 member-card" *ngFor="let repo of repositories">
       <div class="card border-primary component-card">
         <a href="https://www.github.com/{{orgName}}/{{repo.name}}" target="_blank">

@@ -10,11 +10,11 @@
       </div>
       <span class="col-md-4 orga-link">
         <a href="https://www.{{orga.website}}" target="_blank">
-          <i class="fa fa-globe fa-4x"></i>{{orga.website}}</a>
+          <i class="fa fa-globe fa-4x"></i>&nbsp;{{orga.website}}</a>
       </span>
       <span class="col-md-4 orga-link">
         <a href="https://www.github.com/{{orga.name}}" target="_blank">
-          <i class="fa fa-github fa-4x"></i>github.com/{{orga.name}}</a>
+          <i class="fa fa-github fa-4x"></i>&nbsp;github.com/{{orga.name}}</a>
       </span>
     </div>
   </div>
@@ -108,14 +108,13 @@
   </div>
 
   <!-- Graphs -->
-  <!-- TODO: Move to array and unify all attributes to single object -->
   <div class="row justify-content-center">
-    <graph class="col-md-4" [title]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels" [chartOptions]="chartOptions"
-      [chartLegend]="chartLegend" [chartColors]="chartColors"></graph>
-    <graph class="col-md-4" [title]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels" [chartOptions]="chartOptions"
-      [chartLegend]="chartLegend" [chartColors]="chartColors"></graph>
-    <graph class="col-md-4" [title]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels" [chartOptions]="chartOptions"
-      [chartLegend]="chartLegend" [chartColors]="chartColors"></graph>
+    <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels" [chartOptions]="chartOptions"
+      [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="orga.name"></graph>
+    <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels" [chartOptions]="chartOptions"
+      [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="orga.name"></graph>
+    <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels" [chartOptions]="chartOptions"
+      [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="orga.name"></graph>
   </div>
 
 </div>
