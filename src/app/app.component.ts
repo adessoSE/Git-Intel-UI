@@ -1,6 +1,5 @@
-import { Component, OnInit, Renderer, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd, UrlSegment } from '@angular/router';
-import { Location } from '@angular/common';
 
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
@@ -26,20 +25,56 @@ export class AppComponent implements OnInit {
 	tabs = new Array<Tab>();
 	activeTabIdx: number = 0;
 
+	/*
+	 * How Tab system work:
+	 * 
+	 * New Tabs are opened under specific conditions 
+	 * and are stored in the @tabs Array. 
+	 * 
+	 * The currently active Tab is referenced via @activeTabIdx 
+	 * and stores the latest route until a new Tab is marked as active.
+	 * 
+	 * A new Tab is opened if: 
+	 *     - There are no open Tabs (e.g. if all are closed, 
+	 *     or the user directly navigates to a URL)
+	 *     - There's a request triggered by
+	 *         - the global searchForm 
+	 *         - HomeComponents searchHistory
+	 * 
+	 * A Tab is marked as active if:
+	 *     - It's a newly opened Tab.
+	 *     - It's clicked on to.
+	 *     - It's displayed because another Tab was closed.
+	 * 
+	 * In case the URL is "/home", no Tab is active.
+	 */
+
 	constructor(
 		private globalNavService: GlobalNavigationService,
-		private location: Location,
 		private router: Router,
-		private activatedRoute: ActivatedRoute,
-		private elRef: ElementRef, private renderer: Renderer) { }
+		private activatedRoute: ActivatedRoute) { }
 
 	ngOnInit() {
+		/*
+		 * Subscribes to "open a new Tab" requests, e.g. from HomeComponents
+		 * searchHistory.
+		 */
 		this.globalNavService.onOpenNewTabEmitter.subscribe((tab) => {
 			if (tab !== null && tab.org !== "home")
 				this.openNewTab(tab)
 		});
 
-		// TODO: Simplify
+		/*
+		 * Subscription returns an Array of Objects that look like so:
+		 *     Object { path: "1. URL segment", parameters: {} }
+		 *     Object { path: "2. URL segment", parameters: {} }
+		 *     ...
+		 * 
+		 * The final URL is concatenated and if conditions are met, 
+		 * opened in a new tab, or otherwise assigned to the active tab. 
+		 * 
+		 * This procedure might be simplified.
+		 */
 		this.router.events
 			.filter((event) => event instanceof NavigationEnd)
 			.map(() => this.activatedRoute)
@@ -53,7 +88,6 @@ export class AppComponent implements OnInit {
 				let targetURL = this.concatURL(event);
 
 				if (targetURL !== "home") {
-
 					if (this.checkNewTab()) {
 						this.globalNavService.onOpenNewTab(targetURL);
 					} else {
@@ -63,21 +97,35 @@ export class AppComponent implements OnInit {
 			});
 	}
 
+	/*
+	 * Triggered by the search/stalk-button, the method
+	 * checks if the entered term is a legit Github username
+	 * and displays hint and a warning in case not.  
+	 */
 	onClickStalk(org: string) {
 		if (this.checkSearchTerm(org)) {
-			this.isSearchInvalid = false;			
+			this.isSearchInvalid = false;
 			this.globalNavService.onOpenNewTab(org);
 		} else {
 			this.isSearchInvalid = true;
 		}
 	}
 
+	/*
+	 * Pushes Tab into the global @tabs Array, hence opens it, marks it as active and navigates to given route. 
+	 * Validations if the new Tab _should be_ opened are performed previously. 
+	 */
 	openNewTab(tab: Tab) {
 		this.tabs.push(tab);
 		this.setActiveTab(this.tabs.length - 1);
 		this.router.navigate([tab.url]);
 	}
 
+	/*
+	 * Removes Tab from global @tabs Array, hence closes it.
+	 * Assigns @activeTabIdx to Tab left of the previously closed, if there's more than one
+	 * or navigates to "/home" otherwise.
+	 */
 	closeTab(idx: number) {
 		this.tabs.splice(idx, 1);
 
@@ -90,34 +138,37 @@ export class AppComponent implements OnInit {
 		}
 	}
 
-	onClickTab(idx: number) {
-		this.setActiveTab(idx);
-	}
-
+	/*
+	 * Assigns @activeTabIdx to index of given Tab. 
+	 */
 	setActiveTab(idx: number) {
-		this.tabs[this.activeTabIdx].isActive = false;
-
-		this.tabs[idx].isActive = true;
 		this.activeTabIdx = idx;
-		console.log("active: " + idx);
 	}
 
+	/*
+	 * Validates given conditions if a new Tab should be opened. 
+	 */
 	checkNewTab() {
 		return this.tabs.length === 0;
 	}
 
+	/*
+	 * Checks given username according to following criteria
+	 * as provided by the official "Join Github" page:
+	 *  
+	 * Github username may only contain alphanumeric characters or hyphens.
+	 * Github username cannot have multiple consecutive hyphens.
+	 * Github username cannot begin or end with a hyphen.
+	 * Maximum is 39 characters.
+	*/
 	checkSearchTerm(username: string): boolean {
-		/*
-		 * Criteria according to the "join Github" page: 
-		 * Github username may only contain alphanumeric characters or hyphens.
-		 * Github username cannot have multiple consecutive hyphens.
-		 * Github username cannot begin or end with a hyphen.
-		 * Maximum is 39 characters.
-		*/
-
 		return /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i.test(username);
 	}
 
+	/*
+	 * Concatenates the given UrlSegment seperated by "/"
+	 * and removes the last one.
+	 */
 	concatURL(urlSegment: UrlSegment[]): string {
 		let joinedURL = "";
 		urlSegment.forEach(str => { joinedURL += str.toString() + "/" });

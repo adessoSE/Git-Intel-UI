@@ -31,7 +31,7 @@ export class GlobalNavigationService {
   onOpenNewTab(url: string) {
     let org = url;
  
-    let tab = { org: org, url: url, isActive: false };
+    let tab = { org: org, url: url };
 
     this._openNewTab.next(tab);
   }
