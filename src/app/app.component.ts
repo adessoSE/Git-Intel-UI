@@ -1,16 +1,17 @@
 import { Component, OnInit, Renderer, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd, UrlSegment } from '@angular/router';
 import { Location } from '@angular/common';
+
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
+
 import { PopoverModule } from "ngx-popover";
 
 import { HomeComponent } from './home/home.component';
 import { Tab } from './entities/tab';
 
 import { GlobalNavigationService } from './services/global-navigation.service';
-
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
 
 @Component({
 	selector: 'app-root',
@@ -20,9 +21,10 @@ import 'rxjs/add/operator/mergeMap';
 export class AppComponent implements OnInit {
 
 	organization: string = "";
-	tabs = new Array<Tab>();
-	route: string = "";
 	isSearchInvalid: boolean = false;
+
+	tabs = new Array<Tab>();
+	activeTabIdx: number = 0;
 
 	constructor(
 		private globalNavService: GlobalNavigationService,
@@ -32,10 +34,13 @@ export class AppComponent implements OnInit {
 		private elRef: ElementRef, private renderer: Renderer) { }
 
 	ngOnInit() {
-		this.globalNavService.onOpenNewTabEmitter.subscribe((tab) => { if (tab !== null && tab.org !== "home") this.openNewTab(tab) });
+
+		this.globalNavService.onOpenNewTabEmitter.subscribe((tab) => {
+			if (tab !== null && tab.org !== "home")
+				this.openNewTab(tab)
+		});
 
 		// TODO: Simplify
-
 		this.router.events
 			.filter((event) => event instanceof NavigationEnd)
 			.map(() => this.activatedRoute)
@@ -46,8 +51,16 @@ export class AppComponent implements OnInit {
 			.filter((route) => route.outlet === 'primary')
 			.mergeMap((route) => route.url)
 			.subscribe((event) => {
-				// console.log(event)
-				this.checkIfTabExists(event);
+				let targetURL = this.concatURL(event);
+
+				if (targetURL !== "home") {
+
+					if (this.checkNewTab()) {
+						this.globalNavService.onOpenNewTab(targetURL);
+					} else {
+						this.tabs[this.activeTabIdx].url = targetURL;
+					}
+				}
 			});
 	}
 
@@ -56,12 +69,13 @@ export class AppComponent implements OnInit {
 	}
 
 	openNewTab(tab: Tab) {
-		if (this.checkSearchTerm(tab.org)) {
-			this.isSearchInvalid = false;
+		if (this.checkSearchTerm(tab.url)) {
+			this.isSearchInvalid = false; // Reset CSS in search field
+
 			this.tabs.push(tab);
-			this.router.navigate([tab.org]);
-		}
-		else {
+			this.setActiveTab(this.tabs.length - 1);
+			this.router.navigate([tab.url]);
+		} else {
 			this.isSearchInvalid = true;
 		}
 	}
@@ -69,63 +83,35 @@ export class AppComponent implements OnInit {
 	closeTab(idx: number) {
 		this.tabs.splice(idx, 1);
 
-		if (idx - 1 > 0) {
+		if (idx - 1 >= 0) {
+			this.activeTabIdx = idx - 1;
 			this.router.navigate(["/" + this.tabs[idx - 1].url]);
 		} else {
+			this.activeTabIdx = 0;
 			this.router.navigate(["home"]);
 		}
 	}
 
-	// As of right now: useless 
-	// Track tab
-	onClickTab(focus: Tab) {
-		let active = this.elRef.nativeElement.ownerDocument.activeElement;
-
-		let parser = new DOMParser();
-		let parsedHtml = parser.parseFromString(active, 'text/html');
-
-		console.log(parsedHtml)
-
-
-
-		console.log();
+	onClickTab(idx: number) {
+		this.setActiveTab(idx);
 	}
 
-	checkIfTabExists(urlSegment: UrlSegment[]) {
-		/* FOR DEBUGGING: 
-		console.log("path array: " + pathArray.toString());
-		console.log("url set: ");
-		this.tabss.forEach(e => { console.log(e.url) })
-		console.log("*****")
-		*/
+	setActiveTab(idx: number) {
+		this.tabs[this.activeTabIdx].isActive = false;
 
-		let targetURL = "";
-		urlSegment.forEach(str => { targetURL += str.toString() + "/" });
-		targetURL = targetURL.substring(0, targetURL.lastIndexOf("/"))
+		this.tabs[idx].isActive = true;
+		this.activeTabIdx = idx;
+		console.log("active: " + idx);
+	}
 
-		/*	IF USING ARRAY OVER SET
-		if (this.tabss.some(tab => tab.url !== uri)) {
-			console.log(uri + " needs to be inserted")
-			this.tabss.forEach(element => {
-				console.log("current tabs: " + element.url);				
-			});
-			this.globalNavService.onOpenNewTab(uri);
-		}
-		*/
+	checkNewTab() {
+		let isOK = false;
 
-		let noMatch = true;
-		this.tabs.forEach(element => {
-			if (element.url === targetURL) {
-				// console.log("Matched URL in Set: " + uri);
-				noMatch = false;
-			}
-		})
-
-		if (noMatch) {
-			// console.log("Didn't match URL in Set: " + uri);
-			this.globalNavService.onOpenNewTab(targetURL);
+		if (this.tabs.length === 0) {
+			isOK = true;
 		}
 
+		return isOK;
 	}
 
 	checkSearchTerm(term: string): boolean {
@@ -140,4 +126,11 @@ export class AppComponent implements OnInit {
 		return res;
 	}
 
+	concatURL(urlSegment: UrlSegment[]): string {
+		let joinedURL = "";
+		urlSegment.forEach(str => { joinedURL += str.toString() + "/" });
+		joinedURL = joinedURL.substring(0, joinedURL.lastIndexOf("/"))
+
+		return joinedURL;
+	}
 }

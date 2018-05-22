@@ -31,8 +31,8 @@
 <ul class="nav nav-tabs tabBar">
   <li class="nav-item" *ngFor="let tab of tabs; let idx = index">
     <a class="nav-link" data-toggle="tab" [routerLink]="tab.url" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:
-      true}" (click)="onClickTab(tab)" style="display: inline-block;">
-      {{tab.url | prepTabName | capitalize}}
+      true}" (click)="onClickTab(idx)" style="display: inline-block;">
+      {{idx}}:  {{tab.url | prepTabName | capitalize}}
     </a>
     <button (click)="closeTab(idx)" type="button" class="close" data-dismiss="alert" style="margin-top: 10%;">&times;</button>
   </li>
