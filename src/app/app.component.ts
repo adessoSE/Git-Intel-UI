@@ -114,16 +114,17 @@ export class AppComponent implements OnInit {
 		return isOK;
 	}
 
-	checkSearchTerm(term: string): boolean {
-		// TODO: Use Regular Epressions
-		// Rules according to https://gist.github.com/tonybruess/9405134
-		let res = false;
-		if (term !== undefined) {
-			if (term.length > 0 && term.length < 40 && term[0] !== "-") {
-				res = true;
-			}
-		}
-		return res;
+	checkSearchTerm(username: string): boolean {
+		/*
+		 * Criteria according to the "join Github" page: 
+		 * Github username may only contain alphanumeric characters or hyphens.
+		 * Github username cannot have multiple consecutive hyphens.
+		 * Github username cannot begin or end with a hyphen.
+		 * Maximum is 39 characters.
+		*/ 
+		let regEx = new RegExp("/^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i");
+
+		return regEx.test(username);
 	}
 
 	concatURL(urlSegment: UrlSegment[]): string {
