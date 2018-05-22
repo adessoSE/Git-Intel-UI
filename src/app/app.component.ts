@@ -20,8 +20,7 @@ import 'rxjs/add/operator/mergeMap';
 export class AppComponent implements OnInit {
 
 	organization: string = "";
-	//tabss: Tab[] = [{ id: 0, org: "home", url: "/home" }];
-	tabs = new Set<Tab>();
+	tabs = new Array<Tab>();
 	route: string = "";
 	isSearchInvalid: boolean = false;
 
@@ -36,6 +35,7 @@ export class AppComponent implements OnInit {
 		this.globalNavService.onOpenNewTabEmitter.subscribe((tab) => { if (tab !== null && tab.org !== "home") this.openNewTab(tab) });
 
 		// TODO: Simplify
+
 		this.router.events
 			.filter((event) => event instanceof NavigationEnd)
 			.map(() => this.activatedRoute)
@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
 	openNewTab(tab: Tab) {
 		if (this.checkSearchTerm(tab.org)) {
 			this.isSearchInvalid = false;
-			this.tabs.add(tab);
+			this.tabs.push(tab);
 			this.router.navigate([tab.org]);
 		}
 		else {
@@ -66,16 +66,14 @@ export class AppComponent implements OnInit {
 		}
 	}
 
-	closeTab(removeTab: Tab) {
-		/*
-		var idx = this.tabss.indexOf(removeTab);
-		if (idx > 0) {
-			this.tabss.splice(idx, 1);
-			this.router.navigate(["/" + this.tabss[idx - 1].url]);
+	closeTab(idx: number) {
+		this.tabs.splice(idx, 1);
+
+		if (idx - 1 > 0) {
+			this.router.navigate(["/" + this.tabs[idx - 1].url]);
+		} else {
+			this.router.navigate(["home"]);
 		}
-		*/
-		this.tabs.delete(removeTab);
-		this.router.navigate(["/home"]);
 	}
 
 	// As of right now: useless 

@@ -32,7 +32,7 @@ export class GlobalNavigationService {
     let org = url;
  
     let id = new Date().getMilliseconds();
-    let tab = { id: id, org: org, url: url };
+    let tab = { org: org, url: url, isActive: true };
 
     this._openNewTab.next(tab);
   }
