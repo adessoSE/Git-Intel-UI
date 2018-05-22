@@ -34,7 +34,6 @@ export class AppComponent implements OnInit {
 		private elRef: ElementRef, private renderer: Renderer) { }
 
 	ngOnInit() {
-
 		this.globalNavService.onOpenNewTabEmitter.subscribe((tab) => {
 			if (tab !== null && tab.org !== "home")
 				this.openNewTab(tab)
@@ -65,19 +64,18 @@ export class AppComponent implements OnInit {
 	}
 
 	onClickStalk(org: string) {
-		this.globalNavService.onOpenNewTab(org);
-	}
-
-	openNewTab(tab: Tab) {
-		if (this.checkSearchTerm(tab.url)) {
-			this.isSearchInvalid = false; // Reset CSS in search field
-
-			this.tabs.push(tab);
-			this.setActiveTab(this.tabs.length - 1);
-			this.router.navigate([tab.url]);
+		if (this.checkSearchTerm(org)) {
+			this.isSearchInvalid = false;			
+			this.globalNavService.onOpenNewTab(org);
 		} else {
 			this.isSearchInvalid = true;
 		}
+	}
+
+	openNewTab(tab: Tab) {
+		this.tabs.push(tab);
+		this.setActiveTab(this.tabs.length - 1);
+		this.router.navigate([tab.url]);
 	}
 
 	closeTab(idx: number) {
@@ -105,13 +103,7 @@ export class AppComponent implements OnInit {
 	}
 
 	checkNewTab() {
-		let isOK = false;
-
-		if (this.tabs.length === 0) {
-			isOK = true;
-		}
-
-		return isOK;
+		return this.tabs.length === 0;
 	}
 
 	checkSearchTerm(username: string): boolean {
@@ -121,10 +113,9 @@ export class AppComponent implements OnInit {
 		 * Github username cannot have multiple consecutive hyphens.
 		 * Github username cannot begin or end with a hyphen.
 		 * Maximum is 39 characters.
-		*/ 
-		let regEx = new RegExp("/^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i");
+		*/
 
-		return regEx.test(username);
+		return /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i.test(username);
 	}
 
 	concatURL(urlSegment: UrlSegment[]): string {
