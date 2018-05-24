@@ -30,9 +30,8 @@
 <!-- Tab Bar -->
 <ul class="nav nav-tabs tabBar">
   <li class="nav-item" *ngFor="let tab of tabs; let idx = index">
-    <a class="nav-link" data-toggle="tab" [routerLink]="tab.url" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:
-      true}" (click)="setActiveTab(idx)" style="display: inline-block;">
-      {{tab.url | prepTabName | capitalize}}
+    <a class="nav-link" data-toggle="tab" [class.active]="idx === activeTabIdx && isHome === false" [routerLink]="tab.url" (click)="setActiveTab(idx)" style="display: inline-block;">
+      {{idx}}: {{tab.url | prepTabName | capitalize}}
       <button (click)="closeTab(idx)" type="button" class="close" data-dismiss="alert">&times;</button>
     </a>
   </li>

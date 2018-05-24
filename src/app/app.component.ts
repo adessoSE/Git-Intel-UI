@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
 
 	organization: string = "";
 	isSearchInvalid: boolean = false;
+	isHome: boolean = false;
 
 	tabs = new Array<Tab>();
 	activeTabIdx: number = 0;
@@ -93,6 +94,10 @@ export class AppComponent implements OnInit {
 					} else {
 						this.tabs[this.activeTabIdx].url = targetURL;
 					}
+					this.isHome = false;
+				}
+				else {
+					this.isHome = true;
 				}
 			});
 	}
