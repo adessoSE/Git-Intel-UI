@@ -8,13 +8,24 @@ import { GlobalNavigationService } from '../services/global-navigation.service';
 })
 export class HomeComponent implements OnInit {
 
+  searchHistory: Set<string> = new Set<string>();
+
   constructor(private globalNavService: GlobalNavigationService) { }
 
   /* 
-   * Disables NavigationBar while on HomeComponent. 
+   * Disables NavigationBar while on HomeComponent
+   * and saves entries of searched organization in a Set,
+   * since multiple entries are unnecessary. 
    */
   ngOnInit() {
+    this.searchHistory.add("adessoAG");   // Dummy data
+    this.searchHistory.add("microsoft");  // Dummy data
+    
     this.globalNavService.showNavBar(false);
+
+    this.globalNavService.onOpenNewTabEmitter.subscribe((tab) => {
+      if (tab !== null) this.searchHistory.add(tab.org);
+    })
   }
 
   /*

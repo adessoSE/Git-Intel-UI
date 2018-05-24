@@ -12,6 +12,8 @@ export class MembersComponent implements OnInit {
   members: Member[];
   membersCopy: Member [];
 
+  sortByTag: string = "";
+
   constructor(memberService: MemberService) {
     this.members = memberService.getMembers();
     // Necessary copy for filter function
@@ -22,24 +24,28 @@ export class MembersComponent implements OnInit {
 
   sortByAlphabet() {
     this.members.sort((a: Member, b: Member) => a.name.localeCompare(b.name));
+    this.sortByTag = "Alphabet";
   }
 
   sortByCommits() {
     this.members.sort((a: Member, b: Member) => {
       return +b.commits - +a.commits;
     });
+    this.sortByTag = "Commits";    
   }
 
   sortByPullRequests() {
     this.members.sort((a: Member, b: Member) => {
       return +b.pullRequests - +a.pullRequests;
     });
+    this.sortByTag = "Pull Requests";    
   }
 
   sortByIssues() {
     this.members.sort((a: Member, b: Member) => {
       return +b.issues - +a.issues;
     });
+    this.sortByTag = "Issues";    
   }
 
   search(term: string) {
