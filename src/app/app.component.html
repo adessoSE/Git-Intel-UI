@@ -33,8 +33,8 @@
     <a class="nav-link" data-toggle="tab" [routerLink]="tab.url" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:
       true}" (click)="setActiveTab(idx)" style="display: inline-block;">
       {{tab.url | prepTabName | capitalize}}
+      <button (click)="closeTab(idx)" type="button" class="close" data-dismiss="alert">&times;</button>
     </a>
-    <button (click)="closeTab(idx)" type="button" class="close" data-dismiss="alert" style="margin-top: 10%;">&times;</button>
   </li>
 </ul>
 

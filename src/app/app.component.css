@@ -6,3 +6,7 @@
 .tabBar {
     margin-top: -2%;
 }
+
+.close {
+    padding-left: 10px;
+}
