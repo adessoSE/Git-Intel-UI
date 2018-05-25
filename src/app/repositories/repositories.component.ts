@@ -76,8 +76,10 @@ export class RepositoriesComponent implements OnInit {
   }
 
   search(term: string) {
-    this.repositories = this.repositoriesCopy.filter(e => {
-      return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
-    });
+    setTimeout(() => {
+      this.repositories = this.repositoriesCopy.filter(e => {
+        return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
+      });
+    }, 25);
   }
 }

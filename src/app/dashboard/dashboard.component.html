@@ -2,6 +2,7 @@
 
   <!-- Company meta data -->
   <div class="card col-md-12 member-card" style="border: 0; padding-top: 2%; padding-bottom: 2%; margin-bottom: 2%">
+
     <div class="row">
       <div class="col-md-4">
         <h1>{{orga.name}}</h1>
@@ -19,9 +20,7 @@
           <i class="fa fa-globe fa-4x" style="padding-right: 10px;"></i>{{orga.website}}
         </a>
         <br>
-        <!-- Last Update -->
-        <span>
-          <i class="fas fa-clock" style="padding-right: 10px;"></i>{{orga.lastUpdate | date:'MMM d, y, h:mm'}}</span>
+
       </span>
       <!-- Github -->
       <span class="col-md-4 orga-link">
@@ -129,4 +128,8 @@
         [chartOptions]="chartOptions" [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="orga.name"></graph>
     </div>
 
+    <!-- Last Update -->
+    <span class="badge badge-warning">
+      <i class="fa fa-clock-o" style="padding-right: 10px;"></i>Last update: {{orga.lastUpdate | date:'MMM d, y, h:mm'}}
+    </span>
   </div>

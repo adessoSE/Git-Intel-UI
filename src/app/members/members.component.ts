@@ -10,7 +10,7 @@ import { Member } from '../entities/member';
 export class MembersComponent implements OnInit {
 
   members: Member[];
-  membersCopy: Member [];
+  membersCopy: Member[];
 
   sortByTag: string = "";
 
@@ -31,27 +31,29 @@ export class MembersComponent implements OnInit {
     this.members.sort((a: Member, b: Member) => {
       return +b.commits - +a.commits;
     });
-    this.sortByTag = "Commits";    
+    this.sortByTag = "Commits";
   }
 
   sortByPullRequests() {
     this.members.sort((a: Member, b: Member) => {
       return +b.pullRequests - +a.pullRequests;
     });
-    this.sortByTag = "Pull Requests";    
+    this.sortByTag = "Pull Requests";
   }
 
   sortByIssues() {
     this.members.sort((a: Member, b: Member) => {
       return +b.issues - +a.issues;
     });
-    this.sortByTag = "Issues";    
+    this.sortByTag = "Issues";
   }
 
   search(term: string) {
-    this.members = this.membersCopy.filter(e => {
-      return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
-    });
+    setTimeout(() => {
+      this.members = this.membersCopy.filter(e => {
+        return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
+      });
+    }, 25);
   }
 
 

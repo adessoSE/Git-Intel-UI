@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ExternalRepositoriesComponent implements OnInit {
 
   extRepos: Repository[];
-  extReposCopy: Repository[];  
+  extReposCopy: Repository[];
   orgName: string = "";
   sortByTag: string = "";
 
@@ -23,7 +23,7 @@ export class ExternalRepositoriesComponent implements OnInit {
     this.extRepos = extRepoService.getExRepositories();
     // Necessary copy for filter function    
     this.extReposCopy = this.extRepos;
-    
+
     router.events.subscribe((val) => { this.orgName = this.activeRoute.snapshot.paramMap.get('organization'); });
   }
 
@@ -76,8 +76,10 @@ export class ExternalRepositoriesComponent implements OnInit {
   }
 
   search(term: string) {
-    this.extRepos = this.extReposCopy.filter(e => {
-      return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
-    });
+    setTimeout(() => {
+      this.extRepos = this.extReposCopy.filter(e => {
+        return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
+      });
+    }, 50);
   }
 }
