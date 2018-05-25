@@ -13,7 +13,8 @@ export const ORGANIZATIONS: Organization[] = [
         numOfMembers: 63,
         numOfTeams: 8,
         numOfRepos: 22,
-        numOfExternalRepos: 4
+        numOfExternalRepos: 4,
+        lastUpdate: 1527235577893
     },
     {
         name: "microsoft",
@@ -23,7 +24,8 @@ export const ORGANIZATIONS: Organization[] = [
         numOfMembers: 500,
         numOfTeams: 89,
         numOfRepos: 222,
-        numOfExternalRepos: 40
+        numOfExternalRepos: 40,
+        lastUpdate: 1527235577893
     }
 ];
 

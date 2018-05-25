@@ -8,5 +8,6 @@ export class Organization {
     public numOfTeams: number;
     public numOfRepos: number;
     public numOfExternalRepos: number;
+    public lastUpdate: number;
     // Avatar 
 }
