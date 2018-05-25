@@ -17,18 +17,20 @@ export class RepositoriesComponent implements OnInit {
   sortByTag: string = "";
 
   constructor(
-    private repoService: RepositoryService,
+    private repositoryService: RepositoryService,
     private activeRoute: ActivatedRoute,
-    private router: Router) {
+    private router: Router) { }
 
-    this.repositories = repoService.getRepositories();
-    // Necessary copy for filter function    
+  /**
+   * Uses @repositoryService to get data and initialize 
+   * a copy to apply filter and sorting funcionality.      
+   */
+  ngOnInit() {
+    this.repositories = this.repositoryService.getRepositories();
     this.repositoriesCopy = this.repositories;
 
-    router.events.subscribe((val) => { this.orgName = this.activeRoute.snapshot.paramMap.get('organization'); });
+    this.router.events.subscribe((val) => { this.orgName = this.activeRoute.snapshot.paramMap.get('organization'); });
   }
-
-  ngOnInit() { }
 
   sortByAlphabet() {
     this.repositories.sort((a: Repository, b: Repository) => a.name.localeCompare(b.name));
@@ -80,6 +82,6 @@ export class RepositoriesComponent implements OnInit {
       this.repositories = this.repositoriesCopy.filter(e => {
         return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
       });
-    }, 25);
+    }, 50);
   }
 }

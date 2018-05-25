@@ -47,6 +47,14 @@ export const MEMBERS: Member[] = [
         issues: 11,
     },
     {
+        username: "john-doe",
+        name: 'John Doe',
+        organization: ORGANIZATIONS[0],
+        commits: 10,
+        pullRequests: 14,
+        issues: 0,
+    },
+    {
         username: "alfreed-mueller",
         name: 'Alfred Müller',
         organization: ORGANIZATIONS[0],

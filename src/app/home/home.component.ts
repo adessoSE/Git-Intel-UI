@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private globalNavService: GlobalNavigationService) { }
 
-  /* 
+  /** 
    * Disables NavigationBar while on HomeComponent
    * and saves entries of searched organization in a Set,
    * since multiple entries are unnecessary. 
@@ -28,14 +28,14 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  /*
+  /** 
    * Displays NavigationBar as user leaves the HomeComponent.
    */
   ngOnDestroy() {
     this.globalNavService.showNavBar(true);
   }
 
-  /*
+  /** 
    * Requests the @globalNavService to open a new Tab for given organization.
    */
   openNewTab(org: string) {

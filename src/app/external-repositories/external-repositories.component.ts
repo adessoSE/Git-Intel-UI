@@ -18,16 +18,17 @@ export class ExternalRepositoriesComponent implements OnInit {
   constructor(
     private extRepoService: ExRepositoryService,
     private activeRoute: ActivatedRoute,
-    private router: Router) {
+    private router: Router) { }
 
-    this.extRepos = extRepoService.getExRepositories();
-    // Necessary copy for filter function    
+  /**
+   * Uses @extRepoService to get data and initialize 
+   * a copy to apply filter and sorting funcionality.      
+   */
+  ngOnInit() {
+    this.extRepos = this.extRepoService.getExRepositories();
     this.extReposCopy = this.extRepos;
 
-    router.events.subscribe((val) => { this.orgName = this.activeRoute.snapshot.paramMap.get('organization'); });
-  }
-
-  ngOnInit() {
+    this.router.events.subscribe((val) => { this.orgName = this.activeRoute.snapshot.paramMap.get('organization'); });
   }
 
   sortByAlphabet() {

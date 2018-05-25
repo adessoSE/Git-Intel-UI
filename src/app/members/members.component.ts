@@ -14,13 +14,17 @@ export class MembersComponent implements OnInit {
 
   sortByTag: string = "";
 
-  constructor(memberService: MemberService) {
-    this.members = memberService.getMembers();
-    // Necessary copy for filter function
+
+  constructor(private memberService: MemberService) { }
+
+  /**
+   * Uses @memberService to get data and initialize 
+   * a copy to apply filter and sorting funcionality.      
+   */
+  ngOnInit() {
+    this.members = this.memberService.getMembers();
     this.membersCopy = this.members;
   }
-
-  ngOnInit() { }
 
   sortByAlphabet() {
     this.members.sort((a: Member, b: Member) => a.name.localeCompare(b.name));
@@ -53,7 +57,7 @@ export class MembersComponent implements OnInit {
       this.members = this.membersCopy.filter(e => {
         return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
       });
-    }, 25);
+    }, 50);
   }
 
 

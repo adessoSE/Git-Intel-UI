@@ -1,5 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+/**
+ * @CapitalizePipe capitalizes every segment of a route.
+ * Recognized segments are seperated by a "/", "-" or "_".
+ * 
+ * E.g. 
+ * "/adessoAG/members"
+ * => "AdessoAG/Members " 
+ * 
+ * "/adessoAG/members/john-doe"
+ * => "AdessoAG/John-Doe "
+ */
 @Pipe({ name: 'capitalize' })
 export class CapitalizePipe implements PipeTransform {
 
