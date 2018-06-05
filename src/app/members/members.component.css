@@ -3,3 +3,8 @@
     width: 10%;
     padding-right: 5%;
 }
+
+.form-control {
+    width: 300px; 
+    margin-right: 10px;    
+}

@@ -99,7 +99,8 @@ export const REPOSITORIES: Repository[] = [
         commits: 156,
         pullRequests: 1,
         forks: 1,
-        issues: 2
+        issues: 2,
+        contributor: MEMBERS[0]
     },
     {
         name: 'HelloWorld',
@@ -111,7 +112,8 @@ export const REPOSITORIES: Repository[] = [
         commits: 2,
         pullRequests: 5,
         forks: 3,
-        issues: 4
+        issues: 4,
+        contributor: MEMBERS[3]
     },
     {
         name: 'GitStalker',
@@ -123,7 +125,8 @@ export const REPOSITORIES: Repository[] = [
         commits: 99,
         pullRequests: 0,
         forks: 43,
-        issues: 6
+        issues: 6,
+        contributor: MEMBERS[2]
     }
 ];
 
@@ -138,7 +141,8 @@ export const EX_REPOSITORIES: Repository[] = [
         commits: 156,
         pullRequests: 1,
         forks: 1,
-        issues: 2
+        issues: 2,
+        contributor: MEMBERS[0]
     },
     {
         name: 'HelloWorld',
@@ -150,7 +154,8 @@ export const EX_REPOSITORIES: Repository[] = [
         commits: 2,
         pullRequests: 5,
         forks: 3,
-        issues: 4
+        issues: 4,
+        contributor: MEMBERS[1]
     },
     {
         name: 'GitStalker',
@@ -162,7 +167,8 @@ export const EX_REPOSITORIES: Repository[] = [
         commits: 99,
         pullRequests: 0,
         forks: 43,
-        issues: 6
+        issues: 6,
+        contributor: MEMBERS[2]
     }
 ];
 

@@ -1,3 +1,4 @@
+import { Member } from "./member";
 
 export class Repository {
     public name: string;
@@ -10,5 +11,6 @@ export class Repository {
     public pullRequests: number;
     public forks: number;
     public issues: number;
+    public contributor: Member;
     // Avatar
 }

@@ -29,6 +29,7 @@ export class ExternalRepositoriesComponent implements OnInit {
     this.extReposCopy = this.extRepos;
 
     this.router.events.subscribe((val) => { this.orgName = this.activeRoute.snapshot.paramMap.get('organization'); });
+    console.log(this.extRepos[0].contributor.username)
   }
 
   sortByAlphabet() {
@@ -79,7 +80,7 @@ export class ExternalRepositoriesComponent implements OnInit {
   search(term: string) {
     setTimeout(() => {
       this.extRepos = this.extReposCopy.filter(e => {
-        return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
+        return (e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase()) || e.contributor.username.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase()));
       });
     }, 50);
   }
