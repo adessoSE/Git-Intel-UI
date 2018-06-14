@@ -5,7 +5,7 @@
 
     <div class="row">
       <div class="col-md-4">
-        <h1>{{orga.name}}</h1>
+        <h1>{{orga.id}}</h1>
         <!-- Location -->
         <span class="orga-location">
           <i class="fa fa-map-marker" style="padding-left: 3px; padding-right: 15px;"></i>{{orga.location}}</span>
@@ -16,16 +16,16 @@
       </div>
       <!-- Website -->
       <span class="col-md-4 orga-link">
-        <a href="https://www.{{orga.website}}" target="_blank">
-          <i class="fa fa-globe fa-4x" style="padding-right: 10px;"></i>{{orga.website}}
+        <a href="https://www.{{orga.websiteURL}}" target="_blank">
+          <i class="fa fa-globe fa-4x" style="padding-right: 10px;"></i>{{orga.websiteURL}}
         </a>
         <br>
 
       </span>
       <!-- Github -->
       <span class="col-md-4 orga-link">
-        <a href="https://www.github.com/{{orga.name}}" target="_blank">
-          <i class="fa fa-github fa-4x" style="padding-right: 10px;"></i>github.com/{{orga.name}}</a>
+        <a href="https://www.{{orga.githubURL}}" target="_blank">
+          <i class="fa fa-github fa-4x" style="padding-right: 10px;"></i>{{orga.githubURL}}</a>
       </span>
     </div>
 
@@ -85,7 +85,7 @@
             </h4>
             <a routerLink="repositories/">
               <h3 class="card-title" style="text-align: center">
-                <i class="fa fa-book mr-3"></i> {{orga.numOfRepos}}</h3>
+                <i class="fa fa-book mr-3"></i> {{orga.numOfInternalRepos}}</h3>
             </a>
           </div>
         </div>
@@ -121,11 +121,11 @@
     <!-- Graphs -->
     <div class="row justify-content-center pad-bottom">
       <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels"
-        [chartOptions]="chartOptions" [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="orga.name"></graph>
-      <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels"
-        [chartOptions]="chartOptions" [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="orga.name"></graph>
-      <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels"
-        [chartOptions]="chartOptions" [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="orga.name"></graph>
+        [chartOptions]="chartOptions" [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="orga.id"></graph>
+        <graph class="col-md-4" [chartTitle]="'Internal Repos'" [chartType]="'line'" [chartData]="orga.internalRepositories.data" [chartLabels]="orga.internalRepositories.labels"
+        [chartOptions]="chartOptions" [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="orga.id"></graph>
+        <graph class="col-md-4" [chartTitle]="'Internal Repos'" [chartType]="'line'" [chartData]="orga.externalRepositories.data" [chartLabels]="orga.externalRepositories.labels"
+        [chartOptions]="chartOptions" [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="orga.id"></graph>
     </div>
 
     <!-- Last Update -->

@@ -42,14 +42,14 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private globalNavService: GlobalNavigationService) {
 
-    /*
+    /**
      * Subscribes to routing changes and fetches data to given organization.
      * Must be handled before onInit, because @orga will be undefined otherwise 
      */
     router.events.subscribe((val) => { this.determineOrganization(); });
   }
 
-  /* 
+  /** 
    * Disables NavigationBar while on the Dashboard and requests chart data from Backend. 
    */
   ngOnInit() {
@@ -58,14 +58,14 @@ export class DashboardComponent implements OnInit {
     this.chartLabels = ['16/4/2018', '19/4/2018', '20/4/2018', '21/4/2018'];
   }
 
-  /*
+  /** 
    * Displays NavigationBar as user leaves the Dashboard.
    */
   ngOnDestroy() {
     this.globalNavService.showNavBar(true);
   }
 
-  /*
+  /** 
    * Reads the URL parameter and calls @globalNavService to fetch organization data from Backend.
    */
   determineOrganization() {

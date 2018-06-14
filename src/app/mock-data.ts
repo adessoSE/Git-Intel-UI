@@ -2,41 +2,77 @@ import { Organization } from "./entities/organization";
 import { Member } from "./entities/member";
 import { Repository } from "./entities/repository";
 import { Team } from "./entities/team";
+import { ChartJS } from "./entities/chartJS";
 
+export const CHARTJS: ChartJS[] = [
+    {
+        labels: ['15/4/2018', '16/4/2018', '17/4/2018', '18/4/2018', '19/4/2018', '20/4/2018', '21/4/2018'],
+        data: [{ data: [2, 4, 5, 3, 3, 3, 0], label: 'Commits' }]
+    },
+    {
+        labels: ['15/4/2018', '16/4/2018', '17/4/2018', '18/4/2018', '19/4/2018', '20/4/2018', '21/4/2018'],
+        data: [{ data: [1, 1, 2, 3, 2, 3, 5], label: 'Issues' }]
+    },
+    {
+        labels: ['15/4/2018', '16/4/2018', '17/4/2018', '18/4/2018', '19/4/2018', '20/4/2018', '21/4/2018'],
+        data: [{ data: [0, 0, 5, 3, 2, 3, 1], label: 'Pull Requests' }]
+    },
+    {
+        labels: ['15/4/2018', '16/4/2018', '17/4/2018', '18/4/2018', '19/4/2018', '20/4/2018', '21/4/2018'],
+        data: [{ data: [10, 2, 5, 13, 2, 5, 1], label: 'Commits' }]
+    },
+    {
+        labels: ['15/4/2018', '16/4/2018', '17/4/2018', '18/4/2018', '19/4/2018', '20/4/2018', '21/4/2018'],
+        data: [{ data: [10, 12, 2, 3, 1, 0, 5], label: 'Pull Requests' }]
+    }
+];
 
 export const ORGANIZATIONS: Organization[] = [
     {
-        name: "adessoAG",
+        id: "adessoAG",
         description: "All hail adesso",
         location: "Dortmund",
-        website: "adesso.de",
+        websiteURL: "adesso.de",
+        githubURL: "github.com/adessoAG",
+        avatarURL: "assets/adesso.png",
         numOfMembers: 63,
         numOfTeams: 8,
-        numOfRepos: 22,
+        numOfInternalRepos: 22,
         numOfExternalRepos: 4,
-        lastUpdate: 1527235577893
+        lastUpdate: 1527235577893,
+        internalRepositories: CHARTJS[3],
+        externalRepositories: CHARTJS[4]
     },
     {
-        name: "microsoft",
+        id: "microsoft",
         description: "All hail Microsoft",
         location: "LA",
-        website: "microsoft.de",
+        websiteURL: "microsoft.de",
+        githubURL: "github.com/microsoft",
+        avatarURL: "assets/adesso.png",
         numOfMembers: 500,
         numOfTeams: 89,
-        numOfRepos: 222,
+        numOfInternalRepos: 222,
         numOfExternalRepos: 40,
-        lastUpdate: 1527235577893
+        lastUpdate: 1527235577893,
+        internalRepositories: CHARTJS[3],
+        externalRepositories: CHARTJS[4]
     }
 ];
 
 export const MEMBERS: Member[] = [
     {
-        username: "gbz",
+        username: "s-gbz",
         name: 'Sergej G',
         organization: ORGANIZATIONS[0],
         commits: 200,
         pullRequests: 1,
         issues: 7,
+        avatarURL: "assets/octocat.jpg",
+        githubURL: "github.com/s-gbz",
+        previousCommits: CHARTJS[0],
+        previousIssues: CHARTJS[1],
+        previousPullRequests: ChartJS[2]
     },
     {
         username: "peter-mueller",
@@ -45,6 +81,11 @@ export const MEMBERS: Member[] = [
         commits: 180,
         pullRequests: 3,
         issues: 11,
+        avatarURL: "assets/octocat.jpg",
+        githubURL: "github.com/s-gbz",
+        previousCommits: CHARTJS[0],
+        previousIssues: CHARTJS[1],
+        previousPullRequests: ChartJS[2]
     },
     {
         username: "john-doe",
@@ -53,6 +94,11 @@ export const MEMBERS: Member[] = [
         commits: 10,
         pullRequests: 14,
         issues: 0,
+        avatarURL: "assets/octocat.jpg",
+        githubURL: "github.com/s-gbz",
+        previousCommits: CHARTJS[0],
+        previousIssues: CHARTJS[1],
+        previousPullRequests: ChartJS[2]
     },
     {
         username: "alfreed-mueller",
@@ -61,6 +107,11 @@ export const MEMBERS: Member[] = [
         commits: 50,
         pullRequests: 3,
         issues: 0,
+        avatarURL: "assets/octocat.jpg",
+        githubURL: "github.com/s-gbz",
+        previousCommits: CHARTJS[0],
+        previousIssues: CHARTJS[1],
+        previousPullRequests: ChartJS[2]
     },
     {
         username: "jochen-schweizer",
@@ -69,6 +120,11 @@ export const MEMBERS: Member[] = [
         commits: 2,
         pullRequests: 13,
         issues: 2,
+        avatarURL: "assets/octocat.jpg",
+        githubURL: "github.com/s-gbz",
+        previousCommits: CHARTJS[0],
+        previousIssues: CHARTJS[1],
+        previousPullRequests: ChartJS[2]
     },
     {
         username: "peter-pan",
@@ -77,6 +133,11 @@ export const MEMBERS: Member[] = [
         commits: 0,
         pullRequests: 7,
         issues: 5,
+        avatarURL: "assets/octocat.jpg",
+        githubURL: "github.com/s-gbz",
+        previousCommits: CHARTJS[0],
+        previousIssues: CHARTJS[1],
+        previousPullRequests: ChartJS[2]
     },
     {
         username: "dennis-zauener",
@@ -85,6 +146,11 @@ export const MEMBERS: Member[] = [
         commits: 20,
         pullRequests: 0,
         issues: 20,
+        avatarURL: "assets/octocat.jpg",
+        githubURL: "github.com/s-gbz",
+        previousCommits: CHARTJS[0],
+        previousIssues: CHARTJS[1],
+        previousPullRequests: ChartJS[2]
     }
 ];
 
