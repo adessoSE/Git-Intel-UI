@@ -2,9 +2,32 @@ import { Organization } from "./entities/organization";
 import { Member } from "./entities/member";
 import { Repository } from "./entities/repository";
 import { Team } from "./entities/team";
-import { ChartJS } from "./entities/chartJS";
+import { ChartJsContent, ChartJs } from "./entities/chartJS";
 
-export const CHARTJS: ChartJS[] = [
+export const CHARTJS_DEFAULT: ChartJs = {
+    chartTitle: "Member Growth",
+    chartType: "line",
+    chartLegend: true,
+    chartOptions: {
+        responsive: true
+    },
+    chartContent: {
+        data: [{ data: [2, 2, 1, 2], label: 'Pull Requests last 5 Days' }],
+        labels: ['16/4/2018', '19/4/2018', '20/4/2018', '21/4/2018']
+    },
+    chartColors: [
+        {
+            backgroundColor: 'rgba(132, 179, 221, 0.2)',
+            borderColor: '#428bca',
+            pointBackgroundColor: 'rgba(225,10,24,0.2)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(225,10,24,0.2)'
+        }
+    ],
+};
+
+export const CHARTJS: ChartJsContent[] = [
     {
         labels: ['15/4/2018', '16/4/2018', '17/4/2018', '18/4/2018', '19/4/2018', '20/4/2018', '21/4/2018'],
         data: [{ data: [2, 4, 5, 3, 3, 3, 0], label: 'Commits' }]
@@ -72,7 +95,7 @@ export const MEMBERS: Member[] = [
         githubURL: "github.com/s-gbz",
         previousCommits: CHARTJS[0],
         previousIssues: CHARTJS[1],
-        previousPullRequests: ChartJS[2]
+        previousPullRequests: ChartJsContent[2]
     },
     {
         username: "peter-mueller",
@@ -85,7 +108,7 @@ export const MEMBERS: Member[] = [
         githubURL: "github.com/s-gbz",
         previousCommits: CHARTJS[0],
         previousIssues: CHARTJS[1],
-        previousPullRequests: ChartJS[2]
+        previousPullRequests: ChartJsContent[2]
     },
     {
         username: "john-doe",
@@ -98,7 +121,7 @@ export const MEMBERS: Member[] = [
         githubURL: "github.com/s-gbz",
         previousCommits: CHARTJS[0],
         previousIssues: CHARTJS[1],
-        previousPullRequests: ChartJS[2]
+        previousPullRequests: ChartJsContent[2]
     },
     {
         username: "alfreed-mueller",
@@ -111,7 +134,7 @@ export const MEMBERS: Member[] = [
         githubURL: "github.com/s-gbz",
         previousCommits: CHARTJS[0],
         previousIssues: CHARTJS[1],
-        previousPullRequests: ChartJS[2]
+        previousPullRequests: ChartJsContent[2]
     },
     {
         username: "jochen-schweizer",
@@ -124,7 +147,7 @@ export const MEMBERS: Member[] = [
         githubURL: "github.com/s-gbz",
         previousCommits: CHARTJS[0],
         previousIssues: CHARTJS[1],
-        previousPullRequests: ChartJS[2]
+        previousPullRequests: ChartJsContent[2]
     },
     {
         username: "peter-pan",
@@ -137,7 +160,7 @@ export const MEMBERS: Member[] = [
         githubURL: "github.com/s-gbz",
         previousCommits: CHARTJS[0],
         previousIssues: CHARTJS[1],
-        previousPullRequests: ChartJS[2]
+        previousPullRequests: ChartJsContent[2]
     },
     {
         username: "dennis-zauener",
@@ -150,7 +173,7 @@ export const MEMBERS: Member[] = [
         githubURL: "github.com/s-gbz",
         previousCommits: CHARTJS[0],
         previousIssues: CHARTJS[1],
-        previousPullRequests: ChartJS[2]
+        previousPullRequests: ChartJsContent[2]
     }
 ];
 

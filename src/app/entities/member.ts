@@ -1,5 +1,5 @@
 import { Organization } from "./organization";
-import { ChartJS } from "./chartJS";
+import { ChartJsContent } from "./chartJS";
 
 export class Member {
     public username: string;
@@ -10,7 +10,7 @@ export class Member {
     public commits: number;
     public pullRequests: number;
     public issues: number;
-    public previousCommits: ChartJS;
-    public previousPullRequests: ChartJS;
-    public previousIssues: ChartJS;
+    public previousCommits: ChartJsContent;
+    public previousPullRequests: ChartJsContent;
+    public previousIssues: ChartJsContent;
 }

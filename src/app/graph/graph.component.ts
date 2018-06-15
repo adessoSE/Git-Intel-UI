@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ChartJs } from '../entities/chartJS';
 
 @Component({
   selector: 'graph',
@@ -7,25 +8,23 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class GraphComponent implements OnInit {
 
-  @Input() chartTitle: string;
-  @Input() chartType: string;
-  @Input() chartOptions: any;
-  @Input() chartLegend: boolean;
-  @Input() chartData: Array<any>;
-  @Input() chartLabels: Array<any>;
-  @Input() chartColors: Array<any>
+  @Input() chart: ChartJs;
   @Input() organization: string;
 
   constructor() { }
 
   ngOnInit() { }
 
+  /**
+   * Fetches graph element and prepares download link.
+   * @param event MouseClick event that referes to triggered DOM element. 
+   */
   downloadGraph(event) {
     var anchor = event.target;
 
     anchor.href = document.getElementsByTagName('canvas')[0].toDataURL();
 
-    anchor.download = this.organization + " " + this.chartTitle + " - " + new Date().toLocaleDateString() + ".png";
+    anchor.download = this.organization + " " + this.chart.chartTitle + " - " + new Date().toLocaleDateString() + ".png";
   }
 
 

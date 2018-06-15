@@ -42,12 +42,9 @@
   </div>
 
   <div>
-    <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels"
-      [chartOptions]="chartOptions" [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="member.organization.name"></graph>
-    <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels"
-      [chartOptions]="chartOptions" [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="member.organization.name"></graph>
-    <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels"
-      [chartOptions]="chartOptions" [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="member.organization.name"></graph>
+    <graph class="col-md-4" [chart]="chartCommits" [organization]="member.organization.name"></graph>
+    <graph class="col-md-4" [chart]="chartPRs" [organization]="member.organization.name"></graph>
+    <graph class="col-md-4" [chart]="chartIssues" [organization]="member.organization.name"></graph>
   </div>
 
 

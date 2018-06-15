@@ -120,12 +120,9 @@
 
     <!-- Graphs -->
     <div class="row justify-content-center pad-bottom">
-      <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels"
-        [chartOptions]="chartOptions" [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="orga.id"></graph>
-        <graph class="col-md-4" [chartTitle]="'Internal Repos'" [chartType]="'line'" [chartData]="orga.internalRepositories.data" [chartLabels]="orga.internalRepositories.labels"
-        [chartOptions]="chartOptions" [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="orga.id"></graph>
-        <graph class="col-md-4" [chartTitle]="'Internal Repos'" [chartType]="'line'" [chartData]="orga.externalRepositories.data" [chartLabels]="orga.externalRepositories.labels"
-        [chartOptions]="chartOptions" [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="orga.id"></graph>
+      <graph class="col-md-4" [chart]="chartMembers" [organization]="member.organization.name"></graph>
+      <graph class="col-md-4" [chart]="chartCommits" [organization]="member.organization.name"></graph>
+      <graph class="col-md-4" [chart]="chartPRs" [organization]="member.organization.name"></graph>
     </div>
 
     <!-- Last Update -->

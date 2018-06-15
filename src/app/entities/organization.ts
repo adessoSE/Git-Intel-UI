@@ -1,4 +1,4 @@
-import { ChartJS } from "./chartJS";
+import { ChartJsContent } from "./chartJS";
 
 export class Organization {
     public id: string;
@@ -12,6 +12,6 @@ export class Organization {
     public numOfInternalRepos: number;
     public numOfExternalRepos: number;
     public lastUpdate: number;
-    public externalRepositories: ChartJS;
-    public internalRepositories: ChartJS;
+    public externalRepositories: ChartJsContent;
+    public internalRepositories: ChartJsContent;
 }

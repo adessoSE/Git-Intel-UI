@@ -6,6 +6,8 @@ import { Organization } from '../entities/organization';
 
 import { DashboardService } from '../services/dashboard.service';
 import { GlobalNavigationService } from '../services/global-navigation.service';
+import { CHARTJS_DEFAULT } from '../mock-data';
+import { ChartJs } from '../entities/chartJS';
 
 
 @Component({
@@ -16,25 +18,9 @@ import { GlobalNavigationService } from '../services/global-navigation.service';
 export class DashboardComponent implements OnInit {
 
   orga: Organization;
-
-  chartTitle: string = "Member Growth";
-  chartType: string = "line";
-  chartLegend: boolean = true;
-  chartOptions = {
-    responsive: true
-  };
-  chartData: Array<any>;
-  chartLabels: Array<any>;
-  chartColors: Array<any> = [
-    {
-      backgroundColor: 'rgba(132, 179, 221, 0.2)',
-      borderColor: '#428bca',
-      pointBackgroundColor: 'rgba(225,10,24,0.2)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(225,10,24,0.2)'
-    }
-  ];
+  chartMembers: ChartJs = CHARTJS_DEFAULT;
+  chartCommits: ChartJs = CHARTJS_DEFAULT;
+  chartPRs: ChartJs = CHARTJS_DEFAULT;
 
   constructor(
     private service: DashboardService,
@@ -54,8 +40,6 @@ export class DashboardComponent implements OnInit {
    */
   ngOnInit() {
     this.globalNavService.showNavBar(false);
-    this.chartData = [{ data: [2, 2, 1, 2], label: 'Pull Requests last 5 Days' }];
-    this.chartLabels = ['16/4/2018', '19/4/2018', '20/4/2018', '21/4/2018'];
   }
 
   /** 
@@ -71,5 +55,9 @@ export class DashboardComponent implements OnInit {
   determineOrganization() {
     let org = this.activeRoute.snapshot.paramMap.get('organization');
     this.orga = this.service.getOrganization(org);
+    
+    this.chartMembers.chartContent = this.orga.internalRepositories; // To change
+    this.chartCommits.chartContent = this.orga.internalRepositories
+    this.chartPRs.chartContent = this.orga.externalRepositories;
   }
 }
