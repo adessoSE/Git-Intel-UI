@@ -13,6 +13,10 @@ ul {
     list-style-type: none;
 }
 
+.fa {
+    vertical-align: middle;
+}
+
 .member-card {
     padding: 1em;
 }
@@ -30,4 +34,8 @@ ul {
 
 .card-title {
     margin-bottom: 2em;
+}
+
+.pad-bottom {
+    padding-bottom: 2%;
 }

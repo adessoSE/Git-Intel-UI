@@ -10,42 +10,54 @@ import { Member } from '../entities/member';
 export class MembersComponent implements OnInit {
 
   members: Member[];
-  membersCopy: Member [];
+  membersCopy: Member[];
 
-  constructor(memberService: MemberService) {
-    this.members = memberService.getMembers();
-    // Necessary copy for filter function
+  sortByTag: string = "";
+
+
+  constructor(private memberService: MemberService) { }
+
+  /**
+   * Uses @memberService to get data and initialize 
+   * a copy to apply filter and sorting funcionality.      
+   */
+  ngOnInit() {
+    this.members = this.memberService.getMembers();
     this.membersCopy = this.members;
   }
 
-  ngOnInit() { }
-
   sortByAlphabet() {
     this.members.sort((a: Member, b: Member) => a.name.localeCompare(b.name));
+    this.sortByTag = "Alphabet";
   }
 
   sortByCommits() {
     this.members.sort((a: Member, b: Member) => {
       return +b.commits - +a.commits;
     });
+    this.sortByTag = "Commits";
   }
 
   sortByPullRequests() {
     this.members.sort((a: Member, b: Member) => {
       return +b.pullRequests - +a.pullRequests;
     });
+    this.sortByTag = "Pull Requests";
   }
 
   sortByIssues() {
     this.members.sort((a: Member, b: Member) => {
       return +b.issues - +a.issues;
     });
+    this.sortByTag = "Issues";
   }
 
   search(term: string) {
-    this.members = this.membersCopy.filter(e => {
-      return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
-    });
+    setTimeout(() => {
+      this.members = this.membersCopy.filter(e => {
+        return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
+      });
+    }, 50);
   }
 
 

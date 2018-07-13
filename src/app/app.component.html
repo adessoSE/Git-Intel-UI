@@ -1,5 +1,5 @@
 <!-- Header -->
-<div class="jumbotron">
+<div class="jumbotron" style="margin-top: -1%; margin-bottom: -1%;">
 
   <div class="container-fluid">
 
@@ -20,21 +20,19 @@
           <button class="btn btn-primary my-2 my-sm-0" (click)="onClickStalk(organization)">Stalk!</button>
         </form>
       </div>
-
     </div>
   </div>
 
 </div>
 
-
 <!-- Tab Bar -->
 <ul class="nav nav-tabs tabBar">
   <li class="nav-item" *ngFor="let tab of tabs; let idx = index">
-    <a class="nav-link" data-toggle="tab" [routerLink]="tab.url" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:
-      true}" (click)="setActiveTab(idx)" style="display: inline-block;">
+    <a class="nav-link" data-toggle="tab" [class.active]="idx === activeTabIdx && isHome === false" [routerLink]="tab.url" (click)="setActiveTab(idx)"
+      style="display: inline-block;">
       {{tab.url | prepTabName | capitalize}}
+      <button (click)="closeTab(idx)" type="button" class="close" data-dismiss="alert">&times;</button>
     </a>
-    <button (click)="closeTab(idx)" type="button" class="close" data-dismiss="alert" style="margin-top: 10%;">&times;</button>
   </li>
 </ul>
 

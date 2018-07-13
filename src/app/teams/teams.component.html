@@ -10,19 +10,19 @@
     </form>
     <div class="dropdown float-right mr-3">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-        Sort by
+        Sort by: {{sortByTag}}
       </button>
       <div class="dropdown-menu">
         <button class="dropdown-item" (click)="sortByAlphabet()">Alphabet</button>
         <button class="dropdown-item" (click)="sortByCommits()">Commits</button>
-        <button class="dropdown-item" (click)="sortByMembers()">Members</button>
+        <button class="dropdown-item" (click)="sortByMembers()">Member size</button>
         <button class="dropdown-item" (click)="sortByRepositories()">Repositories</button>
       </div>
     </div>
   </div>
 
   <!--Cards displaying teams and team info-->
-  <div class="row justify-content-center graph-row">
+  <div class="row justify-content-center graph-row pad-bottom">
     <!-- Teams -->
     <div class="col-md-12 member-card" *ngFor="let team of teams">
       <div class="card border-primary component-card">

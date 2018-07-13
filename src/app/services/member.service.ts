@@ -10,6 +10,7 @@ import { GlobalNavigationService } from './global-navigation.service';
 export class MemberService {
 
   members: Member [] = MEMBERS;
+  cache: Set<Member> = new Set<Member>(); 
   
   constructor(private globalNavService: GlobalNavigationService) {
     globalNavService.tellNumOfEntities(this.members.length);
@@ -19,9 +20,9 @@ export class MemberService {
     return this.members;
   }
 
-  getMemberDetails(usrname: string) {
-    for (const member of this.members) {
-      if (member.username === usrname) {
+  getMemberDetails(username: string) {
+    for (let member of this.members) {
+      if (member.username === username) {
         return member;
       }
     }

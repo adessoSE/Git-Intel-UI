@@ -7,10 +7,6 @@ export class Team {
     public repositories: Repository[];
     public members: Member[];
     public commits: number;
-    // Avatar 
-
-    // Optional weitere Details:
-    // private license: string; ?
-    // private pullRequests: number; ?
-    // private issues: number; ?
+    public avatarURL: string;
+    public githubURL: string;
 }

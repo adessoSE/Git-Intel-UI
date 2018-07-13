@@ -2,39 +2,40 @@
 
   <div class="card border-primary col-md-12 member-card" style="padding-bottom: 1%; margin-bottom: 2%">
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-4" style="padding-left: 1.5%">
         <h1>{{member.name}}</h1>
       </div>
       <span class="col-md-4 orga-link">
-        <a href="https://www.github.com/{{member.username}}" target="_blank">
-          <i class="fa fa-github fa-4x"></i>github.com/{{member.username}}</a>
+        <a href="https://www.{{member.githubURL}}" target="_blank ">
+          <i class="fa fa-github fa-4x " style="padding-right: 10px; "></i>{{member.githubURL}}
+        </a>
       </span>
       <span>
-        <img class="img-responsive img-circle float-right" width="50%" height="50%" src="https://www.gruenderstory.de/wp-content/uploads/2013/08/github-logo-300x300.png">
+        <img class="img-responsive img-circle float-right " width="50% " height="50% " src="https://www.gruenderstory.de/wp-content/uploads/2013/08/github-logo-300x300.png ">
       </span>
     </div>
 
-    <div class="card border-secondary col-md-12 member-card" style="border : 0;">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="member-icon">
-            <i class="fa fa-stop-circle"></i>
+    <div class="card border-secondary col-md-12 member-card " style="border : 0; ">
+      <div class="row ">
+        <div class="col-md-4 ">
+          <div class="member-icon ">
+            <i class="fa fa-stop-circle fa-3x "></i>
           </div>
-          <span class="">{{member.commits}} Commits</span>
+          <span class=" ">{{member.commits}} Commits</span>
         </div>
 
-        <div class="col-md-4">
-          <div class="member-icon">
-            <i class="fa fa-code-fork"></i>
+        <div class="col-md-4 ">
+          <div class="member-icon ">
+            <i class="fa fa-code-fork fa-3x "></i>
           </div>
-          <span class="">{{member.pullRequests}} Pull Requests</span>
+          <span class=" ">{{member.pullRequests}} Pull Requests</span>
         </div>
 
-        <div class="col-md-4">
-          <div class="member-icon">
-            <i class="fa fa-exclamation-circle"></i>
+        <div class="col-md-4 ">
+          <div class="member-icon ">
+            <i class="fa fa-exclamation-circle fa-3x "></i>
           </div>
-          <span class=""> {{member.issues}}</span> Issues (Closed/Opened)
+          <span class=" "> {{member.issues}}</span> Issues (Closed/Opened)
         </div>
       </div>
 
@@ -42,13 +43,11 @@
   </div>
 
   <div>
-    <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels"
-      [chartOptions]="chartOptions" [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="member.organization.name"></graph>
-    <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels"
-      [chartOptions]="chartOptions" [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="member.organization.name"></graph>
-    <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels"
-      [chartOptions]="chartOptions" [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="member.organization.name"></graph>
+    <graph class="col-md-4 " [chartData]="chartCommits" [organization]="member.organization.id "></graph>
+    <graph class="col-md-4 " [chartData]="chartPRs" [organization]="member.organization.id "></graph>
+    <graph class="col-md-4 " [chartData]="chartIssues" [organization]="member.organization.id "></graph>
   </div>
+
 
 
 </div>

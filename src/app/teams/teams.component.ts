@@ -9,10 +9,12 @@ import { TeamService } from '../services/team.service';
 })
 export class TeamsComponent implements OnInit {
 
-  teams: Team [];
-  teamsCopy: Team [];
+  teams: Team[];
+  teamsCopy: Team[];
 
-  constructor(memberService: TeamService) { 
+  sortByTag: string = "";
+
+  constructor(memberService: TeamService) {
     this.teams = memberService.getTeams();
     this.teamsCopy = this.teams;
   }
@@ -21,29 +23,36 @@ export class TeamsComponent implements OnInit {
 
   sortByAlphabet() {
     this.teams.sort((a: Team, b: Team) => a.name.localeCompare(b.name));
+    this.sortByTag = "Alphabet";
   }
 
   sortByCommits() {
     this.teams.sort((a: Team, b: Team) => {
       return +b.commits - +a.commits;
     });
+    this.sortByTag = "Commits";
   }
 
   sortByMembers() {
     this.teams.sort((a: Team, b: Team) => {
       return +b.members.length - +a.members.length;
     });
+    this.sortByTag = "Member size";
   }
 
   sortByRepositories() {
     this.teams.sort((a: Team, b: Team) => {
       return +b.repositories.length - +a.repositories.length;
     });
+    this.sortByTag = "Pull Requests";
   }
 
   search(term: string) {
-    this.teams = this.teamsCopy.filter(e => {
-      return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
-    });
+    setTimeout(() => {
+      this.teams = this.teamsCopy.filter(e => {
+        return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
+      });
+    }, 50);
+
   }
 }

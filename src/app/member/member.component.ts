@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Member } from '../entities/member';
 import { MemberService } from '../services/member.service';
-import { GlobalNavigationService } from '../services/global-navigation.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ChartJs, ChartJsData } from '../entities/chartJS';
+import { CHARTJS_DEFAULT } from '../mock-data';
 
 @Component({
   selector: 'app-member',
@@ -12,36 +13,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class MemberComponent implements OnInit {
 
   member: Member;
-
-  chartTitle: string = "Member Growth";
-  chartType: string = "line";
-  chartLegend: boolean = true;
-  chartOptions = {
-    responsive: true
-  };
-  chartData: Array<any>;
-  chartLabels: Array<any>;
-  chartColors: Array<any> = [
-    {
-      backgroundColor: 'rgba(132, 179, 221, 0.2)',
-      borderColor: '#428bca',
-      pointBackgroundColor: 'rgba(225,10,24,0.2)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(225,10,24,0.2)'
-    }
-  ];
+  chartCommits: ChartJsData;
+  chartPRs: ChartJsData;
+  chartIssues: ChartJsData;
 
   constructor(private memberService: MemberService, private route: ActivatedRoute,
-    private router: Router, private globalNavService: GlobalNavigationService) {
+    private router: Router) {
 
     // Must be handled before onInit, because organization will be undefined otherwise 
-    router.events.subscribe((val) => { this.determineMember(); });
+    router.events.subscribe(() => { this.determineMember(); });
   }
 
   ngOnInit() {
-    this.chartData = [{ data: [2, 2, 1, 2], label: 'Pull Requests last 5 Days' }];
-    this.chartLabels = ['16/4/2018', '19/4/2018', '20/4/2018', '21/4/2018'];
+    this.initGraphs();
   }
 
   determineMember() {
@@ -49,4 +33,10 @@ export class MemberComponent implements OnInit {
     this.member = this.memberService.getMemberDetails(usr);
   }
 
+  initGraphs() {
+    console.log(this.member.organization.id);
+    this.chartIssues = this.member.previousIssues;
+    this.chartCommits = this.member.previousCommits;
+    this.chartPRs = this.member.previousPullRequests;
+  }
 }

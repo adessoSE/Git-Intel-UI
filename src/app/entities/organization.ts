@@ -1,12 +1,18 @@
+import { ChartJsData } from "./chartJS";
 
 export class Organization {
-    public name: string;
+    public id: string;
     public description: string;
     public location: string;
-    public website: string;
+    public websiteURL: string;
+    public githubURL: string;
+    public avatarURL: string;
     public numOfMembers: number;
     public numOfTeams: number;
-    public numOfRepos: number;
+    public numOfInternalRepos: number;
     public numOfExternalRepos: number;
-    // Avatar 
+    public lastUpdate: number;
+    public memberGrowth: ChartJsData;
+    public externalRepositories: ChartJsData;
+    public internalRepositories: ChartJsData;
 }

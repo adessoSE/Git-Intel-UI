@@ -14,6 +14,8 @@ import { TeamService } from '../services/team.service';
 })
 export class TeamComponent implements OnInit {
 
+  sortByTag: string = "";  
+
   team: Team;
 
   members: Member[];
@@ -42,6 +44,7 @@ export class TeamComponent implements OnInit {
   sortByAlphabet() {
     this.members.sort((a: Member, b: Member) => a.name.localeCompare(b.name));
     this.repositories.sort((a: Repository, b: Repository) => a.name.localeCompare(b.name));
+    this.sortByTag = "Alphabet";   
   }
 
   sortByCommits() {
@@ -52,6 +55,7 @@ export class TeamComponent implements OnInit {
     this.repositories.sort((a: Repository, b: Repository) => {
       return +b.commits - +a.commits;
     });
+    this.sortByTag = "Commits";  
   }
 
   sortByIssues() {
@@ -62,6 +66,7 @@ export class TeamComponent implements OnInit {
     this.repositories.sort((a: Repository, b: Repository) => {
       return +b.issues - +a.issues;
     });
+    this.sortByTag = "Issues"; 
   }
 
   sortByPullRequests() {
@@ -72,6 +77,7 @@ export class TeamComponent implements OnInit {
     this.repositories.sort((a: Repository, b: Repository) => {
       return +b.pullRequests - +a.pullRequests;
     });
+    this.sortByTag = "Pull Requests"; 
   }
 
   search(term: string) {

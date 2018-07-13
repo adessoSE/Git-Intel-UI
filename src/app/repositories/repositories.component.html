@@ -8,12 +8,14 @@
         <i class="fa fa-search"></i>
       </button>
     </form>
+    <!-- optional: 
     <div class="float-left mr-3">
-        <h4>Activities: Last 7 days.</h4>
+      <h4>Activities: Last 7 days.</h4>
     </div>
+    -->
     <div class="dropdown float-right mr-3">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-        Sort by
+        Sort by: {{sortByTag}}
       </button>
       <div class="dropdown-menu">
         <button class="dropdown-item" (click)="sortByAlphabet()">Alphabet</button>
@@ -28,7 +30,7 @@
   </div>
 
   <!--Cards displaying Repositories and Repository info-->
-  <div class="row justify-content-center graph-row">
+  <div class="row justify-content-center graph-row pad-bottom">
     <!-- Repositories -->
     <div class="col-md-12 member-card" *ngFor="let repo of repositories">
       <div class="card border-primary component-card">

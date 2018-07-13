@@ -5,4 +5,14 @@
 
 .tabBar {
     margin-top: -2%;
+    background: #eeeeee;
+}
+
+.close {
+    padding-left: 10px;
+}
+
+.active {
+    background: #ffff !important;
+    font-weight: bold;
 }
