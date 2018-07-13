@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
   }
 
   /** 
-   * Requests the @globalNavService to open a new Tab for given organization.
+   * Requests @globalNavService to open a new Tab for given organization.
    */
   openNewTab(org: string) {
     this.globalNavService.onOpenNewTab(org);

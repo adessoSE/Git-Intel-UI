@@ -12,5 +12,5 @@ export class Repository {
     public forks: number;
     public issues: number;
     public contributor: Member;
-    // Avatar
+    public githubURL: string;
 }

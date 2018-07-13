@@ -5,27 +5,27 @@
 
     <div class="row">
       <div class="col-md-4">
-        <h1>{{orga.name}}</h1>
+        <h1>{{organization.id}}</h1>
         <!-- Location -->
         <span class="orga-location">
-          <i class="fa fa-map-marker" style="padding-left: 3px; padding-right: 15px;"></i>{{orga.location}}</span>
+          <i class="fa fa-map-marker" style="padding-left: 3px; padding-right: 15px;"></i>{{organization.location}}</span>
 
         <!-- Description -->
         <p class="orga-description">
-          <i class="fa fa-paper-plane" style="padding-right: 10px;"></i>{{orga.description}}.</p>
+          <i class="fa fa-paper-plane" style="padding-right: 10px;"></i>{{organization.description}}.</p>
       </div>
       <!-- Website -->
       <span class="col-md-4 orga-link">
-        <a href="https://www.{{orga.website}}" target="_blank">
-          <i class="fa fa-globe fa-4x" style="padding-right: 10px;"></i>{{orga.website}}
+        <a href="https://www.{{organization.websiteURL}}" target="_blank">
+          <i class="fa fa-globe fa-4x" style="padding-right: 10px;"></i>{{organization.websiteURL}}
         </a>
         <br>
 
       </span>
       <!-- Github -->
       <span class="col-md-4 orga-link">
-        <a href="https://www.github.com/{{orga.name}}" target="_blank">
-          <i class="fa fa-github fa-4x" style="padding-right: 10px;"></i>github.com/{{orga.name}}</a>
+        <a href="https://www.{{organization.githubURL}}" target="_blank">
+          <i class="fa fa-github fa-4x" style="padding-right: 10px;"></i>{{organization.githubURL}}</a>
       </span>
     </div>
 
@@ -43,7 +43,7 @@
             </h4>
             <a routerLink="members/">
               <h3 class="card-title" style="text-align: center">
-                <i class="fa fa-user"></i> {{orga.numOfMembers}}</h3>
+                <i class="fa fa-user"></i> {{organization.numOfMembers}}</h3>
             </a>
           </div>
         </div>
@@ -64,7 +64,7 @@
             </h4>
             <a routerLink="teams/">
               <h3 class="card-title" style="text-align: center">
-                <i class="fa fa-users"></i> {{orga.numOfTeams}}</h3>
+                <i class="fa fa-users"></i> {{organization.numOfTeams}}</h3>
             </a>
           </div>
         </div>
@@ -85,7 +85,7 @@
             </h4>
             <a routerLink="repositories/">
               <h3 class="card-title" style="text-align: center">
-                <i class="fa fa-book mr-3"></i> {{orga.numOfRepos}}</h3>
+                <i class="fa fa-book mr-3"></i> {{organization.numOfInternalRepos}}</h3>
             </a>
           </div>
         </div>
@@ -107,7 +107,7 @@
             </h4>
             <a routerLink="external-repositories/">
               <h3 class="card-title" style="text-align: center">
-                <i class="fa fa-location-arrow"></i> {{orga.numOfExternalRepos}}</h3>
+                <i class="fa fa-location-arrow"></i> {{organization.numOfExternalRepos}}</h3>
             </a>
           </div>
         </div>
@@ -120,16 +120,13 @@
 
     <!-- Graphs -->
     <div class="row justify-content-center pad-bottom">
-      <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels"
-        [chartOptions]="chartOptions" [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="orga.name"></graph>
-      <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels"
-        [chartOptions]="chartOptions" [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="orga.name"></graph>
-      <graph class="col-md-4" [chartTitle]="chartTitle" [chartType]="'line'" [chartData]="chartData" [chartLabels]="chartLabels"
-        [chartOptions]="chartOptions" [chartLegend]="chartLegend" [chartColors]="chartColors" [organization]="orga.name"></graph>
+      <graph class="col-md-4" [chartData]="chartMembers" [organization]="organization.id"></graph>
+      <graph class="col-md-4" [chartData]="chartCommits" [organization]="organization.id"></graph>
+      <graph class="col-md-4" [chartData]="chartPRs" [organization]="organization.id"></graph>
     </div>
 
     <!-- Last Update -->
     <span class="badge badge-warning">
-      <i class="fa fa-clock-o" style="padding-right: 10px;"></i>Last update: {{orga.lastUpdate | date:'MMM d, y, h:mm'}}
+      <i class="fa fa-clock-o" style="padding-right: 10px;"></i>Last update: {{organization.lastUpdate | date:'MMM d, y, h:mm'}}
     </span>
   </div>
