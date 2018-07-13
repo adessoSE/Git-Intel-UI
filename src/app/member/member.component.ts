@@ -21,18 +21,22 @@ export class MemberComponent implements OnInit {
     private router: Router) {
 
     // Must be handled before onInit, because organization will be undefined otherwise 
-    router.events.subscribe((val) => { this.determineMember(); });
+    router.events.subscribe(() => { this.determineMember(); });
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.initGraphs();
+  }
 
   determineMember() {
     let usr = this.route.snapshot.paramMap.get('username');
     this.member = this.memberService.getMemberDetails(usr);
+  }
 
+  initGraphs() {
+    console.log(this.member.organization.id);
     this.chartIssues = this.member.previousIssues;
     this.chartCommits = this.member.previousCommits;
     this.chartPRs = this.member.previousPullRequests;
   }
-
 }
