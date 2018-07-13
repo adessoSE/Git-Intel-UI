@@ -13,7 +13,8 @@ export const CHARTJS_DEFAULT: ChartJs = {
     },
     chartData: {
         data: [{ data: [2, 2, 1, 2], label: 'Pull Requests last 5 Days' }],
-        labels: ['16/4/2018', '19/4/2018', '20/4/2018', '21/4/2018']
+        labels: ['16/4/2018', '19/4/2018', '20/4/2018', '21/4/2018'],
+        caption: "test"
     },
     chartColors: [
         {
@@ -30,27 +31,33 @@ export const CHARTJS_DEFAULT: ChartJs = {
 export const CHARTJS: ChartJsData[] = [
     {
         labels: ['15/4/2018', '16/4/2018', '17/4/2018', '18/4/2018', '19/4/2018', '20/4/2018', '21/4/2018'],
-        data: [{ data: [2, 4, 5, 3, 3, 3, 0], label: 'Commits' }]
+        data: [{ data: [2, 4, 5, 3, 3, 3, 0], label: 'Commits' }],
+        caption: "test"
     },
     {
         labels: ['15/4/2018', '16/4/2018', '17/4/2018', '18/4/2018', '19/4/2018', '20/4/2018', '21/4/2018'],
-        data: [{ data: [1, 1, 2, 3, 2, 3, 5], label: 'Issues' }]
+        data: [{ data: [1, 1, 2, 3, 2, 3, 5], label: 'Issues' }],
+        caption: "test"
     },
     {
         labels: ['15/4/2018', '16/4/2018', '17/4/2018', '18/4/2018', '19/4/2018', '20/4/2018', '21/4/2018'],
-        data: [{ data: [0, 0, 5, 3, 2, 3, 1], label: 'Pull Requests' }]
+        data: [{ data: [0, 0, 5, 3, 2, 3, 1], label: 'Pull Requests' }],
+        caption: "test"
     },
     {
         labels: ['15/4/2018', '16/4/2018', '17/4/2018', '18/4/2018', '19/4/2018', '20/4/2018', '21/4/2018'],
-        data: [{ data: [10, 2, 5, 13, 2, 5, 1], label: 'Commits' }]
+        data: [{ data: [10, 2, 5, 13, 2, 5, 1], label: 'Commits' }],
+        caption: "test"
     },
     {
         labels: ['15/4/2018', '16/4/2018', '17/4/2018', '18/4/2018', '19/4/2018', '20/4/2018', '21/4/2018'],
-        data: [{ data: [10, 12, 2, 3, 1, 0, 5], label: 'Pull Requests' }]
+        data: [{ data: [10, 12, 2, 3, 1, 0, 5], label: 'Pull Requests' }],
+        caption: "test"
     },
     {
         labels: ['15/4/2018', '16/4/2018', '17/4/2018', '18/4/2018', '19/4/2018', '20/4/2018', '21/4/2018'],
-        data: [{ data: [2, 4, 5, 3, 3, 3, 0], label: 'Members' }]
+        data: [{ data: [2, 4, 5, 3, 3, 3, 0], label: 'Members' }],
+        caption: "test"
     }
 ];
 

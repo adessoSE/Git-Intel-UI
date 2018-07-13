@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <canvas id="chart" baseChart [chartType]="chart.chartType" [datasets]="chartData.data" [labels]="chart.chartLabels" [options]="chart.chartOptions"
+        <canvas id="chart" baseChart [chartType]="chart.chartType" [datasets]="chartData.data" [labels]="chartData.labels" [options]="chart.chartOptions"
           [legend]="chart.chartLegend" [colors]="chart.chartColors">
         </canvas>
       </div>
@@ -27,7 +27,7 @@
     <!-- Custom card header -->
     <div class="row">
       <div class="col-md-5">
-        {{chartTitle}}
+        {{chartCaption}}
       </div>
       <div class="col-md-4 offset-md-3">
         <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#memberModal">
@@ -36,7 +36,7 @@
       </div>
     </div>
     <!-- Actual Graph body -->
-    <canvas id="chart" baseChart [chartType]="chart.chartType" [datasets]="chartData.data" [labels]="chart.chartLabels" [options]="chart.chartOptions"
+    <canvas id="chart" baseChart [chartType]="chart.chartType" [datasets]="chartData.data" [labels]="chartData.labels" [options]="chart.chartOptions"
       [legend]="chart.chartLegend" [colors]="chart.chartColors">
     </canvas>
   </div>

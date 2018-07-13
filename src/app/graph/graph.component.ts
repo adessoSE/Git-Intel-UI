@@ -9,13 +9,16 @@ import { CHARTJS_DEFAULT } from '../mock-data';
 })
 export class GraphComponent implements OnInit {
 
-  chart: ChartJs = CHARTJS_DEFAULT;
   @Input() chartData: ChartJsData;
   @Input() organization: string;
+  chart: ChartJs = CHARTJS_DEFAULT;
+  chartCaption: string;
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.chartCaption = this.chartData.caption;
+  }
 
   /**
    * Fetches graph element and prepares download link.
