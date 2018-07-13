@@ -12,7 +12,7 @@ import { CHARTJS_DEFAULT } from '../mock-data';
 })
 export class MemberComponent implements OnInit {
 
-  member: Member; 
+  member: Member;
   chartCommits: ChartJs = CHARTJS_DEFAULT;
   chartPRs: ChartJs = CHARTJS_DEFAULT;
   chartIssues: ChartJs = CHARTJS_DEFAULT;
@@ -29,9 +29,9 @@ export class MemberComponent implements OnInit {
   determineMember() {
     let usr = this.route.snapshot.paramMap.get('username');
     this.member = this.memberService.getMemberDetails(usr);
-    this.chartCommits.chartContent = this.member.previousCommits;
-    this.chartPRs.chartContent = this.member.previousPullRequests;
-    this.chartIssues.chartContent = this.member.previousIssues;
+    this.chartCommits.chartData = this.member.previousCommits;
+    this.chartPRs.chartData = this.member.previousPullRequests;
+    this.chartIssues.chartData = this.member.previousIssues;
   }
 
 }

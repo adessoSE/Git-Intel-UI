@@ -2,7 +2,7 @@ import { Organization } from "./entities/organization";
 import { Member } from "./entities/member";
 import { Repository } from "./entities/repository";
 import { Team } from "./entities/team";
-import { ChartJsContent, ChartJs } from "./entities/chartJS";
+import { ChartJsData, ChartJs } from "./entities/chartJS";
 
 export const CHARTJS_DEFAULT: ChartJs = {
     chartTitle: "Member Growth",
@@ -11,7 +11,7 @@ export const CHARTJS_DEFAULT: ChartJs = {
     chartOptions: {
         responsive: true
     },
-    chartContent: {
+    chartData: {
         data: [{ data: [2, 2, 1, 2], label: 'Pull Requests last 5 Days' }],
         labels: ['16/4/2018', '19/4/2018', '20/4/2018', '21/4/2018']
     },
@@ -27,7 +27,7 @@ export const CHARTJS_DEFAULT: ChartJs = {
     ],
 };
 
-export const CHARTJS: ChartJsContent[] = [
+export const CHARTJS: ChartJsData[] = [
     {
         labels: ['15/4/2018', '16/4/2018', '17/4/2018', '18/4/2018', '19/4/2018', '20/4/2018', '21/4/2018'],
         data: [{ data: [2, 4, 5, 3, 3, 3, 0], label: 'Commits' }]
@@ -47,6 +47,10 @@ export const CHARTJS: ChartJsContent[] = [
     {
         labels: ['15/4/2018', '16/4/2018', '17/4/2018', '18/4/2018', '19/4/2018', '20/4/2018', '21/4/2018'],
         data: [{ data: [10, 12, 2, 3, 1, 0, 5], label: 'Pull Requests' }]
+    },
+    {
+        labels: ['15/4/2018', '16/4/2018', '17/4/2018', '18/4/2018', '19/4/2018', '20/4/2018', '21/4/2018'],
+        data: [{ data: [2, 4, 5, 3, 3, 3, 0], label: 'Members' }]
     }
 ];
 
@@ -64,7 +68,8 @@ export const ORGANIZATIONS: Organization[] = [
         numOfExternalRepos: 4,
         lastUpdate: 1527235577893,
         internalRepositories: CHARTJS[3],
-        externalRepositories: CHARTJS[4]
+        externalRepositories: CHARTJS[4],
+        memberGrowth: CHARTJS[5]
     },
     {
         id: "microsoft",
@@ -79,7 +84,8 @@ export const ORGANIZATIONS: Organization[] = [
         numOfExternalRepos: 40,
         lastUpdate: 1527235577893,
         internalRepositories: CHARTJS[3],
-        externalRepositories: CHARTJS[4]
+        externalRepositories: CHARTJS[4],
+        memberGrowth: CHARTJS[5]
     }
 ];
 
@@ -95,7 +101,7 @@ export const MEMBERS: Member[] = [
         githubURL: "github.com/s-gbz",
         previousCommits: CHARTJS[0],
         previousIssues: CHARTJS[1],
-        previousPullRequests: ChartJsContent[2]
+        previousPullRequests: ChartJsData[2]
     },
     {
         username: "peter-mueller",
@@ -108,7 +114,7 @@ export const MEMBERS: Member[] = [
         githubURL: "github.com/s-gbz",
         previousCommits: CHARTJS[0],
         previousIssues: CHARTJS[1],
-        previousPullRequests: ChartJsContent[2]
+        previousPullRequests: ChartJsData[2]
     },
     {
         username: "john-doe",
@@ -121,7 +127,7 @@ export const MEMBERS: Member[] = [
         githubURL: "github.com/s-gbz",
         previousCommits: CHARTJS[0],
         previousIssues: CHARTJS[1],
-        previousPullRequests: ChartJsContent[2]
+        previousPullRequests: ChartJsData[2]
     },
     {
         username: "alfreed-mueller",
@@ -134,7 +140,7 @@ export const MEMBERS: Member[] = [
         githubURL: "github.com/s-gbz",
         previousCommits: CHARTJS[0],
         previousIssues: CHARTJS[1],
-        previousPullRequests: ChartJsContent[2]
+        previousPullRequests: ChartJsData[2]
     },
     {
         username: "jochen-schweizer",
@@ -147,7 +153,7 @@ export const MEMBERS: Member[] = [
         githubURL: "github.com/s-gbz",
         previousCommits: CHARTJS[0],
         previousIssues: CHARTJS[1],
-        previousPullRequests: ChartJsContent[2]
+        previousPullRequests: ChartJsData[2]
     },
     {
         username: "peter-pan",
@@ -160,7 +166,7 @@ export const MEMBERS: Member[] = [
         githubURL: "github.com/s-gbz",
         previousCommits: CHARTJS[0],
         previousIssues: CHARTJS[1],
-        previousPullRequests: ChartJsContent[2]
+        previousPullRequests: ChartJsData[2]
     },
     {
         username: "dennis-zauener",
@@ -173,7 +179,7 @@ export const MEMBERS: Member[] = [
         githubURL: "github.com/s-gbz",
         previousCommits: CHARTJS[0],
         previousIssues: CHARTJS[1],
-        previousPullRequests: ChartJsContent[2]
+        previousPullRequests: ChartJsData[2]
     }
 ];
 
@@ -189,7 +195,8 @@ export const REPOSITORIES: Repository[] = [
         pullRequests: 1,
         forks: 1,
         issues: 2,
-        contributor: MEMBERS[0]
+        contributor: MEMBERS[0],
+        githubURL: "github.com/brainysnake"
     },
     {
         name: 'HelloWorld',
@@ -202,7 +209,8 @@ export const REPOSITORIES: Repository[] = [
         pullRequests: 5,
         forks: 3,
         issues: 4,
-        contributor: MEMBERS[3]
+        contributor: MEMBERS[1],
+        githubURL: "github.com/helloworld"
     },
     {
         name: 'GitStalker',
@@ -215,7 +223,8 @@ export const REPOSITORIES: Repository[] = [
         pullRequests: 0,
         forks: 43,
         issues: 6,
-        contributor: MEMBERS[2]
+        contributor: MEMBERS[2],
+        githubURL: "github.com/adessoag/gitstalkerbootstrapui"
     }
 ];
 
@@ -231,7 +240,8 @@ export const EX_REPOSITORIES: Repository[] = [
         pullRequests: 1,
         forks: 1,
         issues: 2,
-        contributor: MEMBERS[0]
+        contributor: MEMBERS[0],
+        githubURL: "github.com/brainysnake"
     },
     {
         name: 'HelloWorld',
@@ -244,7 +254,8 @@ export const EX_REPOSITORIES: Repository[] = [
         pullRequests: 5,
         forks: 3,
         issues: 4,
-        contributor: MEMBERS[1]
+        contributor: MEMBERS[1],
+        githubURL: "github.com/helloworld"
     },
     {
         name: 'GitStalker',
@@ -257,7 +268,8 @@ export const EX_REPOSITORIES: Repository[] = [
         pullRequests: 0,
         forks: 43,
         issues: 6,
-        contributor: MEMBERS[2]
+        contributor: MEMBERS[2],
+        githubURL: "github.com/adessoag/gitstalkerbootstrapui"
     }
 ];
 
@@ -267,20 +279,28 @@ export const TEAMS: Team[] = [
         description: "Developing the coolest programm",
         repositories: REPOSITORIES.slice(0, 2),
         members: MEMBERS.slice(0, 3),
-        commits: 200
+        commits: 200,
+        avatarURL: "assets/octocat.jpg",
+        githubURL: "github.com/teams/brainysnake"
+
     },
     {
         name: "BrainySnake",
         description: "Developing the coolest programm",
         repositories: REPOSITORIES.slice(1, 2),
         members: MEMBERS.slice(2, 6),
-        commits: 150
+        commits: 150,
+        avatarURL: "assets/octocat.jpg",
+        githubURL: "github.com/teams/brainysnake"
+
     },
     {
         name: "HelloWorld",
         description: "Developing helloworlds",
         repositories: REPOSITORIES.slice(0, 1),
         members: MEMBERS.slice(1, 2),
-        commits: 20
+        commits: 20,
+        githubURL: "github.com/teams/helloworld",
+        avatarURL: "assets/octocat.jpg"
     }
 ];

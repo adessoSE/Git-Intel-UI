@@ -1,5 +1,5 @@
 
-export class ChartJsContent {
+export class ChartJsData {
     public labels: Array<string>;
     public data: [{ data: Array<number>, label: string }];
 }
@@ -9,6 +9,6 @@ export class ChartJs {
     chartType: string;
     chartOptions: any;
     chartLegend: boolean;
-    chartContent: ChartJsContent;
+    chartData: ChartJsData;
     chartColors: Array<any>;
 }

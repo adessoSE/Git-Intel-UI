@@ -17,7 +17,7 @@ import { ChartJs } from '../entities/chartJS';
 })
 export class DashboardComponent implements OnInit {
 
-  orga: Organization;
+  organization: Organization;
   chartMembers: ChartJs = CHARTJS_DEFAULT;
   chartCommits: ChartJs = CHARTJS_DEFAULT;
   chartPRs: ChartJs = CHARTJS_DEFAULT;
@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
      * Subscribes to routing changes and fetches data to given organization.
      * Must be handled before onInit, because @orga will be undefined otherwise 
      */
-    router.events.subscribe((val) => { this.determineOrganization(); });
+    router.events.subscribe(() => { this.determineOrganization(); });
   }
 
   /** 
@@ -54,10 +54,10 @@ export class DashboardComponent implements OnInit {
    */
   determineOrganization() {
     let org = this.activeRoute.snapshot.paramMap.get('organization');
-    this.orga = this.service.getOrganization(org);
-    
-    this.chartMembers.chartContent = this.orga.internalRepositories; // To change
-    this.chartCommits.chartContent = this.orga.internalRepositories
-    this.chartPRs.chartContent = this.orga.externalRepositories;
+    this.organization = this.service.getOrganization(org);
+
+    this.chartMembers.chartData = this.organization.memberGrowth;
+    this.chartCommits.chartData = this.organization.internalRepositories
+    this.chartPRs.chartData = this.organization.externalRepositories;
   }
 }

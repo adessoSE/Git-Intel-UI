@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
 	tabs = new Array<Tab>();
 	activeTabIdx: number = 0;
 
-	/*
+	/** 
 	 * How Tab system work:
 	 * 
 	 * New Tabs are opened under specific conditions 
@@ -65,7 +65,7 @@ export class AppComponent implements OnInit {
 				this.openNewTab(tab)
 		});
 
-		/*
+		/**
 		 * Subscription returns an Array of Objects that look like so:
 		 *     Object { path: "1. URL segment", parameters: {} }
 		 *     Object { path: "2. URL segment", parameters: {} }
@@ -102,7 +102,7 @@ export class AppComponent implements OnInit {
 			});
 	}
 
-	/*
+	/**
 	 * Triggered by the search/stalk-button, the method
 	 * checks if the entered term is a legit Github username
 	 * and displays hint and a warning in case not.  
@@ -116,7 +116,7 @@ export class AppComponent implements OnInit {
 		}
 	}
 
-	/*
+	/**
 	 * Pushes Tab into the global @tabs Array, hence opens it, marks it as active and navigates to given route. 
 	 * Validations if the new Tab _should be_ opened are performed previously. 
 	 */
@@ -126,7 +126,7 @@ export class AppComponent implements OnInit {
 		this.router.navigate([tab.url]);
 	}
 
-	/*
+	/** 
 	 * Removes Tab from global @tabs Array, hence closes it.
 	 * Assigns @activeTabIdx to Tab left of the previously closed, if there's more than one
 	 * or navigates to "/home" otherwise.
@@ -143,21 +143,21 @@ export class AppComponent implements OnInit {
 		}
 	}
 
-	/*
+	/** 
 	 * Assigns @activeTabIdx to index of given Tab. 
 	 */
 	setActiveTab(idx: number) {
 		this.activeTabIdx = idx;
 	}
 
-	/*
+	/** 
 	 * Validates given conditions if a new Tab should be opened. 
 	 */
 	checkNewTab() {
 		return this.tabs.length === 0;
 	}
 
-	/*
+	/** 
 	 * Checks given username according to following criteria
 	 * as provided by the official "Join Github" page:
 	 *  
@@ -170,7 +170,7 @@ export class AppComponent implements OnInit {
 		return /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i.test(username);
 	}
 
-	/*
+	/** 
 	 * Concatenates the given UrlSegment seperated by "/"
 	 * and removes the last one.
 	 */
