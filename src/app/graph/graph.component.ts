@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ChartJs } from '../entities/chartJS';
+import { ChartJs, ChartJsData } from '../entities/chartJS';
+import { CHARTJS_DEFAULT } from '../mock-data';
 
 @Component({
   selector: 'graph',
@@ -8,7 +9,8 @@ import { ChartJs } from '../entities/chartJS';
 })
 export class GraphComponent implements OnInit {
 
-  @Input() chart: ChartJs;
+  chart: ChartJs = CHARTJS_DEFAULT;
+  @Input() chartData: ChartJsData;
   @Input() organization: string;
 
   constructor() { }

@@ -7,7 +7,7 @@ import { Organization } from '../entities/organization';
 import { DashboardService } from '../services/dashboard.service';
 import { GlobalNavigationService } from '../services/global-navigation.service';
 import { CHARTJS_DEFAULT } from '../mock-data';
-import { ChartJs } from '../entities/chartJS';
+import { ChartJs, ChartJsData } from '../entities/chartJS';
 
 
 @Component({
@@ -18,9 +18,9 @@ import { ChartJs } from '../entities/chartJS';
 export class DashboardComponent implements OnInit {
 
   organization: Organization;
-  chartMembers: ChartJs = CHARTJS_DEFAULT;
-  chartCommits: ChartJs = CHARTJS_DEFAULT;
-  chartPRs: ChartJs = CHARTJS_DEFAULT;
+  chartMembers: ChartJsData;
+  chartCommits: ChartJsData;
+  chartPRs: ChartJsData;
 
   constructor(
     private service: DashboardService,
@@ -56,8 +56,8 @@ export class DashboardComponent implements OnInit {
     let org = this.activeRoute.snapshot.paramMap.get('organization');
     this.organization = this.service.getOrganization(org);
 
-    this.chartMembers.chartData = this.organization.memberGrowth;
-    this.chartCommits.chartData = this.organization.internalRepositories
-    this.chartPRs.chartData = this.organization.externalRepositories;
+    this.chartMembers = this.organization.memberGrowth;
+    this.chartCommits = this.organization.internalRepositories
+    this.chartPRs = this.organization.externalRepositories;
   }
 }

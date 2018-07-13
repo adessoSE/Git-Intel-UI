@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Member } from '../entities/member';
 import { MemberService } from '../services/member.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ChartJs } from '../entities/chartJS';
+import { ChartJs, ChartJsData } from '../entities/chartJS';
 import { CHARTJS_DEFAULT } from '../mock-data';
 
 @Component({
@@ -13,9 +13,9 @@ import { CHARTJS_DEFAULT } from '../mock-data';
 export class MemberComponent implements OnInit {
 
   member: Member;
-  chartCommits: ChartJs = CHARTJS_DEFAULT;
-  chartPRs: ChartJs = CHARTJS_DEFAULT;
-  chartIssues: ChartJs = CHARTJS_DEFAULT;
+  chartCommits: ChartJsData;
+  chartPRs: ChartJsData;
+  chartIssues: ChartJsData;
 
   constructor(private memberService: MemberService, private route: ActivatedRoute,
     private router: Router) {
@@ -29,9 +29,10 @@ export class MemberComponent implements OnInit {
   determineMember() {
     let usr = this.route.snapshot.paramMap.get('username');
     this.member = this.memberService.getMemberDetails(usr);
-    this.chartCommits.chartData = this.member.previousCommits;
-    this.chartPRs.chartData = this.member.previousPullRequests;
-    this.chartIssues.chartData = this.member.previousIssues;
+
+    this.chartIssues = this.member.previousIssues;
+    this.chartCommits = this.member.previousCommits;
+    this.chartPRs = this.member.previousPullRequests;
   }
 
 }
