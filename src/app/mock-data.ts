@@ -63,7 +63,7 @@ export const CHARTJS: ChartJsData[] = [
 
 export const ORGANIZATIONS: Organization[] = [
     {
-        id: "adessoAG",
+        name: "adessoAG",
         description: "All hail adesso",
         location: "Dortmund",
         websiteURL: "adesso.de",
@@ -79,7 +79,7 @@ export const ORGANIZATIONS: Organization[] = [
         memberGrowth: CHARTJS[5]
     },
     {
-        id: "microsoft",
+        name: "microsoft",
         description: "All hail Microsoft",
         location: "LA",
         websiteURL: "microsoft.de",

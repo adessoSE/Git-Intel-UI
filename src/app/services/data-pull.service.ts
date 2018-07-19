@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Organization } from '../entities/organization';
-import { Info } from '../enums/INFO';
 import { Member } from '../entities/member';
 
 @Injectable()

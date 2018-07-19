@@ -17,7 +17,9 @@ export class GraphComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.chartCaption = this.chartData.caption;
+    if (this.chartData != null) {
+      this.chartCaption = this.chartData.caption;
+    }
   }
 
   /**

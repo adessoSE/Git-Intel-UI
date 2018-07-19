@@ -34,7 +34,7 @@ export class MemberComponent implements OnInit {
   }
 
   initGraphs() {
-    console.log(this.member.organization.id);
+    console.log(this.member.organization.name);
     this.chartIssues = this.member.previousIssues;
     this.chartCommits = this.member.previousCommits;
     this.chartPRs = this.member.previousPullRequests;

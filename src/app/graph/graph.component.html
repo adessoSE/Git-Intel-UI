@@ -1,5 +1,5 @@
 <!-- Graph Modal | Must remain first element, because it's canvas is used for downloading -->
-<div class="modal fade" id="memberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="memberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf='chartData'>
   <div class="modal-dialog" style="margin-left: 20%" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -22,7 +22,7 @@
 </div>
 
 <!-- Member Growth -->
-<div class="card border-secondary mb-3 graph-card">
+<div class="card border-secondary mb-3 graph-card" *ngIf='chartData'>
   <div class="card-body">
     <!-- Custom card header -->
     <div class="row">
