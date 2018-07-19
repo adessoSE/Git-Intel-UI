@@ -10,7 +10,7 @@
     </form>
     <div class="dropdown float-right mr-3">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-        Sort by: {{sortByTag}} 
+        Sort by: {{sortByTag}}
       </button>
       <div class="dropdown-menu">
         <button class="dropdown-item" (click)="sortByAlphabet()">Alphabet</button>
@@ -28,14 +28,13 @@
       <div class="card border-primary component-card">
         <a routerLink={{member.username}}>
           <div class="card-body">
-            <h4 class="card-title">{{member.name}}
-              <picture style="float: right;">
-                <i class="fa fa-user fa-3x"></i>
-              </picture>
+            <!-- If a user does not have a 'name', display the 'username' instead-->
+            <h4 class="card-title">{{member.name != null ? member.name : member.username}}
+              <img style="float: right; width:100px; height:100px;" src="{{member.avatarURL}}" alt="{{member.name}} + '\'">
             </h4>
             <div class="card-text">
               <p>Activity Last 7 Days:</p>
-              <ul>
+              <ul>'
                 <li>
                   <div class="member-icon">
                     <i class="fa fa-stop-circle"></i>

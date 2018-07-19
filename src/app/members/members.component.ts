@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MemberService } from '../services/member.service';
 import { Member } from '../entities/member';
+import { DataPullService } from '../services/data-pull.service';
+import { ActivatedRoute } from '../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-members',
@@ -15,15 +17,29 @@ export class MembersComponent implements OnInit {
   sortByTag: string = "";
 
 
-  constructor(private memberService: MemberService) { }
+  constructor(
+    private memberService: MemberService,
+    private dataPullService: DataPullService,
+    private activeRoute: ActivatedRoute) { }
 
   /**
    * Uses @memberService to get data and initialize 
    * a copy to apply filter and sorting funcionality.      
    */
   ngOnInit() {
-    this.members = this.memberService.getMembers();
-    this.membersCopy = this.members;
+    this.determineOrganization();
+  }
+
+  determineOrganization() {
+    let org = this.activeRoute.snapshot.paramMap.get('organization');
+
+    this.dataPullService.requestMembers(org).subscribe(data => this.processData(data));
+  }
+
+  processData(members: Member[]) {
+    this.members = members;
+    this.membersCopy = members;
+    console.log(members);
   }
 
   sortByAlphabet() {
