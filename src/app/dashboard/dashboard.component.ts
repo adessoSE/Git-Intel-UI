@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PopoverModule } from "ngx-popover";
 
 import { Organization } from '../entities/organization';
 
 import { DashboardService } from '../services/dashboard.service';
 import { GlobalNavigationService } from '../services/global-navigation.service';
-import { CHARTJS_DEFAULT } from '../mock-data';
 import { ChartJs, ChartJsData } from '../entities/chartJS';
+import { DataPullService } from '../services/data-pull.service';
+import { Info } from '../enums/INFO';
 
 
 @Component({
@@ -26,7 +26,8 @@ export class DashboardComponent implements OnInit {
     private service: DashboardService,
     private activeRoute: ActivatedRoute,
     private router: Router,
-    private globalNavService: GlobalNavigationService) {
+    private globalNavService: GlobalNavigationService,
+    private dataPullService: DataPullService) {
 
     /**
      * Subscribes to routing changes and fetches data to given organization.
@@ -39,7 +40,7 @@ export class DashboardComponent implements OnInit {
    * Disables NavigationBar while on the Dashboard and requests chart data from Backend. 
    */
   ngOnInit() {
-    this.globalNavService.showNavBar(false);
+    this.globalNavService.showNavBar(false)
   }
 
   /** 
@@ -54,10 +55,15 @@ export class DashboardComponent implements OnInit {
    */
   determineOrganization() {
     let org = this.activeRoute.snapshot.paramMap.get('organization');
-    this.organization = this.service.getOrganization(org);
+    
+    this.dataPullService.requestOrganization(org).subscribe(data => this.processData(data));
+  }
 
-    this.chartMembers = this.organization.memberGrowth;
-    this.chartCommits = this.organization.internalRepositories
-    this.chartPRs = this.organization.externalRepositories;
+  processData(orga: Organization) {
+    this.organization = orga;
+    this.chartMembers = orga.memberGrowth;
+    this.chartCommits = orga.internalRepositories;
+    this.chartPRs = orga.externalRepositories;
+    console.log(orga);
   }
 }

@@ -1,7 +1,7 @@
 import { ChartJsData } from "./chartJS";
 
 export class Organization {
-    public id: string;
+    public name: string;
     public description: string;
     public location: string;
     public websiteURL: string;

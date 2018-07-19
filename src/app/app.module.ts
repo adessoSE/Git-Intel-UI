@@ -28,6 +28,8 @@ import { TabService } from './services/tab.service';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { LastWordPipe } from './pipes/last-word.pipe';
 import { PrepTabNamePipe } from './pipes/prep-tab-name.pipe';
+import { DataPullService } from './services/data-pull.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -52,7 +54,8 @@ import { PrepTabNamePipe } from './pipes/prep-tab-name.pipe';
     AppRoutingModule,
     FormsModule,
     PopoverModule,
-    ChartsModule
+    ChartsModule,
+    HttpClientModule
   ],
   providers: [
     MemberService,
@@ -61,7 +64,8 @@ import { PrepTabNamePipe } from './pipes/prep-tab-name.pipe';
     ExRepositoryService,
     DashboardService,
     GlobalNavigationService,
-    TabService
+    TabService,
+    DataPullService
   ],
   bootstrap: [AppComponent]
 })

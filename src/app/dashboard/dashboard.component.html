@@ -1,11 +1,11 @@
-<div class="container-fluid" style="width: 75%">
+<div class="container-fluid" style="width: 75%" *ngIf="organization">
 
   <!-- Company meta data -->
   <div class="card col-md-12 member-card" style="border: 0; padding-top: 2%; padding-bottom: 2%; margin-bottom: 2%">
 
     <div class="row">
       <div class="col-md-4">
-        <h1>{{organization.id}}</h1>
+        <h1>{{organization.name}}</h1>
         <!-- Location -->
         <span class="orga-location">
           <i class="fa fa-map-marker" style="padding-left: 3px; padding-right: 15px;"></i>{{organization.location}}</span>
@@ -16,7 +16,7 @@
       </div>
       <!-- Website -->
       <span class="col-md-4 orga-link">
-        <a href="https://www.{{organization.websiteURL}}" target="_blank">
+        <a href="{{organization.websiteURL}}" target="_blank">
           <i class="fa fa-globe fa-4x" style="padding-right: 10px;"></i>{{organization.websiteURL}}
         </a>
         <br>
@@ -24,7 +24,7 @@
       </span>
       <!-- Github -->
       <span class="col-md-4 orga-link">
-        <a href="https://www.{{organization.githubURL}}" target="_blank">
+        <a href="{{organization.githubURL}}" target="_blank">
           <i class="fa fa-github fa-4x" style="padding-right: 10px;"></i>{{organization.githubURL}}</a>
       </span>
     </div>
@@ -120,9 +120,9 @@
 
     <!-- Graphs -->
     <div class="row justify-content-center pad-bottom">
-      <graph class="col-md-4" [chartData]="chartMembers" [organization]="organization.id"></graph>
-      <graph class="col-md-4" [chartData]="chartCommits" [organization]="organization.id"></graph>
-      <graph class="col-md-4" [chartData]="chartPRs" [organization]="organization.id"></graph>
+      <graph class="col-md-4" [chartData]="chartMembers" [organization]="organization.name"></graph>
+      <graph class="col-md-4" [chartData]="chartCommits" [organization]="organization.name"></graph>
+      <graph class="col-md-4" [chartData]="chartPRs" [organization]="organization.name"></graph>
     </div>
 
     <!-- Last Update -->
