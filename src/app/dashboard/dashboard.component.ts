@@ -7,7 +7,6 @@ import { DashboardService } from '../services/dashboard.service';
 import { GlobalNavigationService } from '../services/global-navigation.service';
 import { ChartJs, ChartJsData } from '../entities/chartJS';
 import { DataPullService } from '../services/data-pull.service';
-import { Info } from '../enums/INFO';
 
 
 @Component({
