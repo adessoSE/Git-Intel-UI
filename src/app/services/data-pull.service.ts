@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Organization } from '../entities/organization';
 import { Member } from '../entities/member';
+import { Repository } from '../entities/repository';
+import { Team } from '../entities/team';
 
 @Injectable()
 export class DataPullService {
@@ -23,6 +25,18 @@ export class DataPullService {
     this.params = new HttpParams().set('name', organizationName);
     let requestURL = this.gitStalkerURL + 'members';
     return this._http.post<Member[]>(requestURL, this.params);
+  }
+
+  requestRepositories(organizationName: string): Observable<Repository[]> {
+    this.params = new HttpParams().set('name', organizationName);
+    let requestURL = this.gitStalkerURL + 'repositories';
+    return this._http.post<Repository[]>(requestURL, this.params);    
+  }
+
+  requestTeams(organizationName: string): Observable<Team[]> {
+    this.params = new HttpParams().set('name', organizationName);
+    let requestURL = this.gitStalkerURL + 'teams';
+    return this._http.post<Team[]>(requestURL, this.params);    
   }
 
 }

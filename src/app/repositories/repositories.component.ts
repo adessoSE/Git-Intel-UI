@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Repository } from '../entities/repository';
 import { RepositoryService } from '../services/repository.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DataPullService } from '../services/data-pull.service';
 
 @Component({
   selector: 'app-repositories',
@@ -19,17 +20,29 @@ export class RepositoriesComponent implements OnInit {
   constructor(
     private repositoryService: RepositoryService,
     private activeRoute: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private dataPullService: DataPullService) { }
 
   /**
    * Uses @repositoryService to get data and initialize 
    * a copy to apply filter and sorting funcionality.      
    */
   ngOnInit() {
-    this.repositories = this.repositoryService.getRepositories();
-    this.repositoriesCopy = this.repositories;
+    this.determineOrganization();
 
     this.router.events.subscribe((val) => { this.orgName = this.activeRoute.snapshot.paramMap.get('organization'); });
+  }
+
+  determineOrganization() {
+    let org = this.activeRoute.snapshot.paramMap.get('organization');
+
+    this.dataPullService.requestRepositories(org).subscribe(data => this.processData(data));
+  }
+
+  processData(repo: Repository[]) {
+    this.repositories = repo;
+    this.repositoriesCopy = repo;
+    console.log(repo);
   }
 
   sortByAlphabet() {

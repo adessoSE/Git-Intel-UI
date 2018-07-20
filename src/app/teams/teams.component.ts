@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Team } from '../entities/team';
 import { TeamService } from '../services/team.service';
+import { DataPullService } from '../services/data-pull.service';
+import { ActivatedRoute } from '../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-teams',
@@ -14,12 +16,27 @@ export class TeamsComponent implements OnInit {
 
   sortByTag: string = "";
 
-  constructor(memberService: TeamService) {
-    this.teams = memberService.getTeams();
-    this.teamsCopy = this.teams;
+  constructor(
+    private memberService: TeamService,
+    private dataPullService: DataPullService,
+    private activeRoute: ActivatedRoute) {
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.determineOrganization();
+  }
+
+  determineOrganization() {
+    let org = this.activeRoute.snapshot.paramMap.get('organization');
+
+    this.dataPullService.requestTeams(org).subscribe(data => this.processData(data));
+  }
+
+  processData(teams: Team[]) {
+    this.teams = teams;
+    this.teamsCopy = teams;
+    console.log(teams);
+  }
 
   sortByAlphabet() {
     this.teams.sort((a: Team, b: Team) => a.name.localeCompare(b.name));
