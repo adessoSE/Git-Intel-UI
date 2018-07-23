@@ -6,6 +6,7 @@ export class Team {
     public description: string;
     public repositories: Repository[];
     public members: Member[];
+    public numOfMembers: number;
     public commits: number;
     public avatarURL: string;
     public githubURL: string;

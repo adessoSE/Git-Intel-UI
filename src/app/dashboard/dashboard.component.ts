@@ -32,13 +32,15 @@ export class DashboardComponent implements OnInit {
      * Subscribes to routing changes and fetches data to given organization.
      * Must be handled before onInit, because @orga will be undefined otherwise 
      */
-    router.events.subscribe(() => { this.determineOrganization(); });
+    // router.events.subscribe(() => { this.determineOrganization(); });
+    // console.log("Dashboard Component constructed")
   }
 
   /** 
    * Disables NavigationBar while on the Dashboard and requests chart data from Backend. 
    */
   ngOnInit() {
+    this.determineOrganization();
     this.globalNavService.showNavBar(false)
   }
 
@@ -60,9 +62,9 @@ export class DashboardComponent implements OnInit {
 
   processData(orga: Organization) {
     this.organization = orga;
-    this.chartMembers = orga.memberGrowth;
-    this.chartCommits = orga.internalRepositories;
-    this.chartPRs = orga.externalRepositories;
+    // this.chartMembers = orga.memberGrowth;
+    // this.chartCommits = orga.internalRepositories;
+    // this.chartPRs = orga.externalRepositories;
     console.log(orga);
   }
 }
