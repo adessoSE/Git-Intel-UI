@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Team } from '../entities/team';
-import { TeamService } from '../services/team.service';
 import { DataPullService } from '../services/data-pull.service';
 import { ActivatedRoute } from '../../../node_modules/@angular/router';
+import { GlobalNavigationService } from '../services/global-navigation.service';
 
 @Component({
   selector: 'app-teams',
@@ -17,9 +17,9 @@ export class TeamsComponent implements OnInit {
   sortByTag: string = "";
 
   constructor(
-    private memberService: TeamService,
     private dataPullService: DataPullService,
-    private activeRoute: ActivatedRoute) {
+    private activeRoute: ActivatedRoute,
+    private navService: GlobalNavigationService) {
   }
 
   ngOnInit() {
@@ -35,6 +35,7 @@ export class TeamsComponent implements OnInit {
   processData(teams: Team[]) {
     this.teams = teams;
     this.teamsCopy = teams;
+    this.navService.tellNumOfEntities(teams.length);
     console.log(teams);
   }
 

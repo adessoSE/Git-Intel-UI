@@ -3,6 +3,7 @@ import { MemberService } from '../services/member.service';
 import { Member } from '../entities/member';
 import { DataPullService } from '../services/data-pull.service';
 import { ActivatedRoute } from '../../../node_modules/@angular/router';
+import { GlobalNavigationService } from '../services/global-navigation.service';
 
 @Component({
   selector: 'app-members',
@@ -14,13 +15,16 @@ export class MembersComponent implements OnInit {
   members: Member[];
   membersCopy: Member[];
 
+  previousCommits: number[];
+
   sortByTag: string = "";
 
 
   constructor(
     private memberService: MemberService,
     private dataPullService: DataPullService,
-    private activeRoute: ActivatedRoute) { }
+    private activeRoute: ActivatedRoute,
+    private navService: GlobalNavigationService) { }
 
   /**
    * Uses @memberService to get data and initialize 
@@ -39,6 +43,7 @@ export class MembersComponent implements OnInit {
   processData(members: Member[]) {
     this.members = members;
     this.membersCopy = members;
+    this.navService.tellNumOfEntities(members.length);
     console.log(members);
   }
 
