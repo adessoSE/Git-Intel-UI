@@ -48,27 +48,38 @@ export class MembersComponent implements OnInit {
   }
 
   sortByAlphabet() {
-    this.members.sort((a: Member, b: Member) => a.name.localeCompare(b.name));
+    // If the user has no 'name', use 'username' for comparison
+    this.members.sort((a: Member, b: Member) => {
+      if (a.name == null) {
+        return a.username.localeCompare(b.name)
+      }
+      if (b.name == null) {
+        return a.name.localeCompare(b.username);
+      }
+      else {
+        return a.name.localeCompare(b.name);
+      }
+    });
     this.sortByTag = "Alphabet";
   }
 
   sortByCommits() {
     this.members.sort((a: Member, b: Member) => {
-      return +b.commits - +a.commits;
+      return +b.amountPreviousCommits - +a.amountPreviousCommits;
     });
     this.sortByTag = "Commits";
   }
 
   sortByPullRequests() {
     this.members.sort((a: Member, b: Member) => {
-      return +b.pullRequests - +a.pullRequests;
+      return +b.amountPreviousPullRequests - +a.amountPreviousPullRequests;
     });
     this.sortByTag = "Pull Requests";
   }
 
   sortByIssues() {
     this.members.sort((a: Member, b: Member) => {
-      return +b.issues - +a.issues;
+      return +b.amountPreviousIssues - +a.amountPreviousIssues;
     });
     this.sortByTag = "Issues";
   }
