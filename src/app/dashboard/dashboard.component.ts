@@ -63,8 +63,8 @@ export class DashboardComponent implements OnInit {
   processData(orga: Organization) {
     this.organization = orga;
     // this.chartMembers = orga.memberGrowth;
-    // this.chartCommits = orga.internalRepositories;
-    // this.chartPRs = orga.externalRepositories;
+    this.chartCommits = orga.internalRepositoriesCommits;
+    this.chartPRs = orga.externalRepositoriesPullRequests;
     console.log(orga);
   }
 }
