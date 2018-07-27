@@ -34,22 +34,22 @@
             </h4>
             <div class="card-text">
               <p>Activity Last 7 Days:</p>
-              <ul>'
+              <ul>
                 <li>
                   <div class="member-icon">
                     <i class="fa fa-stop-circle"></i>
                   </div>
-                  <span class="text-primary"> {{member.commits}}</span> Commits</li>
+                  <span class="text-primary"> {{member.amountPreviousCommits}}</span> Commits</li>
                 <li>
                   <div class="member-icon">
                     <i class="fa fa-code-fork"></i>
                   </div>
-                  <span class="text-primary"> {{member.pullRequests}}</span> Pull Requests</li>
+                  <span class="text-primary"> {{member.amountPreviousPullRequests}}</span> Pull Requests</li>
                 <li>
                   <div class="member-icon">
                     <i class="fa fa-exclamation-circle"></i>
                   </div>
-                  <span class="text-primary"> {{member.issues}}</span> Issues (Closed/Opened)</li>
+                  <span class="text-primary"> {{member.amountPreviousIssues}}</span> Issues (Closed/Opened)</li>
               </ul>
             </div>
           </div>
