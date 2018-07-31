@@ -49,7 +49,7 @@ export class TeamComponent implements OnInit {
 
   sortByCommits() {
     this.members.sort((a: Member, b: Member) => {
-      return +b.commits - +a.commits;
+      return +b.amountPreviousCommits - +a.amountPreviousCommits;
     });
 
     this.repositories.sort((a: Repository, b: Repository) => {
@@ -60,7 +60,7 @@ export class TeamComponent implements OnInit {
 
   sortByIssues() {
     this.members.sort((a: Member, b: Member) => {
-      return +b.issues - +a.issues;
+      return +b.amountPreviousIssues - +a.amountPreviousIssues;
     });
 
     this.repositories.sort((a: Repository, b: Repository) => {
@@ -71,7 +71,7 @@ export class TeamComponent implements OnInit {
 
   sortByPullRequests() {
     this.members.sort((a: Member, b: Member) => {
-      return +b.pullRequests - +a.pullRequests;
+      return +b.amountPreviousPullRequests - +a.amountPreviousPullRequests;
     });
 
     this.repositories.sort((a: Repository, b: Repository) => {
