@@ -39,3 +39,24 @@ ul {
 .pad-bottom {
     padding-bottom: 2%;
 }
+
+.profile-pic {
+    float: right; 
+    width: 100px; 
+    height: 100px;
+}
+
+.member-icon {
+    display: inline-block;
+    padding-right: 5%;
+}
+
+.small-member-icon {
+    display: inline-block;
+    padding-right: 5%;
+    width: 10%;
+}
+
+.orga-link {
+    margin-top: 20px;
+}
