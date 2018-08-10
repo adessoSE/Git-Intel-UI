@@ -15,6 +15,11 @@ export class DataPullService {
 
   constructor(private _http: HttpClient) { }
 
+  /**
+   * Set the organization's name as needed http parameter for the post operation.
+   * Post to the correct REST endpoint and receive appropriate data. 
+   * @param organizationName 
+   */
   requestOrganization(organizationName: string): Observable<Organization> {
     this.params = new HttpParams().set('name', organizationName);
     let requestURL = this.gitStalkerURL + 'organizationdetail';
@@ -33,14 +38,14 @@ export class DataPullService {
     this.params = new HttpParams().set('name', organizationName);
     let requestURL = this.gitStalkerURL + 'repositories';
     console.log("REPOSITORY DATA REQUESTED");
-    return this._http.post<Repository[]>(requestURL, this.params);    
+    return this._http.post<Repository[]>(requestURL, this.params);
   }
 
   requestTeams(organizationName: string): Observable<Team[]> {
     this.params = new HttpParams().set('name', organizationName);
     let requestURL = this.gitStalkerURL + 'teams';
     console.log("TEAM DATA REQUESTED");
-    return this._http.post<Team[]>(requestURL, this.params);    
+    return this._http.post<Team[]>(requestURL, this.params);
   }
 
 }
