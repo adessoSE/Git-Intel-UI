@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Member } from '../entities/member';
-import { MemberService } from '../services/member.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ChartJs, ChartJsData } from '../entities/chartJS';
-import { CHARTJS_DEFAULT } from '../mock-data';
+import { ChartJsData } from '../entities/chartJS';
+import { Member } from '../entities/member';
+import { DataPullService } from '../services/data-pull.service';
+import { GlobalNavigationService } from '../services/global-navigation.service';
 
 @Component({
   selector: 'app-member',
@@ -17,26 +17,52 @@ export class MemberComponent implements OnInit {
   chartPRs: ChartJsData;
   chartIssues: ChartJsData;
 
-  constructor(private memberService: MemberService, private route: ActivatedRoute,
-    private router: Router) {
+  constructor(
+    private dataPullService: DataPullService,
+    private activeRoute: ActivatedRoute,
+    private navService: GlobalNavigationService) {
 
-    // Must be handled before onInit, because organization will be undefined otherwise 
-    router.events.subscribe(() => { this.determineMember(); });
+    // Set the number of "entities" displayed in the breadcrumbs to 0 so they are disabled in navigation-bar.component.html.
+    this.navService.tellNumOfEntities(0);
+    this.determineMember();
   }
 
   ngOnInit() {
-    this.initGraphs();
+    // this.initGraphs();
   }
 
   determineMember() {
-    let usr = this.route.snapshot.paramMap.get('username');
-    this.member = this.memberService.getMemberDetails(usr);
+    let member = this.activeRoute.snapshot.paramMap.get('username');
+    this.findMemberByName(member);
+  }
+
+  findMemberByName(username: string) {
+    let organization = this.activeRoute.snapshot.paramMap.get('organization');
+    this.dataPullService.requestMembers(organization).subscribe(data => {
+      for (let member of data) {
+        if (member.username === username) {
+          this.member = member;
+        }
+      }
+      this.initGraphs();
+    });
   }
 
   initGraphs() {
-    console.log(this.member.organization.name);
-    this.chartIssues = this.member.previousIssues;
-    this.chartCommits = this.member.previousCommits;
-    this.chartPRs = this.member.previousPullRequests;
+    this.chartCommits = {
+      labels: this.member.previousCommits.chartJSLabels,
+      data: [{ data: this.member.previousCommits.chartJSDataset, label: "Commits" }],
+      caption: "Latest commits"
+    };
+    this.chartPRs = {
+      labels: this.member.previousPullRequests.chartJSLabels,
+      data: [{ data: this.member.previousPullRequests.chartJSDataset, label: "Pull Requests" }],
+      caption: "Latest Pull Requests"
+    };
+    this.chartIssues = {
+      labels: this.member.previousIssues.chartJSLabels,
+      data: [{ data: this.member.previousIssues.chartJSDataset, label: "Issues" }],
+      caption: "Latest Issues"
+    };
   }
 }

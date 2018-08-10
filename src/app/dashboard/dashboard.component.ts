@@ -56,15 +56,31 @@ export class DashboardComponent implements OnInit {
    */
   determineOrganization() {
     let org = this.activeRoute.snapshot.paramMap.get('organization');
-    
+
     this.dataPullService.requestOrganization(org).subscribe(data => this.processData(data));
   }
 
   processData(orga: Organization) {
     this.organization = orga;
-    // this.chartMembers = orga.memberGrowth;
-    this.chartCommits = orga.internalRepositoriesCommits;
-    this.chartPRs = orga.externalRepositoriesPullRequests;
     console.log(orga);
+    this.initGraphs();
+  }
+
+  initGraphs() {
+    this.chartCommits = {
+      labels: this.organization.internalRepositoriesCommits.chartJSLabels,
+      data: [{ data: this.organization.internalRepositoriesCommits.chartJSDataset, label: "Commits" }],
+      caption: "Commits to internal repositories"
+    };
+    this.chartPRs = {
+      labels: this.organization.externalRepositoriesPullRequests.chartJSLabels,
+      data: [{ data: this.organization.externalRepositoriesPullRequests.chartJSDataset, label: "Pull Requests" }],
+      caption: "Pull Requests to external repositories"
+    };
+    this.chartMembers = {
+      labels: this.organization.externalRepositoriesPullRequests.chartJSLabels,
+      data: [{ data: [72,72,73,73,75,75], label: "Members" }],
+      caption: "Members"
+    };
   }
 }

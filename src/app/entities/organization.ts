@@ -12,7 +12,7 @@ export class Organization {
     public numOfInternalRepos: number;
     public numOfExternalRepos: number;
     public lastUpdate: number;
-    public memberGrowth: ChartJsData;
-    public externalRepositoriesPullRequests: ChartJsData;
-    public internalRepositoriesCommits: ChartJsData;
+    public memberGrowth: any;
+    public externalRepositoriesPullRequests: any;
+    public internalRepositoriesCommits: any;
 }

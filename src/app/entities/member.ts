@@ -10,7 +10,7 @@ export class Member {
     public amountPreviousCommits: number;
     public amountPreviousPullRequests: number;
     public amountPreviousIssues: number;
-    public previousCommits: ChartJsData;
-    public previousPullRequests: ChartJsData;
-    public previousIssues: ChartJsData;
+    public previousCommits: any;
+    public previousPullRequests: any;
+    public previousIssues: any;
 }

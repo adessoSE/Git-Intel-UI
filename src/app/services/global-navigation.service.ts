@@ -28,13 +28,17 @@ export class GlobalNavigationService {
     this._numOfEntities.next(n);
   }
 
+  getNumOfEntities(): BehaviorSubject<number> {
+    return this._numOfEntities;
+  }
+
   showNavBar(ifShow: boolean) {
     this._showNavBar.next(ifShow);
   }
 
   onOpenNewTab(url: string) {
     let idxDash = url.indexOf("/");
-    let idxSubstr = idxDash === -1 ? url.length : idxDash; 
+    let idxSubstr = idxDash === -1 ? url.length : idxDash;
 
     let org = url.substring(0, idxSubstr);
 
