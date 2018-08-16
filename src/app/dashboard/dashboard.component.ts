@@ -61,9 +61,11 @@ export class DashboardComponent implements OnInit {
   }
 
   processData(orga: Organization) {
-    this.organization = orga;
-    console.log(orga);
-    this.initGraphs();
+    if (orga != null) {
+      this.organization = orga;
+      console.log(orga);
+      this.initGraphs();
+    }
   }
 
   initGraphs() {
@@ -79,7 +81,7 @@ export class DashboardComponent implements OnInit {
     };
     this.chartMembers = {
       labels: this.organization.externalRepositoriesPullRequests.chartJSLabels,
-      data: [{ data: [72,72,73,73,75,75], label: "Members" }],
+      data: [{ data: [72, 72, 73, 73, 75, 75], label: "Members" }],
       caption: "Members"
     };
   }

@@ -22,10 +22,6 @@ export class RepositoriesComponent implements OnInit {
     private dataPullService: DataPullService,
     private navService: GlobalNavigationService) { }
 
-  /**
-   * Uses @repositoryService to get data and initialize 
-   * a copy to apply filter and sorting funcionality.      
-   */
   ngOnInit() {
     this.determineOrganization();
   }

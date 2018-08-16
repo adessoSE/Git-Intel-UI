@@ -2,26 +2,35 @@ import { Injectable } from '@angular/core';
 import { GlobalNavigationService } from './global-navigation.service';
 import { Team } from '../entities/team';
 import { TEAMS } from '../mock-data';
+import { ActivatedRoute } from '../../../node_modules/@angular/router';
+import { DataPullService } from './data-pull.service';
 
 @Injectable()
 export class TeamService {
 
-  teams: Team [] = TEAMS;
+  team: Team;
 
-  constructor(private globalNavService: GlobalNavigationService) {
-    globalNavService.tellNumOfEntities(this.teams.length);
-   }
-
-  getTeams() {
-    return this.teams;
+  constructor(
+    private globalNavService: GlobalNavigationService,
+    private activeRoute: ActivatedRoute,
+    private dataPullService: DataPullService) {
+    // Set the number of "entities" displayed in the breadcrumbs to 0 so they are disabled in navigation-bar.component.html.
+    globalNavService.tellNumOfEntities(0);
   }
 
-  getTeamDetails(name: string) : Team {
-    for (const team of this.teams) {
-      if (team.name.toLocaleLowerCase === name.toLocaleLowerCase) {
-        return team;
+  determineTean() {
+    let team = this.activeRoute.snapshot.paramMap.get('name');
+    this.findTeamByName(team);
+  }
+
+  findTeamByName(teamname: string) {
+    let organization = this.activeRoute.snapshot.paramMap.get('organization');
+    this.dataPullService.requestTeams(organization).subscribe(data => {
+      for (let team of data) {
+        if (team.name === name) {
+          this.team = team;
+        }
       }
-    }
+    });
   }
-
 }
