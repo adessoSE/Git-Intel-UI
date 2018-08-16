@@ -48,4 +48,11 @@ export class DataPullService {
     return this._http.post<Team[]>(requestURL, this.params);
   }
 
+  requestExternalRepositories(organizationName: string): Observable<Repository[]> {
+    this.params = new HttpParams().set('name', organizationName);
+    let requestURL = this.gitStalkerURL + 'externalrepositories';
+    console.log("EXTERNAL REPOSITORY DATA REQUESTED");
+    return this._http.post<Repository[]>(requestURL, this.params);
+  }
+
 }
