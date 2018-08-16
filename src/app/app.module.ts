@@ -17,18 +17,12 @@ import { TeamComponent } from './team/team.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { GraphComponent } from './graph/graph.component';
 
-import { MemberService } from './services/member.service';
-import { TeamService } from './services/team.service';
-import { RepositoryService } from './services/repository.service';
-import { ExRepositoryService } from './services/ex-repository.service';
-import { DashboardService } from './services/dashboard.service';
 import { GlobalNavigationService } from './services/global-navigation.service';
-import { TabService } from './services/tab.service';
+import { DataPullService } from './services/data-pull.service';
 
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { LastWordPipe } from './pipes/last-word.pipe';
 import { PrepTabNamePipe } from './pipes/prep-tab-name.pipe';
-import { DataPullService } from './services/data-pull.service';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -58,13 +52,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   providers: [
-    MemberService,
-    TeamService,
-    RepositoryService,
-    ExRepositoryService,
-    DashboardService,
     GlobalNavigationService,
-    TabService,
     DataPullService
   ],
   bootstrap: [AppComponent]

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MemberService } from '../services/member.service';
+import { ActivatedRoute } from '../../../node_modules/@angular/router';
 import { Member } from '../entities/member';
 import { DataPullService } from '../services/data-pull.service';
-import { ActivatedRoute } from '../../../node_modules/@angular/router';
 import { GlobalNavigationService } from '../services/global-navigation.service';
 
 @Component({
@@ -21,7 +20,6 @@ export class MembersComponent implements OnInit {
 
 
   constructor(
-    private memberService: MemberService,
     private dataPullService: DataPullService,
     private activeRoute: ActivatedRoute,
     private navService: GlobalNavigationService) { }

@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { ChartJsData } from '../entities/chartJS';
 import { Organization } from '../entities/organization';
-
-import { DashboardService } from '../services/dashboard.service';
-import { GlobalNavigationService } from '../services/global-navigation.service';
-import { ChartJs, ChartJsData } from '../entities/chartJS';
 import { DataPullService } from '../services/data-pull.service';
+import { GlobalNavigationService } from '../services/global-navigation.service';
+
+
 
 
 @Component({
@@ -22,7 +21,6 @@ export class DashboardComponent implements OnInit {
   chartPRs: ChartJsData;
 
   constructor(
-    private service: DashboardService,
     private activeRoute: ActivatedRoute,
     private router: Router,
     private globalNavService: GlobalNavigationService,
