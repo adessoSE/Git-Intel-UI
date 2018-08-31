@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd, UrlSegment } from '@angular/router';
-
+import { ActivatedRoute, NavigationEnd, Router, UrlSegment } from '@angular/router';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
-
-import { PopoverModule } from "ngx-popover";
-
-import { HomeComponent } from './home/home.component';
 import { Tab } from './entities/tab';
-
 import { GlobalNavigationService } from './services/global-navigation.service';
+
+
+
+
 
 @Component({
 	selector: 'app-root',
