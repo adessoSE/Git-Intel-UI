@@ -44,25 +44,18 @@ export class TeamsComponent implements OnInit {
     this.sortByTag = "Alphabet";
   }
 
-  sortByCommits() {
-    this.teams.sort((a: Team, b: Team) => {
-      return +b.commits - +a.commits;
-    });
-    this.sortByTag = "Commits";
-  }
-
   sortByMembers() {
     this.teams.sort((a: Team, b: Team) => {
-      return +b.members.length - +a.members.length;
+      return +b.teamMembers.length - +a.teamMembers.length;
     });
-    this.sortByTag = "Member size";
+    this.sortByTag = "Members";
   }
 
   sortByRepositories() {
     this.teams.sort((a: Team, b: Team) => {
-      return +b.repositories.length - +a.repositories.length;
+      return +b.teamRepositories.length - +a.teamRepositories.length;
     });
-    this.sortByTag = "Pull Requests";
+    this.sortByTag = "Repositories";
   }
 
   search(term: string) {
