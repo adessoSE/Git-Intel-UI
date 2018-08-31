@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { ChartJsData } from '../entities/chartJS';
 import { Organization } from '../entities/organization';
 import { DataPullService } from '../services/data-pull.service';
 import { GlobalNavigationService } from '../services/global-navigation.service';
-
-
-
 
 @Component({
   selector: 'app-dashboard',
@@ -20,6 +17,8 @@ export class DashboardComponent implements OnInit {
   chartCommits: ChartJsData;
   chartPRs: ChartJsData;
 
+  navigationSubscription;
+
   constructor(
     private activeRoute: ActivatedRoute,
     private router: Router,
@@ -30,8 +29,11 @@ export class DashboardComponent implements OnInit {
      * Subscribes to routing changes and fetches data to given organization.
      * Must be handled before onInit, because @orga will be undefined otherwise 
      */
-    // router.events.subscribe(() => { this.determineOrganization(); });
-    // console.log("Dashboard Component constructed")
+    this.navigationSubscription = router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.determineOrganization(); 
+      }
+    });
   }
 
   /** 
