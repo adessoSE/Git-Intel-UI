@@ -92,10 +92,7 @@ export class ExternalRepositoriesComponent implements OnInit {
   }
 
   sumOf(numbers: Array<number>) {
-    let sum = 0;
-    numbers.forEach(number => {
-      sum += number;
-    })
+    let sum = numbers.reduce((acc, cur) => acc + cur, 0);
     return sum;
   }
 }
