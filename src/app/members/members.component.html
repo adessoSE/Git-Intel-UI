@@ -29,9 +29,9 @@
         <a routerLink={{member.username}}>
           <div class="card-body">
             <!-- If a user does not have a 'name', display the 'username' instead-->
-            <h4 class="card-title">{{member.name != null ? member.name : member.username}}
+            <h3 class="card-title">{{member.name != null ? member.name : member.username}}
               <img class="profile-pic" src="{{member.avatarURL}}" alt="{{member.name}}'s github profile picture'">
-            </h4>
+            </h3>
             <div class="card-text">
               <p>Activity Last 7 Days:</p>
               <ul>

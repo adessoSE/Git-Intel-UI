@@ -44,6 +44,8 @@ ul {
     float: right; 
     width: 100px; 
     height: 100px;
+    border-radius: 0.5em;
+    margin-bottom: 5%;
 }
 
 .member-icon {

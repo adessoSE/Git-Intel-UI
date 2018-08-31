@@ -19,11 +19,11 @@ export class TeamComponent implements OnInit {
 
   team: Team;
 
-  members: Member[];
-  membersCopy: Member[];
+  teamMembers: Member[];
+  teamMembersCopy: Member[];
 
-  repositories: Repository[];
-  repositoriesCopy: Repository[];
+  teamRepositories: Repository[];
+  teamRepositoriesCopy: Repository[];
 
   constructor(
     private navService: GlobalNavigationService,
@@ -48,6 +48,8 @@ export class TeamComponent implements OnInit {
       for (let team of data) {
         if (team.name === teamname) {
           this.team = team;
+          this.teamMembers = team.teamMembers;
+          this.teamRepositories = team.teamRepositories;
           console.log(team);
         }
       }
@@ -55,50 +57,50 @@ export class TeamComponent implements OnInit {
   }
 
   sortByAlphabet() {
-    this.members.sort((a: Member, b: Member) => a.name.localeCompare(b.name));
-    this.repositories.sort((a: Repository, b: Repository) => a.name.localeCompare(b.name));
+    this.teamMembers.sort((a: Member, b: Member) => a.name.localeCompare(b.name));
+    this.teamRepositories.sort((a: Repository, b: Repository) => a.name.localeCompare(b.name));
     this.sortByTag = "Alphabet";
   }
 
   sortByCommits() {
-    this.members.sort((a: Member, b: Member) => {
+    this.teamMembers.sort((a: Member, b: Member) => {
       return +b.amountPreviousCommits - +a.amountPreviousCommits;
     });
 
-    this.repositories.sort((a: Repository, b: Repository) => {
+    this.teamRepositories.sort((a: Repository, b: Repository) => {
       return +b.commits - +a.commits;
     });
     this.sortByTag = "Commits";
   }
 
   sortByIssues() {
-    this.members.sort((a: Member, b: Member) => {
+    this.teamMembers.sort((a: Member, b: Member) => {
       return +b.amountPreviousIssues - +a.amountPreviousIssues;
     });
 
-    this.repositories.sort((a: Repository, b: Repository) => {
+    this.teamRepositories.sort((a: Repository, b: Repository) => {
       return +b.issues - +a.issues;
     });
     this.sortByTag = "Issues";
   }
 
   sortByPullRequests() {
-    this.members.sort((a: Member, b: Member) => {
+    this.teamMembers.sort((a: Member, b: Member) => {
       return +b.amountPreviousPullRequests - +a.amountPreviousPullRequests;
     });
 
-    this.repositories.sort((a: Repository, b: Repository) => {
+    this.teamRepositories.sort((a: Repository, b: Repository) => {
       return +b.pullRequests - +a.pullRequests;
     });
     this.sortByTag = "Pull Requests";
   }
 
   search(term: string) {
-    this.members = this.membersCopy.filter(e => {
+    this.teamMembers = this.teamMembersCopy.filter(e => {
       return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
     });
 
-    this.repositories = this.repositoriesCopy.filter(e => {
+    this.teamRepositories = this.teamRepositoriesCopy.filter(e => {
       return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
     });
   }

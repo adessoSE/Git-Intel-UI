@@ -42,50 +42,32 @@
   </div>
 
   <!-- Cards displaying users and user info -->
+  <h3>Team Members</h3>
   <div class="row justify-content-center graph-row" *ngIf="cbMembers.checked">
     <!-- Members -->
-    <div class="col-md-4 member-card" *ngFor="let member of members">
+    <div class="col-md-4 member-card" *ngFor="let member of teamMembers">
       <div class="card border-primary component-card">
         <a routerLink={{member.username}}>
           <div class="card-body">
-            <h4 class="card-title">{{member.name}}
-              <picture style="float: right;">
-                <i class="fa fa-user fa-3x"></i>
-              </picture>
+            <h4 class="card-title">{{member.name != null ? member.name : member.username}}
+              <img class="profile-pic" src="{{member.avatarURL}}" alt="{{member.name}}'s github profile picture'">
+              <br>
+              <h5>({{member.username}})</h5>
             </h4>
-            <div class="card-text">
-              <p>Activity Last 7 Days:</p>
-              <ul>
-                <li>
-                  <div class="member-icon">
-                    <i class="fa fa-stop-circle"></i>
-                  </div>
-                  <span class="text-primary"> {{member.commits}}</span> Commits</li>
-                <li>
-                  <div class="member-icon">
-                    <i class="fa fa-code-fork"></i>
-                  </div>
-                  <span class="text-primary"> {{member.pullRequests}}</span> Pull Requests</li>
-                <li>
-                  <div class="member-icon">
-                    <i class="fa fa-exclamation-circle"></i>
-                  </div>
-                  <span class="text-primary"> {{member.issues}}</span> Issues (Closed/Opened)</li>
-              </ul>
-            </div>
           </div>
         </a>
       </div>
     </div>
   </div>
 
+  <h3>Team Repositories</h3>
   <!--Cards displaying Repositories and Repository info-->
   <div class="row justify-content-center graph-row" *ngIf="cbRepos.checked">
     <!-- Repositories -->
-    <div class="col-md-12 member-card" *ngFor="let repo of team.teamRepositories">
+    <div class="col-md-12 member-card" *ngFor="let repo of teamRepositories">
 
       <div class="card border-primary component-card">
-        <a href="{{repo.githubURL}}" target="_blank">
+        <a href="{{repo.url}}" target="_blank">
           <div class="card-body">
             <div class="card-title">
               <h4>{{repo.name}}
