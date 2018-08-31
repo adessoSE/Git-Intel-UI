@@ -13,7 +13,7 @@ import { TeamComponent } from './team/team.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: ':organization', component: DashboardComponent },
+  { path: ':organization', component: DashboardComponent, runGuardsAndResolvers: 'paramsChange' },
   { path: ':organization/members', component: MembersComponent },
   { path: ':organization/members/:username', component: MemberComponent },
   { path: ':organization/teams', component: TeamsComponent },
@@ -24,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
