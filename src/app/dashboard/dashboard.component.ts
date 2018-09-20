@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { PopoverModule } from "ngx-popover";
-
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ChartJsData } from '../entities/chartJS';
 import { Organization } from '../entities/organization';
-
-import { DashboardService } from '../services/dashboard.service';
+import { DataPullService } from '../services/data-pull.service';
 import { GlobalNavigationService } from '../services/global-navigation.service';
-import { CHARTJS_DEFAULT } from '../mock-data';
-import { ChartJs, ChartJsData } from '../entities/chartJS';
-
 
 @Component({
   selector: 'app-dashboard',
@@ -22,24 +17,31 @@ export class DashboardComponent implements OnInit {
   chartCommits: ChartJsData;
   chartPRs: ChartJsData;
 
+  navigationSubscription;
+
   constructor(
-    private service: DashboardService,
     private activeRoute: ActivatedRoute,
     private router: Router,
-    private globalNavService: GlobalNavigationService) {
+    private globalNavService: GlobalNavigationService,
+    private dataPullService: DataPullService) {
 
     /**
      * Subscribes to routing changes and fetches data to given organization.
      * Must be handled before onInit, because @orga will be undefined otherwise 
      */
-    router.events.subscribe(() => { this.determineOrganization(); });
+    this.navigationSubscription = router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.determineOrganization(); 
+      }
+    });
   }
 
   /** 
    * Disables NavigationBar while on the Dashboard and requests chart data from Backend. 
    */
   ngOnInit() {
-    this.globalNavService.showNavBar(false);
+    this.determineOrganization();
+    this.globalNavService.showNavBar(false)
   }
 
   /** 
@@ -54,10 +56,33 @@ export class DashboardComponent implements OnInit {
    */
   determineOrganization() {
     let org = this.activeRoute.snapshot.paramMap.get('organization');
-    this.organization = this.service.getOrganization(org);
 
-    this.chartMembers = this.organization.memberGrowth;
-    this.chartCommits = this.organization.internalRepositories
-    this.chartPRs = this.organization.externalRepositories;
+    this.dataPullService.requestOrganization(org).subscribe(data => this.processData(data));
+  }
+
+  processData(orga: Organization) {
+    if (orga != null) {
+      this.organization = orga;
+      console.log(orga);
+      this.initGraphs();
+    }
+  }
+
+  initGraphs() {
+    this.chartCommits = {
+      labels: this.organization.internalRepositoriesCommits.chartJSLabels,
+      data: [{ data: this.organization.internalRepositoriesCommits.chartJSDataset, label: "Commits" }],
+      caption: "Commits to internal repositories"
+    };
+    this.chartPRs = {
+      labels: this.organization.externalRepositoriesPullRequests.chartJSLabels,
+      data: [{ data: this.organization.externalRepositoriesPullRequests.chartJSDataset, label: "Pull Requests" }],
+      caption: "Pull Requests to external repositories"
+    };
+    this.chartMembers = {
+      labels: this.organization.externalRepositoriesPullRequests.chartJSLabels,
+      data: [{ data: [72, 72, 73, 73, 75, 75], label: "Members" }],
+      caption: "Members"
+    };
   }
 }

@@ -14,7 +14,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({ name: 'prepTabName' })
 export class PrepTabNamePipe implements PipeTransform {
 
-
     transform(value: string) {
         let retVal = value;
 

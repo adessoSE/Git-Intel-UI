@@ -6,8 +6,8 @@
       </button>
 
       <li class="nav-item" *ngFor="let route of routeHistory" style="display: inline-block;">
-        <a class="nav-link" [routerLink]="route">/ {{route | lastWord | capitalize}} </a>
-      </li>({{numOfEntities}})
+        <a class="nav-link" [routerLink]="route">/ {{route | lastWord | capitalize}}</a>
+      </li><span *ngIf="numOfEntities > 0">({{numOfEntities}})</span>
     </h2>
   </div>
 </ng-container>

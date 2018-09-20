@@ -34,7 +34,7 @@
     <!-- Repositories -->
     <div class="col-md-12 member-card" *ngFor="let repo of repositories">
       <div class="card border-primary component-card">
-        <a href="https://www.github.com/{{orgName}}/{{repo.name}}" target="_blank">
+        <a href="{{repo.url}}" target="_blank">
           <div class="card-body">
             <div class="card-title">
               <h4>{{repo.name}}
@@ -42,9 +42,7 @@
                   <li class="mr-5">
                     <i class="fa fa-code list-inline-item"></i>
                     <!--Only insert '/' after an element if it is not the last one-->
-                    <span *ngFor="let lang of repo.languages, let last = last">{{lang}}
-                      <span *ngIf="!last">/</span>
-                    </span>
+                    <span>{{repo.programmingLanguage}}</span>
                   </li>
                   <li class="mr-5">
                     <i class="fa fa-code-fork list-inline-item"></i>

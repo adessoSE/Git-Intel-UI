@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from "rxjs/Observable";
-import { ActivatedRoute, Router } from '@angular/router';
-
 import { Tab } from '../entities/tab';
+
 
 @Injectable()
 export class GlobalNavigationService {
@@ -22,10 +21,14 @@ export class GlobalNavigationService {
   private _tabClicked: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public onClickTabEmitter: Observable<boolean> = this._tabClicked.asObservable();
 
-  constructor(private activeRoute: ActivatedRoute, private router: Router) { }
+  constructor() { }
 
   tellNumOfEntities(n: number) {
     this._numOfEntities.next(n);
+  }
+
+  getNumOfEntities(): BehaviorSubject<number> {
+    return this._numOfEntities;
   }
 
   showNavBar(ifShow: boolean) {
@@ -34,10 +37,10 @@ export class GlobalNavigationService {
 
   onOpenNewTab(url: string) {
     let idxDash = url.indexOf("/");
-    let idxSubstr = idxDash === -1 ? url.length : idxDash; 
+    let idxSubstr = idxDash === -1 ? url.length : idxDash;
 
     let org = url.substring(0, idxSubstr);
-
+    
     let tab = { org: org, url: url };
     this._openNewTab.next(tab);
   }

@@ -7,10 +7,10 @@ export class Member {
     public avatarURL: string;
     public githubURL: string;
     public organization: Organization;
-    public commits: number;
-    public pullRequests: number;
-    public issues: number;
-    public previousCommits: ChartJsData;
-    public previousPullRequests: ChartJsData;
-    public previousIssues: ChartJsData;
+    public amountPreviousCommits: number;
+    public amountPreviousPullRequests: number;
+    public amountPreviousIssues: number;
+    public previousCommits: any;
+    public previousPullRequests: any;
+    public previousIssues: any;
 }

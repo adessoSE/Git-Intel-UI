@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit {
    */
   ngOnInit() {
     this.searchHistory.add("adessoAG");   // Dummy data
-    this.searchHistory.add("microsoft");  // Dummy data
     
     this.globalNavService.showNavBar(false);
 

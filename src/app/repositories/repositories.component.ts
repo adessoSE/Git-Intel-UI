@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Repository } from '../entities/repository';
-import { RepositoryService } from '../services/repository.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { DataPullService } from '../services/data-pull.service';
+import { GlobalNavigationService } from '../services/global-navigation.service';
 
 @Component({
   selector: 'app-repositories',
@@ -17,19 +18,25 @@ export class RepositoriesComponent implements OnInit {
   sortByTag: string = "";
 
   constructor(
-    private repositoryService: RepositoryService,
     private activeRoute: ActivatedRoute,
-    private router: Router) { }
+    private dataPullService: DataPullService,
+    private navService: GlobalNavigationService) { }
 
-  /**
-   * Uses @repositoryService to get data and initialize 
-   * a copy to apply filter and sorting funcionality.      
-   */
   ngOnInit() {
-    this.repositories = this.repositoryService.getRepositories();
-    this.repositoriesCopy = this.repositories;
+    this.determineOrganization();
+  }
 
-    this.router.events.subscribe((val) => { this.orgName = this.activeRoute.snapshot.paramMap.get('organization'); });
+  determineOrganization() {
+    let org = this.activeRoute.snapshot.paramMap.get('organization');
+
+    this.dataPullService.requestRepositories(org).subscribe(data => this.processData(data));
+  }
+
+  processData(repo: Repository[]) {
+    this.repositories = repo;
+    this.repositoriesCopy = repo;
+    this.navService.tellNumOfEntities(repo.length);
+    console.log(repo);
   }
 
   sortByAlphabet() {

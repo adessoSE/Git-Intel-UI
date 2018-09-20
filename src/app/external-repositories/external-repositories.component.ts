@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Repository } from '../entities/repository';
-import { ExRepositoryService } from '../services/ex-repository.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { DataPullService } from '../services/data-pull.service';
+import { GlobalNavigationService } from '../services/global-navigation.service';
 
 @Component({
   selector: 'app-external-repositories',
@@ -16,20 +17,25 @@ export class ExternalRepositoriesComponent implements OnInit {
   sortByTag: string = "";
 
   constructor(
-    private extRepoService: ExRepositoryService,
     private activeRoute: ActivatedRoute,
-    private router: Router) { }
+    private dataPullService: DataPullService,
+    private navService: GlobalNavigationService) { }
 
-  /**
-   * Uses @extRepoService to get data and initialize 
-   * a copy to apply filter and sorting funcionality.      
-   */
   ngOnInit() {
-    this.extRepos = this.extRepoService.getExRepositories();
-    this.extReposCopy = this.extRepos;
+    this.determineOrganization();
+  }
 
-    this.router.events.subscribe((val) => { this.orgName = this.activeRoute.snapshot.paramMap.get('organization'); });
-    console.log(this.extRepos[0].contributor.username)
+  determineOrganization() {
+    let org = this.activeRoute.snapshot.paramMap.get('organization');
+
+    this.dataPullService.requestExternalRepositories(org).subscribe(data => this.processData(data));
+  }
+
+  processData(repo: Repository[]) {
+    this.extRepos = repo;
+    this.extReposCopy = repo;
+    this.navService.tellNumOfEntities(repo.length);
+    console.log(repo);
   }
 
   sortByAlphabet() {
@@ -83,5 +89,10 @@ export class ExternalRepositoriesComponent implements OnInit {
         return (e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase()) || e.contributor.username.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase()));
       });
     }, 50);
+  }
+
+  sumOf(numbers: Array<number>) {
+    let sum = numbers.reduce((acc, cur) => acc + cur, 0);
+    return sum;
   }
 }

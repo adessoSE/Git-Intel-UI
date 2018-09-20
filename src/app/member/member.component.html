@@ -1,41 +1,44 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="member">
 
   <div class="card border-primary col-md-12 member-card" style="padding-bottom: 1%; margin-bottom: 2%">
     <div class="row">
       <div class="col-md-4" style="padding-left: 1.5%">
         <h1>{{member.name}}</h1>
+        <h4>({{member.username}})</h4>
       </div>
       <span class="col-md-4 orga-link">
-        <a href="https://www.{{member.githubURL}}" target="_blank ">
+        <a href="{{member.githubURL}}" target="_blank ">
           <i class="fa fa-github fa-4x " style="padding-right: 10px; "></i>{{member.githubURL}}
         </a>
       </span>
-      <span>
-        <img class="img-responsive img-circle float-right " width="50% " height="50% " src="https://www.gruenderstory.de/wp-content/uploads/2013/08/github-logo-300x300.png ">
+      <span class="col-md-4">
+        <a href="{{member.avatarURL}}" target="_blank">
+          <img class="img-responsive img-circle float-right " width="50% " height="50% " src="{{member.avatarURL}}" class="profile-pic">
+        </a>
       </span>
     </div>
 
     <div class="card border-secondary col-md-12 member-card " style="border : 0; ">
       <div class="row ">
         <div class="col-md-4 ">
-          <div class="member-icon ">
+          <div class="member-icon">
             <i class="fa fa-stop-circle fa-3x "></i>
           </div>
-          <span class=" ">{{member.commits}} Commits</span>
+          <span class="text-primary">{{member.amountPreviousCommits}}</span> Commits
         </div>
 
         <div class="col-md-4 ">
-          <div class="member-icon ">
+          <div class="member-icon">
             <i class="fa fa-code-fork fa-3x "></i>
           </div>
-          <span class=" ">{{member.pullRequests}} Pull Requests</span>
+          <span class="text-primary">{{member.amountPreviousPullRequests}}</span> Pull Requests
         </div>
 
         <div class="col-md-4 ">
-          <div class="member-icon ">
+          <div class="member-icon">
             <i class="fa fa-exclamation-circle fa-3x "></i>
           </div>
-          <span class=" "> {{member.issues}}</span> Issues (Closed/Opened)
+          <span class="text-primary"> {{member.amountPreviousIssues}}</span> Issues (Closed/Opened)
         </div>
       </div>
 
@@ -43,9 +46,9 @@
   </div>
 
   <div>
-    <graph class="col-md-4 " [chartData]="chartCommits" [organization]="member.organization.id "></graph>
-    <graph class="col-md-4 " [chartData]="chartPRs" [organization]="member.organization.id "></graph>
-    <graph class="col-md-4 " [chartData]="chartIssues" [organization]="member.organization.id "></graph>
+    <graph class="col-md-4 " [chartData]="chartCommits" [organization]="organization"></graph>
+    <graph class="col-md-4 " [chartData]="chartPRs" [organization]="organization"></graph>
+    <graph class="col-md-4 " [chartData]="chartIssues" [organization]="organization"></graph>
   </div>
 
 

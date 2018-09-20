@@ -1,7 +1,7 @@
 import { ChartJsData } from "./chartJS";
 
 export class Organization {
-    public id: string;
+    public name: string;
     public description: string;
     public location: string;
     public websiteURL: string;
@@ -12,7 +12,7 @@ export class Organization {
     public numOfInternalRepos: number;
     public numOfExternalRepos: number;
     public lastUpdate: number;
-    public memberGrowth: ChartJsData;
-    public externalRepositories: ChartJsData;
-    public internalRepositories: ChartJsData;
+    public memberGrowth: any;
+    public externalRepositoriesPullRequests: any;
+    public internalRepositoriesCommits: any;
 }

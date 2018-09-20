@@ -32,10 +32,14 @@
         <!-- Contributing user -->
         <div class="float-right list-inline" style="padding-left: 15px; padding-top: 15px">
           <span class="badge badge-info" style="display: inline-block;">
-            <i class="fa fa-user mr-4 fa"></i>{{repo.contributor.username}}
+            <i class="fa fa-user mr-4 fa"></i>
+            <span *ngFor="let user of repo.contributor, let last = last">
+              <a href="{{user.githubURL}}" target="_blank" id="userLink">{{user.username}}</a>
+              <span *ngIf="!last">, </span>
+            </span>
           </span>
         </div>
-        <a href="https://www.github.com/{{orgName}}/{{repo.name}}" target="_blank">
+        <a href="{{repo.url}}" target="_blank">
           <div class="card-body">
             <div class="card-title">
               <h4>{{repo.name}}
@@ -43,9 +47,7 @@
                   <li class="mr-5">
                     <i class="fa fa-code list-inline-item"></i>
                     <!--Only insert '/' after an element if it is not the last one-->
-                    <span *ngFor="let lang of repo.languages, let last = last">{{lang}}
-                      <span *ngIf="!last">/</span>
-                    </span>
+                    <span>{{repo.programmingLanguage}}</span>
                   </li>
                   <li class="mr-5">
                     <i class="fa fa-code-fork list-inline-item"></i>
@@ -65,18 +67,21 @@
             </div>
 
             <div class="card-text pb-3">
+              <p>Activity last 7 days:</p>
               <div class="team-info-container">
+                <div>
+                </div>
                 <span>
                   <i class="fa fa-stop-circle mr-3 fa-3x"></i>
-                  <span class="text-primary">{{repo.commits}}</span> Commits
+                  <span class="text-primary">{{sumOf(repo.previousCommits.chartJSDataset)}}</span> Commits
                 </span>
                 <span>
                   <i class="fa fa-question-circle-o mr-3 fa-3x"></i>
-                  <span class="text-primary">{{repo.pullRequests}}</span> Pull Requests
+                  <span class="text-primary">{{sumOf(repo.previousPullRequests.chartJSDataset)}}</span> Pull Requests
                 </span>
                 <span>
                   <i class="fa fa-exclamation-circle mr-3 fa-3x"></i>
-                  <span class="text-primary">{{repo.issues}}</span> Issues
+                  <span class="text-primary">{{sumOf(repo.previousIssues.chartJSDataset)}}</span> Issues
                 </span>
               </div>
 
