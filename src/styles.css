@@ -3,7 +3,7 @@
 @import "https://bootswatch.com/4/cerulean/bootstrap.min.css";
 
 /* Simple links everywhere */
-a, a:visited, a:active {
+a, a:active {
     color: inherit !important;
     text-decoration:none !important;
 }
@@ -65,4 +65,12 @@ ul {
 
 #userLink:hover { 
     color: #428bca !important;
+}
+
+table {
+    margin: 10px;
+}
+
+.customContainer {
+    padding-bottom: 2em;
 }

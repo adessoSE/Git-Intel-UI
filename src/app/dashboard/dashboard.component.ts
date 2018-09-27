@@ -27,13 +27,15 @@ export class DashboardComponent implements OnInit {
 
     /**
      * Subscribes to routing changes and fetches data to given organization.
-     * Must be handled before onInit, because @orga will be undefined otherwise 
+     * Must be handled before onInit, because @orga will be undefined otherwise
+     * 
+     * THE BELOW CODE FIXES TABS BUT CREATS MEMORY LEAKS INSTEAD...
      */
-    this.navigationSubscription = router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.determineOrganization(); 
-      }
-    });
+    // this.navigationSubscription = router.events.subscribe((event) => {
+    //   if (event instanceof NavigationEnd) {
+    //     this.determineOrganization(); 
+    //   }
+    // });
   }
 
   /** 

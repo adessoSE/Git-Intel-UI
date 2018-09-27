@@ -13,4 +13,7 @@ export class Member {
     public previousCommits: any;
     public previousPullRequests: any;
     public previousIssues: any;
+    public previousCommitsWithLink: any;
+    public previousPullRequestsWithLink: any;
+    public previousIssuesWithLink: any;
 }
