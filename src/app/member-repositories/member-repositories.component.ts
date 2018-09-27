@@ -12,8 +12,6 @@ import { Organization } from '../entities/organization';
 })
 export class MemberRepositoriesComponent implements OnInit {
 
-  @Input() organization: Organization;
-
   repositories: Repository[];
   repositoriesCopy: Repository[];
 
@@ -31,16 +29,14 @@ export class MemberRepositoriesComponent implements OnInit {
     determineOrganization() {
       let org = this.activeRoute.snapshot.paramMap.get('organization');
   
-      this.dataPullService.requestOrganization(org).subscribe(data => this.processData(data));
+      this.dataPullService.requestMemberRepositories(org).subscribe(data => this.processData(data));
     }
   
-    processData(orga: Organization) {
-      if (orga != null) {
-        this.organization = orga;
-        console.log(orga);
-        this.repositories = this.organization.createdReposByMembers;
-        this.repositoriesCopy = this.repositories;
-      }
+    processData(repo: Repository[]) {
+      this.repositories = repo;
+      this.repositoriesCopy = repo;
+      this.navService.tellNumOfEntities(repo.length);
+      console.log(repo);
     }
 
   sortByAlphabet() {
@@ -86,5 +82,13 @@ export class MemberRepositoriesComponent implements OnInit {
       return +b.stars - +a.stars;
     });
     this.sortByTag = "Stars";
+  }
+
+  search(term: string) {
+    setTimeout(() => {
+      this.repositories = this.repositoriesCopy.filter(e => {
+        return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
+      });
+    }, 50);
   }
 }
