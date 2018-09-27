@@ -1,6 +1,5 @@
 <div class="container-fluid" *ngIf="member">
-
-  <div class="card border-primary col-md-12 member-card" style="padding-bottom: 1%; margin-bottom: 2%">
+  <div class="card border-primary col-md-12 member-card customContainer" style="margin-bottom: 2%">
     <div class="row">
       <div class="col-md-4" style="padding-left: 1.5%">
         <h1>{{member.name}}</h1>
@@ -13,7 +12,8 @@
       </span>
       <span class="col-md-4">
         <a href="{{member.avatarURL}}" target="_blank">
-          <img class="img-responsive img-circle float-right " width="50% " height="50% " src="{{member.avatarURL}}" class="profile-pic">
+          <img class="img-responsive img-circle float-right " width="50% " height="50% " src="{{member.avatarURL}}"
+            class="profile-pic">
         </a>
       </span>
     </div>
@@ -45,12 +45,44 @@
     </div>
   </div>
 
-  <div>
+  <div class="row col-md-12 customContainer">
     <graph class="col-md-4 " [chartData]="chartCommits" [organization]="organization"></graph>
     <graph class="col-md-4 " [chartData]="chartPRs" [organization]="organization"></graph>
     <graph class="col-md-4 " [chartData]="chartIssues" [organization]="organization"></graph>
   </div>
-
-
-
+  <div>
+    <h2>Latest Commits - <span class="text-primary">{{commitsTableData.length}}</span></h2>
+    <table class="table table-hover">
+      <tr>
+        <th>Date</th>
+        <th>Commit</th>
+      </tr>
+      <tr *ngFor="let commit of commitsTableData">
+        <td>{{commit.date}}</td>
+        <td><a href="{{commit.value}}" target="_blank" class="text-primary">{{commit.value}}</a></td>
+      </tr>
+    </table>
+    <h2>Latest Pull Requests - <span class="text-primary">{{pullRequestsTableData.length}}</span></h2>
+    <table class="table table-hover">
+      <tr>
+        <th>Date</th>
+        <th>Pull Request</th>
+      </tr>
+      <tr *ngFor="let pr of pullRequestsTableData">
+        <td>{{pr.date}}</td>
+        <td><a href="{{pr.value}}" target="_blank" class="text-primary">{{pr.value}}</a></td>
+      </tr>
+    </table>
+    <h2>Latest Issues - <span class="text-primary">{{issuesTableData.length}}</span></h2>
+    <table class="table table-hover">
+      <tr>
+        <th>Date</th>
+        <th>Issue</th>
+      </tr>
+      <tr *ngFor="let issue of issuesTableData">
+        <td>{{issue.date}}</td>
+        <td><a href="{{issue.value}}" target="_blank" class="text-primary">{{issue.value}}</a></td>
+      </tr>
+    </table>
+  </div>
 </div>
