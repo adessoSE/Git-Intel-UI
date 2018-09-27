@@ -1,6 +1,6 @@
 export class TableDataObject {
-    public date: String;
-    public value: String;
+    public date: Date;
+    public value: string;
 
     constructor(key, value) {
         this.date = key;

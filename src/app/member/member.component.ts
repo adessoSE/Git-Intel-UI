@@ -79,25 +79,39 @@ export class MemberComponent implements OnInit {
     let tableDataObject: TableDataObject;
     for (var key in this.member.previousCommitsWithLink) {
       if (this.member.previousCommitsWithLink.hasOwnProperty(key)) {
-        // Format date string so it is a valid argument for the Date() constructor
-        let year = key.split(" ");
-        console.log(year);
-        tableDataObject = new TableDataObject(new Date(key), this.member.previousCommitsWithLink[key]);
+        let formattedDate = this.formatDate(key);
+        tableDataObject = new TableDataObject(formattedDate, this.member.previousCommitsWithLink[key]);
         this.commitsTableData.push(tableDataObject);
       }
     }
     for (var key in this.member.previousPullRequestsWithLink) {
       if (this.member.previousPullRequestsWithLink.hasOwnProperty(key)) {
-        tableDataObject = new TableDataObject(key, this.member.previousPullRequestsWithLink[key]);
+        let formattedDate = this.formatDate(key);
+        tableDataObject = new TableDataObject(formattedDate, this.member.previousPullRequestsWithLink[key]);
         this.pullRequestsTableData.push(tableDataObject);
       }
     }
     for (var key in this.member.previousIssuesWithLink) {
       if (this.member.previousIssuesWithLink.hasOwnProperty(key)) {
-        console.log(new Date(key));
-        tableDataObject = new TableDataObject(key, this.member.previousIssuesWithLink[key]);
+        let formattedDate = this.formatDate(key);
+        tableDataObject = new TableDataObject(formattedDate, this.member.previousIssuesWithLink[key]);
         this.issuesTableData.push(tableDataObject);
       }
     }
+    this.sortTableData(this.commitsTableData);
+    this.sortTableData(this.issuesTableData);
+    this.sortTableData(this.pullRequestsTableData);
+  }
+
+  formatDate(stringDate: string): Date {
+    let year = stringDate.split(" ");
+    let formattedDate = year[0] + " " + year[1] + " " + year[2] + " " + year[5] + " " + year[3];
+    return new Date(formattedDate);
+  }
+
+  sortTableData(objects: TableDataObject[]) {
+    objects.sort((a: TableDataObject, b: TableDataObject) => {
+      return a.date.getTime() - b.date.getTime();
+    });
   }
 }
