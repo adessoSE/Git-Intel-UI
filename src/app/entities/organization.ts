@@ -1,4 +1,5 @@
 import { ChartJsData } from "./chartJS";
+import { Repository } from "./repository";
 
 export class Organization {
     public name: string;
@@ -15,4 +16,5 @@ export class Organization {
     public memberGrowth: any;
     public externalRepositoriesPullRequests: any;
     public internalRepositoriesCommits: any;
+    public createdReposByMembers: Repository [];
 }

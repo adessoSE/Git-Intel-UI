@@ -9,6 +9,7 @@ import { ExternalRepositoriesComponent } from './external-repositories/external-
 import { MemberComponent } from './member/member.component';
 import { HomeComponent } from './home/home.component';
 import { TeamComponent } from './team/team.component';
+import { MemberRepositoriesComponent } from './member-repositories/member-repositories.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: ':organization/teams/:name', component: TeamComponent },
   { path: ':organization/teams/:name/:username', component: MemberComponent },
   { path: ':organization/repositories', component: RepositoriesComponent },
-  { path: ':organization/external-repositories', component: ExternalRepositoriesComponent }
+  { path: ':organization/external-repositories', component: ExternalRepositoriesComponent },
+  { path: ':organization/member-repositories', component: MemberRepositoriesComponent }
 ];
 
 @NgModule({

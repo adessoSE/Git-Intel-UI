@@ -24,6 +24,7 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { LastWordPipe } from './pipes/last-word.pipe';
 import { PrepTabNamePipe } from './pipes/prep-tab-name.pipe';
 import { HttpClientModule } from '@angular/common/http';
+import { MemberRepositoriesComponent } from './member-repositories/member-repositories.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { HttpClientModule } from '@angular/common/http';
     GraphComponent,
     CapitalizePipe,
     LastWordPipe,
-    PrepTabNamePipe
+    PrepTabNamePipe,
+    MemberRepositoriesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,8 @@
 <div class="container-fluid" style="width: 75%" *ngIf="organization">
-
   <!-- Company meta data -->
   <div class="card col-md-12 member-card" style="border: 0; padding-top: 2%; padding-bottom: 2%; margin-bottom: 2%">
 
+    <!-- Head row -->
     <div class="row">
       <div class="col-md-4">
         <h1>{{organization.name}} |
@@ -22,17 +22,17 @@
           <i class="fa fa-globe fa-4x" style="padding-right: 10px;"></i>{{organization.websiteURL}}
         </a>
         <br>
-
       </span>
+
       <!-- Github -->
       <span class="col-md-4 orga-link">
         <a href="{{organization.githubURL}}" target="_blank">
           <i class="fa fa-github fa-4x" style="padding-right: 10px;"></i>{{organization.githubURL}}</a>
       </span>
-    </div>
+    </div> 
+    <!-- End of Head row -->
 
-
-    <div class="row col-mb-12 justify-content-center graph-row">
+    <div class="row col-mb-12 justify-content-center">
 
       <!-- Members -->
       <div class="col-xs-3">
@@ -72,35 +72,37 @@
         </div>
 
         <popover-content #popoverTeams title="" placement="top" [closeOnClickOutside]="true">
-          See all teams of the organization. Write more here..
+          See all teams of the organization.
         </popover-content>
       </div>
 
-      <!-- Repositories -->
-      <div class="col-xs-3">
-        <div class="card border-secondary mb-3 component-card">
-          <div class="card-body">
-            <h4 class="card-title">Repositories
-              <button type="button" class="btn btn-link" [popover]="popoverRepos" [popoverOnHover]="true">
-                <i class="fa fa-info-circle"></i>
-              </button>
-            </h4>
-            <a routerLink="repositories/">
-              <h3 class="card-title" style="text-align: center">
-                <i class="fa fa-book mr-3"></i> {{organization.numOfRepositories}}</h3>
-            </a>
+    </div>
+
+    <div class="row col-mb-12 justify-content-center">
+       <!-- Repositories -->
+       <div class="col-xs-3">
+          <div class="card border-secondary mb-3 component-card">
+            <div class="card-body">
+              <h4 class="card-title">Repositories
+                <button type="button" class="btn btn-link" [popover]="popoverRepos" [popoverOnHover]="true">
+                  <i class="fa fa-info-circle"></i>
+                </button>
+              </h4>
+              <a routerLink="repositories/">
+                <h3 class="card-title" style="text-align: center">
+                  <i class="fa fa-book mr-3"></i> {{organization.numOfRepositories}}</h3>
+              </a>
+            </div>
           </div>
+  
+          <popover-content #popoverRepos title="" placement="top" [closeOnClickOutside]="true">
+            See all repositories of the organization.
+          </popover-content>
         </div>
 
-        <popover-content #popoverRepos title="" placement="top" [closeOnClickOutside]="true">
-          See all repositories of the organization. Write more here..
-        </popover-content>
-
-      </div>
-
       <!-- External Repos -->
-      <div class="col-xs-3">
-        <div class="card border-secondary mb-3 component-card">
+      <div class="col-xs-3 col-md-3">
+        <div class="card border-secondary mb-6 component-card">
           <div class="card-body">
             <h4 class="card-title">Ext. Repositories
               <button type="button" class="btn btn-link" [popover]="popoverExtRepos" [popoverOnHover]="true">
@@ -115,20 +117,42 @@
         </div>
 
         <popover-content #popoverExtRepos title="" placement="top" [closeOnClickOutside]="true">
-          See all the repositories members of the organization contributed to. Write more here..
+          See all the repositories members of the organization contributed to.
         </popover-content>
       </div>
-    </div>
 
-    <!-- Graphs -->
-    <div class="row justify-content-center pad-bottom">
-      <graph class="col-md-4" [chartData]="chartMembers" [organization]="organization.name"></graph>
-      <graph class="col-md-4" [chartData]="chartCommits" [organization]="organization.name"></graph>
-      <graph class="col-md-4" [chartData]="chartPRs" [organization]="organization.name"></graph>
-    </div>
 
-    <!-- Last Update -->
-    <span class="badge badge-warning">
-      <i class="fa fa-clock-o" style="padding-right: 10px;"></i>Last update: {{organization.lastUpdate | date:'MMM d, y, h:mm'}}
-    </span>
+    <!-- Member Repositories -->
+    <div class="col-xs-3 col-md-3">
+      <div class="card border-secondary mb-3 component-card">
+        <div class="card-body">
+          <h4 class="card-title">Member Repositories
+            <button type="button" class="btn btn-link" [popover]="popoverMemberRepos" [popoverOnHover]="true">
+              <i class="fa fa-info-circle"></i>
+            </button>
+          </h4>
+          <a routerLink="member-repositories/">
+            <h3 class="card-title" style="text-align: center">
+              <i class="fa fa-folder-open"></i> 0<!-- zu ersetzen sobald schnittstelle läuft: {{ organization.createdReposByMembers.length }}--></h3>
+          </a>
+        </div>
+
+      <popover-content #popoverMemberRepos title="" placement="top" [closeOnClickOutside]="true">
+        See all repositories created by members of the organization.
+      </popover-content>
+    </div>
   </div>
+
+  <!-- Graphs -->
+  <div class="row justify-content-center pad-bottom">
+    <graph class="col-md-4" [chartData]="chartMembers" [organization]="organization.name"></graph>
+    <graph class="col-md-4" [chartData]="chartCommits" [organization]="organization.name"></graph>
+    <graph class="col-md-4" [chartData]="chartPRs" [organization]="organization.name"></graph>
+  </div>
+
+  <!-- Last Update -->
+  <span class="badge badge-warning">
+    <i class="fa fa-clock-o" style="padding-right: 10px;"></i>Last update: {{organization.lastUpdate | date:'MMM d,
+    y, h:mm'}}
+  </span>
+</div>
