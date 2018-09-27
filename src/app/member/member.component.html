@@ -58,7 +58,7 @@
         <th>Commit</th>
       </tr>
       <tr *ngFor="let commit of commitsTableData">
-        <td>{{commit.date}}</td>
+        <td>{{commit.date.toUTCString()}}</td>
         <td><a href="{{commit.value}}" target="_blank" class="text-primary">{{commit.value}}</a></td>
       </tr>
     </table>
@@ -69,7 +69,7 @@
         <th>Pull Request</th>
       </tr>
       <tr *ngFor="let pr of pullRequestsTableData">
-        <td>{{pr.date}}</td>
+        <td>{{pr.date.toUTCString()}}</td>
         <td><a href="{{pr.value}}" target="_blank" class="text-primary">{{pr.value}}</a></td>
       </tr>
     </table>
@@ -80,7 +80,7 @@
         <th>Issue</th>
       </tr>
       <tr *ngFor="let issue of issuesTableData">
-        <td>{{issue.date}}</td>
+        <td>{{issue.date.toUTCString()}}</td>
         <td><a href="{{issue.value}}" target="_blank" class="text-primary">{{issue.value}}</a></td>
       </tr>
     </table>
