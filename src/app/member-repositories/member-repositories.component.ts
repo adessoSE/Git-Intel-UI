@@ -34,11 +34,18 @@ export class MemberRepositoriesComponent implements OnInit {
   
     processData(repo: Repository[]) {
       this.repositories = repo;
-      this.repositoriesCopy = repo;
-      this.navService.tellNumOfEntities(repo.length);
+      this.repositoriesCopy = this.repositories;
+      this.navService.tellNumOfEntities(this.calculateTotalAmountofCreatedReposByMember(repo));
       console.log(repo);
     }
 
+  calculateTotalAmountofCreatedReposByMember(repositories: Repository[]) {
+    let sumOfMemberCreatedRepos: number = 0;
+    for (let repo of repositories) {
+      sumOfMemberCreatedRepos += repo.length;
+    }
+     return sumOfMemberCreatedRepos;
+  }
   sortByAlphabet() {
     this.repositories.sort((a: Repository, b: Repository) => a.name.localeCompare(b.name));
     this.sortByTag = "Alphabet";
