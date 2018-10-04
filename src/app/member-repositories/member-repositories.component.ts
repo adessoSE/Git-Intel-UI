@@ -32,37 +32,24 @@ export class MemberRepositoriesComponent implements OnInit {
       this.dataPullService.requestMemberRepositories(org).subscribe(data => this.processData(data));
     }
   
-    processData(repo: Repository[]) {
-      this.repositories = repo;
+    processData(repo: [Repository[]]) {
+      this.repositories = this.processTotalRepositoriesOfMembers(repo);
       this.repositoriesCopy = this.repositories;
-      this.navService.tellNumOfEntities(this.calculateTotalAmountofCreatedReposByMember(repo));
-      console.log(repo);
+      this.navService.tellNumOfEntities(this.repositories.length);
+      console.log(this.repositories);
     }
 
-  calculateTotalAmountofCreatedReposByMember(repositories: Repository[]) {
-    let sumOfMemberCreatedRepos: number = 0;
+  processTotalRepositoriesOfMembers(repositories: [Repository[]]) {
+    let totalRepositoriesOfMember: Repository[] = [];
     for (let repo of repositories) {
-      sumOfMemberCreatedRepos += repo.length;
+      totalRepositoriesOfMember = totalRepositoriesOfMember.concat(repo);
     }
-     return sumOfMemberCreatedRepos;
+    return totalRepositoriesOfMember;
   }
+
   sortByAlphabet() {
     this.repositories.sort((a: Repository, b: Repository) => a.name.localeCompare(b.name));
     this.sortByTag = "Alphabet";
-  }
-
-  sortByCommits() {
-    this.repositories.sort((a: Repository, b: Repository) => {
-      return +b.commits - +a.commits;
-    });
-    this.sortByTag = "Commits";
-  }
-
-  sortByIssues() {
-    this.repositories.sort((a: Repository, b: Repository) => {
-      return +b.issues - +a.issues;
-    });
-    this.sortByTag = "Issues";
   }
 
   sortByForks() {
@@ -75,13 +62,6 @@ export class MemberRepositoriesComponent implements OnInit {
   sortByLicense() {
     this.repositories.sort((a: Repository, b: Repository) => a.license.localeCompare(b.license));
     this.sortByTag = "License";
-  }
-
-  sortByPullRequests() {
-    this.repositories.sort((a: Repository, b: Repository) => {
-      return +b.pullRequests - +a.pullRequests;
-    });
-    this.sortByTag = "Pull Requests";
   }
 
   sortByStars() {

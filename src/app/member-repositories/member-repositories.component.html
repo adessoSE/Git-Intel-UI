@@ -19,10 +19,7 @@
         </button>
         <div class="dropdown-menu">
           <button class="dropdown-item" (click)="sortByAlphabet()">Alphabet</button>
-          <button class="dropdown-item" (click)="sortByCommits()">Commits</button>
-          <button class="dropdown-item" (click)="sortByIssues()">Issues</button>
           <button class="dropdown-item" (click)="sortByForks()">Forks</button>
-          <button class="dropdown-item" (click)="sortByPullRequests()">Pull Requests</button>
           <button class="dropdown-item" (click)="sortByLicense()">License</button>
           <button class="dropdown-item" (click)="sortByStars()">Stars</button>
         </div>
@@ -32,8 +29,8 @@
     <!--Cards displaying Repositories and Repository info-->
     <div class="row justify-content-center graph-row pad-bottom">
       <!-- Repositories -->
-      <ng-container *ngFor="let repos of repositories">
-      <div class="col-md-12 member-card" *ngFor="let repo of repos">
+      <ng-container *ngFor="let repo of repositories">
+      <div class="col-md-12 member-card">
         <div class="card border-primary component-card">
         <!-- Contributing user -->
         <div class="float-right list-inline" style="padding-left: 15px; padding-top: 15px">
