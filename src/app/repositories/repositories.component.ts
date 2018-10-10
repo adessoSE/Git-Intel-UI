@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Repository } from '../entities/repository';
 import { DataPullService } from '../services/data-pull.service';
 import { GlobalNavigationService } from '../services/global-navigation.service';
+import { ChartJsData } from '../entities/chartJS';
 
 @Component({
   selector: 'app-repositories',
@@ -16,6 +17,10 @@ export class RepositoriesComponent implements OnInit {
 
   orgName: string = "";
   sortByTag: string = "";
+
+  chartCommits: ChartJsData;
+  chartPRs: ChartJsData;
+  chartIssues: ChartJsData;
 
   constructor(
     private activeRoute: ActivatedRoute,
@@ -90,5 +95,28 @@ export class RepositoriesComponent implements OnInit {
         return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
       });
     }, 50);
+  }
+
+  sumOf(numbers: Array<number>) {
+    let sum = numbers.reduce((acc, cur) => acc + cur, 0);
+    return sum;
+  }
+
+  generateChartJSData(chartJSLabelsCommits: any, chartJSDatasetCommits: any, chartJSLabelsPullRequests: any, chartJSDatasetPullRequests: any, chartJSLabelsIssues: any, chartJSDatasetIssues: any,) {
+    this.chartCommits = {
+      labels: chartJSLabelsCommits,
+      data: [{ data: chartJSDatasetCommits, label: "Commits" }],
+      caption: "Latest commits"
+    };
+    this.chartPRs = {
+      labels: chartJSLabelsPullRequests,
+      data: [{ data: chartJSDatasetPullRequests, label: "Pull Requests" }],
+      caption: "Latest Pull Requests"
+    };
+    this.chartIssues = {
+      labels: chartJSLabelsIssues,
+      data: [{ data: chartJSDatasetIssues, label: "Issues" }],
+      caption: "Latest Issues"
+    };
   }
 }

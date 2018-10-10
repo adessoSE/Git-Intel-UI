@@ -64,14 +64,20 @@
               <div class="team-info-container">
                 <span>
                   <i class="fa fa-stop-circle mr-3 fa-3x"></i>
-                  <span class="text-primary">{{repo.commits}}</span> Commits</span>
+                  <span class="text-primary">{{sumOf(repo.previousCommits.chartJSDataset)}}</span> Commits</span>
                 <span>
                   <i class="fa fa-question-circle-o mr-3 fa-3x"></i>
-                  <span class="text-primary">{{repo.pullRequests}}</span> Pull Requests</span>
+                  <span class="text-primary">{{sumOf(repo.previousPullRequests.chartJSDataset)}}</span> Pull Requests</span>
                 <span>
                   <i class="fa fa-exclamation-circle mr-3 fa-3x"></i>
-                  <span class="text-primary">{{repo.issues}}</span> Issues</span>
+                  <span class="text-primary">{{sumOf(repo.previousIssues.chartJSDataset)}}</span> Issues</span>
               </div>
+            </div>
+            {{generateChartJSData(repo.previousCommits.chartJSLabels, repo.previousCommits.chartJSDataset, repo.previousPullRequests.chartJSLabels, repo.previousPullRequests.chartJSDataset, repo.previousIssues.chartJSLabels, repo.previousIssues.chartJSDataset)}}
+            <div class="row col-md-12 customContainer">
+              <graph class="col-md-4 " [chartData]="chartCommits" [organization]="organization"></graph>
+              <graph class="col-md-4 " [chartData]="chartPRs" [organization]="organization"></graph>
+              <graph class="col-md-4 " [chartData]="chartIssues" [organization]="organization"></graph>
             </div>
           </div>
         </a>
