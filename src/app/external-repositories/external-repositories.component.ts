@@ -86,7 +86,10 @@ export class ExternalRepositoriesComponent implements OnInit {
   search(term: string) {
     setTimeout(() => {
       this.extRepos = this.extReposCopy.filter(e => {
-        return (e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase()) || e.contributor.username.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase()));
+
+        for (let user of e.contributor) {
+          return (e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase()) || user.username.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase()));
+        }
       });
     }, 50);
   }
