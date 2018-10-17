@@ -85,7 +85,13 @@ export class MembersComponent implements OnInit {
   search(term: string) {
     setTimeout(() => {
       this.members = this.membersCopy.filter(e => {
-        return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
+        let usedNameToFilter;
+        if (e.name != null) {
+          usedNameToFilter = e.name;
+        } else {
+          usedNameToFilter = e.username;
+        }
+        return usedNameToFilter.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
       });
     }, 50);
   }
