@@ -26,23 +26,19 @@ export class DashboardComponent implements OnInit {
     private dataPullService: DataPullService) {
 
     /**
-     * Subscribes to routing changes and fetches data to given organization.
-     * Must be handled before onInit, because @orga will be undefined otherwise
-     * 
-     * THE BELOW CODE FIXES TABS BUT CREATS MEMORY LEAKS INSTEAD...
+     * Listens to routing events and renders the dashboard according to the active route.
      */
-    // this.navigationSubscription = router.events.subscribe((event) => {
-    //   if (event instanceof NavigationEnd) {
-    //     this.determineOrganization(); 
-    //   }
-    // });
+    this.navigationSubscription = router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.determineOrganization();
+      }
+    });
   }
 
   /** 
-   * Disables NavigationBar while on the Dashboard and requests chart data from Backend. 
+   * Disables NavigationBar while on the Dashboard. 
    */
   ngOnInit() {
-    this.determineOrganization();
     this.globalNavService.showNavBar(false)
   }
 
