@@ -43,10 +43,10 @@ export class DataPullService {
     return this._http.post<Repository[]>(requestURL, this.params);
   }
 
-  requestMemberRepositories(organizationName: string): Observable<Repository[]> {
+  requestMemberRepositories(organizationName: string): Observable<[Repository[]]> {
     let requestURL = this.gitStalkerURL + 'createdreposbymembers' + '/' + organizationName;
     console.log("MEMBER REPOSITORY DATA REQUESTED");
-    return this._http.post<Repository[]>(requestURL, this.params);
+    return this._http.post<[Repository[]]>(requestURL, this.params);
   }
 
   requestExternalRepositories(organizationName: string): Observable<Repository[]> {
