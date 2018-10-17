@@ -87,7 +87,7 @@ export class ExternalRepositoriesComponent implements OnInit {
     setTimeout(() => {
       this.extRepos = this.extReposCopy.filter(e => {
 
-        for (let user of e.contributor) {
+        for (let user of e.contributors) {
           return (e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase()) || user.username.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase()));
         }
       });
