@@ -11,6 +11,7 @@ import { MembersComponent } from './members/members.component';
 import { TeamsComponent } from './teams/teams.component';
 import { RepositoriesComponent } from './repositories/repositories.component';
 import { ExternalRepositoriesComponent } from './external-repositories/external-repositories.component';
+import { MemberRepositoriesComponent } from './member-repositories/member-repositories.component';
 import { MemberComponent } from './member/member.component';
 import { HomeComponent } from './home/home.component';
 import { TeamComponent } from './team/team.component';
@@ -34,6 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
     TeamsComponent,
     RepositoriesComponent,
     ExternalRepositoriesComponent,
+    MemberRepositoriesComponent,
     MemberComponent,
     HomeComponent,
     NavigationBarComponent,

@@ -38,6 +38,12 @@ export class DataPullService {
     return this._http.post<Repository[]>(requestURL, this.params);
   }
 
+  requestMemberRepositories(organizationName: string): Observable<[Repository[]]> {
+    let requestURL = this.gitStalkerURL + 'createdreposbymembers' + '/' + organizationName;
+    console.log("MEMBER REPOSITORY DATA REQUESTED");
+    return this._http.post<[Repository[]]>(requestURL, this.params);
+  }
+
   requestTeams(organizationName: string): Observable<Team[]> {
     let requestURL = this.gitStalkerURL + 'teams' + '/' + organizationName;
     console.log("TEAM DATA REQUESTED");
