@@ -11,6 +11,6 @@ export class Repository {
     public pullRequests: number;
     public forks: number;
     public issues: number;
-    public contributor: Member[];
+    public contributors: Member[];
     public githubURL: string;
 }
