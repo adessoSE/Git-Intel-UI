@@ -68,7 +68,7 @@ export class TeamComponent implements OnInit {
     });
 
     this.teamRepositories.sort((a: Repository, b: Repository) => {
-      return +b.commits - +a.commits;
+      return + this.sumOf(b.previousCommits.chartJSDataset) - this.sumOf(a.previousCommits.chartJSDataset);
     });
     this.sortByTag = "Commits";
   }
@@ -79,7 +79,7 @@ export class TeamComponent implements OnInit {
     });
 
     this.teamRepositories.sort((a: Repository, b: Repository) => {
-      return +b.issues - +a.issues;
+      return + this.sumOf(b.previousIssues.chartJSDataset) - this.sumOf(a.previousIssues.chartJSDataset);
     });
     this.sortByTag = "Issues";
   }
@@ -90,7 +90,7 @@ export class TeamComponent implements OnInit {
     });
 
     this.teamRepositories.sort((a: Repository, b: Repository) => {
-      return +b.pullRequests - +a.pullRequests;
+      return + this.sumOf(b.previousPullRequests.chartJSDataset) - this.sumOf(a.previousPullRequests.chartJSDataset);
     });
     this.sortByTag = "Pull Requests";
   }

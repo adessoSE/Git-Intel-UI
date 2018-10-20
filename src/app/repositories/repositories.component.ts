@@ -46,14 +46,14 @@ export class RepositoriesComponent implements OnInit {
 
   sortByCommits() {
     this.repositories.sort((a: Repository, b: Repository) => {
-      return +b.commits - +a.commits;
+      return + this.sumOf(b.previousCommits.chartJSDataset) - this.sumOf(a.previousCommits.chartJSDataset);
     });
     this.sortByTag = "Commits";
   }
 
   sortByIssues() {
     this.repositories.sort((a: Repository, b: Repository) => {
-      return +b.issues - +a.issues;
+      return + this.sumOf(b.previousIssues.chartJSDataset) - this.sumOf(a.previousIssues.chartJSDataset);
     });
     this.sortByTag = "Issues";
   }
@@ -72,7 +72,7 @@ export class RepositoriesComponent implements OnInit {
 
   sortByPullRequests() {
     this.repositories.sort((a: Repository, b: Repository) => {
-      return +b.pullRequests - +a.pullRequests;
+      return + this.sumOf(b.previousPullRequests.chartJSDataset) - this.sumOf(a.previousPullRequests.chartJSDataset);
     });
     this.sortByTag = "Pull Requests";
   }
@@ -90,5 +90,10 @@ export class RepositoriesComponent implements OnInit {
         return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
       });
     }, 50);
+  }
+
+  sumOf(numbers: Array<number>) {
+    let sum = numbers.reduce((acc, cur) => acc + cur, 0);
+    return sum;
   }
 }
