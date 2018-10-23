@@ -46,14 +46,14 @@ export class RepositoriesComponent implements OnInit {
 
   sortByCommits() {
     this.repositories.sort((a: Repository, b: Repository) => {
-      return +b.commits - +a.commits;
+      return +b.amountPreviousCommits - +a.amountPreviousCommits;
     });
     this.sortByTag = "Commits";
   }
 
   sortByIssues() {
     this.repositories.sort((a: Repository, b: Repository) => {
-      return +b.issues - +a.issues;
+      return +b.amountPreviousIssues - +a.amountPreviousIssues;
     });
     this.sortByTag = "Issues";
   }
@@ -72,7 +72,7 @@ export class RepositoriesComponent implements OnInit {
 
   sortByPullRequests() {
     this.repositories.sort((a: Repository, b: Repository) => {
-      return +b.pullRequests - +a.pullRequests;
+      return +b.amountPreviousPullRequests - +a.amountPreviousPullRequests;
     });
     this.sortByTag = "Pull Requests";
   }

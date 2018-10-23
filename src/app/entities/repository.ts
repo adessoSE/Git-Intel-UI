@@ -7,10 +7,10 @@ export class Repository {
     public license: string;
     public numOfContributors: number;
     public stars: number;
-    public commits: number;
-    public pullRequests: number;
+    public amountPreviousCommits: number;
+    public amountPreviousPullRequests: number;
     public forks: number;
-    public issues: number;
+    public amountPreviousIssues: number;
     public contributors: Member[];
     public githubURL: string;
 }
