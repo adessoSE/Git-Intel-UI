@@ -74,7 +74,9 @@ export class MemberRepositoriesComponent implements OnInit {
   search(term: string) {
     setTimeout(() => {
       this.repositories = this.repositoriesCopy.filter(e => {
-        return e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase());
+        for (let user of e.contributors) {
+          return (e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase()) || user.username.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase()));
+        }
       });
     }, 50);
   }

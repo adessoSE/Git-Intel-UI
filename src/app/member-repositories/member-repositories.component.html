@@ -36,7 +36,7 @@
         <div class="float-right list-inline" style="padding-left: 15px; padding-top: 15px">
             <span class="badge badge-info" style="display: inline-block;">
               <i class="fa fa-user mr-4 fa"></i>
-              <span *ngFor="let user of repo.contributor, let last = last">
+              <span *ngFor="let user of repo.contributors, let last = last">
                 <a href="{{user.githubURL}}" target="_blank" id="userLink">{{user.username}}</a>
                 <span *ngIf="!last">, </span>
               </span>
