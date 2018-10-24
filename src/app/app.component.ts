@@ -109,6 +109,8 @@ export class AppComponent implements OnInit {
 		if (this.checkSearchTerm(org)) {
 			this.isSearchInvalid = false;
 			this.globalNavService.onOpenNewTab(org);
+			// Clear input field
+			this.organization = null;
 		} else {
 			this.isSearchInvalid = true;
 		}
@@ -122,6 +124,7 @@ export class AppComponent implements OnInit {
 		this.tabs.push(tab);
 		this.setActiveTab(this.tabs.length - 1);
 		this.router.navigate([tab.url]);
+		console.log(this.activeTabIdx);
 	}
 
 	/** 
@@ -131,14 +134,21 @@ export class AppComponent implements OnInit {
 	 */
 	closeTab(idx: number) {
 		this.tabs.splice(idx, 1);
-
-		if (idx - 1 >= 0) {
-			this.activeTabIdx = idx - 1;
-			this.router.navigate(["/" + this.tabs[idx - 1].url]);
-		} else {
-			this.activeTabIdx = 0;
-			this.router.navigate(["home"]);
+		if (this.activeTabIdx == idx) {
+			// Check if more than one tab is open
+			if (idx - 1 >= 0) {
+				this.activeTabIdx = idx - 1;
+				this.router.navigate(["/" + this.tabs[idx - 1].url]);
+			} else {
+				this.activeTabIdx = 0;
+				this.router.navigate(["home"]);
+			}
 		}
+		// If the active tab is 'right to' the closing tab, adjust indices 
+		if (this.activeTabIdx > idx) {
+			this.activeTabIdx = this.tabs.length - 1;
+		}
+		// If it's to the left, do nothing to keep the active tab active
 	}
 
 	/** 
