@@ -29,7 +29,6 @@ export class DashboardComponent implements OnInit {
      * Listens to routing events and renders the dashboard according to the active route.
      */
     this.navigationSubscription = router.events.subscribe((event) => {
-      console.log(event);
       if (event instanceof NavigationEnd) {
         this.determineOrganization();
       }
