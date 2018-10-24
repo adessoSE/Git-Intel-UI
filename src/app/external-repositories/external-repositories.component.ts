@@ -45,14 +45,14 @@ export class ExternalRepositoriesComponent implements OnInit {
 
   sortByCommits() {
     this.extRepos.sort((a: Repository, b: Repository) => {
-      return +b.commits - +a.commits;
+      return +b.amountPreviousCommits - +a.amountPreviousCommits;
     });
     this.sortByTag = "Commits";
   }
 
   sortByIssues() {
     this.extRepos.sort((a: Repository, b: Repository) => {
-      return +b.issues - +a.issues;
+      return +b.amountPreviousIssues - +a.amountPreviousIssues;
     });
     this.sortByTag = "Issues";
   }
@@ -71,7 +71,7 @@ export class ExternalRepositoriesComponent implements OnInit {
 
   sortByPullRequests() {
     this.extRepos.sort((a: Repository, b: Repository) => {
-      return +b.pullRequests - +a.pullRequests;
+      return +b.amountPreviousPullRequests - +a.amountPreviousPullRequests;
     });
     this.sortByTag = "Pull Requests";
   }
