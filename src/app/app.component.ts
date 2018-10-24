@@ -134,20 +134,21 @@ export class AppComponent implements OnInit {
 	 */
 	closeTab(idx: number) {
 		this.tabs.splice(idx, 1);
-		console.log("IDX: " + idx);
-		console.log("ACTIVE_ID: " + this.activeTabIdx);
 		if (this.activeTabIdx == idx) {
 			// Check if more than one tab is open
-			if (idx -1 >= 0) {
+			if (idx - 1 >= 0) {
 				this.activeTabIdx = idx - 1;
 				this.router.navigate(["/" + this.tabs[idx - 1].url]);
 			} else {
 				this.activeTabIdx = 0;
 				this.router.navigate(["home"]);
 			}
-		} else {
+		}
+		// If the active tab is 'right to' the closing tab, adjust indices 
+		if (this.activeTabIdx > idx) {
 			this.activeTabIdx = this.tabs.length - 1;
 		}
+		// If it's to the left, do nothing to keep the active tab active
 	}
 
 	/** 
