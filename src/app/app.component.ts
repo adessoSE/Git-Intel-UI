@@ -63,6 +63,9 @@ export class AppComponent implements OnInit {
 				this.openNewTab(tab)
 		});
 
+		// Hide input error on init
+		document.getElementById("error").hidden = true;
+
 		/**
 		 * Subscription returns an Array of Objects that look like so:
 		 *     Object { path: "1. URL segment", parameters: {} }
@@ -111,8 +114,10 @@ export class AppComponent implements OnInit {
 			this.globalNavService.onOpenNewTab(org);
 			// Clear input field
 			this.organization = null;
+			document.getElementById("error").hidden = true;
 		} else {
 			this.isSearchInvalid = true;
+			document.getElementById("error").hidden = false;
 		}
 	}
 
