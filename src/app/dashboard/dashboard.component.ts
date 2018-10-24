@@ -29,6 +29,7 @@ export class DashboardComponent implements OnInit {
      * Listens to routing events and renders the dashboard according to the active route.
      */
     this.navigationSubscription = router.events.subscribe((event) => {
+      console.log(event);
       if (event instanceof NavigationEnd) {
         this.determineOrganization();
       }
@@ -46,6 +47,8 @@ export class DashboardComponent implements OnInit {
    * Displays NavigationBar as user leaves the Dashboard.
    */
   ngOnDestroy() {
+    // Unsubscribe from router events to prevent double triggering of events
+    this.navigationSubscription.unsubscribe();
     this.globalNavService.showNavBar(true);
   }
 
