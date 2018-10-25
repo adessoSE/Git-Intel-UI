@@ -35,7 +35,7 @@
     <div class="row col-mb-12 justify-content-center graph-row">
 
       <!-- Members -->
-      <div class="col-xs-3">
+      <div class="col-md-4">
         <div class="card border-secondary mb-3 component-card">
           <div class="card-body">
             <h4 class="card-title">Members
@@ -51,12 +51,12 @@
         </div>
 
         <popover-content #popoverMembers title="" placement="top" [closeOnClickOutside]="true">
-          See all members of the organization. Write more here..
+          See all members of the organization.
         </popover-content>
       </div>
 
       <!-- Teams -->
-      <div class="col-xs-3">
+      <div class="col-md-4">
         <div class="card border-secondary mb-3 component-card">
           <div class="card-body">
             <h4 class="card-title">Teams
@@ -72,12 +72,12 @@
         </div>
 
         <popover-content #popoverTeams title="" placement="top" [closeOnClickOutside]="true">
-          See all teams of the organization. Write more here..
+          See all teams of the organization.
         </popover-content>
       </div>
 
       <!-- Repositories -->
-      <div class="col-xs-3">
+      <div class="col-md-4">
         <div class="card border-secondary mb-3 component-card">
           <div class="card-body">
             <h4 class="card-title">Repositories
@@ -93,13 +93,16 @@
         </div>
 
         <popover-content #popoverRepos title="" placement="top" [closeOnClickOutside]="true">
-          See all repositories of the organization. Write more here..
+          See all repositories of the organization.
         </popover-content>
 
       </div>
+    </div>
+
+    <div class="row col-mb-12 justify-content-center graph-row">
 
       <!-- External Repos -->
-      <div class="col-xs-3">
+      <div class="col-md-4">
         <div class="card border-secondary mb-3 component-card">
           <div class="card-body">
             <h4 class="card-title">Ext. Repositories
@@ -115,24 +118,24 @@
         </div>
 
         <popover-content #popoverExtRepos title="" placement="top" [closeOnClickOutside]="true">
-          See all the repositories members of the organization contributed to. Write more here..
+          See all the repositories members of the organization contributed to.
         </popover-content>
       </div>
-    </div>
 
-    <!-- Member Repositories -->
-    <div class="col-xs-3 col-md-3">
-      <div class="card border-secondary mb-3 component-card">
-        <div class="card-body">
-          <h4 class="card-title">Member Repositories
-            <button type="button" class="btn btn-link" [popover]="popoverMemberRepos" [popoverOnHover]="true">
-              <i class="fa fa-info-circle"></i>
-            </button>
-          </h4>
-          <a routerLink="member-repositories/">
-            <h3 class="card-title" style="text-align: center">
-              <i class="fa fa-folder-open"></i> {{organization.numOfCreatedReposByMembers}}</h3>
-          </a>
+      <!-- Member Repositories -->
+      <div class="col-md-4">
+        <div class="card border-secondary mb-3 component-card">
+          <div class="card-body">
+            <h4 class="card-title">Member Repositories
+              <button type="button" class="btn btn-link" [popover]="popoverMemberRepos" [popoverOnHover]="true">
+                <i class="fa fa-info-circle"></i>
+              </button>
+            </h4>
+            <a routerLink="member-repositories/">
+              <h3 class="card-title" style="text-align: center">
+                <i class="fa fa-folder-open"></i> {{organization.numOfCreatedReposByMembers}}</h3>
+            </a>
+          </div>
         </div>
 
         <popover-content #popoverMemberRepos title="" placement="top" [closeOnClickOutside]="true">
@@ -140,7 +143,6 @@
         </popover-content>
       </div>
     </div>
-
 
     <!-- Graphs -->
     <div class="row justify-content-center pad-bottom">
