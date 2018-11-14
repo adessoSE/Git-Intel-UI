@@ -5,6 +5,9 @@ import { Member } from '../entities/member';
 import { DataPullService } from '../services/data-pull.service';
 import { GlobalNavigationService } from '../services/global-navigation.service';
 import { TableDataObject } from '../entities/tableDataObject';
+import { ProcessingOrganizationInfo } from '../entities/processingOrganizationInfo';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { useAnimation } from '@angular/core/src/animation/dsl';
 
 @Component({
   selector: 'app-member',
@@ -22,6 +25,16 @@ export class MemberComponent implements OnInit {
   pullRequestsTableData: TableDataObject[] = [];
   issuesTableData: TableDataObject[] = [];
 
+  statusCode: number;
+  error: HttpErrorResponse;
+  initializedProcessingInterval: boolean = false;
+  interval: any;
+  processingInformation: ProcessingOrganizationInfo;
+  progressBarPercentage: number = 0;
+  myStyles = {
+    width: this.progressBarPercentage + "%"
+  };
+
   constructor(
     private dataPullService: DataPullService,
     private activeRoute: ActivatedRoute,
@@ -35,23 +48,56 @@ export class MemberComponent implements OnInit {
   ngOnInit() {
     // this.initGraphs();
   }
+  
+  initRequestInterval(username: String) {
+    if (!this.initializedProcessingInterval) {
+      this.initializedProcessingInterval = true;
+      this.interval = setInterval( () => {
+        this.dataPullService.requestMembers(this.processingInformation.searchedOrganization.toString()).subscribe(data => this.processData(data, username), error => this.processError(error));
+      }, 10000);
+  }
+}
+
+initProgressBar() {   
+  var progressBarIncreasementPerFinishedRequestType: number = 100 / this.processingInformation.totalCountOfRequestTypes;
+  this.progressBarPercentage = (Math.round(progressBarIncreasementPerFinishedRequestType * 10) / 10) * this.processingInformation.finishedRequestTypes.length;
+  this.myStyles.width = this.progressBarPercentage + "%";
+}
+
+processError(error: HttpErrorResponse) {
+  this.statusCode = 400;
+  this.error = error;
+  console.log("Error Processing");
+}
+
+  processData(members: HttpResponse<Member[]>, username: String) {
+    switch (members.status) {
+      case 200:
+        this.statusCode = 200;
+        for (let member of members.body) {
+          if (member.username === username) {
+            this.member = member;
+          }
+        }
+        this.initGraphs();
+        this.processTableData();
+        clearInterval(this.interval);
+        break;
+      case 202:
+        this.statusCode = 202;
+        this.processingInformation = JSON.parse(JSON.stringify(members.body));
+        console.log(this.processingInformation)
+        console.log("Accepted - 202");
+        this.initRequestInterval(username);
+        this.initProgressBar();
+        break;
+    }
+  }
 
   determineMember() {
     let member = this.activeRoute.snapshot.paramMap.get('username');
-    this.findMemberByName(member);
-  }
-
-  findMemberByName(username: string) {
     let organization = this.activeRoute.snapshot.paramMap.get('organization');
-    this.dataPullService.requestMembers(organization).subscribe(data => {
-      for (let member of data) {
-        if (member.username === username) {
-          this.member = member;
-        }
-      }
-      this.initGraphs();
-      this.processTableData();
-    });
+    this.dataPullService.requestMembers(organization).subscribe(data => this.processData(data, member), error => this.processError(error));
   }
 
   initGraphs() {

@@ -3,6 +3,8 @@ import { Team } from '../entities/team';
 import { DataPullService } from '../services/data-pull.service';
 import { ActivatedRoute } from '../../../node_modules/@angular/router';
 import { GlobalNavigationService } from '../services/global-navigation.service';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { ProcessingOrganizationInfo } from '../entities/processingOrganizationInfo';
 
 @Component({
   selector: 'app-teams',
@@ -16,6 +18,16 @@ export class TeamsComponent implements OnInit {
 
   sortByTag: string = "";
 
+  statusCode: number;
+  error: HttpErrorResponse;
+  initializedProcessingInterval: boolean = false;
+  interval: any;
+  processingInformation: ProcessingOrganizationInfo;
+  progressBarPercentage: number = 0;
+  myStyles = {
+    width: this.progressBarPercentage + "%"
+  };
+
   constructor(
     private dataPullService: DataPullService,
     private activeRoute: ActivatedRoute,
@@ -28,16 +40,49 @@ export class TeamsComponent implements OnInit {
 
   determineOrganization() {
     let org = this.activeRoute.snapshot.paramMap.get('organization');
-
-    this.dataPullService.requestTeams(org).subscribe(data => this.processData(data));
+    this.dataPullService.requestTeams(org).subscribe(data => this.processData(data), error => this.processError(error));
   }
 
-  processData(teams: Team[]) {
-    this.teams = teams;
-    this.teamsCopy = teams;
-    this.navService.tellNumOfEntities(teams.length);
-    console.log(teams);
+  initRequestInterval() {
+    if (!this.initializedProcessingInterval) {
+      this.initializedProcessingInterval = true;
+      this.interval = setInterval( () => {
+        this.dataPullService.requestTeams(this.processingInformation.searchedOrganization.toString()).subscribe(data => this.processData(data), error => this.processError(error));
+      }, 10000);
   }
+}
+
+initProgressBar() {   
+  var progressBarIncreasementPerFinishedRequestType: number = 100 / this.processingInformation.totalCountOfRequestTypes;
+  this.progressBarPercentage = (Math.round(progressBarIncreasementPerFinishedRequestType * 10) / 10) * this.processingInformation.finishedRequestTypes.length;
+  this.myStyles.width = this.progressBarPercentage + "%";
+}
+
+processError(error: HttpErrorResponse) {
+  this.statusCode = 400;
+  this.error = error;
+  console.log("Error Processing");
+}
+
+  processData(teams: HttpResponse<Team[]>) {
+    switch (teams.status) {
+      case 200:
+        this.statusCode = 200;
+        this.teams = teams.body;
+        this.teamsCopy = teams.body;
+        this.navService.tellNumOfEntities(teams.body.length);
+        clearInterval(this.interval);
+        break;
+      case 202:
+        this.statusCode = 202;
+        this.processingInformation = JSON.parse(JSON.stringify(teams.body));
+        console.log("Accepted - 202");
+        this.initRequestInterval();
+        this.initProgressBar();
+        break;
+    }
+  }
+
 
   sortByAlphabet() {
     this.teams.sort((a: Team, b: Team) => a.name.localeCompare(b.name));
