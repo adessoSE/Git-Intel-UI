@@ -46,6 +46,7 @@ export class GlobalNavigationService {
   }
 
   onClickTab(clicked: boolean) {
+    console.log("Tab clicked!")
     this._tabClicked.next(clicked);
   }
 

@@ -5,6 +5,8 @@ import { Repository } from '../entities/repository';
 import { Team } from '../entities/team';
 import { DataPullService } from '../services/data-pull.service';
 import { GlobalNavigationService } from '../services/global-navigation.service';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { ProcessingOrganizationInfo } from '../entities/processingOrganizationInfo';
 
 
 
@@ -25,6 +27,16 @@ export class TeamComponent implements OnInit {
   teamRepositories: Repository[];
   teamRepositoriesCopy: Repository[];
 
+  statusCode: number;
+  error: HttpErrorResponse;
+  initializedProcessingInterval: boolean = false;
+  interval: any;
+  processingInformation: ProcessingOrganizationInfo;
+  progressBarPercentage: number = 0;
+  myStyles = {
+    width: this.progressBarPercentage + "%"
+  };
+
   constructor(
     private navService: GlobalNavigationService,
     private activatedRoute: ActivatedRoute,
@@ -39,21 +51,52 @@ export class TeamComponent implements OnInit {
 
   determineTeam() {
     let team = this.activatedRoute.snapshot.paramMap.get('name');
-    this.findTeamByName(team);
+    let organization = this.activatedRoute.snapshot.paramMap.get('organization');
+    this.dataPullService.requestTeams(organization).subscribe(data => this.processData(data, team), error => this.processError(error));
   }
 
-  findTeamByName(teamname: string) {
-    let organization = this.activatedRoute.snapshot.paramMap.get('organization');
-    this.dataPullService.requestTeams(organization).subscribe(data => {
-      for (let team of data) {
-        if (team.name === teamname) {
-          this.team = team;
-          this.teamMembers = team.teamMembers;
-          this.teamRepositories = team.teamRepositories;
-          console.log(team);
+  initRequestInterval(teamname: string) {
+    if (!this.initializedProcessingInterval) {
+      this.initializedProcessingInterval = true;
+      this.interval = setInterval( () => {
+        this.dataPullService.requestTeams(this.processingInformation.searchedOrganization.toString()).subscribe(data => this.processData(data, teamname), error => this.processError(error));
+      }, 10000);
+  }
+}
+
+initProgressBar() {   
+  var progressBarIncreasementPerFinishedRequestType: number = 100 / this.processingInformation.totalCountOfRequestTypes;
+  this.progressBarPercentage = (Math.round(progressBarIncreasementPerFinishedRequestType * 10) / 10) * this.processingInformation.finishedRequestTypes.length;
+  this.myStyles.width = this.progressBarPercentage + "%";
+}
+
+processError(error: HttpErrorResponse) {
+  this.statusCode = 400;
+  this.error = error;
+  console.log("Error Processing");
+}
+
+  processData(teams: HttpResponse<Team[]>, teamname: string) {
+    switch (teams.status) {
+      case 200:
+        this.statusCode = 200;
+        for (let team of teams.body) {
+          if (team.name === teamname) {
+            this.team = team;
+            this.teamMembers = team.teamMembers;
+            this.teamRepositories = team.teamRepositories;
+          }
         }
-      }
-    });
+        clearInterval(this.interval);
+        break;
+      case 202:
+        this.statusCode = 202;
+        this.processingInformation = JSON.parse(JSON.stringify(teams.body));
+        console.log("Accepted - 202");
+        this.initRequestInterval(teamname);
+        this.initProgressBar();
+        break;
+    }
   }
 
   sortByAlphabet() {

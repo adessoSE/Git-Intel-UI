@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Repository } from '../entities/repository';
 import { DataPullService } from '../services/data-pull.service';
 import { GlobalNavigationService } from '../services/global-navigation.service';
+import { ProcessingOrganizationInfo } from '../entities/processingOrganizationInfo';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-repositories',
@@ -17,6 +19,16 @@ export class RepositoriesComponent implements OnInit {
   orgName: string = "";
   sortByTag: string = "";
 
+  statusCode: number;
+  error: HttpErrorResponse;
+  initializedProcessingInterval: boolean = false;
+  interval: any;
+  processingInformation: ProcessingOrganizationInfo;
+  progressBarPercentage: number = 0;
+  myStyles = {
+    width: this.progressBarPercentage + "%"
+  };
+
   constructor(
     private activeRoute: ActivatedRoute,
     private dataPullService: DataPullService,
@@ -28,15 +40,48 @@ export class RepositoriesComponent implements OnInit {
 
   determineOrganization() {
     let org = this.activeRoute.snapshot.paramMap.get('organization');
-
-    this.dataPullService.requestRepositories(org).subscribe(data => this.processData(data));
+    this.dataPullService.requestRepositories(org).subscribe(data => this.processData(data), error => this.processError(error));
   }
 
-  processData(repo: Repository[]) {
-    this.repositories = repo;
-    this.repositoriesCopy = repo;
-    this.navService.tellNumOfEntities(repo.length);
-    console.log(repo);
+  initRequestInterval() {
+    if (!this.initializedProcessingInterval) {
+      this.initializedProcessingInterval = true;
+      this.interval = setInterval( () => {
+        this.dataPullService.requestRepositories(this.processingInformation.searchedOrganization.toString()).subscribe(data => this.processData(data), error => this.processError(error));
+      }, 10000);
+  }
+}
+
+initProgressBar() {   
+  var progressBarIncreasementPerFinishedRequestType: number = 100 / this.processingInformation.totalCountOfRequestTypes;
+  this.progressBarPercentage = (Math.round(progressBarIncreasementPerFinishedRequestType * 10) / 10) * this.processingInformation.finishedRequestTypes.length;
+  this.myStyles.width = this.progressBarPercentage + "%";
+}
+
+processError(error: HttpErrorResponse) {
+  this.statusCode = 400;
+  this.error = error;
+  console.log("Error Processing");
+}
+
+  processData(repo: HttpResponse<Repository[]>) {
+    switch (repo.status) {
+      case 200:
+        this.statusCode = 200;
+        this.repositories = repo.body;
+        this.repositoriesCopy = repo.body;
+        this.navService.tellNumOfEntities(repo.body.length);
+        clearInterval(this.interval);
+        break;
+      case 202:
+        this.statusCode = 202;
+        this.processingInformation = JSON.parse(JSON.stringify(repo.body));
+        console.log(this.processingInformation)
+        console.log("Accepted - 202");
+        this.initRequestInterval();
+        this.initProgressBar();
+        break;
+    }
   }
 
   sortByAlphabet() {
