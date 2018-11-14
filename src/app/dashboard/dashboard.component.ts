@@ -4,7 +4,7 @@ import { ChartJsData } from '../entities/chartJS';
 import { Organization } from '../entities/organization';
 import { DataPullService } from '../services/data-pull.service';
 import { GlobalNavigationService } from '../services/global-navigation.service';
-import { HttpResponse, HttpErrorResponse} from '@angular/common/http';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ProcessingOrganizationInfo } from '../entities/processingOrganizationInfo';
 
 @Component({
@@ -14,6 +14,7 @@ import { ProcessingOrganizationInfo } from '../entities/processingOrganizationIn
 })
 export class DashboardComponent implements OnInit {
 
+  organizationRequestedByUser: string;
   organization: Organization;
   chartMembers: ChartJsData;
   chartCommits: ChartJsData;
@@ -25,10 +26,6 @@ export class DashboardComponent implements OnInit {
   progressBarPercentage: number = 0;
   initializedProcessingInterval: boolean = false;
   interval: any;
-
-  myStyles = {
-    width: this.progressBarPercentage + "%"
-  };
 
   navigationSubscription;
 
@@ -61,7 +58,7 @@ export class DashboardComponent implements OnInit {
    * Displays NavigationBar as user leaves the Dashboard.
    */
   ngOnDestroy() {
-    // Unsubscribe from router events to prevent double triggering of events
+    // Unsubscribe from router events to prevent further triggering of events
     this.navigationSubscription.unsubscribe();
     this.globalNavService.showNavBar(true);
     clearInterval(this.interval);
@@ -71,31 +68,30 @@ export class DashboardComponent implements OnInit {
    * Reads the URL parameter and calls @globalNavService to fetch organization data from Backend.
    */
   determineOrganization() {
-      let org = this.activeRoute.snapshot.paramMap.get('organization');
-      this.dataPullService.requestOrganization(org).subscribe(data => this.processData(data), error => this.processError(error));
+    this.organizationRequestedByUser = this.activeRoute.snapshot.paramMap.get('organization');
+    this.dataPullService.requestOrganization(this.organizationRequestedByUser).subscribe(data => this.processData(data), error => this.processError(error));
   }
 
   initRequestInterval() {
     if (!this.initializedProcessingInterval) {
       this.initializedProcessingInterval = true;
-      this.interval = setInterval( () => {
-        this.dataPullService.requestOrganization(this.processingInformation.searchedOrganization.toString()).subscribe(data => this.processData(data), error => this.processError(error));
+      this.interval = setInterval(() => {
+        this.dataPullService.requestOrganization(this.organizationRequestedByUser).subscribe(data => this.processData(data), error => this.processError(error));
       }, 10000);
-  }
-}
-
-  initProgressBar() {   
-        var progressBarIncreasementPerFinishedRequestType: number = 100 / this.processingInformation.totalCountOfRequestTypes;
-        this.progressBarPercentage = (Math.round(progressBarIncreasementPerFinishedRequestType * 10) / 10) * this.processingInformation.finishedRequestTypes.length;
-        this.myStyles.width = this.progressBarPercentage + "%";
     }
+  }
+
+  initProgressBar() {
+    var progressBarIncreasementPerFinishedRequestType: number = 100 / this.processingInformation.totalCountOfRequestTypes;
+    this.progressBarPercentage = (Math.round(progressBarIncreasementPerFinishedRequestType * 10) / 10) * this.processingInformation.finishedRequestTypes.length;
+  }
 
   processError(error: HttpErrorResponse) {
     this.statusCode = 400;
     this.error = error;
     console.log("Error Processing");
   }
-  
+
   processData(orga: HttpResponse<Organization>) {
     console.log("Processing Organization!");
     switch (orga.status) {
