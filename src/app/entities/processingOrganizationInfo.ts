@@ -5,4 +5,5 @@ export class ProcessingOrganizationInfo {
     missingRequestTypes: String[];
     totalCountOfRequestTypes: number;
     totalCountOfNeededRequests: number;
+    currentPositionInQueue: number;
 }

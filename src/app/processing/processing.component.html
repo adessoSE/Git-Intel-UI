@@ -1,10 +1,12 @@
 <!-- Processing organization -->
 <div class="jumbotron jumbotron-fluid vertical-center" style="margin-top: 2%; align-items: center">
   <div class="container" style="width: 75%; margin-top: 2%">
-    <h1 class="display-4 text-center">{{processingInformation.searchedOrganization}} is being processed!</h1>
+    <h1 class="display-4 text-center" *ngIf="processingInformation.currentPositionInQueue === 1">{{processingInformation.searchedOrganization}} is being processed!</h1>
+    <h1 class="display-4 text-center" *ngIf="processingInformation.currentPositionInQueue > 1">{{processingInformation.searchedOrganization}} is waiting to be processed!</h1>
     <p class="lead text-center">In order to process {{processingInformation.searchedOrganization}}
       {{processingInformation.totalCountOfNeededRequests}} requests are being made, this might take a while.</p>
     <p class="lead text-center">Time to get yourself a fresh coffee! <i class="fa fa-coffee fa-2x fa-spin" style="margin-left: 2%"></i></p>
+    <p class="lead text-center">Current at position: {{processingInformation.currentPositionInQueue}}</p>
     <div class="progress">
       <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" [ngStyle]="myStyles"
         attr.aria-valuenow="{{progressBarPercentage}}" aria-valuemin="0" aria-valuemax="100"></div>
