@@ -27,6 +27,7 @@ import { PrepTabNamePipe } from './pipes/prep-tab-name.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { ProcessingComponent } from './processing/processing.component';
 import { ErrorComponent } from './error/error.component';
+import { CacheService } from './services/cache.service';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { ErrorComponent } from './error/error.component';
   ],
   providers: [
     GlobalNavigationService,
-    DataPullService
+    DataPullService,
+    CacheService
   ],
   bootstrap: [AppComponent]
 })

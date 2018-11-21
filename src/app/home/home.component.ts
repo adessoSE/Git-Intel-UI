@@ -1,5 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { GlobalNavigationService } from '../services/global-navigation.service';
+import { CacheService } from '../services/cache.service';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,8 @@ export class HomeComponent implements OnInit {
 
   searchHistory: Set<string> = new Set<string>();
 
-  constructor(private globalNavService: GlobalNavigationService) { }
+  constructor(private globalNavService: GlobalNavigationService,
+    private cacheService: CacheService) { }
 
   /** 
    * Disables NavigationBar while on HomeComponent
@@ -18,12 +20,21 @@ export class HomeComponent implements OnInit {
    * since multiple entries are unnecessary. 
    */
   ngOnInit() {
-    this.searchHistory.add("adessoAG");   // Dummy data
-    
     this.globalNavService.showNavBar(false);
 
     this.globalNavService.onOpenNewTabEmitter.subscribe((tab) => {
-      if (tab !== null) this.searchHistory.add(tab.org);
+      if (tab !== null){
+        if(this.cacheService.has("searchHistory")){
+          let mergedSearchedHistory = new Set<string>();
+          this.cacheService.get("searchHistory").subscribe(data => {
+            this.searchHistory = data;
+            this.searchHistory.add(tab.org);
+          });
+        } else {
+          this.searchHistory.add(tab.org);
+        }
+      this.cacheService.set("searchHistory", this.searchHistory);
+      }    
     })
   }
 

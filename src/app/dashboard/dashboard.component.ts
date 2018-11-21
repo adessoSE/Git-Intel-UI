@@ -6,6 +6,7 @@ import { DataPullService } from '../services/data-pull.service';
 import { GlobalNavigationService } from '../services/global-navigation.service';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ProcessingOrganizationInfo } from '../entities/processingOrganizationInfo';
+import { CacheService } from '../services/cache.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +15,6 @@ import { ProcessingOrganizationInfo } from '../entities/processingOrganizationIn
 })
 export class DashboardComponent implements OnInit {
 
-  organizationRequestedByUser: string;
   organization: Organization;
   chartMembers: ChartJsData;
   chartCommits: ChartJsData;
@@ -33,7 +33,8 @@ export class DashboardComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private router: Router,
     private globalNavService: GlobalNavigationService,
-    private dataPullService: DataPullService) {
+    private dataPullService: DataPullService,
+    private cacheService: CacheService) {
 
     /**
      * Listens to routing events and renders the dashboard according to the active route.
@@ -68,15 +69,15 @@ export class DashboardComponent implements OnInit {
    * Reads the URL parameter and calls @globalNavService to fetch organization data from Backend.
    */
   determineOrganization() {
-    this.organizationRequestedByUser = this.activeRoute.snapshot.paramMap.get('organization');
-    this.dataPullService.requestOrganization(this.organizationRequestedByUser).subscribe(data => this.processData(data), error => this.processError(error));
+    let organization = this.activeRoute.snapshot.paramMap.get('organization');
+    this.cacheService.get(organization + 'Organization', this.dataPullService.requestOrganization(organization)).subscribe(data => this.processData(data), error => this.processError(error));
   }
 
   initRequestInterval() {
     if (!this.initializedProcessingInterval) {
       this.initializedProcessingInterval = true;
       this.interval = setInterval(() => {
-        this.dataPullService.requestOrganization(this.organizationRequestedByUser).subscribe(data => this.processData(data), error => this.processError(error));
+        this.determineOrganization();
       }, 10000);
     }
   }

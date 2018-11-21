@@ -5,6 +5,7 @@ import { DataPullService } from '../services/data-pull.service';
 import { GlobalNavigationService } from '../services/global-navigation.service';
 import { ProcessingOrganizationInfo } from '../entities/processingOrganizationInfo';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { CacheService } from '../services/cache.service';
 
 @Component({
   selector: 'app-repositories',
@@ -32,22 +33,23 @@ export class RepositoriesComponent implements OnInit {
   constructor(
     private activeRoute: ActivatedRoute,
     private dataPullService: DataPullService,
-    private navService: GlobalNavigationService) { }
+    private navService: GlobalNavigationService,
+    private cacheService: CacheService) { }
 
   ngOnInit() {
     this.determineOrganization();
   }
 
   determineOrganization() {
-    let org = this.activeRoute.snapshot.paramMap.get('organization');
-    this.dataPullService.requestRepositories(org).subscribe(data => this.processData(data), error => this.processError(error));
+    let organization = this.activeRoute.snapshot.paramMap.get('organization');
+    this.cacheService.get(organization + 'Repositories', this.dataPullService.requestRepositories(organization)).subscribe(data => this.processData(data), error => this.processError(error));
   }
 
   initRequestInterval() {
     if (!this.initializedProcessingInterval) {
       this.initializedProcessingInterval = true;
       this.interval = setInterval( () => {
-        this.dataPullService.requestRepositories(this.processingInformation.searchedOrganization.toString()).subscribe(data => this.processData(data), error => this.processError(error));
+        this.determineOrganization();
       }, 10000);
   }
 }
