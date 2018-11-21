@@ -6,7 +6,7 @@
     <p class="lead text-center">In order to process {{processingInformation.searchedOrganization}}
       {{processingInformation.totalCountOfNeededRequests}} requests are being made, this might take a while.</p>
     <p class="lead text-center">Time to get yourself a fresh coffee! <i class="fa fa-coffee fa-2x fa-spin" style="margin-left: 2%"></i></p>
-    <p class="lead text-center">Current at position: {{processingInformation.currentPositionInQueue}}</p>
+    <p class="lead text-center">Current Position: {{processingInformation.currentPositionInQueue}}</p>
     <div class="progress">
       <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" [ngStyle]="myStyles"
         attr.aria-valuenow="{{progressBarPercentage}}" aria-valuemin="0" aria-valuemax="100"></div>
