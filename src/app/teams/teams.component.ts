@@ -5,6 +5,7 @@ import { ActivatedRoute } from '../../../node_modules/@angular/router';
 import { GlobalNavigationService } from '../services/global-navigation.service';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ProcessingOrganizationInfo } from '../entities/processingOrganizationInfo';
+import { CacheService } from '../services/cache.service';
 
 @Component({
   selector: 'app-teams',
@@ -31,7 +32,8 @@ export class TeamsComponent implements OnInit {
   constructor(
     private dataPullService: DataPullService,
     private activeRoute: ActivatedRoute,
-    private navService: GlobalNavigationService) {
+    private navService: GlobalNavigationService,
+    private cacheService: CacheService) {
   }
 
   ngOnInit() {
@@ -39,15 +41,15 @@ export class TeamsComponent implements OnInit {
   }
 
   determineOrganization() {
-    let org = this.activeRoute.snapshot.paramMap.get('organization');
-    this.dataPullService.requestTeams(org).subscribe(data => this.processData(data), error => this.processError(error));
+    let organization = this.activeRoute.snapshot.paramMap.get('organization');
+    this.cacheService.get(organization + 'Teams', this.dataPullService.requestTeams(organization)).subscribe(data => this.processData(data), error => this.processError(error));
   }
 
   initRequestInterval() {
     if (!this.initializedProcessingInterval) {
       this.initializedProcessingInterval = true;
       this.interval = setInterval( () => {
-        this.dataPullService.requestTeams(this.processingInformation.searchedOrganization.toString()).subscribe(data => this.processData(data), error => this.processError(error));
+        this.determineOrganization()
       }, 10000);
   }
 }

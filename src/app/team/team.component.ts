@@ -7,6 +7,7 @@ import { DataPullService } from '../services/data-pull.service';
 import { GlobalNavigationService } from '../services/global-navigation.service';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { ProcessingOrganizationInfo } from '../entities/processingOrganizationInfo';
+import { CacheService } from '../services/cache.service';
 
 
 
@@ -40,7 +41,8 @@ export class TeamComponent implements OnInit {
   constructor(
     private navService: GlobalNavigationService,
     private activatedRoute: ActivatedRoute,
-    private dataPullService: DataPullService) {
+    private dataPullService: DataPullService,
+    private cacheService: CacheService) {
 
     // Set the number of "entities" displayed in the breadcrumbs to 0 so they are disabled in navigation-bar.component.html.
     this.navService.tellNumOfEntities(0);
@@ -52,14 +54,14 @@ export class TeamComponent implements OnInit {
   determineTeam() {
     let team = this.activatedRoute.snapshot.paramMap.get('name');
     let organization = this.activatedRoute.snapshot.paramMap.get('organization');
-    this.dataPullService.requestTeams(organization).subscribe(data => this.processData(data, team), error => this.processError(error));
+    this.cacheService.get(organization + 'Teams', this.dataPullService.requestTeams(organization)).subscribe(data => this.processData(data,team), error => this.processError(error));
   }
 
-  initRequestInterval(teamname: string) {
+  initRequestInterval() {
     if (!this.initializedProcessingInterval) {
       this.initializedProcessingInterval = true;
       this.interval = setInterval( () => {
-        this.dataPullService.requestTeams(this.processingInformation.searchedOrganization.toString()).subscribe(data => this.processData(data, teamname), error => this.processError(error));
+        this.determineTeam();
       }, 10000);
   }
 }
@@ -93,7 +95,7 @@ processError(error: HttpErrorResponse) {
         this.statusCode = 202;
         this.processingInformation = JSON.parse(JSON.stringify(teams.body));
         console.log("Accepted - 202");
-        this.initRequestInterval(teamname);
+        this.initRequestInterval();
         this.initProgressBar();
         break;
     }

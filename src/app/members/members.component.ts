@@ -5,6 +5,7 @@ import { DataPullService } from '../services/data-pull.service';
 import { GlobalNavigationService } from '../services/global-navigation.service';
 import { ProcessingOrganizationInfo } from '../entities/processingOrganizationInfo';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { CacheService } from '../services/cache.service';
 
 @Component({
   selector: 'app-members',
@@ -34,7 +35,8 @@ export class MembersComponent implements OnInit {
   constructor(
     private dataPullService: DataPullService,
     private activeRoute: ActivatedRoute,
-    private navService: GlobalNavigationService) { }
+    private navService: GlobalNavigationService,
+    private cacheService: CacheService) { }
 
   /**
    * Uses @memberService to get data and initialize 
@@ -45,16 +47,16 @@ export class MembersComponent implements OnInit {
   }
 
   determineOrganization() {
-    let org = this.activeRoute.snapshot.paramMap.get('organization');
-
-    this.dataPullService.requestMembers(org).subscribe(data => this.processData(data), error => this.processError(error));
+    let organization = this.activeRoute.snapshot.paramMap.get('organization');
+    this.cacheService.get(organization + 'Members', this.dataPullService.requestMembers(organization)).subscribe(data => this.processData(data), error => this.processError(error));
   }
 
   initRequestInterval() {
     if (!this.initializedProcessingInterval) {
       this.initializedProcessingInterval = true;
       this.interval = setInterval( () => {
-        this.dataPullService.requestMembers(this.processingInformation.searchedOrganization.toString()).subscribe(data => this.processData(data), error => this.processError(error));
+        console.log("Interval running");
+        this.determineOrganization();
       }, 10000);
   }
 }
@@ -74,6 +76,7 @@ processError(error: HttpErrorResponse) {
   processData(members: HttpResponse<Member[]>) {
     switch (members.status) {
       case 200:
+      console.log("Status 200");
         this.statusCode = 200;
         this.members = members.body;
         this.membersCopy = members.body;
@@ -81,6 +84,7 @@ processError(error: HttpErrorResponse) {
         clearInterval(this.interval);
         break;
       case 202:
+      console.log("Status 202");
         this.statusCode = 202;
         this.processingInformation = JSON.parse(JSON.stringify(members.body));
         console.log(this.processingInformation)

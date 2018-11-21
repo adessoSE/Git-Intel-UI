@@ -8,6 +8,7 @@ import { TableDataObject } from '../entities/tableDataObject';
 import { ProcessingOrganizationInfo } from '../entities/processingOrganizationInfo';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { useAnimation } from '@angular/core/src/animation/dsl';
+import { CacheService } from '../services/cache.service';
 
 @Component({
   selector: 'app-member',
@@ -38,7 +39,8 @@ export class MemberComponent implements OnInit {
   constructor(
     private dataPullService: DataPullService,
     private activeRoute: ActivatedRoute,
-    private navService: GlobalNavigationService) {
+    private navService: GlobalNavigationService,
+    private cacheService: CacheService) {
 
     // Set the number of "entities" displayed in the breadcrumbs to 0 so they are disabled in navigation-bar.component.html.
     this.navService.tellNumOfEntities(0);
@@ -53,7 +55,7 @@ export class MemberComponent implements OnInit {
     if (!this.initializedProcessingInterval) {
       this.initializedProcessingInterval = true;
       this.interval = setInterval( () => {
-        this.dataPullService.requestMembers(this.processingInformation.searchedOrganization.toString()).subscribe(data => this.processData(data, username), error => this.processError(error));
+        this.determineMember();
       }, 10000);
   }
 }
@@ -97,7 +99,7 @@ processError(error: HttpErrorResponse) {
   determineMember() {
     let member = this.activeRoute.snapshot.paramMap.get('username');
     let organization = this.activeRoute.snapshot.paramMap.get('organization');
-    this.dataPullService.requestMembers(organization).subscribe(data => this.processData(data, member), error => this.processError(error));
+    this.cacheService.get(organization + 'Members', this.dataPullService.requestMembers(organization)).subscribe(data => this.processData(data, member), error => this.processError(error));
   }
 
   initGraphs() {
