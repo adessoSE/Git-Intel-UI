@@ -16,8 +16,7 @@ export class HomeComponent implements OnInit {
 
   /** 
    * Disables NavigationBar while on HomeComponent
-   * and saves entries of searched organization in a Set,
-   * since multiple entries are unnecessary. 
+   * and saves entries of searched organization in a Set
    */
   ngOnInit() {
     this.globalNavService.showNavBar(false);

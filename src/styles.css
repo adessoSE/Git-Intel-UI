@@ -8,7 +8,18 @@ a, a:active {
     text-decoration:none !important;
 }
 
-/* The following are used in almost every component */
+.nav a {
+    background: rgba(255, 255, 255, 0.541)!important;
+}
+
+.nav-item > .active {
+    background: white!important;
+}
+
+.nav a:hover {
+    background: white!important;
+}
+
 ul {
     list-style-type: none;
 }
