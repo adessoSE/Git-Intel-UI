@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit {
 		 *     ...
 		 * 
 		 * The final URL is concatenated and if conditions are met, 
-		 * opened in a new tab, or otherwise assigned to the active tab. 
+		 * opened in a new tab or otherwise assigned to the active tab. 
 		 */
     this.router.events
       .filter((event) => event instanceof NavigationEnd)
@@ -63,7 +63,6 @@ export class HeaderComponent implements OnInit {
       .mergeMap((route) => route.url)
       .subscribe((event) => {
         let targetURL = this.concatURL(event);
-
         if (targetURL !== "home") {
           if (this.tabs.length === 0) {
             this.globalNavService.onOpenNewTab(targetURL);
@@ -117,16 +116,16 @@ export class HeaderComponent implements OnInit {
 	/** 
 	 * Closes tab and decides which tab to set as new active.
    * Cases:
-   * 1) Any tab other than the active one is closed --> Active tab stays active.
+   * 1) Active tab is closed and it's not the last one in the list --> The tab to the right of the closed tab is now active.
    * 2) Active tab is closed and it's the last one in the list --> The 'new' last tab is now active.
-   * 3) Active tab is closed and it's not the last one in the list --> The tab to the right of the closed tab is now active.
-   * 4/ Active tab is closed and it's the only open tab --> No tabs. Home view is shown
+   * 3/ Active tab is closed and it's the only open tab --> No tabs. Home view is shown
+   * 4) Any tab other than the active one is closed --> Active tab stays active.
 	 */
   closeTab(idx: number) {
     this.tabs.splice(idx, 1);
     // The tab to close is the active tab
     if (this.activeTabIdx == idx) {
-      // Case 3)
+      // Case 1)
       if (this.tabs[idx]) {
         this.activeTabIdx = idx;
         this.router.navigate(["/" + this.tabs[idx].url]);
@@ -134,11 +133,11 @@ export class HeaderComponent implements OnInit {
       else if (this.tabs.length >= 1) {
         this.activeTabIdx = idx - 1;
         this.router.navigate(["/" + this.tabs[idx - 1].url]);
-      } // Case 4)
+      } // Case 3)
       else {
         this.router.navigate(["home"]);
       }
-    } // Case 1)
+    } // Case 4)
     else {
       // If the active tab is 'right to' the closing tab, adjust indices 
       if (this.activeTabIdx > idx) {
@@ -168,7 +167,7 @@ export class HeaderComponent implements OnInit {
   }
 
 	/** 
-	 * Concatenates the given UrlSegment seperated by "/"
+	 * Concatenates the given urlSegment seperated by "/"
 	 * and removes the last one.
 	 */
   concatURL(urlSegment: UrlSegment[]): string {

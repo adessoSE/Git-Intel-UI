@@ -19,10 +19,7 @@ export class GlobalNavigationService {
   public _openNewTab: BehaviorSubject<Tab> = new BehaviorSubject<Tab>(null);
   public onOpenNewTabEmitter: Observable<Tab> = this._openNewTab.asObservable();
 
-  private _tabClicked: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-  public onClickTabEmitter: Observable<boolean> = this._tabClicked.asObservable();
-
-  constructor(private dataPullService: DataPullService) { }
+  constructor() { }
 
   tellNumOfEntities(n: number) {
     this._numOfEntities.next(n);
@@ -45,4 +42,5 @@ export class GlobalNavigationService {
     let tab = { org: org, url: url, name: "processing..." };
     this._openNewTab.next(tab);
   }
+
 }

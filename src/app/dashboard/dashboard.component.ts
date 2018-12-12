@@ -73,6 +73,9 @@ export class DashboardComponent implements OnInit {
     this.cacheService.get(organization + 'Organization', this.dataPullService.requestOrganization(organization)).subscribe(data => this.processData(data), error => this.processError(error));
   }
 
+  /**
+   * Determines the interval in which the progress of a currently processed organisation is checked.
+   */
   initRequestInterval() {
     if (!this.initializedProcessingInterval) {
       this.initializedProcessingInterval = true;
@@ -82,6 +85,9 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  /**
+   * Determines how the progress of the progress bar is calculated.
+   */
   initProgressBar() {
     var progressBarIncreasementPerFinishedRequestType: number = 100 / this.processingInformation.totalCountOfRequestTypes;
     this.progressBarPercentage = (Math.round(progressBarIncreasementPerFinishedRequestType * 10) / 10) * this.processingInformation.finishedRequestTypes.length;
@@ -92,7 +98,7 @@ export class DashboardComponent implements OnInit {
     this.error = error;
     console.log("Error Processing");
   }
-  
+
   /**
    * 
    * @param orga 
