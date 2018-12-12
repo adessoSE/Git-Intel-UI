@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+// Separate internal module for routing containing paths, etc.
 import { AppRoutingModule } from './/app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { PopoverModule } from 'ngx-popover';
@@ -28,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProcessingComponent } from './processing/processing.component';
 import { ErrorComponent } from './error/error.component';
 import { CacheService } from './services/cache.service';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
@@ -48,7 +50,8 @@ import { CacheService } from './services/cache.service';
     LastWordPipe,
     PrepTabNamePipe,
     ProcessingComponent,
-    ErrorComponent
+    ErrorComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

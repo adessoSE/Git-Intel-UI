@@ -1,44 +1,8 @@
 <!-- Header -->
-<div class="jumbotron" style="margin-top: -1%; margin-bottom: -1%;">
-
-  <div class="container-fluid">
-
-    <div class="row">
-      <!-- Title -->
-      <div class="col-sm-4">
-        <h1 class="display-3">
-          <a routerLink="home">GitStalker</a>
-        </h1>
-        <p class="lead">Stalking made easy!</p>
-      </div>
-
-      <!-- Search field -->
-      <div class="col-sm-8">
-        <form class="form-inline my-2 my-lg-0" style="padding-top: 5%;">
-          <input id="name" class="form-control mr-sm-2 searchForm" [ngClass]="{'is-invalid': isSearchInvalid}" [(ngModel)]="organization"
-            required minlength="4" name="search" placeholder="Organization's name" type="text" style="width: 35%;" #name="ngModel">
-          <button id="stalk" class="btn btn-primary my-2 my-sm-0" (click)="onClickStalk(organization)">Stalk!</button>
-          <label for="stalk" id="error" class="text-danger" style="padding-left: 10px;">Invalid Organization Name</label>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Tab Bar -->
-<ul class="nav nav-tabs tabBar">
-  <li class="nav-item" *ngFor="let tab of tabs; let idx = index">
-    <a class="nav-link" data-toggle="tab" [class.active]="idx === activeTabIdx && isHome === false" [routerLink]="tab.url" (click)="setActiveTab(idx)"
-      style="display: inline-block;">
-      {{tab.url | prepTabName | capitalize}}
-      <button (click)="closeTab(idx)" type="button" class="close" data-dismiss="alert">&times;</button>
-    </a>
-  </li>
-</ul>
+<app-header></app-header>
 
 <!-- Navigation Bar -->
 <navigation-bar></navigation-bar>
-
 
 <!-- Body -->
 <router-outlet></router-outlet>
