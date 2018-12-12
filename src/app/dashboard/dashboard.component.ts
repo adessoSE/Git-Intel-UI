@@ -1,12 +1,12 @@
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ChartJsData } from '../entities/chartJS';
 import { Organization } from '../entities/organization';
-import { DataPullService } from '../services/data-pull.service';
-import { GlobalNavigationService } from '../services/global-navigation.service';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ProcessingOrganizationInfo } from '../entities/processingOrganizationInfo';
 import { CacheService } from '../services/cache.service';
+import { DataPullService } from '../services/data-pull.service';
+import { GlobalNavigationService } from '../services/global-navigation.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -92,13 +92,23 @@ export class DashboardComponent implements OnInit {
     this.error = error;
     console.log("Error Processing");
   }
-
+  
+  /**
+   * 
+   * @param orga 
+   * TODO:
+   * The naming of tabs needs to be fixed so the actual organisation's names are displayed
+   * instead of the user input.
+   */
   processData(orga: HttpResponse<Organization>) {
     console.log("Processing Organization!");
     switch (orga.status) {
       case 200:
         this.statusCode = 200;
         this.organization = orga.body;
+        this.globalNavService.onOpenNewTabEmitter.subscribe((tab) => {
+          tab.name = this.organization.name;
+        });
         console.log(this.organization);
         clearInterval(this.interval);
         this.initGraphs();

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from "rxjs/Observable";
 import { Tab } from '../entities/tab';
+import { DataPullService } from './data-pull.service';
 
 
 @Injectable()
@@ -15,13 +16,13 @@ export class GlobalNavigationService {
   private _showNavBar: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public showNavBarEmitter: Observable<boolean> = this._showNavBar.asObservable();
 
-  private _openNewTab: BehaviorSubject<Tab> = new BehaviorSubject<Tab>(null);
+  public _openNewTab: BehaviorSubject<Tab> = new BehaviorSubject<Tab>(null);
   public onOpenNewTabEmitter: Observable<Tab> = this._openNewTab.asObservable();
 
   private _tabClicked: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public onClickTabEmitter: Observable<boolean> = this._tabClicked.asObservable();
 
-  constructor() { }
+  constructor(private dataPullService: DataPullService) { }
 
   tellNumOfEntities(n: number) {
     this._numOfEntities.next(n);
@@ -40,14 +41,8 @@ export class GlobalNavigationService {
     let idxSubstr = idxDash === -1 ? url.length : idxDash;
 
     let org = url.substring(0, idxSubstr);
-    
-    let tab = { org: org, url: url };
+
+    let tab = { org: org, url: url, name: "processing..." };
     this._openNewTab.next(tab);
   }
-
-  onClickTab(clicked: boolean) {
-    console.log("Tab clicked!")
-    this._tabClicked.next(clicked);
-  }
-
 }
