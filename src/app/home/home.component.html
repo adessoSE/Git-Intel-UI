@@ -1,19 +1,14 @@
-<!-- Welcome card -->
-<div class="card text-white bg-primary mb-3 generalLayout">
-  <div class="card-body">
-    <h2 class="card-title" style="text-align: center">Welcome!</h2>
-    <p class="card-text" style="text-align: center">
-      Just look for an organization and gain insight into all the details.
-    </p>
-  </div>
-</div>
-
 <!-- Search history -->
-<div class="list-group generalLayout">
-  <p class="list-group-item list-group-item-action active">
-    Search history:
-  </p>
-  <ng-container *ngFor="let org of searchHistory">
-    <button type="button" class="btn btn-secondary" (click)="openNewTab(org)">{{org}}</button>
-  </ng-container>
+<div class="jumbotron jumbotron-fluid vertical-center" style="align-items: center">
+  <div class="container" style="width: 75%;">
+    <h1 class="display-4 text-center">Welcome!</h1>
+    <p class="lead text-center">This is the place where your data will be displayed.</p>
+    <p class="lead text-center"> Just enter an organisation's name and hit 'Stalk!'.</p>
+    <div class="alert alert-info col-md-4" role="alert">
+      <h2 class="text-center">Search History</h2>
+      <ul class="list-group text-center" *ngFor="let org of searchHistory">
+        <li class="list-group-item"><button type="button" class="btn btn-secondary" (click)="openNewTab(org)">{{org}}</button></li>
+      </ul>
+    </div>
+  </div>
 </div>
