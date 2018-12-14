@@ -5,7 +5,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import { Tab } from '../entities/tab';
 import { GlobalNavigationService } from '../services/global-navigation.service';
-import { DataPullService } from '../services/data-pull.service';
 
 /**
  * Header component containing title message, search bar and tabs.
@@ -50,7 +49,7 @@ export class HeaderComponent implements OnInit {
 		 *     ...
 		 * 
 		 * The final URL is concatenated and if conditions are met, 
-		 * opened in a new tab, or otherwise assigned to the active tab. 
+		 * opened in a new tab or otherwise assigned to the active tab. 
 		 */
     this.router.events
       .filter((event) => event instanceof NavigationEnd)
@@ -63,7 +62,6 @@ export class HeaderComponent implements OnInit {
       .mergeMap((route) => route.url)
       .subscribe((event) => {
         let targetURL = this.concatURL(event);
-
         if (targetURL !== "home") {
           if (this.tabs.length === 0) {
             this.globalNavService.onOpenNewTab(targetURL);
@@ -109,24 +107,37 @@ export class HeaderComponent implements OnInit {
 	 * Pushes Tab into the global @tabs Array, hence opens it, marks it as active and navigates to given route. 
 	 */
   openNewTab(tab: Tab) {
+    console.log("---OPEN NEW TAB FUNCTION CALL---");
     this.tabs.push(tab);
     this.setActiveTab(this.tabs.length - 1);
     this.router.navigate([tab.url]);
+    // Fetches the TabNameObject containing the url and name of the currently active organisation (displayed in the dashboard).
+    // Walks through the list of tabs and looks for a match between a tab's url and the organisation's url (saved in the TabNameObject).
+    this.globalNavService._tabNameObject.subscribe(tabName => {
+      console.log("---SUBSCRIPTION EVENT---");
+      for (let tab of this.tabs) {
+        console.log("---FOR LOOP Tab--- " + tab);
+        if (tabName != null) {
+          if (tab.url === tabName.url) {
+            tab.name = tabName.value;
+          }
+        }
+      }
+    });
   }
 
 	/** 
 	 * Closes tab and decides which tab to set as new active.
    * Cases:
-   * 1) Any tab other than the active one is closed --> Active tab stays active.
+   * 1) Active tab is closed and it's not the last one in the list --> The tab to the right of the closed tab is now active.
    * 2) Active tab is closed and it's the last one in the list --> The 'new' last tab is now active.
-   * 3) Active tab is closed and it's not the last one in the list --> The tab to the right of the closed tab is now active.
-   * 4/ Active tab is closed and it's the only open tab --> No tabs. Home view is shown
+   * 3/ Active tab is closed and it's the only open tab --> No tabs. Home view is shown
+   * 4) Any tab other than the active one is closed --> Active tab stays active.
 	 */
   closeTab(idx: number) {
     this.tabs.splice(idx, 1);
-    // The tab to close is the active tab
     if (this.activeTabIdx == idx) {
-      // Case 3)
+      // Case 1)
       if (this.tabs[idx]) {
         this.activeTabIdx = idx;
         this.router.navigate(["/" + this.tabs[idx].url]);
@@ -134,11 +145,11 @@ export class HeaderComponent implements OnInit {
       else if (this.tabs.length >= 1) {
         this.activeTabIdx = idx - 1;
         this.router.navigate(["/" + this.tabs[idx - 1].url]);
-      } // Case 4)
+      } // Case 3)
       else {
         this.router.navigate(["home"]);
       }
-    } // Case 1)
+    } // Case 4)
     else {
       // If the active tab is 'right to' the closing tab, adjust indices 
       if (this.activeTabIdx > idx) {
@@ -168,7 +179,7 @@ export class HeaderComponent implements OnInit {
   }
 
 	/** 
-	 * Concatenates the given UrlSegment seperated by "/"
+	 * Concatenates the given urlSegment seperated by "/"
 	 * and removes the last one.
 	 */
   concatURL(urlSegment: UrlSegment[]): string {

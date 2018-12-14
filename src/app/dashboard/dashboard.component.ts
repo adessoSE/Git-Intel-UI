@@ -7,6 +7,7 @@ import { ProcessingOrganizationInfo } from '../entities/processingOrganizationIn
 import { CacheService } from '../services/cache.service';
 import { DataPullService } from '../services/data-pull.service';
 import { GlobalNavigationService } from '../services/global-navigation.service';
+import { TabNameObject } from '../entities/tabNameObject';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,6 +20,7 @@ export class DashboardComponent implements OnInit {
   chartMembers: ChartJsData;
   chartCommits: ChartJsData;
   chartPRs: ChartJsData;
+  tabName: TabNameObject;
 
   statusCode: number;
   error: HttpErrorResponse;
@@ -39,7 +41,7 @@ export class DashboardComponent implements OnInit {
     /**
      * Listens to routing events and renders the dashboard according to the active route.
      */
-    this.navigationSubscription = router.events.subscribe((event) => {
+    this.navigationSubscription = router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.determineOrganization();
         this.initializedProcessingInterval = false;
@@ -73,6 +75,9 @@ export class DashboardComponent implements OnInit {
     this.cacheService.get(organization + 'Organization', this.dataPullService.requestOrganization(organization)).subscribe(data => this.processData(data), error => this.processError(error));
   }
 
+  /**
+   * Determines the interval in which the progress of a currently processed organisation is checked.
+   */
   initRequestInterval() {
     if (!this.initializedProcessingInterval) {
       this.initializedProcessingInterval = true;
@@ -82,6 +87,9 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  /**
+   * Determines how the progress of the progress bar is calculated.
+   */
   initProgressBar() {
     var progressBarIncreasementPerFinishedRequestType: number = 100 / this.processingInformation.totalCountOfRequestTypes;
     this.progressBarPercentage = (Math.round(progressBarIncreasementPerFinishedRequestType * 10) / 10) * this.processingInformation.finishedRequestTypes.length;
@@ -92,13 +100,13 @@ export class DashboardComponent implements OnInit {
     this.error = error;
     console.log("Error Processing");
   }
-  
+
   /**
    * 
    * @param orga 
-   * TODO:
-   * The naming of tabs needs to be fixed so the actual organisation's names are displayed
-   * instead of the user input.
+   * Differentiates between two cases:
+   * 1) Data is available -> Displays data in dashboard.
+   * 2) Data needs to be gathered -> Displays progress indicators in dashboard.
    */
   processData(orga: HttpResponse<Organization>) {
     console.log("Processing Organization!");
@@ -106,9 +114,9 @@ export class DashboardComponent implements OnInit {
       case 200:
         this.statusCode = 200;
         this.organization = orga.body;
-        this.globalNavService.onOpenNewTabEmitter.subscribe((tab) => {
-          tab.name = this.organization.name;
-        });
+        this.generateTabName(this.organization);
+        // Sends the generated tabNameObject to the GlobalNavService for the header component to access.
+        this.globalNavService._tabNameObject.next(this.tabName);
         console.log(this.organization);
         clearInterval(this.interval);
         this.initGraphs();
@@ -124,6 +132,14 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  generateTabName(orga: Organization) {
+    let url = this.activeRoute.snapshot.paramMap.get('organization');
+    this.tabName = { url: url, value: orga.name };
+  }
+
+  /**
+   * Initiates the data graphs using the predefined object structure.
+   */
   initGraphs() {
     this.chartCommits = {
       labels: this.organization.internalRepositoriesCommits.chartJSLabels,
