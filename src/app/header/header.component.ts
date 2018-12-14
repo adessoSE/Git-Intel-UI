@@ -5,7 +5,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import { Tab } from '../entities/tab';
 import { GlobalNavigationService } from '../services/global-navigation.service';
-import { DataPullService } from '../services/data-pull.service';
 
 /**
  * Header component containing title message, search bar and tabs.
@@ -108,9 +107,23 @@ export class HeaderComponent implements OnInit {
 	 * Pushes Tab into the global @tabs Array, hence opens it, marks it as active and navigates to given route. 
 	 */
   openNewTab(tab: Tab) {
+    console.log("---OPEN NEW TAB FUNCTION CALL---");
     this.tabs.push(tab);
     this.setActiveTab(this.tabs.length - 1);
     this.router.navigate([tab.url]);
+    // Fetches the TabNameObject containing the url and name of the currently active organisation (displayed in the dashboard).
+    // Walks through the list of tabs and looks for a match between a tab's url and the organisation's url (saved in the TabNameObject).
+    this.globalNavService._tabNameObject.subscribe(tabName => {
+      console.log("---SUBSCRIPTION EVENT---");
+      for (let tab of this.tabs) {
+        console.log("---FOR LOOP Tab--- " + tab);
+        if (tabName != null) {
+          if (tab.url === tabName.url) {
+            tab.name = tabName.value;
+          }
+        }
+      }
+    });
   }
 
 	/** 
@@ -123,7 +136,6 @@ export class HeaderComponent implements OnInit {
 	 */
   closeTab(idx: number) {
     this.tabs.splice(idx, 1);
-    // The tab to close is the active tab
     if (this.activeTabIdx == idx) {
       // Case 1)
       if (this.tabs[idx]) {
