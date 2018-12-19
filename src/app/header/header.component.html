@@ -14,14 +14,19 @@
     </div>
     <div class="row">
       <!-- Search field -->
-      <div class="col-md-12" style="vertical-align: middle; padding-bottom: 3em">
+      <div class="col-md-12" style="padding-bottom: 3em">
         <form class="form-inline justify-content-center" style="padding-top: 1em;">
           <input id="name" class="form-control mr-sm-2 searchForm" [ngClass]="{'is-invalid': isSearchInvalid}"
             [(ngModel)]="organization" required minlength="4" name="search" placeholder="Type your organisation's name here..."
             type="text" style="width: 35%;" #name="ngModel">
-          <button id="stalk" class="btn btn-success my-2 my-sm-0" (click)="onClickStalk(organization)">Gather Intel!</button>
-          <label for="stalk" id="error" class="text-danger" style="padding-left: 10px;">Invalid Organisation Name</label>
+          <button id="stalk" class="btn btn-success my-2 my-sm-0" (click)="onClickStalk(organization)"><b>Gather Intel!</b></button>
         </form>
+        <div id="error" class="alert alert-danger text-center" role="alert" style="width: 35%; margin-top: 1em; margin-left: auto; margin-right: auto">
+          Invalid Organisation Name!
+          <button (click)="hideWarning(true)" type="button" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>

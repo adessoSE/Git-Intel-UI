@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit {
     });
 
     // Hide input error on init
-    document.getElementById("error").hidden = true;
+    this.hideWarning(true);
 
 		/**
 		 * Subscription returns an Array of Objects that look like so:
@@ -96,10 +96,10 @@ export class HeaderComponent implements OnInit {
       this.globalNavService.onOpenNewTab(org);
       // Clear input field
       this.organization = null;
-      document.getElementById("error").hidden = true;
+      this.hideWarning(true);
     } else {
       this.isSearchInvalid = true;
-      document.getElementById("error").hidden = false;
+      this.hideWarning(false);
     }
   }
 
@@ -157,6 +157,10 @@ export class HeaderComponent implements OnInit {
       }
       // If it's to the left, do nothing to keep the active tab active
     }
+  }
+
+  hideWarning(status: boolean) {
+    document.getElementById("error").hidden = status;
   }
 
 	/** 
