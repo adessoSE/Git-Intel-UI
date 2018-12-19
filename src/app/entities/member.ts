@@ -1,5 +1,4 @@
 import { Organization } from "./organization";
-import { ChartJsData } from "./chartJS";
 
 export class Member {
     public username: string;

@@ -1,10 +1,10 @@
 <!-- Graph Modal | Must remain first element, because it's canvas is used for downloading -->
-<div class="modal fade" id="memberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf='chartData'>
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf='rendered'>
   <div class="modal-dialog" style="margin-left: 20%" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">{{chartCaption}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" (click)="render(false)" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -14,23 +14,23 @@
         </canvas>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" (click)="render(false)" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <a href="#" (click)="downloadGraph($event)" class="btn btn-primary" style="color:white !important">Download</a>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Member Growth -->
+
 <div class="card border-secondary mb-3 graph-card" *ngIf='chartData'>
   <div class="card-body">
     <!-- Custom card header -->
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-10">
         {{chartCaption}}
       </div>
-      <div class="col-md-4 offset-md-3">
-        <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#memberModal">
+      <div class="col-md-2">
+        <button type="button" (click)="render(true)" class="btn btn-info float-right" data-toggle="modal" data-target="#modal">
           <i class="fa fa-arrows-alt"></i>
         </button>
       </div>

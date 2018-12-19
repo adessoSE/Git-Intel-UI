@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ChartJsData } from '../entities/chartJS';
 
+import * as $ from 'jquery';
+import { renderDetachView } from '@angular/core/src/view/view_attach';
+
 @Component({
   selector: 'graph',
   templateUrl: './graph.component.html',
@@ -11,6 +14,8 @@ export class GraphComponent implements OnInit {
   @Input() chartData: ChartJsData;
   @Input() organization: string;
   chartCaption: string;
+
+  rendered: boolean = false;
 
   // The ChartJS chart, its properties and options
   chart = {
@@ -45,6 +50,14 @@ export class GraphComponent implements OnInit {
     if (this.chartData != null) {
       this.chartCaption = this.chartData.caption;
     }
+  }
+
+  /**
+   * Only initializes the modal when it is requested by the user.
+   * This way the modal's (static) content always fits the correct graph data.
+   */
+  render(state: boolean) {
+    this.rendered = state
   }
 
   /**
