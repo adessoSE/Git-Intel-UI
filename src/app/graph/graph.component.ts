@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ChartJsData } from '../entities/chartJS';
 
-import * as $ from 'jquery';
-import { renderDetachView } from '@angular/core/src/view/view_attach';
 
 @Component({
   selector: 'graph',
@@ -59,18 +57,4 @@ export class GraphComponent implements OnInit {
   render(state: boolean) {
     this.rendered = state
   }
-
-  /**
-   * Fetches graph element and prepares download link.
-   * @param event MouseClick event that referes to triggered DOM element. 
-   */
-  downloadGraph(event) {
-    var anchor = event.target;
-
-    anchor.href = document.getElementsByTagName('canvas')[0].toDataURL();
-
-    anchor.download = this.organization + " " + this.chart.chartTitle + " - " + new Date().toLocaleDateString() + ".png";
-  }
-
-
 }

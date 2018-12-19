@@ -1,5 +1,6 @@
 <!-- Graph Modal | Must remain first element, because it's canvas is used for downloading -->
-<div class="modal fade" data-backdrop="static" data-keyboard="false" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf='rendered'>
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="modal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf='rendered'>
   <div class="modal-dialog" style="margin-left: 20%" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -9,13 +10,12 @@
         </button>
       </div>
       <div class="modal-body">
-        <canvas id="chart" baseChart [chartType]="chart.chartType" [datasets]="chartData.data" [labels]="chartData.labels" [options]="chart.chartOptions"
-          [legend]="chart.chartLegend" [colors]="chart.chartColors">
+        <canvas id="chart" baseChart [chartType]="chart.chartType" [datasets]="chartData.data" [labels]="chartData.labels"
+          [options]="chart.chartOptions" [legend]="chart.chartLegend" [colors]="chart.chartColors">
         </canvas>
       </div>
       <div class="modal-footer">
         <button type="button" (click)="render(false)" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a href="#" (click)="downloadGraph($event)" class="btn btn-primary" style="color:white !important">Download</a>
       </div>
     </div>
   </div>
@@ -36,7 +36,7 @@
       </div>
     </div>
     <!-- Actual Graph body -->
-    <canvas id="chart" baseChart [chartType]="chart.chartType" [datasets]="chartData.data" [labels]="chartData.labels" [options]="chart.chartOptions"
+    <canvas baseChart [chartType]="chart.chartType" [datasets]="chartData.data" [labels]="chartData.labels" [options]="chart.chartOptions"
       [legend]="chart.chartLegend" [colors]="chart.chartColors">
     </canvas>
   </div>
