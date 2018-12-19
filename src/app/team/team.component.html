@@ -45,7 +45,7 @@
   <h3>Team Members</h3>
   <div class="row justify-content-center graph-row" *ngIf="cbMembers.checked">
     <!-- Members -->
-    <div class="col-md-4 member-card" *ngFor="let member of teamMembers">
+    <div class="col-md-4 " *ngFor="let member of teamMembers">
       <div class="card border-primary component-card">
         <a routerLink={{member.username}}>
           <div class="card-body">
@@ -64,7 +64,7 @@
   <!--Cards displaying Repositories and Repository info-->
   <div class="row justify-content-center graph-row" *ngIf="cbRepos.checked">
     <!-- Repositories -->
-    <div class="col-md-12 member-card" *ngFor="let repo of teamRepositories">
+    <div class="col-md-12 " *ngFor="let repo of teamRepositories">
 
       <div class="card border-primary component-card">
         <a href="{{repo.url}}" target="_blank">
