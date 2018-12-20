@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ChartJsData } from '../entities/chartJS';
 
+
 @Component({
   selector: 'graph',
   templateUrl: './graph.component.html',
@@ -11,6 +12,8 @@ export class GraphComponent implements OnInit {
   @Input() chartData: ChartJsData;
   @Input() organization: string;
   chartCaption: string;
+
+  rendered: boolean = false;
 
   // The ChartJS chart, its properties and options
   chart = {
@@ -48,16 +51,10 @@ export class GraphComponent implements OnInit {
   }
 
   /**
-   * Fetches graph element and prepares download link.
-   * @param event MouseClick event that referes to triggered DOM element. 
+   * Only initializes the modal when it is requested by the user.
+   * This way the modal's (static) content always fits the correct graph data.
    */
-  downloadGraph(event) {
-    var anchor = event.target;
-
-    anchor.href = document.getElementsByTagName('canvas')[0].toDataURL();
-
-    anchor.download = this.organization + " " + this.chart.chartTitle + " - " + new Date().toLocaleDateString() + ".png";
+  render(state: boolean) {
+    this.rendered = state
   }
-
-
 }
