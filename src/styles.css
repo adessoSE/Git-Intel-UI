@@ -28,6 +28,12 @@ ul {
     vertical-align: middle;
 }
 
+#logo {
+    margin-right: 10%;
+    width: 6.5em;
+    height: 3em;
+}
+
 .search-container {
     width: 100%;
     display: table;
