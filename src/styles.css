@@ -28,6 +28,12 @@ ul {
     vertical-align: middle;
 }
 
+#logo {
+    margin-right: 10%;
+    width: 6.5em;
+    height: 3em;
+}
+
 .member-card {
     padding: 1em;
 }
