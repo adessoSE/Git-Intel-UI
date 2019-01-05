@@ -1,8 +1,6 @@
-## Installation
+# Git-Intel-UI
 
-Install necessary dependencies by running `npm install -g @angular/cli @angular/compiler-cli` & `npm install`.
+This is the current UI-application for the **Git-Intel project**, a modern GitHub crawler based on Spring.  
+You can run the application and marvel at the beauty of it, but it won't be of much use to you unless you run the whole project.
 
-Make sure to have MongoDB and the [GitStalker Backend](https://github.com/dariobraun/gitstalker-spring) up and running.
-
-Finally, run `ng serve --open` to open the application.
-
+Head over to https://github.com/adessoAG/Git-Intel-Spring to see what Git-Intel is all about!
