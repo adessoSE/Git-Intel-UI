@@ -142,10 +142,10 @@ export class DashboardComponent implements OnInit {
    * Initiates the data graphs using the predefined object structure.
    */
   initGraphs() {
+    this.memberGrowthData = [];
     for (let i = 0; i < this.organization.internalRepositoriesCommits.chartJSLabels.length; i++) {
       this.memberGrowthData.push(this.organization.numOfMembers);
     }
-    console.log(this.memberGrowthData);
     this.chartCommits = {
       labels: this.organization.internalRepositoriesCommits.chartJSLabels,
       data: [{ data: this.organization.internalRepositoriesCommits.chartJSDataset, label: "Commits" }],

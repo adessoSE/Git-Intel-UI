@@ -11,7 +11,7 @@ import { Team } from '../entities/team';
 @Injectable()
 export class DataPullService {
 
-  gitStalkerURL: string = 'http://localhost:8081/';
+  gitStalkerURL: string = 'http://localhost:8080/';
 
   constructor(private _http: HttpClient) { }
 
