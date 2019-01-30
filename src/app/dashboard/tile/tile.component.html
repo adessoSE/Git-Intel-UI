@@ -1,0 +1,14 @@
+<div>
+  <a routerLink="{{ link }}">
+    <div class="card border-primary mb-3 component-card">
+      <div class="card-body">
+        <h4 class="card-title">{{ title }}
+          <button type="button" class="btn btn-link" [popover]="popoverMembers" [popoverOnHover]="true">
+            <i class="fa fa-info-circle"></i>
+          </button>
+        </h4>
+        <h3 class="card-title" style="text-align: center">
+          <i class="fa fa-user"></i> {{ displayData }}</h3>
+      </div>
+    </div>
+  </a>
