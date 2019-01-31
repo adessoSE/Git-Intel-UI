@@ -43,7 +43,7 @@
 
   <!-- Cards displaying users and user info -->
   <h3>Team Members</h3>
-  <div class="row justify-content-center graph-row" *ngIf="cbMembers.checked">
+  <div class="row justify-content-center " *ngIf="cbMembers.checked">
     <!-- Members -->
     <div class="col-md-4 " *ngFor="let member of teamMembers">
       <div class="card border-primary component-card">
@@ -62,7 +62,7 @@
 
   <h3>Team Repositories</h3>
   <!--Cards displaying Repositories and Repository info-->
-  <div class="row justify-content-center graph-row" *ngIf="cbRepos.checked">
+  <div class="row justify-content-center " *ngIf="cbRepos.checked">
     <!-- Repositories -->
     <div class="col-md-12 " *ngFor="let repo of teamRepositories">
 
