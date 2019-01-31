@@ -30,6 +30,7 @@ import { ProcessingComponent } from './processing/processing.component';
 import { ErrorComponent } from './error/error.component';
 import { CacheService } from './services/cache.service';
 import { HeaderComponent } from './header/header.component';
+import { TileComponent } from './dashboard/tile/tile.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { HeaderComponent } from './header/header.component';
     PrepTabNamePipe,
     ProcessingComponent,
     ErrorComponent,
-    HeaderComponent
+    HeaderComponent,
+    TileComponent
   ],
   imports: [
     BrowserModule,

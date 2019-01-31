@@ -2,6 +2,9 @@
 
 @import "https://bootswatch.com/4/cerulean/bootstrap.min.css";
 
+body {
+    font-size: 3em;
+}
 /* Simple links everywhere */
 a, a:active {
     color: inherit !important;
