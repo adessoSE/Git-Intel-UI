@@ -53,43 +53,8 @@
 </div>
 
 <!-- Processing organization -->
-<div class="jumbotron jumbotron-fluid vertical-center" style="margin-top: 2%; align-items: center" *ngIf="statusCode === 202">
-    <div class="container" style="width: 75%; margin-top: 2%">
-      <h1 class="display-4 text-center">{{processingInformation.searchedOrganization}} is processed!</h1>
-      <p class="lead text-center">In order to process {{processingInformation.searchedOrganization}} there are {{processingInformation.totalCountOfNeededRequests}} requests, that's why the processing needs some time. Time to get yourself a fresh coffee! </p>
-      <div class="progress"> 
-        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" [ngStyle]="myStyles" attr.aria-valuenow="{{progressBarPercentage}}" aria-valuemin="0" aria-valuemax="100"></div>
-      </div>
-          <div class="container">
-              <div class="row">
-                <div class="col">
-                    <div class="alert alert-info" role="alert">
-                        <h2 class="text-center">Currently being processed:</h2>
-                        <ul class="list-group" *ngFor="let missingRequest of processingInformation.missingRequestTypes">
-                          <li class="list-group-item">{{missingRequest}}</li>
-                        </ul>
-                      </div>
-                </div>
-                <div class="col">
-                    <div class="alert alert-success" role="alert">
-                        <h2 class="text-center">Already processed:</h2>
-                        <ul class="list-group" *ngFor="let finishedRequest of processingInformation.finishedRequestTypes">
-                          <li class="list-group-item">{{finishedRequest}}</li>
-                        </ul>
-                      </div>
-                </div>
-              </div>
-            </div>
-    </div>
-  </div>
+<app-processing *ngIf="statusCode === 202" [processingInformation]=processingInformation [progressBarPercentage]=progressBarPercentage></app-processing>
 
 
-  <!-- Invalid Organization -->
-<div class="container-fluid" style="width: 75%" *ngIf="statusCode === 400">
-<div class="alert alert-danger" style="margin-top: 5%" role="alert">
-  <h3 class="alert-heading">Something's gone wrong here!</h3>
-  <p>Unfortunately, the organization you are looking for cannot be found. Please make sure that the organization was spelled correctly and exists on Github.</p>
-  <hr>
-  <p class="mb-0"><b>Error:</b> {{error.error.errorMessage}} <b>Searched Organization:</b> {{error.error.searchedOrganization}}</p>
-</div>
-</div>
+<!-- Invalid Organization -->
+<app-error *ngIf="statusCode === 400" [error]=error></app-error>
