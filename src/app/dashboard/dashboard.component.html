@@ -31,18 +31,22 @@
       </span>
     </div>
 
-    <!-- Data tiles (Members, Repositories, Teams, ...) -->
-    <div class="row col-mb-12 justify-content-center graph-row">
+    <!-- Data tile components (Members, Repositories, Teams, ...) -->
+    <div class="row col-mb-12 justify-content-center">
       <!-- Members -->
-      <app-tile link="members/" displayData="{{ organization.numOfMembers }}" title="Members" class="col-md-4"></app-tile>
+      <app-tile link="members/" displayData="{{ organization.numOfMembers }}" title="Members" faIcon="user" class="col-md-6"></app-tile>
       <!-- Teams -->
-      <app-tile link="teams/" displayData="{{ organization.numOfTeams }}" title="Teams" class="col-md-4"></app-tile>
+      <app-tile link="teams/" displayData="{{ organization.numOfTeams }}" title="Teams" faIcon="users" class="col-md-6"></app-tile>
+    </div>
+    <div class="row col-mb-12 justify-content-center">
       <!-- Repositories -->
-      <app-tile link="repositories/" displayData="{{ organization.numOfRepositories }}" title="Repositories" class="col-md-4"></app-tile>      
+      <app-tile link="repositories/" displayData="{{ organization.numOfRepositories }}" title="Repositories" faIcon="book" class="col-md-4"></app-tile>
       <!-- External Repositories -->
-      <app-tile link="external-repositories/" displayData="{{ organization.numOfExternalRepoContributions }}" title="Ext. Repositories" class="col-md-4"></app-tile>
+      <app-tile link="external-repositories/" displayData="{{ organization.numOfExternalRepoContributions }}" title="Ext. Repositories" faIcon="location-arrow"
+        class="col-md-4"></app-tile>
       <!-- Member Repositories -->
-      <app-tile link="member-repositories/" displayData="{{ organization.numOfCreatedReposByMembers }}" title="Member Repositories" class="col-md-4"></app-tile>
+      <app-tile link="member-repositories/" displayData="{{ organization.numOfCreatedReposByMembers }}" title="Member Repositories" faIcon="folder-open"
+        class="col-md-4"></app-tile>
     </div>
 
     <!-- Graphs -->

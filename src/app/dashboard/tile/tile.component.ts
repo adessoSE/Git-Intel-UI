@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { link } from 'fs';
 
 @Component({
   selector: 'app-tile',
@@ -11,6 +10,7 @@ export class TileComponent implements OnInit {
   @Input() link: string;
   @Input() displayData: number;
   @Input() title: string;
+  @Input() faIcon: string;
 
   constructor() { }
 
