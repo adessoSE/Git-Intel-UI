@@ -2,9 +2,6 @@
 
 @import "https://bootswatch.com/4/cerulean/bootstrap.min.css";
 
-body {
-    font-size: 3em;
-}
 /* Simple links everywhere */
 a, a:active {
     color: inherit !important;
@@ -52,10 +49,6 @@ ul {
     margin-bottom: 2em;
 }
 
-.pad-bottom {
-    padding-bottom: 2%;
-}
-
 .profile-pic {
     float: right; 
     width: 100px; 
@@ -73,10 +66,6 @@ ul {
     display: inline-block;
     padding-right: 5%;
     width: 10%;
-}
-
-.orga-link {
-    margin-top: 20px;
 }
 
 #userLink:hover { 

@@ -1,11 +1,7 @@
-.component-card {
-    max-width: 30rem;
+.orga-name {
+    font-size: 3em
 }
 
-.graph-card {
-    max-width: 40rem;
-}
-
-.orga-link {
-    margin-top: 20px;
+.metadata-link {
+    font-size: 1.5em
 }

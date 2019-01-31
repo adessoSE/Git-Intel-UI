@@ -1,4 +1,4 @@
-<div class="jumbotron" style="background-color: #428bca; color: white; margin-bottom: 0">
+<div class="jumbotron header m-0">
 
   <div class="container-fluid">
     <div class="row">
@@ -10,11 +10,11 @@
       </div>
     </div>
     <div class="row">
-      <h2 class="lead col-md-12 text-center">Every GitHub Organisation, every Detail.</h2>
+      <h2 class="col-md-12 text-center p-5">Every GitHub Organisation, every Detail.</h2>
     </div>
     <div class="row">
       <!-- Search field -->
-      <div class="col-md-12" style="padding-bottom: 3em">
+      <div class="col-md-12 pb-5">
         <form class="form-inline justify-content-center" style="padding-top: 1em;">
           <input id="name" class="form-control mr-sm-2 searchForm" [ngClass]="{'is-invalid': isSearchInvalid}"
             [(ngModel)]="organization" required minlength="4" name="search" placeholder="Type your organisation's name here..."
