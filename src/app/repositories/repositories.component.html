@@ -30,9 +30,9 @@
   </div>
 
   <!--Cards displaying Repositories and Repository info-->
-  <div class="row justify-content-center  pad-bottom">
+  <div class="row justify-content-center ">
     <!-- Repositories -->
-    <div class="col-md-12 " *ngFor="let repo of repositories">
+    <div class="col-md-12 m-3" *ngFor="let repo of repositories">
       <div class="card border-primary component-card">
         <a href="{{repo.url}}" target="_blank">
           <div class="card-body">
@@ -61,6 +61,7 @@
               <p>{{repo.description}}</p>
             </div>
             <div class="card-text pb-3">
+              <p>Activity in the last 7 Days:</p>
               <div class="team-info-container">
                 <span>
                   <i class="fa fa-stop-circle mr-3 fa-3x"></i>

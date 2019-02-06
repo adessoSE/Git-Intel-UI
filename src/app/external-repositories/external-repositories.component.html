@@ -25,12 +25,12 @@
   </div>
 
   <!--Cards displaying teams and team info-->
-  <div class="row justify-content-center  pad-bottom">
+  <div class="row justify-content-center  ">
     <!-- Teams -->
-    <div class="col-md-12" *ngFor="let repo of extRepos">
+    <div class="col-md-12 m-3" *ngFor="let repo of extRepos">
       <div class="card border-primary component-card">
         <!-- Contributing user -->
-        <div class="float-right list-inline" style="padding-left: 15px; padding-top: 15px">
+        <div class="float-right list-inline p-3">
           <span class="badge badge-info" style="display: inline-block;">
             <i class="fa fa-user mr-4 fa"></i>
             <span *ngFor="let user of repo.contributors, let last = last">
@@ -69,8 +69,6 @@
             <div class="card-text pb-3">
               <p>Activity last 7 days:</p>
               <div class="team-info-container">
-                <div>
-                </div>
                 <span>
                   <i class="fa fa-stop-circle mr-3 fa-3x"></i>
                   <span class="text-primary">{{repo.amountPreviousCommits}}</span> Commits
