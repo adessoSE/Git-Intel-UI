@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   chartMembers: ChartJsData;
   chartCommits: ChartJsData;
   chartPRs: ChartJsData;
-  memberGrowthData: number[] = [];
+
   tabName: TabNameObject;
 
   statusCode: number;
@@ -142,10 +142,6 @@ export class DashboardComponent implements OnInit {
    * Initiates the data graphs using the predefined object structure.
    */
   initGraphs() {
-    for (let i = 0; i < this.organization.internalRepositoriesCommits.chartJSLabels.length; i++) {
-      this.memberGrowthData.push(this.organization.numOfMembers);
-    }
-    console.log(this.memberGrowthData);
     this.chartCommits = {
       labels: this.organization.internalRepositoriesCommits.chartJSLabels,
       data: [{ data: this.organization.internalRepositoriesCommits.chartJSDataset, label: "Commits" }],
@@ -157,8 +153,8 @@ export class DashboardComponent implements OnInit {
       caption: "Pull Requests to external repositories"
     };
     this.chartMembers = {
-      labels: this.organization.externalRepositoriesPullRequests.chartJSLabels,
-      data: [{ data: this.memberGrowthData, label: "Members" }],
+      labels: this.organization.memberAmountHistory.chartJSLabels,
+      data: [{ data: this.organization.memberAmountHistory.chartJSDataset, label: "Members" }],
       caption: "Members"
     };
   }

@@ -14,4 +14,5 @@ export class Organization {
     public lastUpdate: number;
     public externalRepositoriesPullRequests: any;
     public internalRepositoriesCommits: any;
+    public memberAmountHistory: any;
 }
