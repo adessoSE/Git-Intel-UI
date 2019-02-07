@@ -1,7 +1,7 @@
 <div class="container-fluid" *ngIf="statusCode === 200">
 
   <!-- Search and sort functionality -->
-  <div class="search-container mb-5">
+  <div class="search-container mb-3">
     <form class="form-inline float-right">
       <input type="text" class="form-control" placeholder="Search Member" #searchBox (keyup)="search(searchBox.value)">
       <button type="submit" class="btn btn-primary">

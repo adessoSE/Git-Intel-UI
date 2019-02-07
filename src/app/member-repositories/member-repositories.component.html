@@ -27,13 +27,13 @@
     </div>
   
     <!--Cards displaying Repositories and Repository info-->
-    <div class="row justify-content-center  pad-bottom">
+    <div class="row justify-content-center  ">
       <!-- Repositories -->
       <ng-container *ngFor="let repo of repositories">
-      <div class="col-md-12 ">
+      <div class="col-md-12 m-3">
         <div class="card border-primary component-card">
         <!-- Contributing user -->
-        <div class="float-right list-inline" style="padding-left: 15px; padding-top: 15px">
+        <div class="float-right list-inline p-3">
             <span class="badge badge-info" style="display: inline-block;">
               <i class="fa fa-user mr-4 fa"></i>
               <span *ngFor="let user of repo.contributors, let last = last">
