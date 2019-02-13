@@ -41,7 +41,7 @@ export class DataPullService {
   requestRepositories(organizationName: string): Observable<HttpResponse<Repository[]>> {
     let requestURL = this.gitStalkerURL + 'repositories' + '/' + organizationName;
     console.log("REPOSITORY DATA REQUESTED");
-    return this._http.get<Member[]>(
+    return this._http.get<Repository[]>(
       requestURL, { observe: 'response' }).pipe(
         catchError(this.handleError)
       );
