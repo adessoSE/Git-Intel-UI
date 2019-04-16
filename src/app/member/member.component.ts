@@ -7,7 +7,6 @@ import { GlobalNavigationService } from '../services/global-navigation.service';
 import { TableDataObject } from '../entities/tableDataObject';
 import { ProcessingOrganizationInfo } from '../entities/processingOrganizationInfo';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { useAnimation } from '@angular/core/src/animation/dsl';
 import { CacheService } from '../services/cache.service';
 
 @Component({
