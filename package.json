@@ -28,7 +28,7 @@
     "font-awesome": "^4.7.0",
     "hoek": "^6.1.2",
     "https-proxy-agent": "^2.2.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ng2-charts": "^1.6.0",
     "ngx-popover": "0.0.16",
     "rxjs": "^6.4.0",
