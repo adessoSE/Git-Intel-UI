@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Rx';
+import { Injectable } from "@angular/core";
 
 interface CacheContent {
   expiry: number;
@@ -12,6 +13,7 @@ interface CacheContent {
  * @export
  * @class CacheService
  */
+@Injectable()
 export class CacheService {
   private cache: Map<string, CacheContent> = new Map<string, CacheContent>();
   private inFlightObservables: Map<string, Subject<any>> = new Map<string, Subject<any>>();
