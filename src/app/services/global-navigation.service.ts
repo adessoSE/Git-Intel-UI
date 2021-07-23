@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import { Observable } from "rxjs/Observable";
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Tab } from '../entities/tab';
 import { TabNameObject } from '../entities/tabNameObject';
 
@@ -39,8 +38,8 @@ export class GlobalNavigationService {
   }
 
   /**
-   * 
-   * @param url 
+   *
+   * @param url
    * Formats the organisation's URL and pushes the latest tab to the tab-BehaviourSubject.
    */
   onOpenNewTab(url: string) {

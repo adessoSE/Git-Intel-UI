@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, UrlSegment } from '@angular/router';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
+import { filter, map, mergeMap } from 'rxjs/operators';
 import { Tab } from '../entities/tab';
 import { GlobalNavigationService } from '../services/global-navigation.service';
 
@@ -47,19 +45,21 @@ export class HeaderComponent implements OnInit {
 		 *     Object { path: "1. URL segment", parameters: {} }
 		 *     Object { path: "2. URL segment", parameters: {} }
 		 *     ...
-		 * 
-		 * The final URL is concatenated and if conditions are met, 
-		 * opened in a new tab or otherwise assigned to the active tab. 
+		 *
+		 * The final URL is concatenated and if conditions are met,
+		 * opened in a new tab or otherwise assigned to the active tab.
 		 */
     this.router.events
-      .filter((event) => event instanceof NavigationEnd)
-      .map(() => this.activatedRoute)
-      .map((route) => {
-        while (route.firstChild) route = route.firstChild;
-        return route;
-      })
-      .filter((route) => route.outlet === 'primary')
-      .mergeMap((route) => route.url)
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        map(() => this.activatedRoute),
+        map((route) => {
+          while (route.firstChild) route = route.firstChild;
+          return route;
+        }),
+        filter((route) => route.outlet === 'primary'),
+        mergeMap((route) => route.url)
+      )
       .subscribe((event) => {
         let targetURL = this.concatURL(event);
         if (targetURL !== "home") {
@@ -104,7 +104,7 @@ export class HeaderComponent implements OnInit {
   }
 
 	/**
-	 * Pushes Tab into the global @tabs Array, hence opens it, marks it as active and navigates to given route. 
+	 * Pushes Tab into the global @tabs Array, hence opens it, marks it as active and navigates to given route.
 	 */
   openNewTab(tab: Tab) {
     console.log("---OPEN NEW TAB FUNCTION CALL---");
@@ -126,7 +126,7 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-	/** 
+	/**
 	 * Closes tab and decides which tab to set as new active.
    * Cases:
    * 1) Active tab is closed and it's not the last one in the list --> The tab to the right of the closed tab is now active.
@@ -151,7 +151,7 @@ export class HeaderComponent implements OnInit {
       }
     } // Case 4)
     else {
-      // If the active tab is 'right to' the closing tab, adjust indices 
+      // If the active tab is 'right to' the closing tab, adjust indices
       if (this.activeTabIdx > idx) {
         this.activeTabIdx = this.activeTabIdx - 1;
       }
@@ -163,14 +163,14 @@ export class HeaderComponent implements OnInit {
     document.getElementById("error").hidden = status;
   }
 
-	/** 
-	 * Assigns @activeTabIdx to index of given Tab. 
+	/**
+	 * Assigns @activeTabIdx to index of given Tab.
 	 */
   setActiveTab(idx: number) {
     this.activeTabIdx = idx;
   }
 
-	/** 
+	/**
 	 *  Input validation for organisation names (see registration on www.github.com):
 	 *  Regex:
 	 * - only alphanumeric characters or hyphens.
@@ -182,7 +182,7 @@ export class HeaderComponent implements OnInit {
     return /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i.test(login);
   }
 
-	/** 
+	/**
 	 * Concatenates the given urlSegment seperated by "/"
 	 * and removes the last one.
 	 */

@@ -1,6 +1,6 @@
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Rx';
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
+import { Subject, Observable, of, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
 interface CacheContent {
   expiry: number;
@@ -28,7 +28,7 @@ export class CacheService {
   get(key: string, fallback?: Observable<any>, maxAge?: number): Observable<any> | Subject<any> {
     if (this.hasValidCachedValue(key)) {
       console.log(`%cGetting from cache ${key}`, 'color: green');
-      return Observable.of(this.cache.get(key).value);
+      return of(this.cache.get(key).value);
     }
 
     if (!maxAge) {
@@ -38,25 +38,26 @@ export class CacheService {
     if (fallback && fallback instanceof Observable) {
         this.inFlightObservables.set(key, new Subject());
         console.log(`%c Calling api for ${key}`, 'color: purple');
-        return fallback.do((value) => {
-          if(value.status === 200){
-            console.log("Cached the response!");
-            this.set(key, value, maxAge);
-            console.log(this.cache);
-          } else {
-            console.log("Blocked caching because of processing!");
-            this.inFlightObservables.delete(key);
-          }
-
-        })
-          .catch((e: any) => {
+        return fallback.pipe(
+          tap((value) => {
+            if(value.status === 200){
+              console.log("Cached the response!");
+              this.set(key, value, maxAge);
+              console.log(this.cache);
+            } else {
+              console.log("Blocked caching because of processing!");
+              this.inFlightObservables.delete(key);
+            }
+          }),
+          catchError((e: any) => {
             console.log("Error");
             console.log(e);
-          this.inFlightObservables.delete(key);
-          return Observable.throw(e);
-      });
+            this.inFlightObservables.delete(key);
+            return throwError(e);
+          })
+        );
     } else {
-        return Observable.throw('Requested key is not available in Cache');
+        return throwError('Requested key is not available in Cache');
     }
 
   }

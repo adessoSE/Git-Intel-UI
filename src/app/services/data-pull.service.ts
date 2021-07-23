@@ -1,8 +1,7 @@
 import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { catchError, tap, retryWhen, delayWhen } from 'rxjs/operators';
-import 'rxjs/add/observable/throw';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Member } from '../entities/member';
 import { Organization } from '../entities/organization';
 import { Repository } from '../entities/repository';
@@ -16,9 +15,9 @@ export class DataPullService {
   constructor(private _http: HttpClient) { }
 
   /**
-   * 
-   * GET Request to the correct REST endpoint and receive appropriate data. 
-   * @param organizationName 
+   *
+   * GET Request to the correct REST endpoint and receive appropriate data.
+   * @param organizationName
    */
   requestOrganization(organizationName: string): Observable<HttpResponse<Organization>> {
     let requestURL = this.gitStalkerURL + 'organizationdetail' + '/' + organizationName;
@@ -80,7 +79,7 @@ export class DataPullService {
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
     }
-    return Observable.throw(error);
+    return throwError(error);
   };
 
 }
