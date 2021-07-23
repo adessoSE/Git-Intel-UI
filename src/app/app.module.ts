@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 // Separate internal module for routing containing paths, etc.
 import { AppRoutingModule } from './/app-routing.module';
 import { FormsModule } from '@angular/forms';
-import { PopoverModule } from 'ngx-popover';
 import { ChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
@@ -32,7 +31,6 @@ import { CacheService } from './services/cache.service';
 import { HeaderComponent } from './header/header.component';
 import { TileComponent } from './dashboard/tile/tile.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,21 +51,16 @@ import { TileComponent } from './dashboard/tile/tile.component';
     ProcessingComponent,
     ErrorComponent,
     HeaderComponent,
-    TileComponent
+    TileComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    PopoverModule,
     ChartsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [
-    GlobalNavigationService,
-    DataPullService,
-    CacheService
-  ],
-  bootstrap: [AppComponent]
+  providers: [GlobalNavigationService, DataPullService, CacheService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
