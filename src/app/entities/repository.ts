@@ -1,4 +1,4 @@
-import { Member } from "./member";
+import { Member } from './member';
 
 export class Repository {
     public name: string;

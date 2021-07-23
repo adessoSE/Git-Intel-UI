@@ -8,74 +8,87 @@ import { Organization } from '../entities/organization';
 @Component({
   selector: 'app-member-repositories',
   templateUrl: './member-repositories.component.html',
-  styleUrls: ['./member-repositories.component.css']
+  styleUrls: ['./member-repositories.component.css'],
 })
 export class MemberRepositoriesComponent implements OnInit {
-
   repositories: Repository[];
   repositoriesCopy: Repository[];
 
-  sortByTag: string = "";
+  sortByTag: string = '';
 
   constructor(
     private activeRoute: ActivatedRoute,
     private dataPullService: DataPullService,
-    private navService: GlobalNavigationService) { }
+    private navService: GlobalNavigationService
+  ) {}
 
-    ngOnInit() {
-      this.determineOrganization();
-    }
-  
-    determineOrganization() {
-      let org = this.activeRoute.snapshot.paramMap.get('organization');
-  
-      this.dataPullService.requestMemberRepositories(org).subscribe(data => this.processData(data));
-    }
-  
-    processData(repo: [Repository[]]) {
-      this.repositories = this.processTotalRepositoriesOfMembers(repo);
-      this.repositoriesCopy = this.repositories;
-      this.navService.tellNumOfEntities(this.repositories.length);
-      console.log(this.repositories);
-    }
+  ngOnInit() {
+    this.determineOrganization();
+  }
+
+  determineOrganization() {
+    const org = this.activeRoute.snapshot.paramMap.get('organization');
+
+    this.dataPullService
+      .requestMemberRepositories(org)
+      .subscribe((data) => this.processData(data));
+  }
+
+  processData(repo: [Repository[]]) {
+    this.repositories = this.processTotalRepositoriesOfMembers(repo);
+    this.repositoriesCopy = this.repositories;
+    this.navService.tellNumOfEntities(this.repositories.length);
+    console.log(this.repositories);
+  }
 
   processTotalRepositoriesOfMembers(repositories: [Repository[]]) {
     let totalRepositoriesOfMember: Repository[] = [];
-    for (let repo of repositories) {
+    for (const repo of repositories) {
       totalRepositoriesOfMember = totalRepositoriesOfMember.concat(repo);
     }
     return totalRepositoriesOfMember;
   }
 
   sortByAlphabet() {
-    this.repositories.sort((a: Repository, b: Repository) => a.name.localeCompare(b.name));
-    this.sortByTag = "Alphabet";
+    this.repositories.sort((a: Repository, b: Repository) =>
+      a.name.localeCompare(b.name)
+    );
+    this.sortByTag = 'Alphabet';
   }
 
   sortByForks() {
     this.repositories.sort((a: Repository, b: Repository) => {
       return +b.forks - +a.forks;
     });
-    this.sortByTag = "Forks";
+    this.sortByTag = 'Forks';
   }
 
   sortByLicense() {
-    this.repositories.sort((a: Repository, b: Repository) => a.license.localeCompare(b.license));
-    this.sortByTag = "License";
+    this.repositories.sort((a: Repository, b: Repository) =>
+      a.license.localeCompare(b.license)
+    );
+    this.sortByTag = 'License';
   }
 
   sortByStars() {
     this.repositories.sort((a: Repository, b: Repository) => {
       return +b.stars - +a.stars;
     });
-    this.sortByTag = "Stars";
+    this.sortByTag = 'Stars';
   }
 
   search(term: string) {
     setTimeout(() => {
-      this.repositories = this.repositoriesCopy.filter(e => {
-        for (let user of e.contributors) {
-          return (e.name.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase()) || user.username.toLocaleLowerCase().includes(term.trim().toLocaleLowerCase()));
+      this.repositories = this.repositoriesCopy.filter((e) => {
+        for (const user of e.contributors) {
+          return (
+            e.name
+              .toLocaleLowerCase()
+              .includes(term.trim().toLocaleLowerCase()) ||
+            user.username
+              .toLocaleLowerCase()
+              .includes(term.trim().toLocaleLowerCase())
+          );
         }
       });
     }, 50);

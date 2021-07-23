@@ -5,7 +5,7 @@ export class LastWordPipe implements PipeTransform {
 
     transform(value: string) {
         if (value) {
-            return value.slice(value.lastIndexOf("/") + 1);
+            return value.slice(value.lastIndexOf('/') + 1);
         }
         return value;
     }

@@ -3,11 +3,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 /**
  * @PrepTabnamePipe concats the first and last
  * segment of a route to create an appropriate Tab name.
- * 
- * E.g. 
+ *
+ * E.g.
  * "/adessoAG/members"
- * => "adessoAG/members " 
- * 
+ * => "adessoAG/members "
+ *
  * "/adessoAG/members/john-doe"
  * => "AdessoAG/John-Doe "
  */
@@ -18,15 +18,14 @@ export class PrepTabNamePipe implements PipeTransform {
         let retVal = value;
 
         if (value) {
-            let idxFirst = value.indexOf("/");
-            let idxLast = value.lastIndexOf("/");
+            const idxFirst = value.indexOf('/');
+            const idxLast = value.lastIndexOf('/');
 
-            if (value.charAt(idxFirst) === "") {
+            if (value.charAt(idxFirst) === '') {
                 retVal = value.slice(idxLast + 1);
-            }
-            else {
-                let orgName = value.slice(0, idxFirst);
-                retVal = orgName + "/" + value.slice(idxLast + 1);
+            } else {
+                const orgName = value.slice(0, idxFirst);
+                retVal = orgName + '/' + value.slice(idxLast + 1);
             }
 
         }

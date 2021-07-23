@@ -1,21 +1,20 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ChartJsData } from '../entities/chartJS';
 import { Organization } from '../entities/organization';
 import { ProcessingOrganizationInfo } from '../entities/processingOrganizationInfo';
+import { TabNameObject } from '../entities/tabNameObject';
 import { CacheService } from '../services/cache.service';
 import { DataPullService } from '../services/data-pull.service';
 import { GlobalNavigationService } from '../services/global-navigation.service';
-import { TabNameObject } from '../entities/tabNameObject';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent implements OnInit {
-
+export class DashboardComponent implements OnInit, OnDestroy {
   organization: Organization;
   chartMembers: ChartJsData;
   chartCommits: ChartJsData;
@@ -37,12 +36,12 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private globalNavService: GlobalNavigationService,
     private dataPullService: DataPullService,
-    private cacheService: CacheService) {
-
+    private cacheService: CacheService
+  ) {
     /**
      * Listens to routing events and renders the dashboard according to the active route.
      */
-    this.navigationSubscription = router.events.subscribe(event => {
+    this.navigationSubscription = router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.determineOrganization();
         this.initializedProcessingInterval = false;
@@ -51,14 +50,14 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  /** 
-   * Disables NavigationBar while on the Dashboard. 
+  /**
+   * Disables NavigationBar while on the Dashboard.
    */
   ngOnInit() {
     this.globalNavService.showNavBar(false);
   }
 
-  /** 
+  /**
    * Displays NavigationBar as user leaves the Dashboard.
    */
   ngOnDestroy() {
@@ -68,12 +67,20 @@ export class DashboardComponent implements OnInit {
     clearInterval(this.interval);
   }
 
-  /** 
+  /**
    * Reads the URL parameter and calls @globalNavService to fetch organization data from Backend.
    */
   determineOrganization() {
-    let organization = this.activeRoute.snapshot.paramMap.get('organization');
-    this.cacheService.get(organization + 'Organization', this.dataPullService.requestOrganization(organization)).subscribe(data => this.processData(data), error => this.processError(error));
+    const organization = this.activeRoute.snapshot.paramMap.get('organization');
+    this.cacheService
+      .get(
+        organization + 'Organization',
+        this.dataPullService.requestOrganization(organization)
+      )
+      .subscribe(
+        (data) => this.processData(data),
+        (error) => this.processError(error)
+      );
   }
 
   /**
@@ -92,25 +99,28 @@ export class DashboardComponent implements OnInit {
    * Determines how the progress of the progress bar is calculated.
    */
   initProgressBar() {
-    var progressBarIncreasementPerFinishedRequestType: number = 100 / this.processingInformation.totalCountOfRequestTypes;
-    this.progressBarPercentage = (Math.round(progressBarIncreasementPerFinishedRequestType * 10) / 10) * this.processingInformation.finishedRequestTypes.length;
+    const progressBarIncreasementPerFinishedRequestType: number =
+      100 / this.processingInformation.totalCountOfRequestTypes;
+    this.progressBarPercentage =
+      (Math.round(progressBarIncreasementPerFinishedRequestType * 10) / 10) *
+      this.processingInformation.finishedRequestTypes.length;
   }
 
   processError(error: HttpErrorResponse) {
     this.statusCode = 400;
     this.error = error;
-    console.log("Error Processing");
+    console.log('Error Processing');
   }
 
   /**
-   * 
-   * @param orga 
+   *
+   * @param orga
    * Differentiates between two cases:
    * 1) Data is available -> Displays data in dashboard.
    * 2) Data needs to be gathered -> Displays progress indicators in dashboard.
    */
   processData(orga: HttpResponse<Organization>) {
-    console.log("Processing Organization!");
+    console.log('Processing Organization!');
     switch (orga.status) {
       case 200:
         this.statusCode = 200;
@@ -125,8 +135,8 @@ export class DashboardComponent implements OnInit {
       case 202:
         this.statusCode = 202;
         this.processingInformation = JSON.parse(JSON.stringify(orga.body));
-        console.log(this.processingInformation)
-        console.log("Accepted - 202");
+        console.log(this.processingInformation);
+        console.log('Accepted - 202');
         this.initRequestInterval();
         this.initProgressBar();
         break;
@@ -134,7 +144,7 @@ export class DashboardComponent implements OnInit {
   }
 
   generateTabName(orga: Organization) {
-    let url = this.activeRoute.snapshot.paramMap.get('organization');
+    const url = this.activeRoute.snapshot.paramMap.get('organization');
     this.tabName = { url: url, value: orga.name };
   }
 
@@ -144,18 +154,34 @@ export class DashboardComponent implements OnInit {
   initGraphs() {
     this.chartCommits = {
       labels: this.organization.internalRepositoriesCommits.chartJSLabels,
-      data: [{ data: this.organization.internalRepositoriesCommits.chartJSDataset, label: "Commits" }],
-      caption: "Commits to internal repositories"
+      data: [
+        {
+          data: this.organization.internalRepositoriesCommits.chartJSDataset,
+          label: 'Commits',
+        },
+      ],
+      caption: 'Commits to internal repositories',
     };
     this.chartPRs = {
       labels: this.organization.externalRepositoriesPullRequests.chartJSLabels,
-      data: [{ data: this.organization.externalRepositoriesPullRequests.chartJSDataset, label: "Pull Requests" }],
-      caption: "Pull Requests to external repositories"
+      data: [
+        {
+          data: this.organization.externalRepositoriesPullRequests
+            .chartJSDataset,
+          label: 'Pull Requests',
+        },
+      ],
+      caption: 'Pull Requests to external repositories',
     };
     this.chartMembers = {
       labels: this.organization.memberAmountHistory.chartJSLabels,
-      data: [{ data: this.organization.memberAmountHistory.chartJSDataset, label: "Members" }],
-      caption: "Members"
+      data: [
+        {
+          data: this.organization.memberAmountHistory.chartJSDataset,
+          label: 'Members',
+        },
+      ],
+      caption: 'Members',
     };
   }
 }

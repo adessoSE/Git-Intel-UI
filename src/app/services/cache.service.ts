@@ -40,17 +40,17 @@ export class CacheService {
         console.log(`%c Calling api for ${key}`, 'color: purple');
         return fallback.pipe(
           tap((value) => {
-            if(value.status === 200){
-              console.log("Cached the response!");
+            if (value.status === 200) {
+              console.log('Cached the response!');
               this.set(key, value, maxAge);
               console.log(this.cache);
             } else {
-              console.log("Blocked caching because of processing!");
+              console.log('Blocked caching because of processing!');
               this.inFlightObservables.delete(key);
             }
           }),
           catchError((e: any) => {
-            console.log("Error");
+            console.log('Error');
             console.log(e);
             this.inFlightObservables.delete(key);
             return throwError(e);

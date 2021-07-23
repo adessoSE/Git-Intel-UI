@@ -3,7 +3,7 @@ import { ChartJsData } from '../entities/chartJS';
 
 
 @Component({
-  selector: 'graph',
+  selector: 'app-graph',
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.css']
 })
@@ -17,8 +17,8 @@ export class GraphComponent implements OnInit {
 
   // The ChartJS chart, its properties and options
   chart = {
-    chartTitle: "Member Growth",
-    chartType: "line",
+    chartTitle: 'Member Growth',
+    chartType: 'line',
     chartOptions: {
       responsive: true,
       scales: {
@@ -55,6 +55,6 @@ export class GraphComponent implements OnInit {
    * This way the modal's (static) content always fits the correct graph data.
    */
   render(state: boolean) {
-    this.rendered = state
+    this.rendered = state;
   }
 }

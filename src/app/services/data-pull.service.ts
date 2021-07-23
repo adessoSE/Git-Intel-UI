@@ -20,8 +20,8 @@ export class DataPullService {
    * @param organizationName
    */
   requestOrganization(organizationName: string): Observable<HttpResponse<Organization>> {
-    let requestURL = this.gitStalkerURL + 'organizationdetail' + '/' + organizationName;
-    console.log("ORGANIZATION DATA REQUESTED");
+    const requestURL = this.gitStalkerURL + 'organizationdetail' + '/' + organizationName;
+    console.log('ORGANIZATION DATA REQUESTED');
     return this._http.get<Organization>(
       requestURL, { observe: 'response' }).pipe(
         catchError(this.handleError)
@@ -29,8 +29,8 @@ export class DataPullService {
   }
 
   requestMembers(organizationName: string): Observable<HttpResponse<Member[]>> {
-    let requestURL = this.gitStalkerURL + 'members' + '/' + organizationName;
-    console.log("MEMBER DATA REQUESTED");
+    const requestURL = this.gitStalkerURL + 'members' + '/' + organizationName;
+    console.log('MEMBER DATA REQUESTED');
     return this._http.get<Member[]>(
       requestURL, { observe: 'response' }).pipe(
         catchError(this.handleError)
@@ -38,8 +38,8 @@ export class DataPullService {
   }
 
   requestRepositories(organizationName: string): Observable<HttpResponse<Repository[]>> {
-    let requestURL = this.gitStalkerURL + 'repositories' + '/' + organizationName;
-    console.log("REPOSITORY DATA REQUESTED");
+    const requestURL = this.gitStalkerURL + 'repositories' + '/' + organizationName;
+    console.log('REPOSITORY DATA REQUESTED');
     return this._http.get<Repository[]>(
       requestURL, { observe: 'response' }).pipe(
         catchError(this.handleError)
@@ -47,14 +47,14 @@ export class DataPullService {
   }
 
   requestMemberRepositories(organizationName: string): Observable<[Repository[]]> {
-    let requestURL = this.gitStalkerURL + 'createdreposbymembers' + '/' + organizationName;
-    console.log("MEMBER REPOSITORY DATA REQUESTED");
+    const requestURL = this.gitStalkerURL + 'createdreposbymembers' + '/' + organizationName;
+    console.log('MEMBER REPOSITORY DATA REQUESTED');
     return this._http.get<[Repository[]]>(requestURL);
   }
 
   requestTeams(organizationName: string): Observable<HttpResponse<Team[]>> {
-    let requestURL = this.gitStalkerURL + 'teams' + '/' + organizationName;
-    console.log("TEAM DATA REQUESTED");
+    const requestURL = this.gitStalkerURL + 'teams' + '/' + organizationName;
+    console.log('TEAM DATA REQUESTED');
     return this._http.get<Team[]>(
       requestURL, { observe: 'response' }).pipe(
         catchError(this.handleError)
@@ -62,8 +62,8 @@ export class DataPullService {
   }
 
   requestExternalRepositories(organizationName: string): Observable<Repository[]> {
-    let requestURL = this.gitStalkerURL + 'externalrepositories' + '/' + organizationName;
-    console.log("EXTERNAL REPOSITORY DATA REQUESTED");
+    const requestURL = this.gitStalkerURL + 'externalrepositories' + '/' + organizationName;
+    console.log('EXTERNAL REPOSITORY DATA REQUESTED');
     return this._http.get<Repository[]>(requestURL);
   }
 
@@ -80,7 +80,7 @@ export class DataPullService {
         `body was: ${error.error}`);
     }
     return throwError(error);
-  };
+  }
 
 }
 

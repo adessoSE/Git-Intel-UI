@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { GlobalNavigationService } from '../services/global-navigation.service';
 import { Location } from '@angular/common';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { GlobalNavigationService } from '../services/global-navigation.service';
 
 @Component({
-  selector: 'navigation-bar',
+  selector: 'app-navigation-bar',
   templateUrl: './navigation-bar.component.html',
   styleUrls: ['./navigation-bar.component.css']
 })
@@ -22,13 +22,13 @@ export class NavigationBarComponent implements OnInit {
 
   ngOnInit() {
     // Subscribe to navigation and routing services
-    this.globalNavService.showNavBarEmitter.subscribe((mode) => { this.showNavigation = mode });
-    this.globalNavService.numOfEntitiesEmitter.subscribe((n) => { this.numOfEntities = n });
-    this.router.events.subscribe((val) => { this.prepareRouteHistory(this.location.path()) });
+    this.globalNavService.showNavBarEmitter.subscribe((mode) => { this.showNavigation = mode; });
+    this.globalNavService.numOfEntitiesEmitter.subscribe((n) => { this.numOfEntities = n; });
+    this.router.events.subscribe((val) => { this.prepareRouteHistory(this.location.path()); });
 
-    /* 
+    /*
      * Necessary for enabling Navigation Bar if navigating via URL
-     */ 
+     */
     this.globalNavService.showNavBar(true);
   }
 
@@ -37,11 +37,11 @@ export class NavigationBarComponent implements OnInit {
 
     let h: string[] = [];
 
-    h = url.split("/");
+    h = url.split('/');
     h.shift();
 
     for (let i = 1; i < h.length; i++) {
-      h[i] = h[i - 1] + "/" + h[i];
+      h[i] = h[i - 1] + '/' + h[i];
     }
 
     this.routeHistory = h;

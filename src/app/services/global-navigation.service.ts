@@ -7,7 +7,7 @@ import { TabNameObject } from '../entities/tabNameObject';
 @Injectable()
 export class GlobalNavigationService {
 
-  organization: string = "";
+  organization: string = '';
 
   // Is used to display how many members/teams/repos there are - displayed in navigation bar.
   private _numOfEntities: BehaviorSubject<number> = new BehaviorSubject<number>(0);
@@ -43,13 +43,13 @@ export class GlobalNavigationService {
    * Formats the organisation's URL and pushes the latest tab to the tab-BehaviourSubject.
    */
   onOpenNewTab(url: string) {
-    let idxDash = url.indexOf("/");
-    let idxSubstr = idxDash === -1 ? url.length : idxDash;
+    const idxDash = url.indexOf('/');
+    const idxSubstr = idxDash === -1 ? url.length : idxDash;
 
-    let org = url.substring(0, idxSubstr);
+    const org = url.substring(0, idxSubstr);
 
-    let tab: Tab = { org: org, url: url, name: "processing..." };
-    this._openNewTab.next(tab)
+    const tab: Tab = { org: org, url: url, name: 'processing...' };
+    this._openNewTab.next(tab);
   }
 
 }

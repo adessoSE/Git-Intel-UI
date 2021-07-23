@@ -12,10 +12,9 @@ import { CacheService } from '../services/cache.service';
 @Component({
   selector: 'app-member',
   templateUrl: './member.component.html',
-  styleUrls: ['./member.component.css']
+  styleUrls: ['./member.component.css'],
 })
 export class MemberComponent implements OnInit {
-
   member: Member;
   chartCommits: ChartJsData;
   chartPRs: ChartJsData;
@@ -32,15 +31,15 @@ export class MemberComponent implements OnInit {
   processingInformation: ProcessingOrganizationInfo;
   progressBarPercentage: number = 0;
   myStyles = {
-    width: this.progressBarPercentage + "%"
+    width: this.progressBarPercentage + '%',
   };
 
   constructor(
     private dataPullService: DataPullService,
     private activeRoute: ActivatedRoute,
     private navService: GlobalNavigationService,
-    private cacheService: CacheService) {
-
+    private cacheService: CacheService
+  ) {
     // Set the number of "entities" displayed in the breadcrumbs to 0 so they are disabled in navigation-bar.component.html.
     this.navService.tellNumOfEntities(0);
     this.determineMember();
@@ -49,33 +48,36 @@ export class MemberComponent implements OnInit {
   ngOnInit() {
     // this.initGraphs();
   }
-  
+
   initRequestInterval(username: String) {
     if (!this.initializedProcessingInterval) {
       this.initializedProcessingInterval = true;
-      this.interval = setInterval( () => {
+      this.interval = setInterval(() => {
         this.determineMember();
       }, 10000);
+    }
   }
-}
 
-initProgressBar() {   
-  var progressBarIncreasementPerFinishedRequestType: number = 100 / this.processingInformation.totalCountOfRequestTypes;
-  this.progressBarPercentage = (Math.round(progressBarIncreasementPerFinishedRequestType * 10) / 10) * this.processingInformation.finishedRequestTypes.length;
-  this.myStyles.width = this.progressBarPercentage + "%";
-}
+  initProgressBar() {
+    const progressBarIncreasementPerFinishedRequestType: number =
+      100 / this.processingInformation.totalCountOfRequestTypes;
+    this.progressBarPercentage =
+      (Math.round(progressBarIncreasementPerFinishedRequestType * 10) / 10) *
+      this.processingInformation.finishedRequestTypes.length;
+    this.myStyles.width = this.progressBarPercentage + '%';
+  }
 
-processError(error: HttpErrorResponse) {
-  this.statusCode = 400;
-  this.error = error;
-  console.log("Error Processing");
-}
+  processError(error: HttpErrorResponse) {
+    this.statusCode = 400;
+    this.error = error;
+    console.log('Error Processing');
+  }
 
   processData(members: HttpResponse<Member[]>, username: String) {
     switch (members.status) {
       case 200:
         this.statusCode = 200;
-        for (let member of members.body) {
+        for (const member of members.body) {
           if (member.username === username) {
             this.member = member;
           }
@@ -87,8 +89,8 @@ processError(error: HttpErrorResponse) {
       case 202:
         this.statusCode = 202;
         this.processingInformation = JSON.parse(JSON.stringify(members.body));
-        console.log(this.processingInformation)
-        console.log("Accepted - 202");
+        console.log(this.processingInformation);
+        console.log('Accepted - 202');
         this.initRequestInterval(username);
         this.initProgressBar();
         break;
@@ -96,26 +98,43 @@ processError(error: HttpErrorResponse) {
   }
 
   determineMember() {
-    let member = this.activeRoute.snapshot.paramMap.get('username');
-    let organization = this.activeRoute.snapshot.paramMap.get('organization');
-    this.cacheService.get(organization + 'Members', this.dataPullService.requestMembers(organization)).subscribe(data => this.processData(data, member), error => this.processError(error));
+    const member = this.activeRoute.snapshot.paramMap.get('username');
+    const organization = this.activeRoute.snapshot.paramMap.get('organization');
+    this.cacheService
+      .get(
+        organization + 'Members',
+        this.dataPullService.requestMembers(organization)
+      )
+      .subscribe(
+        (data) => this.processData(data, member),
+        (error) => this.processError(error)
+      );
   }
 
   initGraphs() {
     this.chartCommits = {
       labels: this.member.previousCommits.chartJSLabels,
-      data: [{ data: this.member.previousCommits.chartJSDataset, label: "Commits" }],
-      caption: "Latest commits"
+      data: [
+        { data: this.member.previousCommits.chartJSDataset, label: 'Commits' },
+      ],
+      caption: 'Latest commits',
     };
     this.chartPRs = {
       labels: this.member.previousPullRequests.chartJSLabels,
-      data: [{ data: this.member.previousPullRequests.chartJSDataset, label: "Pull Requests" }],
-      caption: "Latest Pull Requests"
+      data: [
+        {
+          data: this.member.previousPullRequests.chartJSDataset,
+          label: 'Pull Requests',
+        },
+      ],
+      caption: 'Latest Pull Requests',
     };
     this.chartIssues = {
       labels: this.member.previousIssues.chartJSLabels,
-      data: [{ data: this.member.previousIssues.chartJSDataset, label: "Issues" }],
-      caption: "Latest Issues"
+      data: [
+        { data: this.member.previousIssues.chartJSDataset, label: 'Issues' },
+      ],
+      caption: 'Latest Issues',
     };
   }
 
@@ -124,24 +143,33 @@ processError(error: HttpErrorResponse) {
    */
   processTableData() {
     let tableDataObject: TableDataObject;
-    for (var key in this.member.previousCommitsWithLink) {
+    for (const key in this.member.previousCommitsWithLink) {
       if (this.member.previousCommitsWithLink.hasOwnProperty(key)) {
-        let formattedDate = this.formatDate(key);
-        tableDataObject = new TableDataObject(formattedDate, this.member.previousCommitsWithLink[key]);
+        const formattedDate = this.formatDate(key);
+        tableDataObject = new TableDataObject(
+          formattedDate,
+          this.member.previousCommitsWithLink[key]
+        );
         this.commitsTableData.push(tableDataObject);
       }
     }
-    for (var key in this.member.previousPullRequestsWithLink) {
+    for (const key in this.member.previousPullRequestsWithLink) {
       if (this.member.previousPullRequestsWithLink.hasOwnProperty(key)) {
-        let formattedDate = this.formatDate(key);
-        tableDataObject = new TableDataObject(formattedDate, this.member.previousPullRequestsWithLink[key]);
+        const formattedDate = this.formatDate(key);
+        tableDataObject = new TableDataObject(
+          formattedDate,
+          this.member.previousPullRequestsWithLink[key]
+        );
         this.pullRequestsTableData.push(tableDataObject);
       }
     }
-    for (var key in this.member.previousIssuesWithLink) {
+    for (const key in this.member.previousIssuesWithLink) {
       if (this.member.previousIssuesWithLink.hasOwnProperty(key)) {
-        let formattedDate = this.formatDate(key);
-        tableDataObject = new TableDataObject(formattedDate, this.member.previousIssuesWithLink[key]);
+        const formattedDate = this.formatDate(key);
+        tableDataObject = new TableDataObject(
+          formattedDate,
+          this.member.previousIssuesWithLink[key]
+        );
         this.issuesTableData.push(tableDataObject);
       }
     }
@@ -151,8 +179,9 @@ processError(error: HttpErrorResponse) {
   }
 
   formatDate(stringDate: string): Date {
-    let year = stringDate.split(" ");
-    let formattedDate = year[0] + " " + year[1] + " " + year[2] + " " + year[5] + " " + year[3];
+    const year = stringDate.split(' ');
+    const formattedDate =
+      year[0] + ' ' + year[1] + ' ' + year[2] + ' ' + year[5] + ' ' + year[3];
     return new Date(formattedDate);
   }
 

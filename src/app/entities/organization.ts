@@ -1,4 +1,4 @@
-import { ChartJsData } from "./chartJS";
+import { ChartJsData } from './chartJS';
 
 export class Organization {
     public name: string;

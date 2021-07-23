@@ -3,11 +3,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 /**
  * @CapitalizePipe capitalizes every segment of a route.
  * Recognized segments are seperated by a "/", "-" or "_".
- * 
- * E.g. 
+ *
+ * E.g.
  * "/adessoAG/members"
- * => "AdessoAG/Members " 
- * 
+ * => "AdessoAG/Members "
+ *
  * "/adessoAG/members/john-doe"
  * => "AdessoAG/John-Doe "
  */
@@ -19,9 +19,9 @@ export class CapitalizePipe implements PipeTransform {
         if (value) {
             word = word.charAt(0).toUpperCase() + word.slice(1);
 
-            let startIdx = 0;
+            const startIdx = 0;
             for (let i = 1; i < word.length; i++) {
-                if (word.charAt(i) === "/" || word.charAt(i) === "-" || word.charAt(i) === "_") {
+                if (word.charAt(i) === '/' || word.charAt(i) === '-' || word.charAt(i) === '_') {
                     word = word.substr(startIdx, i + 1) + word.charAt(i + 1).toUpperCase() + word.substr(i + 2);
                 }
             }

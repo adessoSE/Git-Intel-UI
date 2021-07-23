@@ -6,4 +6,4 @@ export class TableDataObject {
         this.date = key;
         this.value = value;
     }
-  };
+  }

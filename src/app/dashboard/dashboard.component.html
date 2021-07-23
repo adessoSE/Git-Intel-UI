@@ -56,9 +56,9 @@
   <div class="row col-mb-12">
     <!-- Graphs -->
     <div class="row justify-content-center mt-5">
-      <graph class="col-md-4" [chartData]="chartMembers" [organization]="organization.name"></graph>
-      <graph class="col-md-4" [chartData]="chartCommits" [organization]="organization.name"></graph>
-      <graph class="col-md-4" [chartData]="chartPRs" [organization]="organization.name"></graph>
+      <app-graph class="col-md-4" [chartData]="chartMembers" [organization]="organization.name"></app-graph>
+      <app-graph class="col-md-4" [chartData]="chartCommits" [organization]="organization.name"></app-graph>
+      <app-graph class="col-md-4" [chartData]="chartPRs" [organization]="organization.name"></app-graph>
     </div>
 
     <!-- Last Update -->

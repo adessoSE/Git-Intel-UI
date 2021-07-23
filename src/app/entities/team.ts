@@ -1,5 +1,5 @@
-import { Member } from "./member";
-import { Repository } from "./repository";
+import { Member } from './member';
+import { Repository } from './repository';
 
 export class Team {
     public name: string;

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { ProcessingOrganizationInfo } from '../entities/processingOrganizationInfo';
 
 @Component({
@@ -6,7 +6,7 @@ import { ProcessingOrganizationInfo } from '../entities/processingOrganizationIn
   templateUrl: './processing.component.html',
   styleUrls: ['./processing.component.css']
 })
-export class ProcessingComponent implements OnInit {
+export class ProcessingComponent implements OnChanges {
 
   @Input() processingInformation: ProcessingOrganizationInfo;
   @Input() progressBarPercentage: number = 0;
@@ -14,16 +14,10 @@ export class ProcessingComponent implements OnInit {
   initializedProcessingInterval: boolean = false;
 
   myStyles = {
-    width: 0 + "%"
+    width: 0 + '%'
   };
 
   ngOnChanges() {
-    this.myStyles.width = this.progressBarPercentage + "%";
+    this.myStyles.width = this.progressBarPercentage + '%';
   }
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }
